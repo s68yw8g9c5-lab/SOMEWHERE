@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Somewhere: one riddle, one place, the whole world guessing</title>
+  <meta name="description" content="A new riddle every day points to one spot on Earth. Read the clues, drop your pin, and see how you rank against the whole planet.">
+  <meta name="theme-color" content="#0b1424">
+  <meta property="og:title" content="Somewhere 🌍 One riddle. One place. The whole world guessing.">
+  <meta property="og:description" content="Read the riddle, drop your pin, beat the planet. New place every day at midnight UTC.">
+  <meta property="og:image" content="/og.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Umami analytics (no cookies), same setup as Driftline. Paste Somewhere's own website ID
+       from cloud.umami.is (Settings > Websites > Add website). Until then nothing is sent. -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="PASTE-SOMEWHERE-UMAMI-ID"></script>
+</head>
+<body>
+  <div id="preview-banner" class="banner" hidden>Preview mode: you're seeing sample players. The live leaderboard and map turn on once the site is deployed.</div>
+
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">◉</span>
+      <span class="title">Somewhere</span>
+      <span class="day" id="day-label">#1</span>
+    </div>
+    <div class="live" title="People who played today">
+      <span class="dot"></span><span id="live-count">0</span>&nbsp;<span class="muted">today</span>
+    </div>
+    <button class="icon-btn" id="help-btn" aria-label="How to play" data-umami-event="How to play">?</button>
+  </header>
+
+  <main>
+    <section class="clues" id="clues" aria-live="polite">
+      <div class="clue-head">
+        <span class="eyebrow" id="clue-count">Clue 1 of 5</span>
+        <span class="mult" id="mult">Points ×1.0</span>
+      </div>
+      <ol id="clue-list"></ol>
+      <button class="ghost" id="next-clue">Reveal another clue <span class="muted" id="next-cost"></span></button>
+    </section>
+
+    <section class="map-wrap">
+      <div id="map" role="application" aria-label="World map. Tap to drop your pin."></div>
+      <div class="map-tools">
+        <button class="icon-btn" id="zoom-in" aria-label="Zoom in">+</button>
+        <button class="icon-btn" id="zoom-out" aria-label="Zoom out">−</button>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="map-hint" id="map-hint">Tap the map to drop your pin. Pinch or scroll to zoom.</div>
+    </section>
+
+    <div class="lock-bar" id="lock-bar">
+      <button class="primary" id="lock-btn" disabled>Drop a pin first</button>
+    </div>
+
+    <section class="result" id="result" hidden>
+      <div class="eyebrow">The answer was</div>
+      <h2 id="answer-name"></h2>
+      <div class="big-stats">
+        <div><b id="r-km"></b><span>away</span></div>
+        <div><b id="r-score"></b><span>points</span></div>
+        <div><b id="r-beat"></b><span>of players beaten</span></div>
+      </div>
+      <div class="squares" id="r-squares"></div>
+      <p class="fact" id="r-fact"></p>
+      <div class="share-row">
+        <button class="primary" id="share-btn" data-umami-event="Share result">Share result</button>
+        <button class="ghost" id="card-btn" data-umami-event="Save image">Save image</button>
+      </div>
+      <div class="me-row">
+        <label for="name-input">Your name on the board</label>
+        <div class="name-edit">
+          <input id="name-input" maxlength="20" autocomplete="off">
+          <button class="ghost" id="name-save" data-umami-event="Rename">Save</button>
+        </div>
+      </div>
+      <div class="next">Next place in <b id="countdown">--:--:--</b> <span class="muted">· streak <b id="streak">0</b></span></div>
+    </section>
+
+    <section class="boards">
+      <div class="tabs" role="tablist">
+        <button role="tab" class="tab active" data-tab="players" data-umami-event="Board tab" data-umami-event-tab="players">Top explorers</button>
+        <button role="tab" class="tab" data-tab="countries" data-umami-event="Board tab" data-umami-event-tab="countries">Country cup</button>
+        <button role="tab" class="tab" data-tab="feed" data-umami-event="Board tab" data-umami-event-tab="feed">Live feed</button>
+      </div>
+      <div class="board-meta" id="board-meta"></div>
+      <ol class="board" id="board-players"></ol>
+      <ol class="board" id="board-countries" hidden></ol>
+      <ol class="board" id="board-feed" hidden></ol>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>New place every day at 00:00 UTC.</span>
+    <span class="muted">Your rough location (city level) is used for the player map. No sign-up, no tracking.</span>
+  </footer>
+
+  <dialog id="help">
+    <h3>How to play</h3>
+    <ol>
+      <li>Every day, the whole world gets the <b>same riddle</b>. It points to one place on Earth.</li>
+      <li>Read the clue. Stuck? Reveal more clues, but each one lowers your points.</li>
+      <li>Tap the map to drop your pin, then <b>lock it in</b>. You get one guess.</li>
+      <li>The closer you are, the more points (up to 5,000). Then see where everyone else guessed.</li>
+    </ol>
+    <button class="primary" id="help-close">Let's go</button>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="vendor/d3.min.js"></script>
+  <script src="vendor/topojson-client.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

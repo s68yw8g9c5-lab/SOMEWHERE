@@ -1,0 +1,16 @@
+{
+  "name": "somewhere",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "encode": "node tools/encode.mjs",
+    "dev": "netlify dev",
+    "deploy": "netlify deploy --prod"
+  },
+  "dependencies": {
+    "postgres": "3.4.7"
+  },
+  "devDependencies": {
+    "netlify-cli": "23.9.0"
+  }
+}

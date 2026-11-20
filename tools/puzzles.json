@@ -1,0 +1,362 @@
+[
+  {
+    "name": "Easter Island (Rapa Nui), Chile",
+    "lat": -27.1127, "lon": -109.3497,
+    "clues": [
+      "I am the loneliest crowd: nearly a thousand stone faces, and most of them turn their backs on the sea.",
+      "My nearest inhabited neighbor is more than 2,000 km of open ocean away.",
+      "Each spring, young men once swam to a rocky islet to bring back the first egg of the sooty tern.",
+      "Europeans named me after the holiday on which they arrived in 1722.",
+      "Giant carved heads called moai. Part of Chile, deep in the Pacific."
+    ],
+    "fact": "Most moai face inland, watching over the villages that carved them."
+  },
+  {
+    "name": "Venice, Italy",
+    "lat": 45.4408, "lon": 12.3155,
+    "clues": [
+      "I have no cars, yet my streets are never empty of traffic.",
+      "I stand on millions of wooden piles driven into the mud of a lagoon.",
+      "Every year my ruler once 'married' the sea by throwing a gold ring into it.",
+      "More than 400 bridges cross my waters, and one of them is named for sighs.",
+      "The Italian city of gondolas and canals."
+    ],
+    "fact": "The wooden piles under Venice have lasted centuries because, without oxygen underwater, they slowly turned almost to stone."
+  },
+  {
+    "name": "Timbuktu, Mali",
+    "lat": 16.7666, "lon": -3.0026,
+    "clues": [
+      "People say my name when they mean 'the middle of nowhere', yet I was once a capital of books.",
+      "Families here guarded hundreds of thousands of old manuscripts, and in 2012 many were smuggled out in rice sacks to save them.",
+      "My great mosques are made of mud and wood, and the whole town helps replaster them.",
+      "I sit near the Niger River, where camel caravans met river boats at the edge of the Sahara.",
+      "A legendary desert city in Mali whose name starts with 'Tim'."
+    ],
+    "fact": "Timbuktu's Djinguereber Mosque was built around 1327 and is still made of mud brick."
+  },
+  {
+    "name": "Mount Everest",
+    "lat": 27.9881, "lon": 86.9250,
+    "clues": [
+      "I am still growing, a few millimeters every year.",
+      "Each spring a traffic jam forms where the air holds only a third of the oxygen you are breathing now.",
+      "I have three names: one honors a surveyor, one means 'goddess of the sky', one means 'holy mother'.",
+      "I sit on the border between Nepal and China.",
+      "The highest point on Earth above sea level."
+    ],
+    "fact": "The summit of Everest is made of marine limestone. It was once the floor of an ancient sea."
+  },
+  {
+    "name": "Iguazu Falls, Argentina and Brazil",
+    "lat": -25.6953, "lon": -54.4367,
+    "clues": [
+      "A First Lady of the United States saw me and is said to have sighed: 'Poor Niagara!'",
+      "My name means simply 'big water'.",
+      "My loudest part is called the Devil's Throat.",
+      "I split my roar between two countries, and a third is only a few kilometers away.",
+      "Giant waterfalls on the Argentina and Brazil border."
+    ],
+    "fact": "Iguazu is made of about 275 separate waterfalls spread over nearly 3 km."
+  },
+  {
+    "name": "Great Pyramid of Giza, Egypt",
+    "lat": 29.9792, "lon": 31.1342,
+    "clues": [
+      "For nearly 4,000 years I was the tallest thing humans had ever built.",
+      "Of the seven wonders on the ancient list, I am the only one still standing.",
+      "A lion with a human face keeps watch just below me.",
+      "I sit on a desert plateau at the edge of a megacity on the Nile.",
+      "The great pyramids just outside Cairo."
+    ],
+    "fact": "The Great Pyramid was originally covered in polished white limestone that made it shine in the sun."
+  },
+  {
+    "name": "Svalbard (Longyearbyen), Norway",
+    "lat": 78.2232, "lon": 15.6267,
+    "clues": [
+      "I keep a doomsday library where the books are seeds.",
+      "Dying here is famously discouraged: the frozen ground will not let the dead decay.",
+      "Leave town without a rifle and you may meet a polar bear.",
+      "I am an Arctic archipelago governed by Norway, halfway to the North Pole.",
+      "Longyearbyen, the main town of Svalbard."
+    ],
+    "fact": "The Global Seed Vault holds more than a million seed samples from almost every country."
+  },
+  {
+    "name": "Machu Picchu, Peru",
+    "lat": -13.1631, "lon": -72.5450,
+    "clues": [
+      "I was hidden so well in the clouds that the conquerors never found me.",
+      "My stones fit so tightly that a knife blade cannot slip between them, and no mortar holds them.",
+      "An explorer from Yale brought me to world fame in 1911.",
+      "I sit on a mountain ridge high above the Urubamba River.",
+      "The Inca citadel in the Andes of Peru."
+    ],
+    "fact": "Machu Picchu was built in the 1400s, likely as an estate for the Inca emperor Pachacuti."
+  },
+  {
+    "name": "Uluru, Australia",
+    "lat": -25.3444, "lon": 131.0369,
+    "clues": [
+      "I change color with the sun: dusty brown at noon, glowing red at sunset.",
+      "I am one enormous block of sandstone, and most of me is hidden underground.",
+      "Climbing me was banned in 2019 out of respect for my traditional owners.",
+      "I stand alone in the Red Centre of a country that is also a continent.",
+      "Uluru, also called Ayers Rock."
+    ],
+    "fact": "Uluru is about 348 m high and 9.4 km around at its base."
+  },
+  {
+    "name": "Salar de Uyuni, Bolivia",
+    "lat": -20.1338, "lon": -67.4891,
+    "clues": [
+      "After the rain I become the largest mirror on Earth.",
+      "I am so flat that satellites use me to check their measurements.",
+      "Some hotels here are built entirely out of me.",
+      "Under my crust lies a huge share of the world's lithium.",
+      "The biggest salt flat in the world, high in the Andes of Bolivia."
+    ],
+    "fact": "Salar de Uyuni covers more than 10,000 square kilometers and varies in height by less than a meter."
+  },
+  {
+    "name": "Pripyat and Chernobyl, Ukraine",
+    "lat": 51.4045, "lon": 30.0542,
+    "clues": [
+      "A Ferris wheel here was set to open on May Day, but the crowds never came.",
+      "Wolves, lynx and wild horses now roam where 50,000 people once lived.",
+      "My clocks stopped in April 1986.",
+      "In 2016 a giant steel arch slid over my broken heart.",
+      "The abandoned city next to the Chernobyl nuclear plant."
+    ],
+    "fact": "The New Safe Confinement arch over Chernobyl's reactor is one of the largest movable structures ever built."
+  },
+  {
+    "name": "Galapagos Islands, Ecuador",
+    "lat": -0.7400, "lon": -90.3100,
+    "clues": [
+      "A young man's five-week visit here in 1835 changed how we understand all of life.",
+      "Locals could tell which island a giant tortoise came from by the shape of its shell.",
+      "My iguanas swim in the sea and graze on seaweed.",
+      "I sit on the equator, about 1,000 km off the coast of South America.",
+      "The Galapagos Islands, part of Ecuador."
+    ],
+    "fact": "Galapagos giant tortoises can live for more than 100 years."
+  },
+  {
+    "name": "Petra, Jordan",
+    "lat": 30.3285, "lon": 35.4444,
+    "clues": [
+      "A poet called me 'a rose-red city, half as old as time'.",
+      "My grandest building was never built. It was carved straight into the cliff.",
+      "You enter me through a narrow canyon called the Siq.",
+      "A movie archaeologist rode out of my Treasury in search of the Holy Grail.",
+      "The ancient Nabataean city of Petra."
+    ],
+    "fact": "Scientists estimate that around 85% of Petra is still buried and unexcavated."
+  },
+  {
+    "name": "Victoria Falls, Zambia and Zimbabwe",
+    "lat": -17.9243, "lon": 25.8572,
+    "clues": [
+      "My local name means 'the smoke that thunders'.",
+      "My spray can be seen from 50 km away.",
+      "In the dry season, the bravest swim in a rock pool right at my edge.",
+      "A great river falls into a narrow gorge here, on the border of two countries.",
+      "Victoria Falls on the Zambezi River."
+    ],
+    "fact": "At full flood, more than 500 million liters of water per minute pour over Victoria Falls."
+  },
+  {
+    "name": "Thingvellir, Iceland",
+    "lat": 64.2559, "lon": -21.1299,
+    "clues": [
+      "Here you can stand between two continents, and they are slowly pulling apart.",
+      "One of the world's oldest parliaments first met here, in the year 930.",
+      "Divers float in a crack in the earth, in water so clear they can see 100 meters.",
+      "I am a national park about an hour from the world's northernmost capital.",
+      "Thingvellir (Þingvellir), Iceland."
+    ],
+    "fact": "The rift valley at Thingvellir widens by about 2 cm every year."
+  },
+  {
+    "name": "Angkor Wat, Cambodia",
+    "lat": 13.4125, "lon": 103.8670,
+    "clues": [
+      "My silhouette flies on my nation's flag.",
+      "I am the largest religious monument on Earth.",
+      "I was built for the god Vishnu, and later Buddhist monks moved in.",
+      "My towers rise from the jungle a few kilometers from Siem Reap.",
+      "Angkor Wat temple in Cambodia."
+    ],
+    "fact": "Angkor Wat faces west, which is unusual for a temple of its kind, and the sun rises right behind its towers at the equinox."
+  },
+  {
+    "name": "Times Square, New York City",
+    "lat": 40.7580, "lon": -73.9855,
+    "clues": [
+      "Once a year a glowing ball falls here, and a million people stand in the cold to watch it.",
+      "I am named after a newspaper.",
+      "People call me the crossroads of the world.",
+      "Broadway cuts right through me.",
+      "Times Square, Manhattan."
+    ],
+    "fact": "The New Year's Eve ball drop in Times Square started in 1907."
+  },
+  {
+    "name": "Lake Baikal, Russia",
+    "lat": 53.5587, "lon": 108.1650,
+    "clues": [
+      "I hold about a fifth of all the unfrozen fresh water on the planet.",
+      "The only seals that live only in fresh water swim in me.",
+      "I am the deepest and the oldest lake on Earth.",
+      "I lie in the middle of Siberia.",
+      "Lake Baikal."
+    ],
+    "fact": "Lake Baikal is about 25 million years old and more than 1,600 m deep."
+  },
+  {
+    "name": "Socotra, Yemen",
+    "lat": 12.4634, "lon": 53.8237,
+    "clues": [
+      "My trees bleed red and look like umbrellas blown inside out.",
+      "A third of my plants grow nowhere else on Earth.",
+      "People call me the most alien-looking place on the planet.",
+      "I am an island where the Arabian Sea meets the Gulf of Aden.",
+      "Socotra island, part of Yemen."
+    ],
+    "fact": "The red resin of Socotra's dragon's blood tree has been traded since ancient times as dye and medicine."
+  },
+  {
+    "name": "Christ the Redeemer, Rio de Janeiro",
+    "lat": -22.9519, "lon": -43.2105,
+    "clues": [
+      "My arms are 28 meters wide, and lightning strikes me several times a year.",
+      "I am covered in thousands of small triangles of soapstone.",
+      "I look down on a famous beach called Copacabana.",
+      "I stand on top of Corcovado mountain.",
+      "The Christ the Redeemer statue in Rio de Janeiro, Brazil."
+    ],
+    "fact": "Christ the Redeemer was finished in 1931 and is about 30 m tall, not counting its pedestal."
+  },
+  {
+    "name": "The South Pole",
+    "lat": -89.99, "lon": 0,
+    "clues": [
+      "Stand here and every direction is north.",
+      "The sun rises once a year and sets once a year.",
+      "A striped barber pole topped with a mirrored ball marks me for photos.",
+      "Amundsen beat Scott here in 1911.",
+      "The southern end of Earth's axis."
+    ],
+    "fact": "The ice at the South Pole moves about 10 m a year, so the marker for the exact pole is moved every January."
+  },
+  {
+    "name": "Great Blue Hole, Belize",
+    "lat": 17.3157, "lon": -87.5348,
+    "clues": [
+      "I am a perfect circle of darkness in a turquoise sea.",
+      "I was a dry cave until the ice age ended, the sea rose and swallowed my roof.",
+      "Jacques Cousteau named me one of the best dive sites in the world.",
+      "I lie on the second-largest barrier reef on Earth.",
+      "The Great Blue Hole, off the coast of Belize."
+    ],
+    "fact": "The Great Blue Hole is about 300 m across and 125 m deep."
+  },
+  {
+    "name": "Pamukkale, Turkey",
+    "lat": 37.9204, "lon": 29.1212,
+    "clues": [
+      "I look like snow, but I am warm.",
+      "Water full of calcium built my white terraces, drop by drop.",
+      "An ancient Roman spa town sits right on top of me.",
+      "My name means 'cotton castle'.",
+      "Pamukkale, in southwestern Turkey."
+    ],
+    "fact": "Visitors to Pamukkale must walk the terraces barefoot to protect the soft travertine."
+  },
+  {
+    "name": "Taj Mahal, India",
+    "lat": 27.1751, "lon": 78.0421,
+    "clues": [
+      "A grieving emperor built me for a wife who died giving birth to their 14th child.",
+      "My white marble turns pink at dawn and gold at sunset.",
+      "About 20,000 workers spent around 20 years building me.",
+      "I stand on the bank of the Yamuna River.",
+      "The Taj Mahal in Agra."
+    ],
+    "fact": "The four minarets of the Taj Mahal lean slightly outward so they would fall away from the tomb in an earthquake."
+  },
+  {
+    "name": "Stonehenge, England",
+    "lat": 51.1789, "lon": -1.8262,
+    "clues": [
+      "Some of my stones were dragged about 240 km from the hills of Wales.",
+      "On the longest day of the year, the sun rises over my Heel Stone.",
+      "I am about 5,000 years old and I still keep my secrets.",
+      "I stand on a chalk plain in southern England.",
+      "Stonehenge, on Salisbury Plain."
+    ],
+    "fact": "Stonehenge's biggest stones, the sarsens, weigh around 25 tonnes each."
+  },
+  {
+    "name": "Fushimi Inari Shrine, Kyoto, Japan",
+    "lat": 34.9671, "lon": 135.7727,
+    "clues": [
+      "Thousands of gates, and not a single door.",
+      "Each orange gate was donated by a person or a business hoping for good fortune.",
+      "Stone foxes guard my path. They are messengers of the god of rice.",
+      "I am in my country's old imperial capital.",
+      "Fushimi Inari shrine in Kyoto."
+    ],
+    "fact": "The paths of torii gates at Fushimi Inari wind about 4 km up Mount Inari."
+  },
+  {
+    "name": "Point Nemo, South Pacific",
+    "lat": -48.8767, "lon": -123.3933,
+    "clues": [
+      "I am the place on Earth farthest from any land.",
+      "Often the closest humans to me are astronauts passing overhead.",
+      "Space agencies crash old spacecraft here on purpose. I am a spaceship graveyard.",
+      "I lie in the South Pacific Ocean.",
+      "The 'oceanic pole of inaccessibility', named after Jules Verne's submarine captain."
+    ],
+    "fact": "The nearest land to Point Nemo is about 2,700 km away."
+  },
+  {
+    "name": "Great Wall of China (Badaling)",
+    "lat": 40.3540, "lon": 116.0158,
+    "clues": [
+      "Despite the famous myth, you cannot see me from the Moon with the naked eye.",
+      "I was built and rebuilt over 2,000 years by many dynasties.",
+      "A legend says a woman wept so hard for her husband that part of me collapsed.",
+      "My most visited section is about an hour from a capital city.",
+      "The Great Wall of China, at Badaling near Beijing."
+    ],
+    "fact": "All the sections of the Great Wall added together stretch about 21,000 km."
+  },
+  {
+    "name": "Panama Canal, Panama",
+    "lat": 9.0800, "lon": -79.6800,
+    "clues": [
+      "I made some sea voyages about 13,000 km shorter overnight.",
+      "Ships here climb a staircase of water 26 meters high, then step back down.",
+      "Standing at my Pacific end, you can watch the sun rise over the Pacific.",
+      "I opened in 1914 and was handed over by the United States in 1999.",
+      "The canal across a narrow Central American country."
+    ],
+    "fact": "Each ship passing through the Panama Canal uses about 200 million liters of fresh water from Gatun Lake."
+  },
+  {
+    "name": "Dead Sea",
+    "lat": 31.5590, "lon": 35.4732,
+    "clues": [
+      "I am the lowest place on dry land.",
+      "You cannot sink in me, but swimming is awkward.",
+      "Ancient scrolls were found in caves above my shore.",
+      "Jordan lies on my eastern shore.",
+      "A lake so salty it is called 'dead'."
+    ],
+    "fact": "The Dead Sea's shore is about 430 m below sea level and the water level drops about 1 m a year."
+  }
+]
