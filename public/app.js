@@ -68,7 +68,8 @@ function renderClues(animateLast = false) {
     li.dataset.n = i + 1;
     li.textContent = PUZ.clues[i];
     if (animateLast && i === shown - 1) li.className = "reveal";
-    if (state.result && i >= n) li.style.opacity = ".55";
+    if (state.result && i >= n) li.classList.add("unused");
+    if (i === n - 1) li.classList.add("current");
     list.appendChild(li);
   }
   $("#clue-count").textContent = state.result ? `You used ${n} of ${MAX_CLUES} clues` : `Clue ${n} of ${MAX_CLUES}`;
@@ -179,7 +180,7 @@ function drawAnswer() {
   map.root.select("#layer-line").selectAll("path").data(r ? [1] : []).join("path").attr("class", "guess-line")
     .attr("d", () => map.path({ type: "LineString", coordinates: [[r.glon, r.glat], [PUZ.lon, PUZ.lat]] }));
   marker("answer", r ? [[PUZ.lat, PUZ.lon]] : [], (sel) => {
-    sel.append("circle").attr("r", 16).attr("fill", "var(--gold)").attr("fill-opacity", .18);
+    sel.append("circle").attr("r", 18).attr("fill", "var(--answer)").attr("fill-opacity", .25);
     sel.append("path").attr("class", "answer-pin").attr("stroke-width", 1.2)
       .attr("d", d3.symbol(d3.symbolStar, 260)());
   });
@@ -188,7 +189,7 @@ function drawAll() { drawPlayers(); drawCrowd(); drawAnswer(); drawMine(); rende
 
 function renderLegend() {
   $("#legend").innerHTML = state.result
-    ? `<span><i style="background:var(--accent)"></i>You</span><span><i style="background:var(--gold)"></i>Answer</span><span><i style="background:var(--crowd)"></i>Everyone's guesses</span>`
+    ? `<span><i style="background:var(--pin)"></i>You</span><span><i style="background:var(--answer)"></i>Answer</span><span><i style="background:var(--crowd)"></i>Everyone's guesses</span>`
     : `<span><i style="background:var(--players)"></i>Where people are playing today</span>`;
 }
 
@@ -196,9 +197,13 @@ function fitToResult(animate = true) {
   const r = state.result;
   const W = +map.svg.attr("viewBox").split(" ")[2], H = +map.svg.attr("viewBox").split(" ")[3];
   const [[x0, y0], [x1, y1]] = map.path.bounds({ type: "LineString", coordinates: [[r.glon, r.glat], [PUZ.lon, PUZ.lat]] });
-  const pad = 60;
-  const k = Math.max(1, Math.min(5, 0.9 / Math.max((x1 - x0 + pad) / W, (y1 - y0 + pad) / H)));
-  const t = d3.zoomIdentity.translate(W / 2, H / 2).scale(k).translate(-(x0 + x1) / 2, -(y0 + y1) / 2);
+  // Only the part of the screen above the result sheet (and below the top bar) is visible.
+  const sheet = $("#result");
+  const sheetH = sheet && !sheet.hidden ? sheet.offsetHeight + 20 : 0;
+  const top = 70, visH = Math.max(140, H - sheetH - top);
+  const pad = 80;
+  const k = Math.max(1, Math.min(5, 0.9 / Math.max((x1 - x0 + pad) / W, (y1 - y0 + pad) / visH)));
+  const t = d3.zoomIdentity.translate(W / 2, top + visH / 2).scale(k).translate(-(x0 + x1) / 2, -(y0 + y1) / 2);
   (animate ? map.svg.transition().duration(1200) : map.svg).call(map.zoom.transform, t);
 }
 
@@ -210,13 +215,13 @@ function updateLock() {
   const btn = $("#lock-btn");
   $("#lock-bar").hidden = !!state.result;
   btn.disabled = !state.pin;
-  btn.textContent = state.pin ? `Lock in my pin (×${CLUE_MULT[state.clues - 1]} points)` : "Tap the map to drop a pin";
+  btn.textContent = state.pin ? "GUESS" : "Place your pin on the map";
 }
 
 $("#lock-btn").addEventListener("click", async () => {
   if (!state.pin || state.result) return;
   const btn = $("#lock-btn");
-  btn.disabled = true; btn.textContent = "Locking in…";
+  btn.disabled = true; btn.textContent = "Checking…";
   const [lat, lon] = state.pin;
   const ms = Date.now() - state.started;
   let res = null;
@@ -278,8 +283,12 @@ function showResult(animate) {
   $("#streak").textContent = streak();
   updateLock();
   drawAll();
-  fitToResult(animate);
-  if (animate) setTimeout(() => $("#result").scrollIntoView({ behavior: "smooth", block: "start" }), 900);
+  $("#map-hint").hidden = true;
+  if (matchMedia("(max-width: 640px)").matches) setClues(false);
+  requestAnimationFrame(() => {
+    fitToResult(animate);
+    $("#r-bar").style.width = (r.score / MAX_POINTS * 100).toFixed(1) + "%";
+  });
 }
 
 function shareText() {
@@ -321,18 +330,18 @@ async function makeCard() {
   const ctx = c.getContext("2d");
   await document.fonts.ready;
   const g = ctx.createLinearGradient(0, 0, W, H);
-  g.addColorStop(0, "#1c2d50"); g.addColorStop(1, "#0b1424");
+  g.addColorStop(0, "#ffffff"); g.addColorStop(1, "#e3f0f8");
   ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
-  ctx.fillStyle = "#ffcc4d"; ctx.font = "700 44px Inter, sans-serif"; ctx.fillText("◉", 80, 130);
-  ctx.fillStyle = "#eef2fa"; ctx.font = "700 64px Fraunces, Georgia, serif"; ctx.fillText("Somewhere", 140, 132);
-  ctx.fillStyle = "#8d9bb8"; ctx.font = "600 40px Inter, sans-serif"; ctx.textAlign = "right"; ctx.fillText(`#${DAY}`, W - 80, 130); ctx.textAlign = "left";
+  ctx.fillStyle = "#f5b301"; ctx.beginPath(); ctx.arc(102, 116, 22, 0, 7); ctx.fill(); ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(102, 116, 13, 0, 7); ctx.fill(); ctx.fillStyle = "#e5484d"; ctx.beginPath(); ctx.arc(102, 116, 7, 0, 7); ctx.fill();
+  ctx.fillStyle = "#17202e"; ctx.font = "800 64px 'Bricolage Grotesque', Inter, sans-serif"; ctx.fillText("Somewhere", 140, 136);
+  ctx.fillStyle = "#5d6878"; ctx.font = "700 40px Inter, sans-serif"; ctx.textAlign = "right"; ctx.fillText(`#${DAY}`, W - 80, 130); ctx.textAlign = "left";
 
   // mini map
   const mx = 60, my = 190, mw = W - 120, mh = 600;
   ctx.save();
   ctx.beginPath(); ctx.roundRect(mx, my, mw, mh, 32); ctx.clip();
-  ctx.fillStyle = "#0d1a30"; ctx.fillRect(mx, my, mw, mh);
+  ctx.fillStyle = "#cfe6f3"; ctx.fillRect(mx, my, mw, mh);
   const line = { type: "LineString", coordinates: [[r.glon, r.glat], [PUZ.lon, PUZ.lat]] };
   const proj = d3.geoNaturalEarth1().fitExtent([[mx, my], [mx + mw, my + mh]], { type: "Sphere" });
   const b = d3.geoPath(proj).bounds(line);
@@ -342,24 +351,24 @@ async function makeCard() {
     mx + mw / 2 - (cx - proj.translate()[0]) * k, my + mh / 2 - (cy - proj.translate()[1]) * k,
   ]);
   const path = d3.geoPath(proj, ctx);
-  ctx.beginPath(); path(map.land); ctx.fillStyle = "#233757"; ctx.fill();
-  ctx.strokeStyle = "#0d1a30"; ctx.lineWidth = 1; ctx.stroke();
-  ctx.beginPath(); path(line); ctx.setLineDash([12, 10]); ctx.strokeStyle = "#ffcc4d"; ctx.lineWidth = 5; ctx.stroke(); ctx.setLineDash([]);
+  ctx.beginPath(); path(map.land); ctx.fillStyle = "#f1efe4"; ctx.fill();
+  ctx.strokeStyle = "#c9c3ad"; ctx.lineWidth = 1.5; ctx.stroke();
+  ctx.beginPath(); path(line); ctx.setLineDash([14, 10]); ctx.strokeStyle = "#17202e"; ctx.lineWidth = 5; ctx.stroke(); ctx.setLineDash([]);
   const [ax, ay] = proj([PUZ.lon, PUZ.lat]), [gx, gy] = proj([r.glon, r.glat]);
-  ctx.fillStyle = "#ffcc4d"; ctx.beginPath(); ctx.arc(ax, ay, 16, 0, 7); ctx.fill();
-  ctx.fillStyle = "#ff6b5b"; ctx.strokeStyle = "#fff"; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(gx, gy, 15, 0, 7); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = "#f5b301"; ctx.strokeStyle = "#5b4300"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(ax, ay, 17, 0, 7); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = "#e5484d"; ctx.strokeStyle = "#fff"; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(gx, gy, 15, 0, 7); ctx.fill(); ctx.stroke();
   ctx.restore();
 
   ctx.textAlign = "center";
-  ctx.fillStyle = "#eef2fa"; ctx.font = "700 150px Inter, sans-serif"; ctx.fillText(fmtKm(r.km), W / 2, 980);
-  ctx.fillStyle = "#8d9bb8"; ctx.font = "500 42px Inter, sans-serif";
+  ctx.fillStyle = "#17202e"; ctx.font = "800 150px 'Bricolage Grotesque', Inter, sans-serif"; ctx.fillText(fmtKm(r.km), W / 2, 980);
+  ctx.fillStyle = "#5d6878"; ctx.font = "600 42px Inter, sans-serif";
   ctx.fillText(`${fmt(r.score)} pts  ·  ${r.clues}/${MAX_CLUES} clues  ·  beat ${r.beat}%`, W / 2, 1060);
   // proximity bar
-  const sq = proximitySquares(r.km), colors = { "🟩": "#4ade80", "🟨": "#facc15", "🟧": "#fb923c", "⬛": "#24365a" };
-  [...sq].forEach((ch, i) => { ctx.fillStyle = colors[ch] || "#24365a"; ctx.beginPath(); ctx.roundRect(W / 2 - 290 + i * 120, 1110, 100, 40, 12); ctx.fill(); });
-  ctx.fillStyle = "#eef2fa"; ctx.font = "italic 500 46px Fraunces, Georgia, serif";
+  const sq = proximitySquares(r.km), colors = { "🟩": "#19a463", "🟨": "#f5b301", "🟧": "#f08a24", "⬛": "#dfe4ea" };
+  [...sq].forEach((ch, i) => { ctx.fillStyle = colors[ch] || "#dfe4ea"; ctx.beginPath(); ctx.roundRect(W / 2 - 290 + i * 120, 1110, 100, 40, 12); ctx.fill(); });
+  ctx.fillStyle = "#17202e"; ctx.font = "700 46px Inter, sans-serif";
   ctx.fillText("Can you find today's place?", W / 2, 1240);
-  ctx.fillStyle = "#ffcc4d"; ctx.font = "700 36px Inter, sans-serif";
+  ctx.fillStyle = "#12814d"; ctx.font = "800 36px Inter, sans-serif";
   ctx.fillText(location.host || "somewhere", W / 2, 1295);
   return new Promise((res) => c.toBlob(res, "image/png"));
 }
@@ -400,6 +409,18 @@ async function loadPins() {
     if (r.ok) { crowdPins = (await r.json()).pins; drawCrowd(); }
   } catch {}
 }
+
+function setClues(open) {
+  $("#clues").classList.toggle("collapsed", !open);
+  $("#clue-toggle").setAttribute("aria-expanded", String(open));
+  $("#clue-toggle").setAttribute("aria-label", open ? "Hide clues" : "Show clues");
+}
+$("#clue-toggle").addEventListener("click", () => setClues($("#clues").classList.contains("collapsed")));
+const openBoards = () => { $("#boards").hidden = false; renderBoards(); };
+$("#boards-btn").addEventListener("click", openBoards);
+$("#result-boards").addEventListener("click", openBoards);
+$("#boards-close").addEventListener("click", () => { $("#boards").hidden = true; });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("#boards").hidden = true; });
 
 let tab = "players";
 document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => {
