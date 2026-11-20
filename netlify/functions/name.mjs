@@ -8,7 +8,7 @@ export default async (req) => {
   const name = cleanName(b.name);
   try {
     const sql = await db();
-    await sql`UPDATE plays SET name = ${name} WHERE day = ${Number(b.day) || 0} AND player = ${b.player}`;
+    await sql`UPDATE games SET name = ${name} WHERE day = ${Number(b.day) || 0} AND player = ${b.player}`;
     return json({ ok: true, name });
   } catch (e) { return fail(e); }
 };

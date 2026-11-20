@@ -43,8 +43,10 @@
 
   <section class="clues card" id="clues" aria-live="polite">
     <div class="clue-head">
-      <span class="eyebrow" id="clue-count">Clue 1 of 5</span>
+      <span class="round-label" id="round-label">Round 1/5</span>
+      <span class="eyebrow" id="clue-count">Clue 1 of 3</span>
       <span class="mult" id="mult">Points ×1</span>
+      <span class="total-label" id="total-label">0 pts</span>
       <button class="collapse" id="clue-toggle" aria-label="Hide clues" aria-expanded="true">▾</button>
     </div>
     <ol id="clue-list"></ol>
@@ -59,38 +61,10 @@
   <div class="map-hint" id="map-hint">Tap the map to drop your pin</div>
 
   <div class="lock-bar" id="lock-bar">
-    <button class="guess" id="lock-btn" disabled>Place your pin on the map</button>
+    <button class="guess" id="lock-btn" disabled>Drop a pin on the map</button>
   </div>
 
-  <section class="result sheet" id="result" hidden>
-    <div class="result-top">
-      <div>
-        <div class="eyebrow">The answer was</div>
-        <h2 id="answer-name"></h2>
-      </div>
-      <div class="km"><b id="r-km"></b><span>from the answer</span></div>
-    </div>
-    <div class="scorebar"><div class="fill" id="r-bar"></div></div>
-    <div class="score-line">
-      <span><b id="r-score"></b> / 5,000 points</span>
-      <span class="muted">Beat <b id="r-beat"></b> of players</span>
-    </div>
-    <div class="squares" id="r-squares"></div>
-    <p class="fact" id="r-fact"></p>
-    <div class="share-row">
-      <button class="guess small" id="share-btn" data-umami-event="Share result">Share result</button>
-      <button class="ghost" id="card-btn" data-umami-event="Save image">Save image</button>
-      <button class="ghost" id="result-boards" data-umami-event="Open leaderboard">🏆 Leaderboard</button>
-    </div>
-    <div class="me-row">
-      <label for="name-input">Your name on the board</label>
-      <div class="name-edit">
-        <input id="name-input" maxlength="20" autocomplete="off">
-        <button class="ghost" id="name-save" data-umami-event="Rename">Save</button>
-      </div>
-    </div>
-    <div class="next">Next place in <b id="countdown">--:--:--</b> · streak <b id="streak">0</b></div>
-  </section>
+  <section class="result sheet" id="result" hidden aria-live="polite"></section>
 
   <aside class="drawer" id="boards" hidden aria-label="Leaderboard">
     <div class="drawer-head">
@@ -112,10 +86,10 @@
   <dialog id="help">
     <h3>How to play</h3>
     <ol>
-      <li>Every day, the whole world gets the <b>same riddle</b>. It points to one place on Earth.</li>
-      <li>Read the clue. Stuck? Reveal more clues, but each one lowers your points.</li>
-      <li>Tap the map to drop your pin, then hit <b>Guess</b>. You get one shot.</li>
-      <li>The closer you are, the more points (up to 5,000). Then see where everyone else guessed.</li>
+      <li>Every day, the whole world gets the <b>same 5 riddles</b>. Each one points to a place on Earth.</li>
+      <li>Read the clue. Stuck? Reveal up to 3 clues, but each one lowers your points for that round.</li>
+      <li>Tap the map to drop your pin, then hit <b>Pin it!</b>. One shot per place.</li>
+      <li>The closer you are, the more points: up to 1,000 a round, 5,000 a day. Then see where everyone else guessed.</li>
     </ol>
     <button class="guess" id="help-close">Let's go</button>
   </dialog>

@@ -1,12 +1,13 @@
-// Somewhere: the browser side of the game.
+// Somewhere: the browser side of the game. 5 places a day, 3 clues each.
 import {
-  dayNumber, nextPuzzleAt, puzzleFor, distanceKm, scoreFor, proximitySquares,
-  CLUE_MULT, MAX_CLUES, MAX_POINTS,
+  dayNumber, nextPuzzleAt, puzzlesFor, distanceKm, scoreFor, roundSquare,
+  CLUE_MULT, MAX_CLUES, MAX_POINTS, MAX_TOTAL, ROUNDS,
 } from "./game.js";
 
 const $ = (s) => document.querySelector(s);
-const fmt = (n) => Math.round(n).toLocaleString("en-US");
-const fmtKm = (km) => (km < 10 ? km.toFixed(1) : fmt(km)) + " km";
+const fmt = (n) => Math.round(Number(n)).toLocaleString("en-US");
+const fmtKm = (km) => (km = Number(km), (km < 10 ? km.toFixed(1) : fmt(km)) + " km");
+const multTxt = (n) => "×" + CLUE_MULT[n - 1].toFixed(2).replace(/0$/, "");
 
 /* ---------- storage (wrapped: private windows can throw) ---------- */
 const store = {
@@ -15,11 +16,23 @@ const store = {
 };
 
 const DAY = dayNumber();
-const PUZ = puzzleFor(DAY);
-const STATE_KEY = `sw:day:${DAY}`;
-const state = store.get(STATE_KEY, null) || { clues: 1, pin: null, started: Date.now(), result: null };
+const PUZ = puzzlesFor(DAY);
+const STATE_KEY = `sw:game:${DAY}`;
+const fresh = () => ({
+  round: 0, started: Date.now(), final: null,
+  rounds: Array.from({ length: ROUNDS }, () => ({ clues: 1, pin: null, done: null })),
+});
+let state = store.get(STATE_KEY, null);
+if (!state || !Array.isArray(state.rounds) || state.rounds.length !== ROUNDS) state = fresh();
 const save = () => store.set(STATE_KEY, state);
 save();
+
+const cur = () => state.rounds[state.round];
+const curPuz = () => PUZ[state.round];
+// "guess" = pin dropping, "round" = one round's answer, "final" = the day's summary.
+const view = () => state.final ? "final" : cur().done ? "round" : "guess";
+const doneRounds = () => state.rounds.filter((r) => r.done);
+const runningTotal = () => doneRounds().reduce((s, r) => s + r.done.score, 0);
 
 let player = store.get("sw:player", null);
 if (!player) {
@@ -31,7 +44,7 @@ if (!myName) { myName = randomName(); store.set("sw:name", myName); }
 
 let preview = location.protocol === "file:";
 let lastStats = null;
-let crowdPins = [];
+let crowdPins = [];   // 5 lists of [lat, lon, score]
 
 /* ---------- names, flags ---------- */
 function randomName() {
@@ -49,6 +62,7 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&
 // Anonymous usage counts (Umami, no cookies), like Driftline. Never sends names or pins.
 const track = (name, data) => { try { window.umami?.track(name, data); } catch {} };
 const kmBucket = (km) => km <= 100 ? "under 100 km" : km <= 500 ? "100-500 km" : km <= 1500 ? "500-1500 km" : km <= 5000 ? "1500-5000 km" : "5000+ km";
+const scoreBucket = (s) => `${Math.floor(s / 1000)}k-${Math.floor(s / 1000) + 1}k`;
 
 function toast(msg) {
   const t = $("#toast");
@@ -59,30 +73,36 @@ function toast(msg) {
 /* ---------- clues ---------- */
 function renderClues(animateLast = false) {
   $("#day-label").textContent = `#${DAY}`;
+  const v = view();
+  $("#clues").hidden = v === "final";
+  if (v === "final") return;
+  const r = cur(), p = curPuz();
+  const n = r.done ? r.done.clues : r.clues;
+  const shown = r.done ? MAX_CLUES : n;
   const list = $("#clue-list");
-  const n = state.result ? state.result.clues : state.clues;
-  const shown = state.result ? MAX_CLUES : n;
   list.innerHTML = "";
   for (let i = 0; i < shown; i++) {
     const li = document.createElement("li");
     li.dataset.n = i + 1;
-    li.textContent = PUZ.clues[i];
+    li.textContent = p.clues[i];
     if (animateLast && i === shown - 1) li.className = "reveal";
-    if (state.result && i >= n) li.classList.add("unused");
+    if (r.done && i >= n) li.classList.add("unused");
     if (i === n - 1) li.classList.add("current");
     list.appendChild(li);
   }
-  $("#clue-count").textContent = state.result ? `You used ${n} of ${MAX_CLUES} clues` : `Clue ${n} of ${MAX_CLUES}`;
-  $("#mult").textContent = `Points ×${CLUE_MULT[n - 1].toFixed(2).replace(/0$/, "")}`;
-  const btn = $("#next-clue");
-  btn.hidden = !!state.result || n >= MAX_CLUES;
-  if (n < MAX_CLUES) $("#next-cost").textContent = `(points ×${CLUE_MULT[n].toFixed(2).replace(/0$/, "")})`;
+  $("#round-label").textContent = `Round ${state.round + 1}/${ROUNDS}`;
+  $("#total-label").textContent = `${fmt(runningTotal())} pts`;
+  $("#clue-count").textContent = r.done ? `${n} of ${MAX_CLUES} clues used` : `Clue ${n} of ${MAX_CLUES}`;
+  $("#mult").textContent = `Points ${multTxt(n)}`;
+  $("#next-clue").hidden = !!r.done || n >= MAX_CLUES;
+  if (n < MAX_CLUES) $("#next-cost").textContent = `(points ${multTxt(n + 1)})`;
 }
 
 $("#next-clue").addEventListener("click", () => {
-  if (state.result || state.clues >= MAX_CLUES) return;
-  state.clues++; save(); renderClues(true);
-  track("Reveal clue", { clue: state.clues, day: DAY });
+  const r = cur();
+  if (r.done || r.clues >= MAX_CLUES) return;
+  r.clues++; save(); renderClues(true);
+  track("Reveal clue", { clue: r.clues, round: state.round + 1, day: DAY });
 });
 
 /* ---------- map ---------- */
@@ -115,27 +135,33 @@ function buildMap() {
   map.svg.call(map.zoom).on("dblclick.zoom", null);
   map.svg.on("click", onMapClick);
   drawAll();
-  if (state.result) fitToResult(false);
-  else {
-    // On tall/narrow screens the flat world is a thin strip; zoom in so it fills the box.
-    const [[, y0], [, y1]] = map.path.bounds({ type: "Sphere" });
-    const k = Math.min(2.6, H / (y1 - y0));
-    if (k > 1.15) {
-      const [cx, cy] = map.projection([10, 15]);
-      map.svg.call(map.zoom.transform, d3.zoomIdentity.translate(W / 2, H / 2).scale(k).translate(-cx, -cy));
-    }
+  if (view() !== "guess") fitToResult(false);
+  else resetZoom(false);
+}
+
+// On tall/narrow screens the flat world is a thin strip; zoom in so it fills the box.
+function resetZoom(animate) {
+  const W = +map.svg.attr("viewBox").split(" ")[2], H = +map.svg.attr("viewBox").split(" ")[3];
+  const [[, y0], [, y1]] = map.path.bounds({ type: "Sphere" });
+  const k = Math.min(2.6, H / (y1 - y0));
+  let t = d3.zoomIdentity;
+  if (k > 1.15) {
+    const [cx, cy] = map.projection([10, 15]);
+    t = d3.zoomIdentity.translate(W / 2, H / 2).scale(k).translate(-cx, -cy);
   }
+  (animate ? map.svg.transition().duration(700) : map.svg).call(map.zoom.transform, t);
 }
 
 function onMapClick(e) {
-  if (state.result) return;
+  if (view() !== "guess") return;
   const [x, y] = d3.pointer(e, map.root.node());
   const ll = map.projection.invert([x, y]);
   if (!ll || !isFinite(ll[0]) || !isFinite(ll[1])) return;
   const back = map.projection(ll);
   if (!back || Math.hypot(back[0] - x, back[1] - y) > 1) return; // clicked outside the globe
-  if (!state.pin) track("First pin", { clues: state.clues, day: DAY });
-  state.pin = [Math.round(ll[1] * 1e4) / 1e4, Math.round(ll[0] * 1e4) / 1e4];
+  const r = cur();
+  if (!r.pin && state.round === 0) track("First pin", { clues: r.clues, day: DAY });
+  r.pin = [Math.round(ll[1] * 1e4) / 1e4, Math.round(ll[0] * 1e4) / 1e4];
   save();
   drawMine();
   $("#map-hint").style.opacity = 0;
@@ -158,45 +184,60 @@ function marker(layer, data, draw) {
   rescaleMarkers();
 }
 
+// Which rounds have their answer on the map right now.
+function revealed() {
+  const v = view();
+  if (v === "final") return state.rounds.map((r, i) => i).filter((i) => state.rounds[i].done);
+  if (v === "round") return [state.round];
+  return [];
+}
+
 function drawPlayers() {
-  const where = state.result ? [] : (lastStats?.where || []);
+  const where = view() === "guess" ? (lastStats?.where || []) : [];
   marker("players", where, (sel) => sel.append("circle").attr("class", "player-dot")
     .attr("r", (d) => 2.2 + Math.min(9, Math.sqrt(d[2]) * 1.1)));
 }
 function drawCrowd() {
-  const pins = state.result ? crowdPins : [];
-  marker("crowd", pins, (sel) => sel.append("circle").attr("class", "crowd-dot").attr("r", 2.6));
+  const pins = view() === "final" ? crowdPins.flat() : [];
+  marker("crowd", pins, (sel) => sel.append("circle").attr("class", "crowd-dot").attr("r", 2.4));
 }
 function drawMine() {
-  const pin = state.result ? [state.result.glat, state.result.glon] : state.pin;
-  marker("mine", pin ? [pin] : [], (sel) => {
+  const pins = view() === "guess"
+    ? (cur().pin ? [cur().pin] : [])
+    : revealed().map((i) => [state.rounds[i].done.glat, state.rounds[i].done.glon]);
+  marker("mine", pins, (sel) => {
     sel.append("path").attr("class", "my-pin").attr("stroke-width", 1.5)
       .attr("d", "M0,0 C-2,-6 -8,-9 -8,-15 A8,8 0 1 1 8,-15 C8,-9 2,-6 0,0Z");
     sel.append("circle").attr("cy", -15).attr("r", 3).attr("fill", "#fff");
   });
 }
 function drawAnswer() {
-  const r = state.result;
-  map.root.select("#layer-line").selectAll("path").data(r ? [1] : []).join("path").attr("class", "guess-line")
-    .attr("d", () => map.path({ type: "LineString", coordinates: [[r.glon, r.glat], [PUZ.lon, PUZ.lat]] }));
-  marker("answer", r ? [[PUZ.lat, PUZ.lon]] : [], (sel) => {
-    sel.append("circle").attr("r", 18).attr("fill", "var(--answer)").attr("fill-opacity", .25);
+  const idx = revealed(), numbered = view() === "final";
+  map.root.select("#layer-line").selectAll("path").data(idx).join("path").attr("class", "guess-line")
+    .attr("d", (i) => map.path({ type: "LineString", coordinates: [[state.rounds[i].done.glon, state.rounds[i].done.glat], [PUZ[i].lon, PUZ[i].lat]] }));
+  marker("answer", idx.map((i) => [PUZ[i].lat, PUZ[i].lon, i + 1]), (sel) => {
+    sel.append("circle").attr("r", numbered ? 13 : 18).attr("fill", "var(--answer)").attr("fill-opacity", .25);
     sel.append("path").attr("class", "answer-pin").attr("stroke-width", 1.2)
-      .attr("d", d3.symbol(d3.symbolStar, 260)());
+      .attr("d", d3.symbol(d3.symbolStar, numbered ? 330 : 260)());
+    if (numbered) sel.append("text").attr("class", "answer-num").attr("text-anchor", "middle").attr("dy", "0.36em").text((d) => d[2]);
   });
 }
 function drawAll() { drawPlayers(); drawCrowd(); drawAnswer(); drawMine(); renderLegend(); }
 
 function renderLegend() {
-  $("#legend").innerHTML = state.result
-    ? `<span><i style="background:var(--pin)"></i>You</span><span><i style="background:var(--answer)"></i>Answer</span><span><i style="background:var(--crowd)"></i>Everyone's guesses</span>`
-    : `<span><i style="background:var(--players)"></i>Where people are playing today</span>`;
+  const v = view();
+  $("#legend").innerHTML = v === "guess"
+    ? `<span><i style="background:var(--players)"></i>Where people are playing today</span>`
+    : `<span><i style="background:var(--pin)"></i>You</span><span><i style="background:var(--answer)"></i>Answer</span>`
+      + (v === "final" ? `<span><i style="background:var(--crowd)"></i>Everyone's guesses</span>` : "");
 }
 
 function fitToResult(animate = true) {
-  const r = state.result;
+  const idx = revealed();
+  if (!idx.length) return;
   const W = +map.svg.attr("viewBox").split(" ")[2], H = +map.svg.attr("viewBox").split(" ")[3];
-  const [[x0, y0], [x1, y1]] = map.path.bounds({ type: "LineString", coordinates: [[r.glon, r.glat], [PUZ.lon, PUZ.lat]] });
+  const shape = { type: "MultiLineString", coordinates: idx.map((i) => [[state.rounds[i].done.glon, state.rounds[i].done.glat], [PUZ[i].lon, PUZ[i].lat]]) };
+  const [[x0, y0], [x1, y1]] = map.path.bounds(shape);
   // Only the part of the screen above the result sheet (and below the top bar) is visible.
   const sheet = $("#result");
   const sheetH = sheet && !sheet.hidden ? sheet.offsetHeight + 20 : 0;
@@ -210,46 +251,66 @@ function fitToResult(animate = true) {
 $("#zoom-in").addEventListener("click", () => map.svg.transition().duration(250).call(map.zoom.scaleBy, 2));
 $("#zoom-out").addEventListener("click", () => map.svg.transition().duration(250).call(map.zoom.scaleBy, 0.5));
 
-/* ---------- lock in ---------- */
+/* ---------- guess ---------- */
 function updateLock() {
   const btn = $("#lock-btn");
-  $("#lock-bar").hidden = !!state.result;
-  btn.disabled = !state.pin;
-  btn.textContent = state.pin ? "GUESS" : "Place your pin on the map";
+  $("#lock-bar").hidden = view() !== "guess";
+  btn.disabled = !cur().pin;
+  btn.textContent = cur().pin ? "📍 Pin it!" : "Drop a pin on the map";
 }
 
-$("#lock-btn").addEventListener("click", async () => {
-  if (!state.pin || state.result) return;
-  const btn = $("#lock-btn");
-  btn.disabled = true; btn.textContent = "Checking…";
-  const [lat, lon] = state.pin;
+$("#lock-btn").addEventListener("click", () => {
+  const r = cur(), p = curPuz();
+  if (!r.pin || r.done) return;
+  const [glat, glon] = r.pin;
+  const km = Math.round(distanceKm(glat, glon, p.lat, p.lon) * 10) / 10;
+  r.done = { glat, glon, km, clues: r.clues, score: scoreFor(km, r.clues) };
+  save();
+  track("Guess", { round: state.round + 1, clues: r.clues, distance: kmBucket(km), day: DAY });
+  render(true);
+});
+
+function nextRound() {
+  if (state.round < ROUNDS - 1) {
+    state.round++; save();
+    render(false);
+    resetZoom(true);
+    $("#map-hint").style.opacity = 1;
+  } else finishGame();
+}
+
+async function finishGame() {
+  const btn = $("#next-btn");
+  if (btn) { btn.disabled = true; btn.textContent = "Adding up your score…"; }
   const ms = Date.now() - state.started;
   let res = null;
   if (!preview) {
     try {
       const r = await fetch("/api/play", {
         method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ day: DAY, player, name: myName, lat, lon, clues: state.clues, ms }),
+        body: JSON.stringify({ day: DAY, player, name: myName, ms, rounds: state.rounds.map((x) => ({ lat: x.done.glat, lon: x.done.glon, clues: x.done.clues })) }),
       });
       if (r.ok) res = await r.json();
     } catch {}
   }
-  if (!res) {
-    const km = Math.round(distanceKm(lat, lon, PUZ.lat, PUZ.lon) * 10) / 10;
-    const score = scoreFor(km, state.clues);
-    const players = lastStats?.players || 1;
-    res = { glat: lat, glon: lon, clues: state.clues, km, score, players, beat: estimateBeat(score), local: true };
+  if (res && Array.isArray(res.rounds)) {
+    // Trust the server's numbers (and its copy, if this device already played today).
+    res.rounds.forEach((x, i) => { state.rounds[i].done = { glat: x[0], glon: x[1], clues: x[2], km: Number(x[3]), score: x[4] }; });
+    state.final = { score: res.score, km: Number(res.km), beat: res.beat, players: res.players };
+  } else {
+    const score = runningTotal();
+    state.final = { score, km: doneRounds().reduce((s, r) => s + r.done.km, 0), beat: estimateBeat(score), players: lastStats?.players || 1, local: true };
     if (!preview) toast("Couldn't reach the server. Your result is saved on this device.");
   }
-  state.result = { glat: res.glat, glon: res.glon, clues: res.clues, km: res.km, score: res.score, beat: res.beat, players: res.players };
   save();
-  track("Lock in", { clues: res.clues, distance: kmBucket(res.km), day: DAY, offline: !!res.local });
+  track("Finish game", { score: scoreBucket(state.final.score), clues: totalClues(), day: DAY, offline: !!state.final.local });
   recordHistory();
-  renderClues();
-  showResult(true);
+  render(true);
   loadPins();
-  refreshStats();
-});
+  refreshStats(true);
+}
+
+const totalClues = () => doneRounds().reduce((s, r) => s + r.done.clues, 0);
 
 function estimateBeat(score) {
   // Preview mode only: a rough guess from the average.
@@ -259,7 +320,7 @@ function estimateBeat(score) {
 
 function recordHistory() {
   const h = store.get("sw:history", {});
-  h[DAY] = state.result.score;
+  h[DAY] = state.final.score;
   store.set("sw:history", h);
 }
 function streak() {
@@ -269,50 +330,110 @@ function streak() {
   return s;
 }
 
-/* ---------- result ---------- */
-function showResult(animate) {
-  const r = state.result;
-  $("#result").hidden = false;
-  $("#answer-name").textContent = PUZ.name;
-  $("#r-km").textContent = fmtKm(r.km);
-  $("#r-score").textContent = fmt(r.score);
-  $("#r-beat").textContent = r.beat + "%";
-  $("#r-squares").textContent = proximitySquares(r.km);
-  $("#r-fact").textContent = PUZ.fact;
-  $("#name-input").value = myName;
-  $("#streak").textContent = streak();
+/* ---------- result sheet ---------- */
+function roundHTML() {
+  const r = cur().done, p = curPuz(), last = state.round === ROUNDS - 1;
+  return `
+    <div class="result-top">
+      <div>
+        <div class="eyebrow">Round ${state.round + 1} of ${ROUNDS} · the answer was</div>
+        <h2>${esc(p.name)}</h2>
+      </div>
+      <div class="km"><b>${fmtKm(r.km)}</b><span>from the answer</span></div>
+    </div>
+    <div class="scorebar"><div class="fill" id="r-bar" data-w="${(r.score / MAX_POINTS * 100).toFixed(1)}"></div></div>
+    <div class="score-line">
+      <span>${roundSquare(r.km)} <b>${fmt(r.score)}</b> / ${fmt(MAX_POINTS)} points</span>
+      <span class="muted">Total <b>${fmt(runningTotal())}</b></span>
+    </div>
+    <p class="fact">${esc(p.fact)}</p>
+    <button class="guess" id="next-btn">${last ? "See your final score" : "Next round →"}</button>`;
+}
+
+function finalHTML() {
+  const f = state.final;
+  const rows = state.rounds.map((x, i) => `
+    <li><span class="sq">${roundSquare(x.done.km)}</span>
+      <span class="who">${i + 1}. ${esc(PUZ[i].name)}<span class="sub">${fmtKm(x.done.km)} · ${x.done.clues} clue${x.done.clues > 1 ? "s" : ""}</span></span>
+      <span class="val">${fmt(x.done.score)}</span></li>`).join("");
+  return `
+    <div class="result-top">
+      <div>
+        <div class="eyebrow">Somewhere #${DAY} · your score</div>
+        <h2>${fmt(f.score)} <span class="of">/ ${fmt(MAX_TOTAL)}</span></h2>
+      </div>
+      <div class="km"><b>${f.beat}%</b><span>of players beaten</span></div>
+    </div>
+    <div class="scorebar"><div class="fill" id="r-bar" data-w="${(f.score / MAX_TOTAL * 100).toFixed(1)}"></div></div>
+    <ol class="rounds">${rows}</ol>
+    <div class="share-row">
+      <button class="guess small" id="share-btn" data-umami-event="Share result">Share result</button>
+      <button class="ghost" id="card-btn" data-umami-event="Save image">Save image</button>
+      <button class="ghost" id="result-boards" data-umami-event="Open leaderboard">🏆 Leaderboard</button>
+    </div>
+    <div class="me-row">
+      <label for="name-input">Your name on the board</label>
+      <div class="name-edit">
+        <input id="name-input" maxlength="20" autocomplete="off" value="${esc(myName)}">
+        <button class="ghost" id="name-save" data-umami-event="Rename">Save</button>
+      </div>
+    </div>
+    <div class="next">5 new places in <b id="countdown">--:--:--</b> · streak <b>${streak()}</b></div>`;
+}
+
+function bindSheet() {
+  $("#next-btn")?.addEventListener("click", nextRound);
+  $("#share-btn")?.addEventListener("click", share);
+  $("#card-btn")?.addEventListener("click", saveCard);
+  $("#result-boards")?.addEventListener("click", openBoards);
+  $("#name-save")?.addEventListener("click", rename);
+}
+
+function render(animate) {
+  const v = view(), sheet = $("#result");
+  renderClues();
   updateLock();
-  drawAll();
-  $("#map-hint").hidden = true;
-  if (matchMedia("(max-width: 640px)").matches) setClues(false);
-  requestAnimationFrame(() => {
-    fitToResult(animate);
-    $("#r-bar").style.width = (r.score / MAX_POINTS * 100).toFixed(1) + "%";
+  $("#map-hint").hidden = v !== "guess";
+  if (v === "guess") { sheet.hidden = true; sheet.innerHTML = ""; }
+  else {
+    sheet.innerHTML = v === "final" ? finalHTML() : roundHTML();
+    sheet.hidden = false;
+    sheet.scrollTop = 0;
+    if (animate) { sheet.style.animation = "none"; void sheet.offsetWidth; sheet.style.animation = ""; }
+    bindSheet();
+    tick();
+  }
+  if (map.svg) drawAll();
+  if (v !== "guess" && matchMedia("(max-width: 640px)").matches) setClues(false);
+  if (v === "guess") setClues(true);
+  if (v !== "guess") requestAnimationFrame(() => {
+    if (map.svg) fitToResult(animate);
+    const bar = $("#r-bar");
+    if (bar) requestAnimationFrame(() => { bar.style.width = bar.dataset.w + "%"; });
   });
 }
 
+/* ---------- sharing ---------- */
 function shareText() {
-  const r = state.result;
+  const f = state.final;
   return [
-    `Somewhere #${DAY} 🌍`,
-    `🔎 ${r.clues}/${MAX_CLUES} clues`,
-    `📍 ${fmtKm(r.km)} off`,
-    `${proximitySquares(r.km)} ${fmt(r.score)} pts`,
-    `Beat ${r.beat}% of the world`,
+    `Somewhere #${DAY} 🌍 ${fmt(f.score)} / ${fmt(MAX_TOTAL)}`,
+    state.rounds.map((x) => roundSquare(x.done.km)).join(""),
+    `🔎 ${totalClues()} clues · beat ${f.beat}%`,
     location.origin.startsWith("http") ? location.origin : "",
   ].filter(Boolean).join("\n");
 }
 
-$("#share-btn").addEventListener("click", async () => {
+async function share() {
   const text = shareText();
   if (navigator.share && matchMedia("(pointer: coarse)").matches) {
     try { await navigator.share({ text }); return; } catch (e) { if (e.name === "AbortError") return; }
   }
   try { await navigator.clipboard.writeText(text); toast("Copied! Paste it anywhere."); }
   catch { prompt("Copy your result:", text); }
-});
+}
 
-$("#card-btn").addEventListener("click", async () => {
+async function saveCard() {
   const blob = await makeCard();
   const file = new File([blob], `somewhere-${DAY}.png`, { type: "image/png" });
   if (navigator.canShare && navigator.canShare({ files: [file] }) && matchMedia("(pointer: coarse)").matches) {
@@ -321,11 +442,11 @@ $("#card-btn").addEventListener("click", async () => {
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob); a.download = file.name; a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-});
+}
 
-// A 1080x1350 image card with a mini map of your guess. Great for stories.
+// A 1080x1350 image card with a mini map of all 5 guesses. Great for stories.
 async function makeCard() {
-  const r = state.result, W = 1080, H = 1350;
+  const f = state.final, W = 1080, H = 1350;
   const c = document.createElement("canvas"); c.width = W; c.height = H;
   const ctx = c.getContext("2d");
   await document.fonts.ready;
@@ -337,52 +458,52 @@ async function makeCard() {
   ctx.fillStyle = "#17202e"; ctx.font = "800 64px 'Bricolage Grotesque', Inter, sans-serif"; ctx.fillText("Somewhere", 140, 136);
   ctx.fillStyle = "#5d6878"; ctx.font = "700 40px Inter, sans-serif"; ctx.textAlign = "right"; ctx.fillText(`#${DAY}`, W - 80, 130); ctx.textAlign = "left";
 
-  // mini map
-  const mx = 60, my = 190, mw = W - 120, mh = 600;
+  // mini map with all 5 lines
+  const mx = 60, my = 190, mw = W - 120, mh = 560;
   ctx.save();
   ctx.beginPath(); ctx.roundRect(mx, my, mw, mh, 32); ctx.clip();
   ctx.fillStyle = "#cfe6f3"; ctx.fillRect(mx, my, mw, mh);
-  const line = { type: "LineString", coordinates: [[r.glon, r.glat], [PUZ.lon, PUZ.lat]] };
-  const proj = d3.geoNaturalEarth1().fitExtent([[mx, my], [mx + mw, my + mh]], { type: "Sphere" });
-  const b = d3.geoPath(proj).bounds(line);
-  const k = Math.max(1, Math.min(10, 0.8 / Math.max((b[1][0] - b[0][0] + 80) / mw, (b[1][1] - b[0][1] + 80) / mh)));
-  const cx = (b[0][0] + b[1][0]) / 2, cy = (b[0][1] + b[1][1]) / 2;
-  proj.scale(proj.scale() * k).translate([
-    mx + mw / 2 - (cx - proj.translate()[0]) * k, my + mh / 2 - (cy - proj.translate()[1]) * k,
-  ]);
+  const lines = state.rounds.map((x, i) => [[x.done.glon, x.done.glat], [PUZ[i].lon, PUZ[i].lat]]);
+  const proj = d3.geoNaturalEarth1().fitExtent([[mx + 20, my + 20], [mx + mw - 20, my + mh - 20]], { type: "Sphere" });
   const path = d3.geoPath(proj, ctx);
   ctx.beginPath(); path(map.land); ctx.fillStyle = "#f1efe4"; ctx.fill();
-  ctx.strokeStyle = "#c9c3ad"; ctx.lineWidth = 1.5; ctx.stroke();
-  ctx.beginPath(); path(line); ctx.setLineDash([14, 10]); ctx.strokeStyle = "#17202e"; ctx.lineWidth = 5; ctx.stroke(); ctx.setLineDash([]);
-  const [ax, ay] = proj([PUZ.lon, PUZ.lat]), [gx, gy] = proj([r.glon, r.glat]);
-  ctx.fillStyle = "#f5b301"; ctx.strokeStyle = "#5b4300"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(ax, ay, 17, 0, 7); ctx.fill(); ctx.stroke();
-  ctx.fillStyle = "#e5484d"; ctx.strokeStyle = "#fff"; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(gx, gy, 15, 0, 7); ctx.fill(); ctx.stroke();
+  ctx.strokeStyle = "#c9c3ad"; ctx.lineWidth = 1.2; ctx.stroke();
+  ctx.beginPath(); path({ type: "MultiLineString", coordinates: lines }); ctx.setLineDash([10, 8]); ctx.strokeStyle = "#17202e"; ctx.lineWidth = 3.5; ctx.stroke(); ctx.setLineDash([]);
+  state.rounds.forEach((x, i) => {
+    const [ax, ay] = proj([PUZ[i].lon, PUZ[i].lat]), [gx, gy] = proj([x.done.glon, x.done.glat]);
+    ctx.fillStyle = "#e5484d"; ctx.strokeStyle = "#fff"; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(gx, gy, 11, 0, 7); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = "#f5b301"; ctx.strokeStyle = "#5b4300"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(ax, ay, 17, 0, 7); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = "#3d2d00"; ctx.font = "800 20px Inter, sans-serif"; ctx.textAlign = "center"; ctx.fillText(String(i + 1), ax, ay + 7); ctx.textAlign = "left";
+  });
   ctx.restore();
 
   ctx.textAlign = "center";
-  ctx.fillStyle = "#17202e"; ctx.font = "800 150px 'Bricolage Grotesque', Inter, sans-serif"; ctx.fillText(fmtKm(r.km), W / 2, 980);
+  ctx.fillStyle = "#17202e"; ctx.font = "800 150px 'Bricolage Grotesque', Inter, sans-serif"; ctx.fillText(fmt(f.score), W / 2, 920);
   ctx.fillStyle = "#5d6878"; ctx.font = "600 42px Inter, sans-serif";
-  ctx.fillText(`${fmt(r.score)} pts  ·  ${r.clues}/${MAX_CLUES} clues  ·  beat ${r.beat}%`, W / 2, 1060);
-  // proximity bar
-  const sq = proximitySquares(r.km), colors = { "🟩": "#19a463", "🟨": "#f5b301", "🟧": "#f08a24", "⬛": "#dfe4ea" };
-  [...sq].forEach((ch, i) => { ctx.fillStyle = colors[ch] || "#dfe4ea"; ctx.beginPath(); ctx.roundRect(W / 2 - 290 + i * 120, 1110, 100, 40, 12); ctx.fill(); });
+  ctx.fillText(`out of ${fmt(MAX_TOTAL)}  ·  beat ${f.beat}%`, W / 2, 990);
+  // one tile per round
+  const colors = { "🟩": "#19a463", "🟨": "#f5b301", "🟧": "#f08a24", "🟥": "#e5484d", "⬛": "#c3cad4" };
+  state.rounds.forEach((x, i) => {
+    ctx.fillStyle = colors[roundSquare(x.done.km)]; ctx.beginPath(); ctx.roundRect(W / 2 - 340 + i * 140, 1040, 120, 64, 16); ctx.fill();
+    ctx.fillStyle = "#fff"; ctx.font = "800 28px Inter, sans-serif"; ctx.fillText(fmt(x.done.score), W / 2 - 280 + i * 140, 1082);
+  });
   ctx.fillStyle = "#17202e"; ctx.font = "700 46px Inter, sans-serif";
-  ctx.fillText("Can you find today's place?", W / 2, 1240);
-  ctx.fillStyle = "#12814d"; ctx.font = "800 36px Inter, sans-serif";
-  ctx.fillText(location.host || "somewhere", W / 2, 1295);
+  ctx.fillText("Can you find today's 5 places?", W / 2, 1220);
+  ctx.fillStyle = "#c8402b"; ctx.font = "800 36px Inter, sans-serif";
+  ctx.fillText(location.host || "somewhere", W / 2, 1280);
   return new Promise((res) => c.toBlob(res, "image/png"));
 }
 
-$("#name-save").addEventListener("click", async () => {
+async function rename() {
   const v = $("#name-input").value.trim().slice(0, 20);
   if (!v) return;
   myName = v; store.set("sw:name", v);
-  if (!preview && state.result) {
+  if (!preview && state.final && !state.final.local) {
     try { await fetch("/api/name", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ day: DAY, player, name: v }) }); } catch {}
   }
   toast("Name saved");
   refreshStats(true);
-});
+}
 
 /* ---------- live stats ---------- */
 async function refreshStats(bust) {
@@ -397,13 +518,13 @@ async function refreshStats(bust) {
   $("#preview-banner").hidden = !preview;
   lastStats = s;
   $("#live-count").textContent = fmt(s.players);
-  drawPlayers();
+  if (map.svg) drawPlayers();
   renderBoards();
 }
 
 async function loadPins() {
-  if (!state.result) return;
-  if (preview) { crowdPins = samplePins(); drawCrowd(); return; }
+  if (!state.final) return;
+  if (preview || state.final.local) { crowdPins = samplePins(); drawCrowd(); return; }
   try {
     const r = await fetch(`/api/pins?day=${DAY}&player=${encodeURIComponent(player)}`);
     if (r.ok) { crowdPins = (await r.json()).pins; drawCrowd(); }
@@ -416,9 +537,8 @@ function setClues(open) {
   $("#clue-toggle").setAttribute("aria-label", open ? "Hide clues" : "Show clues");
 }
 $("#clue-toggle").addEventListener("click", () => setClues($("#clues").classList.contains("collapsed")));
-const openBoards = () => { $("#boards").hidden = false; renderBoards(); };
+function openBoards() { $("#boards").hidden = false; renderBoards(); track("Open leaderboard"); }
 $("#boards-btn").addEventListener("click", openBoards);
-$("#result-boards").addEventListener("click", openBoards);
 $("#boards-close").addEventListener("click", () => { $("#boards").hidden = true; });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("#boards").hidden = true; });
 
@@ -436,13 +556,13 @@ function renderBoards() {
   const empty = (msg) => `<li class="empty">${msg}</li>`;
 
   if (tab === "players") {
-    meta.textContent = s.players ? `${fmt(s.players)} players today · average guess ${fmt(s.avgKm)} km off` : "";
-    const mine = state.result;
+    meta.textContent = s.players ? `${fmt(s.players)} players today · average ${fmt(s.avgScore)} / ${fmt(MAX_TOTAL)}` : "";
+    const mine = state.final;
     $("#board-players").innerHTML = s.top.length ? s.top.map((p, i) => `
       <li class="${mine && p.name === myName && p.score === mine.score ? "me" : ""}">
         <span class="rank">${i + 1}</span>
         <span class="who">${flag(p.country)} ${esc(p.name)}</span>
-        <span class="sub">${fmtKm(p.km)} · ${p.clues} clue${p.clues > 1 ? "s" : ""}</span>
+        <span class="sub">${fmtKm(p.km)} total</span>
         <span class="val">${fmt(p.score)}</span>
       </li>`).join("") : empty("No one has played yet today. Be the first!");
   } else if (tab === "countries") {
@@ -462,7 +582,7 @@ function renderBoards() {
   }
 }
 
-/* ---------- preview data (only used before the backend is deployed) ---------- */
+/* ---------- preview data (only used before the database is connected) ---------- */
 function seeded(seed) { return () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296); }
 const CITIES = [[40.7, -74], [34, -118.2], [41.9, -87.6], [19.4, -99.1], [-23.5, -46.6], [-34.6, -58.4], [4.7, -74.1], [51.5, -0.1],
   [48.9, 2.4], [52.5, 13.4], [40.4, -3.7], [41.9, 12.5], [55.8, 37.6], [30, 31.2], [6.5, 3.4], [-1.3, 36.8], [-26.2, 28], [25.2, 55.3],
@@ -478,49 +598,56 @@ function sampleStats() {
     players += n;
     for (let j = 0; j < 4; j++) where.push([la + (rnd() - .5) * 3, lo + (rnd() - .5) * 3, Math.ceil(n / (j + 1) / 2)]);
     const c = countries[CC[i]] || (countries[CC[i]] = { c: CC[i], n: 0, sum: 0 });
-    c.n += n; c.sum += n * (900 + rnd() * 2600);
+    c.n += n; c.sum += n * (1000 + rnd() * 1800);
   });
   const top = Array.from({ length: 15 }, (_, i) => {
-    const km = Math.round((2 + i * i * 9 + rnd() * 20) * 10) / 10, clues = 1 + Math.floor(i / 4);
-    return { name: names[i % names.length] + " " + "ABCDEFGHJKLMNPRS"[Math.floor(rnd() * 16)] + ".", country: CC[Math.floor(rnd() * CC.length)], km, clues, score: scoreFor(km, clues) };
+    const km = Math.round((60 + i * i * 40 + rnd() * 80) * 10) / 10;
+    return { name: names[i % names.length] + " " + "ABCDEFGHJKLMNPRS"[Math.floor(rnd() * 16)] + ".", country: CC[Math.floor(rnd() * CC.length)], km, score: Math.round(4760 - i * 130 - rnd() * 60) };
   }).sort((a, b) => b.score - a.score);
-  const recent = Array.from({ length: 8 }, () => ({ name: names[Math.floor(rnd() * names.length)], country: CC[Math.floor(rnd() * CC.length)], score: Math.floor(rnd() * MAX_POINTS) }));
+  const recent = Array.from({ length: 8 }, () => ({ name: names[Math.floor(rnd() * names.length)], country: CC[Math.floor(rnd() * CC.length)], score: Math.floor(800 + rnd() * 3200) }));
   return {
-    day: DAY, live: true, players, avgKm: 2140, avgScore: 1800, clueDist: [10, 22, 30, 20, 18], top, recent, where,
+    day: DAY, live: true, players, avgKm: 1900, avgScore: 1800, top, recent, where,
     countries: Object.values(countries).map((c) => ({ c: c.c, n: c.n, avg: Math.round(c.sum / c.n) })),
   };
 }
 function samplePins() {
-  const rnd = seeded(DAY * 104729), pins = [];
-  for (let i = 0; i < 600; i++) {
-    const spread = rnd() < 0.55 ? 6 : rnd() < 0.7 ? 25 : 80;
-    const lat = Math.max(-85, Math.min(85, PUZ.lat + (rnd() - .5) * spread));
-    const lon = ((PUZ.lon + (rnd() - .5) * spread * 1.6 + 540) % 360) - 180;
-    pins.push([lat, lon, 0]);
-  }
-  return pins;
+  const rnd = seeded(DAY * 104729);
+  return PUZ.map((p) => {
+    const pins = [];
+    for (let i = 0; i < 120; i++) {
+      const spread = rnd() < 0.55 ? 6 : rnd() < 0.7 ? 25 : 80;
+      const lat = Math.max(-85, Math.min(85, p.lat + (rnd() - .5) * spread));
+      const lon = ((p.lon + (rnd() - .5) * spread * 1.6 + 540) % 360) - 180;
+      pins.push([lat, lon, 0]);
+    }
+    return pins;
+  });
 }
 
 /* ---------- countdown & help ---------- */
 function tick() {
   const ms = Math.max(0, nextPuzzleAt() - Date.now());
-  const h = Math.floor(ms / 3.6e6), m = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1000) % 60;
-  $("#countdown").textContent = [h, m, s].map((v) => String(v).padStart(2, "0")).join(":");
+  const el = $("#countdown");
+  if (el) {
+    const h = Math.floor(ms / 3.6e6), m = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1000) % 60;
+    el.textContent = [h, m, s].map((v) => String(v).padStart(2, "0")).join(":");
+  }
   if (ms === 0 && !tick.reloaded) { tick.reloaded = true; setTimeout(() => location.reload(), 1500); }
 }
-setInterval(tick, 1000); tick();
+setInterval(tick, 1000);
 
 const help = $("#help");
 $("#help-btn").addEventListener("click", () => help.showModal());
 $("#help-close").addEventListener("click", () => help.close());
-if (!store.get("sw:seenHelp", false)) { store.set("sw:seenHelp", true); try { help.showModal(); } catch {} }
+if (!store.get("sw:seenHelp2", false)) { store.set("sw:seenHelp2", true); try { help.showModal(); } catch {} }
 
 /* ---------- start ---------- */
 renderClues();
 updateLock();
 await initMap();
 await refreshStats();
-if (state.result) { showResult(false); loadPins(); }
-else if (state.pin) { $("#map-hint").style.opacity = 0; }
+render(false);
+if (view() === "guess" && cur().pin) $("#map-hint").style.opacity = 0;
+if (state.final) loadPins();
 setInterval(() => { if (!document.hidden) refreshStats(); }, 20000);
-setInterval(() => { if (!document.hidden && state.result) loadPins(); }, 60000);
+setInterval(() => { if (!document.hidden && state.final) loadPins(); }, 60000);

@@ -1,6 +1,6 @@
-// GET /api/pins?day=N&player=ID : everyone's guesses. Only shown after you have
-// played today, so the crowd can't give the answer away.
-import { dayNumber } from "../../public/game.js";
+// GET /api/pins?day=N&player=ID : everyone's guesses, one list per round. Only shown
+// after you have finished today's game, so the crowd can't give the answers away.
+import { dayNumber, ROUNDS } from "../../public/game.js";
 import { db } from "../../lib/db.mjs";
 import { json, validPlayer, fail } from "../../lib/http.mjs";
 
@@ -13,11 +13,15 @@ export default async (req) => {
     const sql = await db();
     if (day === today) {
       if (!validPlayer(player)) return json({ error: "play first" }, { status: 403 });
-      const played = await sql`SELECT 1 FROM plays WHERE day = ${day} AND player = ${player}`;
+      const played = await sql`SELECT 1 FROM games WHERE day = ${day} AND player = ${player}`;
       if (!played.length) return json({ error: "play first" }, { status: 403 });
     }
-    const rows = await sql`SELECT glat, glon, score FROM plays WHERE day = ${day} ORDER BY created DESC LIMIT 1500`;
-    return json({ day, pins: rows.map((r) => [Math.round(r.glat * 10) / 10, Math.round(r.glon * 10) / 10, r.score]) });
+    const rows = await sql`SELECT rounds FROM games WHERE day = ${day} ORDER BY created DESC LIMIT 600`;
+    const pins = Array.from({ length: ROUNDS }, () => []);
+    for (const { rounds } of rows) {
+      rounds.forEach((r, i) => { if (pins[i]) pins[i].push([Math.round(r[0] * 10) / 10, Math.round(r[1] * 10) / 10, r[4]]); });
+    }
+    return json({ day, pins });
   } catch (e) { return fail(e); }
 };
 
