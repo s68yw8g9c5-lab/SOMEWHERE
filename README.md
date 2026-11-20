@@ -1,16 +1,25 @@
 # Somewhere 🌍
 
-**One riddle. One place on Earth. The whole world guessing.**
+**5 riddles. 5 places on Earth. The whole world guessing.**
 
-Every day at midnight UTC, everyone on the planet gets the same riddle. It points to one spot
-on Earth. Read the clues (each extra clue lowers your points), drop one pin on the map, and
-see how close you got, where everyone else guessed, and how you rank against the world.
+Every day at midnight UTC, everyone on the planet gets the same 5 riddles. Each points to one
+spot on Earth. Read the clue (up to 3 per place, each extra one lowers your points), drop a pin,
+and see how close you got. After all 5, see your score out of 5,000, where everyone else
+guessed, and how you rank against the world and your friends.
 
 - No sign-up. Players get a random name they can change.
 - Live global leaderboard, a "Country cup" and a live feed.
 - Live map of where people are playing from (city level, from Netlify's geolocation; no GPS prompt).
 - Everyone's guesses appear only after you lock in, so no spoilers.
-- Share text with emoji squares, plus a "Save image" story card with a mini map of your guess.
+- Spoiler-free sharing: emoji squares per round, plus a "Save image" story card (score and
+  distance per round, never the places).
+- Daily streak with one free "streak saver" a week, so one missed day doesn't reset it.
+- A "Did you know?" fact after every place.
+- Friends boards: private leaderboards shared by link (`/?friends=CODE`).
+- Streamer mode (in the ? window): answers stay blurred until you tap Reveal.
+- Write a riddle for your friends: the whole riddle lives in the link, nothing is stored.
+- Feedback box in the ? window, saved to the database (table `feedback`).
+- The daily game is free, always.
 - The server recomputes every score, so nobody can post fake points.
 - Umami analytics, set up the same way as Driftline.
 
@@ -27,8 +36,10 @@ netlify/functions/   the backend (Netlify Functions)
   stats.mjs          GET /api/stats: live counts, leaderboard, countries, player map
   pins.mjs           GET /api/pins: everyone's guesses (only after you've played)
   name.mjs           POST /api/name: change your name on today's board
+  friends.mjs        /api/friends: create, join, leave and read friends boards
+  feedback.mjs       POST /api/feedback: the feedback box
 lib/db.mjs           database connection; creates the tables by itself on first use
-tools/puzzles.json   30 riddles. Add more here.
+tools/puzzles.json   150 riddles (30 days of 5). Add more here.
 netlify.toml         tells Netlify where the site and functions are
 ```
 
@@ -85,14 +96,23 @@ Events it sends (no names, no pins, no cookies):
 | Event | When | Extra data |
 |---|---|---|
 | First pin | First tap on the map | clues open, day |
-| Reveal clue | Opens another clue | clue number, day |
-| Lock in | Locks in a guess | clues used, distance range, day |
+| Reveal clue | Opens another clue | clue number, round, day |
+| Guess | Pins a guess | round, clues used, distance range, day |
+| Finish game | Finishes all 5 rounds | score range, clues, streak, day |
 | Share result / Save image | Taps a share button | |
-| Board tab | Switches leaderboard tab | tab |
-| Rename, How to play | Taps those buttons | |
+| Open leaderboard / Board tab | Opens the board or switches tab | tab |
+| Create friends board / Join friends board / Invite friends | Friends boards | |
+| Open riddle maker / Create riddle / Finish friend riddle | Write-your-own riddles | |
+| Streamer mode / Send feedback / Rename / How to play | Those buttons | |
 
-"Lock in ÷ visitors" is your completion rate, and "Share result ÷ Lock in" is your share rate,
-the number that decides whether it spreads.
+"Finish game ÷ visitors" is your completion rate, and "Share result ÷ Finish game" is your share
+rate, the number that decides whether it spreads.
+
+## Reading feedback
+
+Messages from the feedback box go to the `feedback` table. Open your database in the Neon
+console (Netlify: **Extensions → Neon**, or https://console.neon.tech), click **Tables**, and pick
+`feedback`.
 
 ## Settings
 
@@ -114,8 +134,8 @@ with sample players, so you can show it to people before deploying.
 
 ## Add more riddles
 
-There are 30 days of riddles and they loop after that. To add more, edit
-`tools/puzzles.json` (name, lat, lon, 5 clues from hardest to easiest, and a fun fact), then:
+There are 150 riddles (30 days of 5) and they loop after that. To add more, edit
+`tools/puzzles.json` (name, lat, lon, 3 clues from hardest to easiest, and a fun fact), then:
 
 ```bash
 npm run encode
@@ -125,8 +145,9 @@ and push or deploy. Tip: find exact coordinates by right-clicking a spot in Goog
 
 ## How scoring works
 
-- Up to 5,000 points. Within 25 km is a perfect score, then it drops off with distance.
-- Clue multiplier: 1 clue ×1, 2 clues ×0.8, 3 clues ×0.6, 4 clues ×0.45, 5 clues ×0.3.
+- Up to 1,000 points per place, 5,000 per day. Within 25 km is a perfect score, then it drops
+  off with distance.
+- Clue multiplier: 1 clue ×1, 2 clues ×0.7, 3 clues ×0.4.
 - Ties on the leaderboard go to whoever locked in faster.
 
 ## Costs
@@ -138,6 +159,5 @@ writes. Netlify DB's free tier covers a launch; if it takes off, upgrade the Neo
 ## Ideas for growth
 
 - Post the share card on TikTok/IG stories each day ("I was 12 km off, can you beat me?").
-- Weekly "World Cup": countries compete on average score.
-- Let players submit riddles about their hometown.
-- Add an archive so new players can play past days.
+- Weekly country competition on average score.
+- An archive of past days (a good paid extra later, the daily stays free).

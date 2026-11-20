@@ -1,0 +1,14 @@
+{
+  "name": "Somewhere",
+  "short_name": "Somewhere",
+  "description": "5 riddles, 5 places, the whole world guessing.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#cfe6f3",
+  "theme_color": "#ff5a4e",
+  "icons": [
+    { "src": "icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

@@ -1,13 +1,15 @@
 // Somewhere: the browser side of the game. 5 places a day, 3 clues each.
+// Also plays single riddles that friends write for each other (links with #r=...).
 import {
   dayNumber, nextPuzzleAt, puzzlesFor, distanceKm, scoreFor, roundSquare,
-  CLUE_MULT, MAX_CLUES, MAX_POINTS, MAX_TOTAL, ROUNDS,
+  CLUE_MULT, MAX_CLUES, MAX_POINTS,
 } from "./game.js";
 
 const $ = (s) => document.querySelector(s);
 const fmt = (n) => Math.round(Number(n)).toLocaleString("en-US");
 const fmtKm = (km) => (km = Number(km), (km < 10 ? km.toFixed(1) : fmt(km)) + " km");
 const multTxt = (n) => "×" + CLUE_MULT[n - 1].toFixed(2).replace(/0$/, "");
+const params = new URLSearchParams(location.search);
 
 /* ---------- storage (wrapped: private windows can throw) ---------- */
 const store = {
@@ -15,15 +17,45 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
 };
 
+/* ---------- friend-made riddles: the whole riddle lives in the link ---------- */
+const RKEY = "somewhere";
+function encodeRiddle(obj) {
+  const bytes = new TextEncoder().encode(JSON.stringify(obj));
+  let bin = "";
+  bytes.forEach((b, i) => { bin += String.fromCharCode(b ^ RKEY.charCodeAt(i % RKEY.length)); });
+  return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+function decodeRiddle(code) {
+  const bin = atob(code.replace(/-/g, "+").replace(/_/g, "/"));
+  const bytes = Uint8Array.from(bin, (c, i) => c.charCodeAt(0) ^ RKEY.charCodeAt(i % RKEY.length));
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+function parseCustom() {
+  const m = location.hash.match(/^#r=([A-Za-z0-9_-]{10,3000})$/);
+  if (!m) return null;
+  try {
+    const o = decodeRiddle(m[1]);
+    const clues = (Array.isArray(o.c) ? o.c : []).map((c) => String(c).slice(0, 160)).filter(Boolean).slice(0, MAX_CLUES);
+    const lat = Number(o.la), lon = Number(o.lo);
+    if (!clues.length || !(lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180)) return null;
+    let id = 0; for (const ch of m[1]) id = (id * 31 + ch.charCodeAt(0)) >>> 0;
+    return { name: String(o.n || "A secret place").slice(0, 60), lat, lon, clues, fact: String(o.f || "").slice(0, 200), by: String(o.b || "A friend").slice(0, 20), id: id.toString(36) };
+  } catch { return null; }
+}
+window.addEventListener("hashchange", () => location.reload());
+
 const DAY = dayNumber();
-const PUZ = puzzlesFor(DAY);
-const STATE_KEY = `sw:game:${DAY}`;
+const CUSTOM = parseCustom();
+const PUZ = CUSTOM ? [CUSTOM] : puzzlesFor(DAY);
+const N = PUZ.length;
+const TOTAL = N * MAX_POINTS;
+const STATE_KEY = CUSTOM ? `sw:custom:${CUSTOM.id}` : `sw:game:${DAY}`;
 const fresh = () => ({
   round: 0, started: Date.now(), final: null,
-  rounds: Array.from({ length: ROUNDS }, () => ({ clues: 1, pin: null, done: null })),
+  rounds: Array.from({ length: N }, () => ({ clues: 1, pin: null, done: null })),
 });
 let state = store.get(STATE_KEY, null);
-if (!state || !Array.isArray(state.rounds) || state.rounds.length !== ROUNDS) state = fresh();
+if (!state || !Array.isArray(state.rounds) || state.rounds.length !== N) state = fresh();
 const save = () => store.set(STATE_KEY, state);
 save();
 
@@ -33,6 +65,7 @@ const curPuz = () => PUZ[state.round];
 const view = () => state.final ? "final" : cur().done ? "round" : "guess";
 const doneRounds = () => state.rounds.filter((r) => r.done);
 const runningTotal = () => doneRounds().reduce((s, r) => s + r.done.score, 0);
+const totalClues = () => doneRounds().reduce((s, r) => s + r.done.clues, 0);
 
 let player = store.get("sw:player", null);
 if (!player) {
@@ -44,7 +77,12 @@ if (!myName) { myName = randomName(); store.set("sw:name", myName); }
 
 let preview = location.protocol === "file:";
 let lastStats = null;
-let crowdPins = [];   // 5 lists of [lat, lon, score]
+let crowdPins = [];   // N lists of [lat, lon, score]
+
+// Streamer mode: answers stay blurred (and off the map) until you tap "Reveal".
+let streamer = params.has("streamer") || store.get("sw:streamer", false);
+let spoilerOpen = false;
+const hideAnswers = () => streamer && !spoilerOpen && view() !== "guess";
 
 /* ---------- names, flags ---------- */
 function randomName() {
@@ -67,18 +105,26 @@ const scoreBucket = (s) => `${Math.floor(s / 1000)}k-${Math.floor(s / 1000) + 1}
 function toast(msg) {
   const t = $("#toast");
   t.textContent = msg; t.classList.add("show");
-  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("show"), 2200);
+  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("show"), 2600);
+}
+async function copyOrShare(text, okMsg, files) {
+  if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+    try { await navigator.share(files ? { files, text } : { text }); return; } catch (e) { if (e.name === "AbortError") return; }
+  }
+  try { await navigator.clipboard.writeText(text); toast(okMsg); }
+  catch { prompt("Copy this:", text); }
 }
 
 /* ---------- clues ---------- */
 function renderClues(animateLast = false) {
-  $("#day-label").textContent = `#${DAY}`;
+  $("#day-label").textContent = CUSTOM ? `✍️ by ${CUSTOM.by}` : `#${DAY}`;
   const v = view();
   $("#clues").hidden = v === "final";
   if (v === "final") return;
-  const r = cur(), p = curPuz();
+  const r = cur(), p = curPuz(), maxC = p.clues.length;
   const n = r.done ? r.done.clues : r.clues;
-  const shown = r.done ? MAX_CLUES : n;
+  // After the guess, show the clues you skipped too (unless streamer mode is hiding answers).
+  const shown = r.done && !hideAnswers() ? maxC : n;
   const list = $("#clue-list");
   list.innerHTML = "";
   for (let i = 0; i < shown; i++) {
@@ -90,19 +136,20 @@ function renderClues(animateLast = false) {
     if (i === n - 1) li.classList.add("current");
     list.appendChild(li);
   }
-  $("#round-label").textContent = `Round ${state.round + 1}/${ROUNDS}`;
+  $("#round-label").textContent = CUSTOM ? "Friend's riddle" : `Round ${state.round + 1}/${N}`;
   $("#total-label").textContent = `${fmt(runningTotal())} pts`;
-  $("#clue-count").textContent = r.done ? `${n} of ${MAX_CLUES} clues used` : `Clue ${n} of ${MAX_CLUES}`;
+  $("#total-label").hidden = !!CUSTOM;
+  $("#clue-count").textContent = r.done ? `${n} of ${maxC} clues used` : `Clue ${n} of ${maxC}`;
   $("#mult").textContent = `Points ${multTxt(n)}`;
-  $("#next-clue").hidden = !!r.done || n >= MAX_CLUES;
-  if (n < MAX_CLUES) $("#next-cost").textContent = `(points ${multTxt(n + 1)})`;
+  $("#next-clue").hidden = !!r.done || n >= maxC;
+  if (n < maxC) $("#next-cost").textContent = `(points ${multTxt(n + 1)})`;
 }
 
 $("#next-clue").addEventListener("click", () => {
   const r = cur();
-  if (r.done || r.clues >= MAX_CLUES) return;
+  if (r.done || r.clues >= curPuz().clues.length) return;
   r.clues++; save(); renderClues(true);
-  track("Reveal clue", { clue: r.clues, round: state.round + 1, day: DAY });
+  track("Reveal clue", { clue: r.clues, round: state.round + 1, day: DAY, custom: !!CUSTOM });
 });
 
 /* ---------- map ---------- */
@@ -135,7 +182,7 @@ function buildMap() {
   map.svg.call(map.zoom).on("dblclick.zoom", null);
   map.svg.on("click", onMapClick);
   drawAll();
-  if (view() !== "guess") fitToResult(false);
+  if (view() !== "guess" && !making) fitToResult(false);
   else resetZoom(false);
 }
 
@@ -152,16 +199,23 @@ function resetZoom(animate) {
   (animate ? map.svg.transition().duration(700) : map.svg).call(map.zoom.transform, t);
 }
 
-function onMapClick(e) {
-  if (view() !== "guess") return;
+function eventLatLon(e) {
   const [x, y] = d3.pointer(e, map.root.node());
   const ll = map.projection.invert([x, y]);
-  if (!ll || !isFinite(ll[0]) || !isFinite(ll[1])) return;
+  if (!ll || !isFinite(ll[0]) || !isFinite(ll[1])) return null;
   const back = map.projection(ll);
-  if (!back || Math.hypot(back[0] - x, back[1] - y) > 1) return; // clicked outside the globe
+  if (!back || Math.hypot(back[0] - x, back[1] - y) > 1) return null; // clicked outside the globe
+  return [Math.round(ll[1] * 1e4) / 1e4, Math.round(ll[0] * 1e4) / 1e4];
+}
+
+function onMapClick(e) {
+  if (making) return makerClick(e);
+  if (view() !== "guess") return;
+  const ll = eventLatLon(e);
+  if (!ll) return;
   const r = cur();
-  if (!r.pin && state.round === 0) track("First pin", { clues: r.clues, day: DAY });
-  r.pin = [Math.round(ll[1] * 1e4) / 1e4, Math.round(ll[0] * 1e4) / 1e4];
+  if (!r.pin && state.round === 0) track("First pin", { clues: r.clues, day: DAY, custom: !!CUSTOM });
+  r.pin = ll;
   save();
   drawMine();
   $("#map-hint").style.opacity = 0;
@@ -183,6 +237,7 @@ function marker(layer, data, draw) {
   draw(sel);
   rescaleMarkers();
 }
+const PIN_PATH = "M0,0 C-2,-6 -8,-9 -8,-15 A8,8 0 1 1 8,-15 C8,-9 2,-6 0,0Z";
 
 // Which rounds have their answer on the map right now.
 function revealed() {
@@ -193,26 +248,31 @@ function revealed() {
 }
 
 function drawPlayers() {
-  const where = view() === "guess" ? (lastStats?.where || []) : [];
+  const where = view() === "guess" && !making ? (lastStats?.where || []) : [];
   marker("players", where, (sel) => sel.append("circle").attr("class", "player-dot")
     .attr("r", (d) => 2.2 + Math.min(9, Math.sqrt(d[2]) * 1.1)));
 }
 function drawCrowd() {
-  const pins = view() === "final" ? crowdPins.flat() : [];
+  const pins = view() === "final" && !hideAnswers() && !making ? crowdPins.flat() : [];
   marker("crowd", pins, (sel) => sel.append("circle").attr("class", "crowd-dot").attr("r", 2.4));
 }
 function drawMine() {
-  const pins = view() === "guess"
+  let pins = view() === "guess"
     ? (cur().pin ? [cur().pin] : [])
     : revealed().map((i) => [state.rounds[i].done.glat, state.rounds[i].done.glon]);
+  if (making) pins = [];
   marker("mine", pins, (sel) => {
-    sel.append("path").attr("class", "my-pin").attr("stroke-width", 1.5)
-      .attr("d", "M0,0 C-2,-6 -8,-9 -8,-15 A8,8 0 1 1 8,-15 C8,-9 2,-6 0,0Z");
+    sel.append("path").attr("class", "my-pin").attr("stroke-width", 1.5).attr("d", PIN_PATH);
     sel.append("circle").attr("cy", -15).attr("r", 3).attr("fill", "#fff");
   });
 }
 function drawAnswer() {
-  const idx = revealed(), numbered = view() === "final";
+  if (making) {
+    map.root.select("#layer-line").selectAll("path").remove();
+    marker("answer", makerPin ? [makerPin] : [], (sel) => sel.append("path").attr("class", "answer-pin").attr("stroke-width", 1.2).attr("d", d3.symbol(d3.symbolStar, 300)()));
+    return;
+  }
+  const idx = hideAnswers() ? [] : revealed(), numbered = view() === "final" && N > 1;
   map.root.select("#layer-line").selectAll("path").data(idx).join("path").attr("class", "guess-line")
     .attr("d", (i) => map.path({ type: "LineString", coordinates: [[state.rounds[i].done.glon, state.rounds[i].done.glat], [PUZ[i].lon, PUZ[i].lat]] }));
   marker("answer", idx.map((i) => [PUZ[i].lat, PUZ[i].lon, i + 1]), (sel) => {
@@ -226,23 +286,26 @@ function drawAll() { drawPlayers(); drawCrowd(); drawAnswer(); drawMine(); rende
 
 function renderLegend() {
   const v = view();
-  $("#legend").innerHTML = v === "guess"
+  $("#legend").innerHTML = v === "guess" || making
     ? `<span><i style="background:var(--players)"></i>Where people are playing today</span>`
     : `<span><i style="background:var(--pin)"></i>You</span><span><i style="background:var(--answer)"></i>Answer</span>`
-      + (v === "final" ? `<span><i style="background:var(--crowd)"></i>Everyone's guesses</span>` : "");
+      + (v === "final" && !CUSTOM ? `<span><i style="background:var(--crowd)"></i>Everyone's guesses</span>` : "");
 }
 
 function fitToResult(animate = true) {
   const idx = revealed();
   if (!idx.length) return;
   const W = +map.svg.attr("viewBox").split(" ")[2], H = +map.svg.attr("viewBox").split(" ")[3];
-  const shape = { type: "MultiLineString", coordinates: idx.map((i) => [[state.rounds[i].done.glon, state.rounds[i].done.glat], [PUZ[i].lon, PUZ[i].lat]]) };
+  // In streamer mode with answers hidden, only frame your own pins so the view gives nothing away.
+  const shape = hideAnswers()
+    ? { type: "MultiPoint", coordinates: idx.map((i) => [state.rounds[i].done.glon, state.rounds[i].done.glat]) }
+    : { type: "MultiLineString", coordinates: idx.map((i) => [[state.rounds[i].done.glon, state.rounds[i].done.glat], [PUZ[i].lon, PUZ[i].lat]]) };
   const [[x0, y0], [x1, y1]] = map.path.bounds(shape);
   // Only the part of the screen above the result sheet (and below the top bar) is visible.
   const sheet = $("#result");
   const sheetH = sheet && !sheet.hidden ? sheet.offsetHeight + 20 : 0;
   const top = 70, visH = Math.max(140, H - sheetH - top);
-  const pad = 80;
+  const pad = hideAnswers() ? 600 : 80;
   const k = Math.max(1, Math.min(5, 0.9 / Math.max((x1 - x0 + pad) / W, (y1 - y0 + pad) / visH)));
   const t = d3.zoomIdentity.translate(W / 2, top + visH / 2).scale(k).translate(-(x0 + x1) / 2, -(y0 + y1) / 2);
   (animate ? map.svg.transition().duration(1200) : map.svg).call(map.zoom.transform, t);
@@ -265,13 +328,14 @@ $("#lock-btn").addEventListener("click", () => {
   const [glat, glon] = r.pin;
   const km = Math.round(distanceKm(glat, glon, p.lat, p.lon) * 10) / 10;
   r.done = { glat, glon, km, clues: r.clues, score: scoreFor(km, r.clues) };
+  spoilerOpen = false;
   save();
-  track("Guess", { round: state.round + 1, clues: r.clues, distance: kmBucket(km), day: DAY });
+  track("Guess", { round: state.round + 1, clues: r.clues, distance: kmBucket(km), day: DAY, custom: !!CUSTOM });
   render(true);
 });
 
 function nextRound() {
-  if (state.round < ROUNDS - 1) {
+  if (state.round < N - 1) {
     state.round++; save();
     render(false);
     resetZoom(true);
@@ -282,6 +346,14 @@ function nextRound() {
 async function finishGame() {
   const btn = $("#next-btn");
   if (btn) { btn.disabled = true; btn.textContent = "Adding up your score…"; }
+  spoilerOpen = false;
+  if (CUSTOM) {
+    state.final = { score: runningTotal(), km: doneRounds().reduce((s, r) => s + r.done.km, 0), custom: true };
+    save();
+    track("Finish friend riddle", { distance: kmBucket(state.final.km), clues: totalClues() });
+    render(true);
+    return;
+  }
   const ms = Date.now() - state.started;
   let res = null;
   if (!preview) {
@@ -303,14 +375,14 @@ async function finishGame() {
     if (!preview) toast("Couldn't reach the server. Your result is saved on this device.");
   }
   save();
-  track("Finish game", { score: scoreBucket(state.final.score), clues: totalClues(), day: DAY, offline: !!state.final.local });
   recordHistory();
+  const st = streakInfo();
+  track("Finish game", { score: scoreBucket(state.final.score), clues: totalClues(), streak: st.count, day: DAY, offline: !!state.final.local });
   render(true);
   loadPins();
   refreshStats(true);
+  loadFriends();
 }
-
-const totalClues = () => doneRounds().reduce((s, r) => s + r.done.clues, 0);
 
 function estimateBeat(score) {
   // Preview mode only: a rough guess from the average.
@@ -318,58 +390,100 @@ function estimateBeat(score) {
   return Math.max(1, Math.min(99, Math.round(50 + (score - avg) / 40)));
 }
 
+/* ---------- streak, with one free "saver" a week ---------- */
 function recordHistory() {
   const h = store.get("sw:history", {});
   h[DAY] = state.final.score;
   store.set("sw:history", h);
 }
-function streak() {
+// Walks back from today. A single missed day is forgiven once per week (weeks run from day 1),
+// so one busy day doesn't wipe out a long streak.
+function streakInfo() {
   const h = store.get("sw:history", {});
-  let s = 0;
-  for (let d = DAY; h[d] != null; d--) s++;
-  return s;
+  const week = (d) => Math.floor((d - 1) / 7);
+  const usedWeeks = new Set(), saved = [];
+  let d = h[DAY] != null ? DAY : DAY - 1, count = 0;
+  while (d >= 1) {
+    if (h[d] != null) { count++; d--; continue; }
+    if (h[d - 1] != null && !usedWeeks.has(week(d))) { usedWeeks.add(week(d)); saved.push(d); d--; continue; }
+    break;
+  }
+  return { count, saved, saverReady: !usedWeeks.has(week(DAY)) };
 }
 
 /* ---------- result sheet ---------- */
+const spoilerBtn = () => hideAnswers() ? `<button class="ghost reveal-btn" id="reveal-btn">👀 Reveal the answer${N > 1 && view() === "final" ? "s" : ""}</button>` : "";
+
 function roundHTML() {
-  const r = cur().done, p = curPuz(), last = state.round === ROUNDS - 1;
+  const r = cur().done, p = curPuz(), last = state.round === N - 1;
   return `
     <div class="result-top">
       <div>
-        <div class="eyebrow">Round ${state.round + 1} of ${ROUNDS} · the answer was</div>
-        <h2>${esc(p.name)}</h2>
+        <div class="eyebrow">${CUSTOM ? `${esc(CUSTOM.by)}'s riddle` : `Round ${state.round + 1} of ${N}`} · the answer was</div>
+        <h2 class="spoiler">${esc(p.name)}</h2>
       </div>
       <div class="km"><b>${fmtKm(r.km)}</b><span>from the answer</span></div>
     </div>
     <div class="scorebar"><div class="fill" id="r-bar" data-w="${(r.score / MAX_POINTS * 100).toFixed(1)}"></div></div>
     <div class="score-line">
       <span>${roundSquare(r.km)} <b>${fmt(r.score)}</b> / ${fmt(MAX_POINTS)} points</span>
-      <span class="muted">Total <b>${fmt(runningTotal())}</b></span>
+      ${CUSTOM ? "" : `<span class="muted">Total <b>${fmt(runningTotal())}</b></span>`}
     </div>
-    <p class="fact">${esc(p.fact)}</p>
-    <button class="guess" id="next-btn">${last ? "See your final score" : "Next round →"}</button>`;
+    ${p.fact ? `<p class="fact spoiler"><b>Did you know?</b> ${esc(p.fact)}</p>` : ""}
+    ${spoilerBtn()}
+    <button class="guess" id="next-btn">${last ? (CUSTOM ? "See your score" : "See your final score") : "Next round →"}</button>`;
+}
+
+function streakHTML() {
+  const s = streakInfo();
+  const savedYesterday = s.saved.includes(DAY - 1);
+  return `<div class="streak-box">
+      <span class="flame">🔥</span>
+      <div><b>${s.count} day${s.count === 1 ? "" : "s"} in a row</b>
+        <span class="sub">${savedYesterday ? "🛟 Your weekly saver kept your streak alive yesterday." : s.saverReady ? "🛟 Streak saver ready: miss one day this week and your streak survives." : "🛟 Saver used this week. Come back tomorrow!"}</span></div>
+    </div>`;
 }
 
 function finalHTML() {
   const f = state.final;
   const rows = state.rounds.map((x, i) => `
     <li><span class="sq">${roundSquare(x.done.km)}</span>
-      <span class="who">${i + 1}. ${esc(PUZ[i].name)}<span class="sub">${fmtKm(x.done.km)} · ${x.done.clues} clue${x.done.clues > 1 ? "s" : ""}</span></span>
+      <span class="who">${N > 1 ? `${i + 1}. ` : ""}<span class="spoiler">${esc(PUZ[i].name)}</span><span class="sub">${fmtKm(x.done.km)} · ${x.done.clues} clue${x.done.clues > 1 ? "s" : ""}</span></span>
       <span class="val">${fmt(x.done.score)}</span></li>`).join("");
+  if (CUSTOM) return `
+    <div class="result-top">
+      <div>
+        <div class="eyebrow">${esc(CUSTOM.by)}'s riddle · your score</div>
+        <h2>${fmt(f.score)} <span class="of">/ ${fmt(TOTAL)}</span></h2>
+      </div>
+      <div class="km"><b>${fmtKm(f.km)}</b><span>from the answer</span></div>
+    </div>
+    <div class="scorebar"><div class="fill" id="r-bar" data-w="${(f.score / TOTAL * 100).toFixed(1)}"></div></div>
+    <ol class="rounds">${rows}</ol>
+    ${spoilerBtn()}
+    <div class="share-row">
+      <button class="guess small" id="share-btn">Tell ${esc(CUSTOM.by)} your score</button>
+      <button class="ghost" id="make-btn">✍️ Write one back</button>
+      <a class="ghost" href="/" id="daily-link">🌍 Play today's 5 places</a>
+    </div>`;
   return `
     <div class="result-top">
       <div>
         <div class="eyebrow">Somewhere #${DAY} · your score</div>
-        <h2>${fmt(f.score)} <span class="of">/ ${fmt(MAX_TOTAL)}</span></h2>
+        <h2>${fmt(f.score)} <span class="of">/ ${fmt(TOTAL)}</span></h2>
       </div>
       <div class="km"><b>${f.beat}%</b><span>of players beaten</span></div>
     </div>
-    <div class="scorebar"><div class="fill" id="r-bar" data-w="${(f.score / MAX_TOTAL * 100).toFixed(1)}"></div></div>
+    <div class="scorebar"><div class="fill" id="r-bar" data-w="${(f.score / TOTAL * 100).toFixed(1)}"></div></div>
+    ${streakHTML()}
     <ol class="rounds">${rows}</ol>
+    ${spoilerBtn()}
     <div class="share-row">
       <button class="guess small" id="share-btn" data-umami-event="Share result">Share result</button>
       <button class="ghost" id="card-btn" data-umami-event="Save image">Save image</button>
+      <button class="ghost" id="friends-btn">👥 ${friendCode ? "Friends board" : "Challenge friends"}</button>
       <button class="ghost" id="result-boards" data-umami-event="Open leaderboard">🏆 Leaderboard</button>
+      <button class="ghost" id="make-btn">✍️ Write a riddle</button>
     </div>
     <div class="me-row">
       <label for="name-input">Your name on the board</label>
@@ -378,15 +492,28 @@ function finalHTML() {
         <button class="ghost" id="name-save" data-umami-event="Rename">Save</button>
       </div>
     </div>
-    <div class="next">5 new places in <b id="countdown">--:--:--</b> · streak <b>${streak()}</b></div>`;
+    <div class="next">5 new places in <b id="countdown">--:--:--</b></div>`;
 }
 
 function bindSheet() {
   $("#next-btn")?.addEventListener("click", nextRound);
   $("#share-btn")?.addEventListener("click", share);
   $("#card-btn")?.addEventListener("click", saveCard);
-  $("#result-boards")?.addEventListener("click", openBoards);
+  $("#result-boards")?.addEventListener("click", () => openBoards("players"));
+  $("#friends-btn")?.addEventListener("click", () => openBoards("friends"));
+  $("#make-btn")?.addEventListener("click", openMaker);
   $("#name-save")?.addEventListener("click", rename);
+  $("#reveal-btn")?.addEventListener("click", revealSpoilers);
+}
+
+function revealSpoilers() {
+  spoilerOpen = true;
+  $("#result").classList.remove("hide-answers");
+  $("#reveal-btn")?.remove();
+  renderClues();
+  drawAll();
+  fitToResult(true);
+  track("Reveal answers (streamer)");
 }
 
 function render(animate) {
@@ -397,6 +524,7 @@ function render(animate) {
   if (v === "guess") { sheet.hidden = true; sheet.innerHTML = ""; }
   else {
     sheet.innerHTML = v === "final" ? finalHTML() : roundHTML();
+    sheet.classList.toggle("hide-answers", hideAnswers());
     sheet.hidden = false;
     sheet.scrollTop = 0;
     if (animate) { sheet.style.animation = "none"; void sheet.offsetWidth; sheet.style.animation = ""; }
@@ -413,24 +541,23 @@ function render(animate) {
   });
 }
 
-/* ---------- sharing ---------- */
+/* ---------- sharing (never gives away the answers) ---------- */
+const siteUrl = () => location.origin.startsWith("http") ? location.origin : "";
 function shareText() {
   const f = state.final;
+  if (CUSTOM) return `I got ${fmt(f.score)} / ${fmt(TOTAL)} on your Somewhere riddle ${roundSquare(f.km)} (${fmtKm(f.km)} off)\n${location.href}`;
+  const s = streakInfo().count;
   return [
-    `Somewhere #${DAY} 🌍 ${fmt(f.score)} / ${fmt(MAX_TOTAL)}`,
+    `Somewhere #${DAY} 🌍 ${fmt(f.score)} / ${fmt(TOTAL)}`,
     state.rounds.map((x) => roundSquare(x.done.km)).join(""),
-    `🔎 ${totalClues()} clues · beat ${f.beat}%`,
-    location.origin.startsWith("http") ? location.origin : "",
+    `🔎 ${totalClues()} clues · beat ${f.beat}%${s > 1 ? ` · 🔥 ${s}` : ""}`,
+    siteUrl(),
   ].filter(Boolean).join("\n");
 }
 
-async function share() {
-  const text = shareText();
-  if (navigator.share && matchMedia("(pointer: coarse)").matches) {
-    try { await navigator.share({ text }); return; } catch (e) { if (e.name === "AbortError") return; }
-  }
-  try { await navigator.clipboard.writeText(text); toast("Copied! Paste it anywhere."); }
-  catch { prompt("Copy your result:", text); }
+function share() {
+  track("Share result", { custom: !!CUSTOM });
+  copyOrShare(shareText(), "Copied! Paste it anywhere.");
 }
 
 async function saveCard() {
@@ -444,7 +571,8 @@ async function saveCard() {
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
 }
 
-// A 1080x1350 image card with a mini map of all 5 guesses. Great for stories.
+// A 1080x1350 story-sized card. Spoiler-free: it shows how close you got each round,
+// never where the places are, so it is safe to post before your friends have played.
 async function makeCard() {
   const f = state.final, W = 1080, H = 1350;
   const c = document.createElement("canvas"); c.width = W; c.height = H;
@@ -454,43 +582,45 @@ async function makeCard() {
   g.addColorStop(0, "#ffffff"); g.addColorStop(1, "#e3f0f8");
   ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
-  ctx.fillStyle = "#f5b301"; ctx.beginPath(); ctx.arc(102, 116, 22, 0, 7); ctx.fill(); ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(102, 116, 13, 0, 7); ctx.fill(); ctx.fillStyle = "#e5484d"; ctx.beginPath(); ctx.arc(102, 116, 7, 0, 7); ctx.fill();
-  ctx.fillStyle = "#17202e"; ctx.font = "800 64px 'Bricolage Grotesque', Inter, sans-serif"; ctx.fillText("Somewhere", 140, 136);
-  ctx.fillStyle = "#5d6878"; ctx.font = "700 40px Inter, sans-serif"; ctx.textAlign = "right"; ctx.fillText(`#${DAY}`, W - 80, 130); ctx.textAlign = "left";
-
-  // mini map with all 5 lines
-  const mx = 60, my = 190, mw = W - 120, mh = 560;
+  // faint world in the background (no pins)
   ctx.save();
-  ctx.beginPath(); ctx.roundRect(mx, my, mw, mh, 32); ctx.clip();
-  ctx.fillStyle = "#cfe6f3"; ctx.fillRect(mx, my, mw, mh);
-  const lines = state.rounds.map((x, i) => [[x.done.glon, x.done.glat], [PUZ[i].lon, PUZ[i].lat]]);
-  const proj = d3.geoNaturalEarth1().fitExtent([[mx + 20, my + 20], [mx + mw - 20, my + mh - 20]], { type: "Sphere" });
+  ctx.globalAlpha = 0.5;
+  const proj = d3.geoNaturalEarth1().fitExtent([[40, 210], [W - 40, 760]], { type: "Sphere" });
   const path = d3.geoPath(proj, ctx);
+  ctx.beginPath(); path({ type: "Sphere" }); ctx.fillStyle = "#cfe6f3"; ctx.fill();
   ctx.beginPath(); path(map.land); ctx.fillStyle = "#f1efe4"; ctx.fill();
-  ctx.strokeStyle = "#c9c3ad"; ctx.lineWidth = 1.2; ctx.stroke();
-  ctx.beginPath(); path({ type: "MultiLineString", coordinates: lines }); ctx.setLineDash([10, 8]); ctx.strokeStyle = "#17202e"; ctx.lineWidth = 3.5; ctx.stroke(); ctx.setLineDash([]);
-  state.rounds.forEach((x, i) => {
-    const [ax, ay] = proj([PUZ[i].lon, PUZ[i].lat]), [gx, gy] = proj([x.done.glon, x.done.glat]);
-    ctx.fillStyle = "#e5484d"; ctx.strokeStyle = "#fff"; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(gx, gy, 11, 0, 7); ctx.fill(); ctx.stroke();
-    ctx.fillStyle = "#f5b301"; ctx.strokeStyle = "#5b4300"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(ax, ay, 17, 0, 7); ctx.fill(); ctx.stroke();
-    ctx.fillStyle = "#3d2d00"; ctx.font = "800 20px Inter, sans-serif"; ctx.textAlign = "center"; ctx.fillText(String(i + 1), ax, ay + 7); ctx.textAlign = "left";
-  });
   ctx.restore();
 
+  try {
+    const logo = new Image(); logo.src = "favicon.svg"; await logo.decode();
+    ctx.drawImage(logo, 70, 80, 60, 60);
+  } catch {}
+  ctx.fillStyle = "#17202e"; ctx.font = "800 64px 'Bricolage Grotesque', Inter, sans-serif"; ctx.fillText("Somewhere", 148, 133);
+  ctx.fillStyle = "#5d6878"; ctx.font = "700 40px Inter, sans-serif"; ctx.textAlign = "right"; ctx.fillText(`#${DAY}`, W - 80, 130);
+
   ctx.textAlign = "center";
-  ctx.fillStyle = "#17202e"; ctx.font = "800 150px 'Bricolage Grotesque', Inter, sans-serif"; ctx.fillText(fmt(f.score), W / 2, 920);
-  ctx.fillStyle = "#5d6878"; ctx.font = "600 42px Inter, sans-serif";
-  ctx.fillText(`out of ${fmt(MAX_TOTAL)}  ·  beat ${f.beat}%`, W / 2, 990);
-  // one tile per round
-  const colors = { "🟩": "#19a463", "🟨": "#f5b301", "🟧": "#f08a24", "🟥": "#e5484d", "⬛": "#c3cad4" };
+  ctx.fillStyle = "#17202e"; ctx.font = "800 210px 'Bricolage Grotesque', Inter, sans-serif"; ctx.fillText(fmt(f.score), W / 2, 500);
+  ctx.fillStyle = "#5d6878"; ctx.font = "700 46px Inter, sans-serif"; ctx.fillText(`out of ${fmt(TOTAL)}`, W / 2, 575);
+  const s = streakInfo().count;
+  ctx.fillStyle = "#17202e"; ctx.font = "700 40px Inter, sans-serif";
+  ctx.fillText(`beat ${f.beat}% of players${s > 1 ? `  ·  🔥 ${s} days` : ""}`, W / 2, 665);
+
+  // one tile per round: colour = how close, number = distance
+  const colors = { "🟩": "#19a463", "🟨": "#f5b301", "🟧": "#f08a24", "🟥": "#e5484d", "⬛": "#8a94a3" };
+  const tw = 170, gap = 18, x0 = (W - (tw * N + gap * (N - 1))) / 2;
   state.rounds.forEach((x, i) => {
-    ctx.fillStyle = colors[roundSquare(x.done.km)]; ctx.beginPath(); ctx.roundRect(W / 2 - 340 + i * 140, 1040, 120, 64, 16); ctx.fill();
-    ctx.fillStyle = "#fff"; ctx.font = "800 28px Inter, sans-serif"; ctx.fillText(fmt(x.done.score), W / 2 - 280 + i * 140, 1082);
+    const tx = x0 + i * (tw + gap);
+    ctx.fillStyle = colors[roundSquare(x.done.km)]; ctx.beginPath(); ctx.roundRect(tx, 820, tw, 190, 28); ctx.fill();
+    ctx.fillStyle = "rgba(255,255,255,.85)"; ctx.font = "800 30px Inter, sans-serif"; ctx.fillText(`#${i + 1}`, tx + tw / 2, 870);
+    ctx.fillStyle = "#fff"; ctx.font = "800 46px 'Bricolage Grotesque', Inter, sans-serif";
+    const km = x.done.km;
+    ctx.fillText(km < 1000 ? fmt(km) : (km / 1000).toFixed(km < 10000 ? 1 : 0) + "k", tx + tw / 2, 945);
+    ctx.font = "700 26px Inter, sans-serif"; ctx.fillText("km off", tx + tw / 2, 985);
   });
-  ctx.fillStyle = "#17202e"; ctx.font = "700 46px Inter, sans-serif";
-  ctx.fillText("Can you find today's 5 places?", W / 2, 1220);
-  ctx.fillStyle = "#c8402b"; ctx.font = "800 36px Inter, sans-serif";
-  ctx.fillText(location.host || "somewhere", W / 2, 1280);
+  ctx.fillStyle = "#17202e"; ctx.font = "700 50px Inter, sans-serif";
+  ctx.fillText("Can you beat me?", W / 2, 1160);
+  ctx.fillStyle = "#c8402b"; ctx.font = "800 38px Inter, sans-serif";
+  ctx.fillText(location.host || "somewhere", W / 2, 1225);
   return new Promise((res) => c.toBlob(res, "image/png"));
 }
 
@@ -500,9 +630,11 @@ async function rename() {
   myName = v; store.set("sw:name", v);
   if (!preview && state.final && !state.final.local) {
     try { await fetch("/api/name", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ day: DAY, player, name: v }) }); } catch {}
+    if (friendCode) friendsPost("join", friendCode).catch(() => {});
   }
   toast("Name saved");
   refreshStats(true);
+  loadFriends();
 }
 
 /* ---------- live stats ---------- */
@@ -523,7 +655,7 @@ async function refreshStats(bust) {
 }
 
 async function loadPins() {
-  if (!state.final) return;
+  if (!state.final || CUSTOM) return;
   if (preview || state.final.local) { crowdPins = samplePins(); drawCrowd(); return; }
   try {
     const r = await fetch(`/api/pins?day=${DAY}&player=${encodeURIComponent(player)}`);
@@ -531,33 +663,129 @@ async function loadPins() {
   } catch {}
 }
 
+/* ---------- friends boards ---------- */
+let friendCode = store.get("sw:friends", null);
+let friendsData = null;
+const inviteLink = () => `${siteUrl() || location.origin}/?friends=${friendCode}`;
+
+async function friendsPost(action, code) {
+  const r = await fetch("/api/friends", {
+    method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ action, code, player, name: myName }),
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || "failed");
+  return j;
+}
+async function loadFriends() {
+  if (!friendCode || preview) return;
+  try {
+    const r = await fetch(`/api/friends?code=${friendCode}&day=${DAY}&player=${encodeURIComponent(player)}`);
+    if (r.ok) { friendsData = await r.json(); renderBoards(); }
+  } catch {}
+}
+// Opening an invite link (?friends=CODE) joins that board.
+async function joinFromLink() {
+  const code = (params.get("friends") || "").toUpperCase();
+  if (!/^[A-Z2-9]{6}$/.test(code)) return;
+  history.replaceState(null, "", location.pathname + location.hash);
+  if (code === friendCode) return;
+  if (preview) { toast("Friends boards turn on once the database is connected."); return; }
+  try {
+    await friendsPost("join", code);
+    friendCode = code; store.set("sw:friends", code); friendsData = null;
+    toast("You joined a friends board! Play today's 5 places to get on it.");
+    track("Join friends board");
+    loadFriends();
+  } catch (e) { toast(e.message === "no such board" ? "That friends link doesn't work anymore." : "Couldn't join the friends board."); }
+}
+
+function friendsHTML() {
+  if (preview) return `<p class="empty-note">Friends boards turn on once the database is connected. Then you can make a private board for you and your friends.</p>`;
+  if (!friendCode) return `
+    <div class="friends-start">
+      <div class="big-emoji">👥</div>
+      <p><b>Play against your friends.</b> Make a private board, send the link to your group chat, and see who gets closest every day.</p>
+      <button class="guess small" id="fr-create">Start a friends board</button>
+    </div>`;
+  const d = friendsData;
+  const rows = d ? d.board.map((p, i) => `
+      <li class="${p.me ? "me" : ""}">
+        <span class="rank">${p.score == null ? "" : i + 1}</span>
+        <span class="who">${p.country ? flag(p.country) + " " : ""}${esc(p.name)}${p.me ? " (you)" : ""}</span>
+        <span class="sub">${p.score == null ? "hasn't played yet" : fmtKm(p.km) + " total"}</span>
+        <span class="val">${p.score == null ? "–" : fmt(p.score)}</span>
+      </li>`).join("") : `<li class="empty">Loading…</li>`;
+  return `
+    <div class="invite">
+      <span>Invite friends with this link:</span>
+      <div class="invite-row"><input readonly value="${esc(inviteLink())}" id="fr-link"><button class="guess small" id="fr-invite">${navigator.share && matchMedia("(pointer: coarse)").matches ? "Share" : "Copy"}</button></div>
+    </div>
+    <ol class="board">${rows}</ol>
+    ${d && d.members === 1 ? `<p class="empty-note">It's just you so far. Send the link to a friend!</p>` : ""}
+    <button class="linkish" id="fr-leave">Leave this board</button>`;
+}
+
+$("#friends-panel").addEventListener("click", async (e) => {
+  const id = e.target.closest("button")?.id;
+  if (id === "fr-create") {
+    e.target.disabled = true;
+    try {
+      const { code } = await friendsPost("create");
+      friendCode = code; store.set("sw:friends", code); friendsData = null;
+      track("Create friends board");
+      renderBoards(); loadFriends();
+      if (state.final) render(false);
+    } catch { toast("Couldn't make the board. Try again in a moment."); e.target.disabled = false; }
+  } else if (id === "fr-invite") {
+    track("Invite friends");
+    copyOrShare(`Play Somewhere with me! Today's 5 places, our own leaderboard:\n${inviteLink()}`, "Invite link copied! Paste it in your group chat.");
+  } else if (id === "fr-leave") {
+    try { await friendsPost("leave", friendCode); } catch {}
+    friendCode = null; friendsData = null; store.set("sw:friends", null);
+    renderBoards();
+    if (state.final) render(false);
+  }
+});
+
+/* ---------- drawer ---------- */
 function setClues(open) {
   $("#clues").classList.toggle("collapsed", !open);
   $("#clue-toggle").setAttribute("aria-expanded", String(open));
   $("#clue-toggle").setAttribute("aria-label", open ? "Hide clues" : "Show clues");
 }
 $("#clue-toggle").addEventListener("click", () => setClues($("#clues").classList.contains("collapsed")));
-function openBoards() { $("#boards").hidden = false; renderBoards(); track("Open leaderboard"); }
-$("#boards-btn").addEventListener("click", openBoards);
-$("#boards-close").addEventListener("click", () => { $("#boards").hidden = true; });
-document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("#boards").hidden = true; });
 
 let tab = "players";
-document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => {
-  tab = b.dataset.tab;
-  document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("active", x === b));
+function setTab(t) {
+  tab = t;
+  document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("active", x.dataset.tab === t));
   renderBoards();
-}));
+  if (t === "friends") loadFriends();
+}
+function openBoards(t) {
+  $("#boards").hidden = false;
+  setTab(typeof t === "string" ? t : tab);
+  track("Open leaderboard", { tab });
+}
+$("#boards-btn").addEventListener("click", () => openBoards());
+$("#boards-close").addEventListener("click", () => { $("#boards").hidden = true; });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("#boards").hidden = true; });
+document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => setTab(b.dataset.tab)));
 
 function renderBoards() {
   const s = lastStats; if (!s) return;
   for (const t of ["players", "countries", "feed"]) $("#board-" + t).hidden = t !== tab;
+  $("#friends-panel").hidden = tab !== "friends";
   const meta = $("#board-meta");
   const empty = (msg) => `<li class="empty">${msg}</li>`;
 
-  if (tab === "players") {
-    meta.textContent = s.players ? `${fmt(s.players)} players today · average ${fmt(s.avgScore)} / ${fmt(MAX_TOTAL)}` : "";
-    const mine = state.final;
+  if (tab === "friends") {
+    meta.textContent = friendCode && friendsData ? `Your friends board · today's 5 places` : "";
+    $("#friends-panel").innerHTML = friendsHTML();
+  } else if (tab === "players") {
+    meta.textContent = s.players ? `${fmt(s.players)} players today · average ${fmt(s.avgScore)} / ${fmt(5 * MAX_POINTS)}` : "";
+    const mine = state.final && !CUSTOM ? state.final : null;
     $("#board-players").innerHTML = s.top.length ? s.top.map((p, i) => `
       <li class="${mine && p.name === myName && p.score === mine.score ? "me" : ""}">
         <span class="rank">${i + 1}</span>
@@ -581,6 +809,87 @@ function renderBoards() {
         <span class="val">${fmt(p.score)}</span></li>`).join("") : empty("Waiting for the first explorer…");
   }
 }
+
+/* ---------- riddle maker ---------- */
+let making = false, makerPin = null;
+const maker = $("#maker");
+function openMaker() {
+  try { help.close(); } catch {}
+  if (!$("#mk-by").value) $("#mk-by").value = myName;
+  $("#mk-result").hidden = true;
+  maker.showModal();
+  track("Open riddle maker");
+}
+$("#make-open").addEventListener("click", openMaker);
+$("#mk-cancel").addEventListener("click", () => maker.close());
+$("#mk-pick").addEventListener("click", () => {
+  maker.close();
+  making = true;
+  document.body.classList.add("making");
+  $("#maker-bar").hidden = false;
+  $("#mk-done").disabled = !makerPin;
+  $("#boards").hidden = true;
+  drawAll();
+  resetZoom(true);
+});
+function makerClick(e) {
+  const ll = eventLatLon(e);
+  if (!ll) return;
+  makerPin = ll;
+  drawAnswer();
+  $("#mk-done").disabled = false;
+}
+$("#mk-done").addEventListener("click", () => {
+  making = false;
+  document.body.classList.remove("making");
+  $("#maker-bar").hidden = true;
+  $("#mk-spot-label").textContent = `✓ Spot picked (${makerPin[0].toFixed(2)}, ${makerPin[1].toFixed(2)})`;
+  render(false);
+  if (view() === "guess") resetZoom(false);
+  maker.showModal();
+});
+$("#maker-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!makerPin) { toast("Pick the spot on the map first."); return; }
+  const obj = {
+    n: $("#mk-name").value.trim(), la: makerPin[0], lo: makerPin[1],
+    c: [$("#mk-c1").value, $("#mk-c2").value, $("#mk-c3").value].map((s) => s.trim()).filter(Boolean),
+    f: $("#mk-fact").value.trim(), b: $("#mk-by").value.trim() || myName,
+  };
+  $("#mk-link").value = `${siteUrl() || location.origin}/#r=${encodeRiddle(obj)}`;
+  $("#mk-result").hidden = false;
+  $("#mk-link").select();
+  $("#mk-result").scrollIntoView({ block: "nearest" });
+  track("Create riddle", { clues: obj.c.length });
+});
+$("#mk-share").addEventListener("click", () => {
+  copyOrShare(`I wrote you a Somewhere riddle. Can you find the place?\n${$("#mk-link").value}`, "Link copied! Send it to your friends.");
+});
+
+/* ---------- feedback & settings ---------- */
+$("#feedback-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const msg = $("#fb-msg").value.trim();
+  if (!msg) return;
+  if (preview) { toast("Feedback turns on once the database is connected."); return; }
+  try {
+    const r = await fetch("/api/feedback", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ msg, contact: $("#fb-contact").value }) });
+    if (!r.ok) throw 0;
+    $("#fb-msg").value = ""; $("#fb-contact").value = "";
+    toast("Thanks! We read every message.");
+    track("Send feedback");
+  } catch { toast("Couldn't send right now. Try again later."); }
+});
+
+$("#streamer-toggle").checked = streamer;
+$("#streamer-toggle").addEventListener("change", (e) => {
+  streamer = e.target.checked; store.set("sw:streamer", streamer);
+  spoilerOpen = false;
+  document.body.classList.toggle("streamer", streamer);
+  track("Streamer mode", { on: streamer });
+  render(false);
+});
+document.body.classList.toggle("streamer", streamer);
 
 /* ---------- preview data (only used before the database is connected) ---------- */
 function seeded(seed) { return () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296); }
@@ -632,14 +941,15 @@ function tick() {
     const h = Math.floor(ms / 3.6e6), m = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1000) % 60;
     el.textContent = [h, m, s].map((v) => String(v).padStart(2, "0")).join(":");
   }
-  if (ms === 0 && !tick.reloaded) { tick.reloaded = true; setTimeout(() => location.reload(), 1500); }
+  if (ms === 0 && !tick.reloaded && !CUSTOM) { tick.reloaded = true; setTimeout(() => location.reload(), 1500); }
 }
 setInterval(tick, 1000);
 
 const help = $("#help");
 $("#help-btn").addEventListener("click", () => help.showModal());
 $("#help-close").addEventListener("click", () => help.close());
-if (!store.get("sw:seenHelp2", false)) { store.set("sw:seenHelp2", true); try { help.showModal(); } catch {} }
+if (!store.get("sw:seenHelp2", false) && !CUSTOM) { store.set("sw:seenHelp2", true); try { help.showModal(); } catch {} }
+if (CUSTOM && view() === "guess" && !state.rounds[0].pin) toast(`${CUSTOM.by} wrote you a riddle. Find the place!`);
 
 /* ---------- start ---------- */
 renderClues();
@@ -649,5 +959,8 @@ await refreshStats();
 render(false);
 if (view() === "guess" && cur().pin) $("#map-hint").style.opacity = 0;
 if (state.final) loadPins();
+joinFromLink();
+loadFriends();
 setInterval(() => { if (!document.hidden) refreshStats(); }, 20000);
 setInterval(() => { if (!document.hidden && state.final) loadPins(); }, 60000);
+setInterval(() => { if (!document.hidden && !$("#boards").hidden && tab === "friends") loadFriends(); }, 30000);

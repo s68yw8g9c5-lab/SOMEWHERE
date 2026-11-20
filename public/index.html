@@ -3,15 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Somewhere: one riddle, one place, the whole world guessing</title>
-  <meta name="description" content="A new riddle every day points to one spot on Earth. Read the clues, drop your pin, and see how you rank against the whole planet.">
+  <title>Somewhere: 5 riddles, 5 places, the whole world guessing</title>
+  <meta name="description" content="Every day, 5 riddles point to 5 spots on Earth. Read the clues, drop your pins, and see how you rank against the whole planet and your friends. Free, no sign-up.">
   <meta name="theme-color" content="#cfe6f3">
-  <meta property="og:title" content="Somewhere 🌍 One riddle. One place. The whole world guessing.">
-  <meta property="og:description" content="Read the riddle, drop your pin, beat the planet. New place every day at midnight UTC.">
+  <meta property="og:title" content="Somewhere 🌍 5 riddles. 5 places. The whole world guessing.">
+  <meta property="og:description" content="Read the riddles, drop your pins, beat your friends. New places every day at midnight UTC.">
   <meta property="og:image" content="/og.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,7 +28,7 @@
 
   <header class="top">
     <div class="brand">
-      <span class="logo" aria-hidden="true"></span>
+      <img class="logo" src="favicon.svg" alt="" width="26" height="26">
       <span class="title">Somewhere</span>
       <span class="day" id="day-label">#1</span>
     </div>
@@ -73,6 +75,7 @@
     </div>
     <div class="tabs" role="tablist">
       <button role="tab" class="tab active" data-tab="players" data-umami-event="Board tab" data-umami-event-tab="players">Top explorers</button>
+      <button role="tab" class="tab" data-tab="friends" data-umami-event="Board tab" data-umami-event-tab="friends">Friends</button>
       <button role="tab" class="tab" data-tab="countries" data-umami-event="Board tab" data-umami-event-tab="countries">Country cup</button>
       <button role="tab" class="tab" data-tab="feed" data-umami-event="Board tab" data-umami-event-tab="feed">Live feed</button>
     </div>
@@ -80,7 +83,8 @@
     <ol class="board" id="board-players"></ol>
     <ol class="board" id="board-countries" hidden></ol>
     <ol class="board" id="board-feed" hidden></ol>
-    <p class="foot muted">New place every day at 00:00 UTC. Your rough location (city level) is used for the player map. No sign-up, no tracking cookies.</p>
+    <div id="friends-panel" hidden></div>
+    <p class="foot muted">5 new places every day at 00:00 UTC. Your rough location (city level) is used for the player map. No sign-up, no tracking cookies.</p>
   </aside>
 
   <dialog id="help">
@@ -91,8 +95,46 @@
       <li>Tap the map to drop your pin, then hit <b>Pin it!</b>. One shot per place.</li>
       <li>The closer you are, the more points: up to 1,000 a round, 5,000 a day. Then see where everyone else guessed.</li>
     </ol>
+    <p class="free-note">🎁 The daily game is free, always. No sign-up.</p>
     <button class="guess" id="help-close">Let's go</button>
+    <details class="more">
+      <summary>Settings, your own riddle, feedback</summary>
+      <label class="switch"><input type="checkbox" id="streamer-toggle"> <span><b>Streamer mode</b>: answers stay hidden until you tap them, so your chat can play along without spoilers.</span></label>
+      <button class="ghost wide" id="make-open" data-umami-event="Open riddle maker">✍️ Write a riddle for your friends</button>
+      <form id="feedback-form" class="feedback">
+        <label for="fb-msg"><b>Ideas, bugs, a riddle that was too hard?</b> Tell us.</label>
+        <textarea id="fb-msg" maxlength="2000" rows="3" placeholder="Your message" required></textarea>
+        <input id="fb-contact" maxlength="120" placeholder="Email or @handle if you'd like a reply (optional)" autocomplete="off">
+        <button class="ghost" type="submit">Send feedback</button>
+      </form>
+    </details>
   </dialog>
+
+  <dialog id="maker">
+    <h3>Write a riddle</h3>
+    <p class="muted small">Pick a place, write up to 3 clues (hardest first), and send the link to your friends. Nothing is posted publicly.</p>
+    <form id="maker-form" class="maker">
+      <label>The answer (what your friends see at the end)<input id="mk-name" maxlength="60" required placeholder="e.g. Grandma's village, Portugal"></label>
+      <label>Clue 1 (the hardest)<textarea id="mk-c1" maxlength="160" rows="2" required></textarea></label>
+      <label>Clue 2 (optional)<textarea id="mk-c2" maxlength="160" rows="2"></textarea></label>
+      <label>Clue 3, the easy one (optional)<textarea id="mk-c3" maxlength="160" rows="2"></textarea></label>
+      <label>A fun fact for the reveal (optional)<input id="mk-fact" maxlength="200"></label>
+      <label>Your name<input id="mk-by" maxlength="20"></label>
+      <div class="mk-spot"><button type="button" class="ghost" id="mk-pick">📍 Pick the spot on the map</button><span id="mk-spot-label" class="muted">No spot yet</span></div>
+      <div class="mk-actions">
+        <button type="button" class="ghost" id="mk-cancel">Cancel</button>
+        <button type="submit" class="guess small" id="mk-create">Create link</button>
+      </div>
+      <div id="mk-result" hidden>
+        <input id="mk-link" readonly>
+        <button type="button" class="guess small" id="mk-share">Copy link</button>
+      </div>
+    </form>
+  </dialog>
+  <div class="maker-bar card" id="maker-bar" hidden>
+    <span>Tap the map where your riddle's answer is</span>
+    <button class="guess small" id="mk-done" disabled>Use this spot</button>
+  </div>
 
   <div class="toast" id="toast" role="status"></div>
 
