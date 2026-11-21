@@ -156,6 +156,7 @@ $("#next-clue").addEventListener("click", () => {
    Zooms from the whole world down to street level. If the street map can't load
    (blocked network, outage), it switches to a simple built-in world map. */
 const STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
+const STREET_ZOOM = 5.5;   // street-map detail appears from this zoom level in
 const map = { gl: null, ready: false, land: null, fallback: false, tilesOk: false, tileErrors: 0, markers: { mine: [], answer: [] } };
 window.__swMap = map; // handy for debugging in the browser console
 const fc = (features) => ({ type: "FeatureCollection", features });
@@ -193,7 +194,7 @@ async function initMap() {
   map.land = topojson.feature(topo, topo.objects.countries);   // also used for the share card
   const gl = map.gl = new maplibregl.Map({
     container: "map", style: STYLE_URL, center: [10, 22], zoom: 1, minZoom: 0, maxZoom: 17,
-    dragRotate: false, pitchWithRotate: false, maxPitch: 0, fadeDuration: 0, attributionControl: { compact: true },
+    dragRotate: false, pitchWithRotate: false, maxPitch: 0, fadeDuration: 0, pixelRatio: Math.min(devicePixelRatio || 1, 2), attributionControl: { compact: true },
   });
   gl.touchZoomRotate.disableRotation();
   gl.touchPitch.disable();
@@ -203,12 +204,13 @@ async function initMap() {
     map.fallback = true;
     gl.setStyle(fallbackStyle());
   };
-  const timer = setTimeout(() => { if (!map.tilesOk) useFallback(); }, 9000);
-  gl.on("error", (e) => {
-    // Style or tiles failed. A few tile errors before any tile has loaded = switch to the simple map.
+  const timer = setTimeout(() => { if (!map.ready) useFallback(); }, 9000);
+  gl.on("error", () => {
+    // The street map's style didn't load, or its tiles keep failing: use the simple map instead.
     if (!map.ready || (!map.tilesOk && ++map.tileErrors >= 3)) useFallback();
   });
-  gl.on("data", (e) => { if (e.dataType === "source" && e.tile && !map.fallback) { map.tilesOk = true; clearTimeout(timer); } });
+  gl.on("data", (e) => { if (e.dataType === "source" && e.tile && e.sourceId === "openmaptiles") map.tilesOk = true; });
+  gl.once("style.load", () => clearTimeout(timer));
   gl.on("style.load", () => { addOverlays(); if (map.ready) drawAll(); });
   gl.on("click", (e) => onMapClick([Math.round(e.lngLat.lat * 1e4) / 1e4, Math.round(e.lngLat.wrap().lng * 1e4) / 1e4]));
   await new Promise((res) => gl.once("style.load", res));
@@ -220,9 +222,20 @@ async function initMap() {
 // Our own layers on top of whichever base map is showing.
 function addOverlays() {
   const gl = map.gl;
-  if (!map.fallback) {
+  if (!map.fallback && !gl.getLayer("lo-land")) {
     // 3D buildings look nice but are slow on phones, and the game never tilts the map.
-    for (const l of gl.getStyle().layers) if (l.type === "fill-extrusion") gl.removeLayer(l.id);
+    // The shaded-relief picture layer is also heavy, so both go.
+    for (const l of gl.getStyle().layers) if (l.type === "fill-extrusion" || l.type === "raster" || l.type === "hillshade") gl.removeLayer(l.id);
+    // Zoomed out, the street map's tiles are huge (up to 1.5 MB each), which makes zooming laggy.
+    // So below STREET_ZOOM we draw our own light world map, and street detail starts after that.
+    for (const l of gl.getStyle().layers) {
+      if (l.source === "openmaptiles") gl.setLayerZoomRange(l.id, Math.max(l.minzoom || 0, STREET_ZOOM), l.maxzoom ?? 24);
+    }
+    const first = gl.getStyle().layers.find((l) => l.type !== "background")?.id;
+    if (!gl.getSource("land")) gl.addSource("land", { type: "geojson", data: mercatorSafe(map.land) });
+    gl.addLayer({ id: "lo-ocean", type: "background", maxzoom: STREET_ZOOM, paint: { "background-color": "#cfe6f3" } }, first);
+    gl.addLayer({ id: "lo-land", type: "fill", source: "land", maxzoom: STREET_ZOOM, paint: { "fill-color": "#f1efe4" } }, first);
+    gl.addLayer({ id: "lo-borders", type: "line", source: "land", maxzoom: STREET_ZOOM, paint: { "line-color": "#c9c3ad", "line-width": 0.8 } }, first);
     // Show place names in English where the map has them.
     for (const l of gl.getStyle().layers) {
       if (l.type === "symbol" && l.layout && l.layout["text-field"]) {
