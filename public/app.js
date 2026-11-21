@@ -1,7 +1,7 @@
 // Somewhere: the browser side of the game. 5 places a day, 3 clues each.
 // Also plays single riddles that friends write for each other (links with #r=...).
 import {
-  dayNumber, nextPuzzleAt, puzzlesFor, distanceKm, scoreFor, roundSquare,
+  dayNumber, nextPuzzleAt, puzzlesFor, dateFor, hasDate, distanceKm, scoreFor, roundSquare,
   CLUE_MULT, MAX_CLUES, MAX_POINTS, MAX_TOTAL, LEVELS, HARD_ROUND, maxFor,
 } from "./game.js";
 
@@ -44,7 +44,10 @@ function parseCustom() {
 }
 window.addEventListener("hashchange", () => location.reload());
 
-const DAY = dayNumber();
+// Tester mode (?dev): replay any day, nothing is sent to the leaderboard, saves are kept apart.
+const DEV = params.has("dev");
+const DEV_DAYS = Array.from({ length: 60 }, (_, i) => i + 1).filter((d) => hasDate(d));
+const DAY = DEV && DEV_DAYS.includes(Number(params.get("day"))) ? Number(params.get("day")) : dayNumber();
 const CUSTOM = parseCustom();
 const PUZ = CUSTOM ? [CUSTOM] : puzzlesFor(DAY);
 const N = PUZ.length;
@@ -53,7 +56,7 @@ const THEME = { emoji: "🍿", name: "Books & movies", about: "each riddle point
 const levelOf = (p) => (LEVELS[p.level] ? p.level : "medium");
 const levelPill = (p) => CUSTOM ? "" : `<span class="lvl lvl-${levelOf(p)}">${LEVELS[levelOf(p)].label}</span>`;
 const crackedHard = () => !CUSTOM && state.rounds[HARD_ROUND]?.done && state.rounds[HARD_ROUND].done.score >= LEVELS.hard.max / 2;
-const STATE_KEY = CUSTOM ? `sw:custom:${CUSTOM.id}` : `sw:game:${DAY}`;
+const STATE_KEY = CUSTOM ? `sw:custom:${CUSTOM.id}` : DEV ? `sw:dev:${DAY}` : `sw:game:${DAY}`;
 const fresh = () => ({
   round: 0, started: Date.now(), final: null,
   rounds: Array.from({ length: N }, () => ({ clues: 1, pin: null, done: null })),
@@ -121,7 +124,7 @@ async function copyOrShare(text, okMsg, files) {
 
 /* ---------- clues ---------- */
 function renderClues(animateLast = false) {
-  $("#day-label").textContent = CUSTOM ? `By ${CUSTOM.by}` : `${new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} · No. ${DAY}`;
+  $("#day-label").textContent = CUSTOM ? `By ${CUSTOM.by}` : `${dateFor(DAY).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" })} · No. ${DAY}`;
   const th = $("#theme-line");
   th.hidden = !!CUSTOM;
   if (!CUSTOM) {
@@ -130,7 +133,7 @@ function renderClues(animateLast = false) {
       const m = fp.from.match(/^(\S+)\s+(.*)$/), kind = m && m[1] === "📖" ? "Book" : "Film";
       th.dataset.level = fp.level || "";
       th.innerHTML = `<span class="kind kind-${kind.toLowerCase()}">${kind}</span><span class="src">${esc(m ? m[2] : fp.from)}</span>`;
-    } else th.textContent = `${THEME.emoji} ${THEME.name}`;
+    } else th.textContent = THEME.name;
     th.title = `Today's theme: ${THEME.about}`;
   }
   const v = view();
@@ -498,7 +501,7 @@ async function finishGame() {
   }
   const ms = Date.now() - state.started;
   let res = null;
-  if (!preview) {
+  if (!preview && !DEV) {
     try {
       const r = await fetch("/api/play", {
         method: "POST", headers: { "content-type": "application/json" },
@@ -514,7 +517,7 @@ async function finishGame() {
   } else {
     const score = runningTotal();
     state.final = { score, km: doneRounds().reduce((s, r) => s + r.done.km, 0), beat: estimateBeat(score), players: lastStats?.players || 1, local: true };
-    if (!preview) toast("Couldn't reach the server. Your result is saved on this device.");
+    if (!preview && !DEV) toast("Couldn't reach the server. Your result is saved on this device.");
   }
   save();
   recordHistory();
@@ -534,6 +537,7 @@ function estimateBeat(score) {
 
 /* ---------- streak, with one free "saver" a week ---------- */
 function recordHistory() {
+  if (DEV) return;
   const h = store.get("sw:history", {});
   h[DAY] = state.final.score;
   store.set("sw:history", h);
@@ -588,7 +592,7 @@ function streakHTML() {
 function finalHTML() {
   const f = state.final;
   const rows = state.rounds.map((x, i) => `
-    <li><span class="sq">${roundSquare(x.done.km)}</span>
+    <li><span class="sq sq-${["🟩","🟨","🟧","🟥"].indexOf(roundSquare(x.done.km))}" aria-hidden="true"></span>
       <span class="who">${N > 1 ? `${i + 1}. ` : ""}<span class="spoiler">${esc(PUZ[i].name)}</span><span class="sub">${CUSTOM ? "" : LEVELS[levelOf(PUZ[i])].label + " · "}${fmtKm(x.done.km)} · ${x.done.clues} clue${x.done.clues > 1 ? "s" : ""}</span></span>
       <span class="val">${fmt(x.done.score)}</span></li>`).join("");
   if (CUSTOM) return `
@@ -610,7 +614,7 @@ function finalHTML() {
   return `
     <div class="result-top">
       <div>
-        <div class="eyebrow">Somewhere #${DAY} · ${THEME.emoji} ${THEME.name}</div>
+        <div class="eyebrow">Somewhere No. ${DAY} · ${THEME.name}</div>
         <h2>${fmt(f.score)} <span class="of">/ ${fmt(TOTAL)}</span></h2>
       </div>
       <div class="km"><b>${f.beat}%</b><span>of players beaten</span></div>
@@ -1107,3 +1111,16 @@ loadFriends();
 setInterval(() => { if (!document.hidden) refreshStats(); }, 20000);
 setInterval(() => { if (!document.hidden && state.final) loadPins(); }, 60000);
 setInterval(() => { if (!document.hidden && !$("#boards").hidden && tab === "friends") loadFriends(); }, 30000);
+
+/* ---------- tester mode bar ---------- */
+if (DEV) {
+  const bar = document.createElement("div");
+  bar.className = "dev-bar";
+  const opt = (d) => `<option value="${d}"${d === DAY ? " selected" : ""}>No. ${d} · ${dateFor(d).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" })}</option>`;
+  bar.innerHTML = `<b>Tester mode</b><span>Not counted on the leaderboard</span>
+    <select id="dev-day" aria-label="Pick a day">${DEV_DAYS.map(opt).join("")}</select>
+    <button id="dev-reset">Play again</button><a href="/">Exit</a>`;
+  document.body.appendChild(bar);
+  $("#dev-day").addEventListener("change", (e) => { location.search = `?dev&day=${e.target.value}`; });
+  $("#dev-reset").addEventListener("click", () => { try { localStorage.removeItem(STATE_KEY); } catch {} location.reload(); });
+}
