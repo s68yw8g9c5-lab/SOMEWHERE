@@ -37,10 +37,8 @@ function decode(b64) {
   return JSON.parse(new TextDecoder().decode(bytes));
 }
 
-// The 5 places for a given day, easy to hard. 150 riddles (60 easy, 60 medium,
-// 30 hard) = 30 days before they repeat.
-// "On this day in history": every riddle is tied to a calendar date (MM-DD), and
-// day N of the game shows that date's 5 events, easy to hard.
+// The 5 places for a given day: 1 easy, 2 medium, 2 hard. Every riddle is tied to a calendar
+// date (MM-DD in tools/puzzles.json); days with no riddles of their own reuse earlier dates.
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 export const dateFor = (day) => new Date(LAUNCH_UTC + (day - 1) * 86400000);
 export const dateLabel = (day) => { const d = dateFor(day); return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}`; };
@@ -56,7 +54,7 @@ function getDates() {
   }
   return byDate;
 }
-// True when this day has its own "on this day" riddles (otherwise older dates are reused).
+// True when this day has its own riddles (otherwise earlier dates are reused).
 export const hasDate = (day) => !!getDates()[mmdd(dateFor(day))];
 
 export function puzzlesFor(day) {

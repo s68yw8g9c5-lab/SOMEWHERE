@@ -411,3 +411,9 @@ body { font-size: 15px; }
   #clue-list li { grid-template-columns: 20px 1fr; gap: 7px; }
   #clue-list li { font-size: 14.5px; }
 }
+
+/* Launch polish: room for 4-line rhymes on desktop; banner wraps on phones */
+@media (min-width: 641px) { .clues { width: min(540px, calc(100% - 28px)); } }
+.banner { white-space: normal; max-width: calc(100% - 32px); text-align: center; }
+.mk-star .answer-num { fill: var(--ink); font: 700 12px var(--body); }
+.banner { top: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 96px); }

@@ -59,14 +59,14 @@ const crackedHard = () => !CUSTOM && state.rounds[HARD_ROUND]?.done && state.rou
 const STATE_KEY = CUSTOM ? `sw:custom:${CUSTOM.id}` : DEV ? `sw:dev:${DAY}` : `sw:game:${DAY}`;
 const fresh = () => ({
   round: 0, started: Date.now(), final: null,
-  rounds: Array.from({ length: N }, (_, i) => ({ clues: 1, pin: null, done: null, shown: i === 0 ? Date.now() : null })),
+  rounds: Array.from({ length: N }, () => ({ clues: 1, pin: null, done: null, shown: null })),
 });
 let state = store.get(STATE_KEY, null);
 if (!state || !Array.isArray(state.rounds) || state.rounds.length !== N) state = fresh();
 const save = () => store.set(STATE_KEY, state);
-// The speed clock for each riddle starts when it first appears (reloading doesn't reset it).
-const startClock = () => { const r = state.rounds[state.round]; if (r && !r.done && !state.final && !r.shown) r.shown = Date.now(); };
-startClock();
+// The speed clock for each riddle starts when it first appears on a ready map (reloading
+// doesn't reset it). The first one starts after the map has loaded, so slow phones aren't punished.
+const startClock = () => { const r = state.rounds[state.round]; if (r && !r.done && !state.final && !r.shown) { r.shown = Date.now(); save(); } };
 save();
 
 const cur = () => state.rounds[state.round];
@@ -368,7 +368,8 @@ const PIN_SVG = `<svg viewBox="-10 -26 20 27" width="30" height="40"><path d="M0
 function pinEl() { const d = document.createElement("div"); d.className = "mk mk-pin"; d.innerHTML = PIN_SVG; return d; }
 function starEl(n) {
   const d = document.createElement("div"); d.className = "mk mk-star";
-  d.innerHTML = `<svg viewBox="-14 -14 28 28" width="38" height="38"><circle r="11" fill="#fff" stroke="#121212" stroke-width="1.5"/><circle r="4.5" fill="#121212"/>${n ? `<text text-anchor="middle" dy="0.36em" class="answer-num">${n}</text>` : ""}</svg>`;
+  // Numbered (final screen): the number replaces the centre dot so the two don't overlap.
+  d.innerHTML = `<svg viewBox="-14 -14 28 28" width="38" height="38"><circle r="11" fill="#fff" stroke="#121212" stroke-width="1.5"/>${n ? `<text text-anchor="middle" dy="0.36em" class="answer-num">${n}</text>` : `<circle r="4.5" fill="#121212"/>`}</svg>`;
   return d;
 }
 function setMarkers(kind, list, make, anchor) {
@@ -609,7 +610,7 @@ function finalHTML() {
       ${f.beat != null ? `<div class="km"><b>${f.beat}%</b><span>of players beaten</span></div>` : `<div class="km"><b>${fmtKm(f.km)}</b><span>off in total</span></div>`}
     </div>
     <div class="scorebar"><div class="fill" id="r-bar" data-w="${(f.score / TOTAL * 100).toFixed(1)}"></div></div>
-    ${streakHTML()}
+    ${DEV ? "" : streakHTML()}
     <ol class="rounds">${rows}</ol>
     ${spoilerBtn()}
     <div class="share-row">
@@ -691,7 +692,7 @@ function shareText() {
     `Somewhere #${DAY} · ${THEME.emoji} ${THEME.name}`,
     `🌍 ${fmt(f.score)} / ${fmt(TOTAL)}`,
     state.rounds.map((x) => roundSquare(x.done.km)).join(""),
-    `🔎 ${totalClues()} clues${f.beat != null ? ` · beat ${f.beat}%` : ""}${crackedHard() ? " · 💀 cracked the hard one" : ""}${s > 1 ? ` · 🔥 ${s}` : ""}`,
+    `🔎 ${totalClues()} clues${f.beat != null ? ` · beat ${f.beat}%` : ""}${crackedHard() ? " · 💀 cracked the last one" : ""}${s > 1 ? ` · 🔥 ${s}` : ""}`,
     siteUrl(),
   ].filter(Boolean).join("\n");
 }
@@ -716,52 +717,48 @@ async function saveCard() {
 // never where the places are, so it is safe to post before your friends have played.
 async function makeCard() {
   const f = state.final, W = 1080, H = 1350;
+  const INK = "#121212", MUTED = "#6b6b6b", PAPER = "#f7f6f2", RULE = "#d9d6cd";
+  const SERIF = "Newsreader, Georgia, serif", SANS = "'Libre Franklin', Helvetica, Arial, sans-serif";
   const c = document.createElement("canvas"); c.width = W; c.height = H;
   const ctx = c.getContext("2d");
   await document.fonts.ready;
-  const g = ctx.createLinearGradient(0, 0, W, H);
-  g.addColorStop(0, "#ffffff"); g.addColorStop(1, "#f7f6f2");
-  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = PAPER; ctx.fillRect(0, 0, W, H);
 
-  // faint world in the background (no pins)
-  ctx.save();
-  ctx.globalAlpha = 0.5;
-  const proj = d3.geoNaturalEarth1().fitExtent([[40, 210], [W - 40, 760]], { type: "Sphere" });
+  // faint world in the background (no pins, so no spoilers)
+  const proj = d3.geoNaturalEarth1().fitExtent([[60, 230], [W - 60, 760]], { type: "Sphere" });
   const path = d3.geoPath(proj, ctx);
-  ctx.beginPath(); path({ type: "Sphere" }); ctx.fillStyle = "#f7f6f2"; ctx.fill();
   ctx.beginPath(); path(map.land); ctx.fillStyle = "#e6e3da"; ctx.fill();
-  ctx.restore();
 
-  try {
-    const logo = new Image(); logo.src = "favicon.svg"; await logo.decode();
-    ctx.drawImage(logo, 70, 80, 60, 60);
-  } catch {}
-  ctx.fillStyle = "#1f2a2c"; ctx.font = "800 64px Newsreader, Georgia, serif"; ctx.fillText("Somewhere", 148, 133);
-  ctx.fillStyle = "#5a6866"; ctx.font = "700 40px Inter, sans-serif"; ctx.textAlign = "right"; ctx.fillText(`#${DAY}`, W - 80, 130);
+  // masthead, like a newspaper puzzle page
+  ctx.fillStyle = INK; ctx.font = `600 76px ${SERIF}`; ctx.textAlign = "left"; ctx.fillText("Somewhere", 80, 150);
+  ctx.fillStyle = MUTED; ctx.font = `500 34px ${SANS}`; ctx.textAlign = "right";
+  ctx.fillText(`No. ${DAY} · ${dateFor(DAY).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" })}`, W - 80, 148);
+  ctx.fillStyle = INK; ctx.fillRect(80, 185, W - 160, 3); ctx.fillRect(80, 195, W - 160, 1);
 
   ctx.textAlign = "center";
-  ctx.fillStyle = "#1f2a2c"; ctx.font = "800 210px Newsreader, Georgia, serif"; ctx.fillText(fmt(f.score), W / 2, 500);
-  ctx.fillStyle = "#5a6866"; ctx.font = "700 46px Inter, sans-serif"; ctx.fillText(`out of ${fmt(TOTAL)}`, W / 2, 575);
+  ctx.fillStyle = INK; ctx.font = `600 220px ${SERIF}`; ctx.fillText(fmt(f.score), W / 2, 540);
+  ctx.fillStyle = MUTED; ctx.font = `500 44px ${SANS}`; ctx.fillText(`out of ${fmt(TOTAL)}`, W / 2, 615);
   const s = streakInfo().count;
-  ctx.fillStyle = "#1f2a2c"; ctx.font = "700 40px Inter, sans-serif";
-  ctx.fillText(`${f.beat != null ? `beat ${f.beat}% of players` : `${fmtKm(f.km)} off in total`}${s > 1 ? `  ·  🔥 ${s} days` : ""}`, W / 2, 665);
+  ctx.fillStyle = INK; ctx.font = `600 40px ${SANS}`;
+  ctx.fillText(`${f.beat != null ? `Beat ${f.beat}% of players` : `${fmtKm(f.km)} off in total`}${s > 1 ? `  ·  ${s}-day streak` : ""}`, W / 2, 700);
 
-  // one tile per round: colour = how close, number = distance
-  const colors = { "🟩": "#19a463", "🟨": "#f5b301", "🟧": "#f08a24", "🟥": "#e5484d", "⬛": "#8a94a3" };
-  const tw = 170, gap = 18, x0 = (W - (tw * N + gap * (N - 1))) / 2;
+  // one tile per riddle: colour = how close, number = km off
+  const colors = { "🟩": "#4f7d5c", "🟨": "#b89a2e", "🟧": "#c26a2b", "🟥": "#d0402b", "⬛": "#8f8b80" };
+  const tw = 172, gap = 16, x0 = (W - (tw * N + gap * (N - 1))) / 2;
   state.rounds.forEach((x, i) => {
     const tx = x0 + i * (tw + gap);
-    ctx.fillStyle = colors[roundSquare(x.done.km)]; ctx.beginPath(); ctx.roundRect(tx, 820, tw, 190, 28); ctx.fill();
-    ctx.fillStyle = "rgba(255,255,255,.85)"; ctx.font = "800 30px Inter, sans-serif"; ctx.fillText(`#${i + 1}`, tx + tw / 2, 870);
-    ctx.fillStyle = "#fff"; ctx.font = "800 46px Newsreader, Georgia, serif";
+    ctx.fillStyle = colors[roundSquare(x.done.km)]; ctx.beginPath(); ctx.roundRect(tx, 820, tw, 190, 6); ctx.fill();
+    ctx.fillStyle = "rgba(255,255,255,.8)"; ctx.font = `600 26px ${SANS}`; ctx.fillText(`Riddle ${i + 1}`, tx + tw / 2, 866);
+    ctx.fillStyle = "#fff"; ctx.font = `600 52px ${SERIF}`;
     const km = x.done.km;
     ctx.fillText(km < 1000 ? fmt(km) : (km / 1000).toFixed(km < 10000 ? 1 : 0) + "k", tx + tw / 2, 945);
-    ctx.font = "700 26px Inter, sans-serif"; ctx.fillText("km off", tx + tw / 2, 985);
+    ctx.font = `500 24px ${SANS}`; ctx.fillText("km off", tx + tw / 2, 983);
   });
-  ctx.fillStyle = "#1f2a2c"; ctx.font = "700 50px Inter, sans-serif";
-  ctx.fillText("Can you beat me?", W / 2, 1160);
-  ctx.fillStyle = "#d0402b"; ctx.font = "800 38px Inter, sans-serif";
-  ctx.fillText(location.host || "somewhere", W / 2, 1225);
+  ctx.fillStyle = RULE; ctx.fillRect(80, 1090, W - 160, 1);
+  ctx.fillStyle = INK; ctx.font = `italic 600 56px ${SERIF}`;
+  ctx.fillText("Can you beat me?", W / 2, 1180);
+  ctx.fillStyle = "#d0402b"; ctx.font = `600 36px ${SANS}`;
+  ctx.fillText(location.host || "playsomewhere.netlify.app", W / 2, 1245);
   return new Promise((res) => c.toBlob(res, "image/png"));
 }
 
@@ -832,12 +829,11 @@ async function joinFromLink() {
   } catch (e) { toast(e.message === "no such board" ? "That friends link doesn't work anymore." : "Couldn't join the friends board."); }
 }
 
-const HARD_BADGE = ` <span class="hard-badge" title="Cracked today's hard riddle">Hard ✓</span>`;
+const HARD_BADGE = ` <span class="hard-badge" title="Cracked today's last (hardest) riddle">Boss</span>`;
 function friendsHTML() {
   if (preview) return `<p class="empty-note">Friends boards turn on once the database is connected. Then you can make a private board for you and your friends.</p>`;
   if (!friendCode) return `
     <div class="friends-start">
-      <div class="big-emoji">👥</div>
       <p><b>Play against your friends.</b> Make a private board, send the link to your group chat, and see who gets closest every day.</p>
       <button class="guess small" id="fr-create">Start a friends board</button>
     </div>`;
@@ -917,7 +913,7 @@ function renderBoards() {
     meta.textContent = friendCode && friendsData ? `Your friends board · today's 5 places` : "";
     $("#friends-panel").innerHTML = friendsHTML();
   } else if (tab === "players") {
-    meta.textContent = s.players ? `${fmt(s.players)} players today · average ${fmt(s.avgScore)} / ${fmt(TOTAL)}${s.cracked != null ? ` · ${fmt(s.cracked)} cracked the hard riddle` : ""}` : "";
+    meta.textContent = s.players ? `${fmt(s.players)} players today · average ${fmt(s.avgScore)} / ${fmt(TOTAL)}${s.cracked != null ? ` · ${fmt(s.cracked)} cracked the last riddle` : ""}` : "";
     const mine = state.final && !CUSTOM ? state.final : null;
     $("#board-players").innerHTML = s.top.length ? s.top.map((p, i) => `
       <li class="${mine && p.name === myName && p.score === mine.score ? "me" : ""}">
@@ -974,7 +970,7 @@ $("#mk-done").addEventListener("click", () => {
   making = false;
   document.body.classList.remove("making");
   $("#maker-bar").hidden = true;
-  $("#mk-spot-label").textContent = `✓ Spot picked (${makerPin[0].toFixed(2)}, ${makerPin[1].toFixed(2)})`;
+  $("#mk-spot-label").textContent = `Spot picked (${makerPin[0].toFixed(2)}, ${makerPin[1].toFixed(2)})`;
   render(false);
   if (view() === "guess") resetZoom(false);
   maker.showModal();
@@ -1034,7 +1030,7 @@ function drawClock() {
   const el = $("#clock");
   if (!el) return;
   const r = cur();
-  if (!r || r.done || state.final) { el.innerHTML = ""; return; }
+  if (!r || r.done || state.final || !r.shown) { el.innerHTML = ""; return; }
   const t = secsOn(r), f = speedFactor(t);
   el.classList.toggle("fading", t > SPEED.full);
   el.innerHTML = `<b>${fmtSecs(t)}</b><small>${f >= 1 ? "Full speed bonus" : f > 0 ? `Speed bonus ${Math.round(f * 100)}%` : "No speed bonus"}</small>`;
@@ -1049,7 +1045,9 @@ function tick() {
     const h = Math.floor(ms / 3.6e6), m = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1000) % 60;
     el.textContent = [h, m, s].map((v) => String(v).padStart(2, "0")).join(":");
   }
-  if (ms === 0 && !tick.reloaded && !CUSTOM) { tick.reloaded = true; setTimeout(() => location.reload(), 1500); }
+  // A new day started: load the new puzzle, but never in the middle of someone's game.
+  const idle = state.final || (state.round === 0 && !cur().done && !cur().pin);
+  if (!DEV && !CUSTOM && !tick.reloaded && dayNumber() !== DAY && idle) { tick.reloaded = true; setTimeout(() => location.reload(), 1500); }
 }
 setInterval(tick, 1000);
 
@@ -1064,6 +1062,7 @@ if (CUSTOM && view() === "guess" && !state.rounds[0].pin) toast(`${CUSTOM.by} wr
 renderClues();
 updateLock();
 await initMap();
+startClock();
 await refreshStats();
 render(false);
 if (view() === "guess" && cur().pin) $("#map-hint").style.opacity = 0;

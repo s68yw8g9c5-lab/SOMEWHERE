@@ -6,9 +6,10 @@
   <title>Somewhere: 5 riddles about places from famous books and movies</title>
   <meta name="description" content="Every day, 5 riddles point to 5 spots on Earth. Read the clues, drop your pins, and see how you rank against the whole planet and your friends. Free, no sign-up.">
   <meta name="theme-color" content="#f7f6f2">
-  <meta property="og:title" content="Somewhere 🌍 5 riddles. 5 places. The whole world guessing.">
+  <meta property="og:title" content="Somewhere: 5 riddles. 5 places. The whole world guessing.">
   <meta property="og:description" content="Read the riddles, drop your pins, beat your friends. New places every day at midnight UTC.">
-  <meta property="og:image" content="/og.png">
+  <meta property="og:image" content="https://playsomewhere.netlify.app/og.png">
+  <meta property="og:url" content="https://playsomewhere.netlify.app/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -96,12 +97,12 @@
       <li>Each day climbs from <b>easy</b> to <b>hard</b>: 1 easy riddle (up to 600 points), 2 medium (900 each) and 2 hard (1,300 each). 5,000 a day in all.</li>
       <li>The closer you are, the more points. Be quick too: answer within 20 seconds for the full speed bonus.</li>
     </ol>
-    <p class="free-note">🎁 The daily game is free, always. No sign-up.</p>
+    <p class="free-note">The daily game is free, always. No sign-up.</p>
     <button class="guess" id="help-close">Let's go</button>
     <details class="more">
       <summary>Settings, your own riddle, feedback</summary>
       <label class="switch"><input type="checkbox" id="streamer-toggle"> <span><b>Streamer mode</b>: answers stay hidden until you tap them, so your chat can play along without spoilers.</span></label>
-      <button class="ghost wide" id="make-open" data-umami-event="Open riddle maker">✍️ Write a riddle for your friends</button>
+      <button class="ghost wide" id="make-open" data-umami-event="Open riddle maker">Write a riddle for your friends</button>
       <form id="feedback-form" class="feedback">
         <label for="fb-msg"><b>Ideas, bugs, a riddle that was too hard?</b> Tell us.</label>
         <textarea id="fb-msg" maxlength="2000" rows="3" placeholder="Your message" required></textarea>
@@ -121,7 +122,7 @@
       <label>Clue 3, the easy one (optional)<textarea id="mk-c3" maxlength="160" rows="2"></textarea></label>
       <label>A fun fact for the reveal (optional)<input id="mk-fact" maxlength="200"></label>
       <label>Your name<input id="mk-by" maxlength="20"></label>
-      <div class="mk-spot"><button type="button" class="ghost" id="mk-pick">📍 Pick the spot on the map</button><span id="mk-spot-label" class="muted">No spot yet</span></div>
+      <div class="mk-spot"><button type="button" class="ghost" id="mk-pick">Pick the spot on the map</button><span id="mk-spot-label" class="muted">No spot yet</span></div>
       <div class="mk-actions">
         <button type="button" class="ghost" id="mk-cancel">Cancel</button>
         <button type="submit" class="guess small" id="mk-create">Create link</button>
