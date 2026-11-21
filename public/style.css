@@ -656,7 +656,8 @@ body { font-family: var(--font-body); color: var(--ink); background: var(--sea);
 .sr-more { text-align: center; margin: 0; font: 600 13px var(--font-body); color: var(--muted); }
 .sr-actions { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
 @media (prefers-reduced-motion: reduce) { .stamp-reveal.play .sr-ink, .stamp-reveal.play .sr-name, .stamp-reveal.play .sr-page { animation: none; } }
-.stamp-art.on { mix-blend-mode: multiply; opacity: .93; }
+.stamp-art.on:not(.visa) { mix-blend-mode: multiply; opacity: .95; }
+.stamp-art.visa.on { filter: drop-shadow(0 2px 3px rgba(63,50,36,.22)); }
 
 /* Near-miss: the stamp you're closest to */
 .near-miss { display: flex; gap: 10px; align-items: center; margin: 10px 0 0; padding-top: 10px; border-top: 2px dashed #e3d7bd; font: 600 13.5px var(--font-body); color: var(--ink); }
