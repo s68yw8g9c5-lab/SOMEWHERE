@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Somewhere: 5 riddles about places from famous books and movies</title>
   <meta name="description" content="Every day, 5 riddles point to 5 spots on Earth. Read the clues, drop your pins, and see how you rank against the whole planet and your friends. Free, no sign-up.">
-  <meta name="theme-color" content="#cfe6f3">
+  <meta name="theme-color" content="#f7f6f2">
   <meta property="og:title" content="Somewhere 🌍 5 riddles. 5 places. The whole world guessing.">
   <meta property="og:description" content="Read the riddles, drop your pins, beat your friends. New places every day at midnight UTC.">
   <meta property="og:image" content="/og.png">
@@ -16,7 +16,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,600&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vendor/maplibre-gl.css">
   <link rel="stylesheet" href="style.css">
   <!-- Umami analytics (no cookies), same setup as Driftline. Paste Somewhere's own website ID
@@ -31,13 +31,10 @@
     <div class="brand">
       <img class="logo" src="favicon.svg" alt="" width="26" height="26">
       <span class="title">Somewhere</span>
-      <span class="day" id="day-label">#1</span>
+      <span class="dateline"><span class="day" id="day-label">No. 1</span><span class="live" title="People who played today"> · <span id="live-count">0</span> solvers today</span></span>
     </div>
     <div class="top-right">
-      <div class="live chip" title="People who played today">
-        <span class="dot"></span><span id="live-count">0</span><span class="muted">&nbsp;playing today</span>
-      </div>
-      <button class="chip btn" id="boards-btn" data-umami-event="Open leaderboard">🏆 <span class="hide-sm">Leaderboard</span></button>
+      <button class="chip btn" id="boards-btn" data-umami-event="Open leaderboard"><svg class="ico" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M2 14V9h3v5M6.5 14V4h3v10M11 14V7h3v7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="hide-sm">Leaderboard</span></button>
       <button class="chip btn round" id="help-btn" aria-label="How to play" data-umami-event="How to play">?</button>
     </div>
   </header>
@@ -52,7 +49,7 @@
       <span class="eyebrow" id="clue-count">Clue 1 of 3</span>
       <span class="mult" id="mult">Points ×1</span>
       <span class="total-label" id="total-label">0 pts</span>
-      <button class="collapse" id="clue-toggle" aria-label="Hide clues" aria-expanded="true">▾</button>
+      <button class="collapse" id="clue-toggle" aria-label="Hide clues" aria-expanded="true"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
     </div>
     <ol id="clue-list"></ol>
     <button class="ghost" id="next-clue">Reveal another clue <span class="muted" id="next-cost"></span></button>
@@ -66,7 +63,7 @@
   <div class="map-hint" id="map-hint">Tap the map to drop your pin</div>
 
   <div class="lock-bar" id="lock-bar">
-    <button class="guess" id="lock-btn" disabled>Drop a pin on the map</button>
+    <button class="guess" id="lock-btn" disabled>Tap the map to drop your pin</button>
   </div>
 
   <section class="result sheet" id="result" hidden aria-live="polite"></section>

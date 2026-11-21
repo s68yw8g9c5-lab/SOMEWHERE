@@ -121,12 +121,16 @@ async function copyOrShare(text, okMsg, files) {
 
 /* ---------- clues ---------- */
 function renderClues(animateLast = false) {
-  $("#day-label").textContent = CUSTOM ? `✍️ by ${CUSTOM.by}` : `#${DAY}`;
+  $("#day-label").textContent = CUSTOM ? `By ${CUSTOM.by}` : `${new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} · No. ${DAY}`;
   const th = $("#theme-line");
   th.hidden = !!CUSTOM;
   if (!CUSTOM) {
     const fp = view() !== "final" && curPuz();
-    th.textContent = fp && fp.from ? fp.from : `${THEME.emoji} ${THEME.name}`;
+    if (fp && fp.from) {
+      const m = fp.from.match(/^(\S+)\s+(.*)$/), kind = m && m[1] === "📖" ? "Book" : "Film";
+      th.dataset.level = fp.level || "";
+      th.innerHTML = `<span class="kind kind-${kind.toLowerCase()}">${kind}</span><span class="src">${esc(m ? m[2] : fp.from)}</span>`;
+    } else th.textContent = `${THEME.emoji} ${THEME.name}`;
     th.title = `Today's theme: ${THEME.about}`;
   }
   const v = view();
@@ -147,19 +151,25 @@ function renderClues(animateLast = false) {
     if (i === n - 1) li.classList.add("current");
     list.appendChild(li);
   }
-  $("#round-label").textContent = CUSTOM ? "Friend's riddle" : `Round ${state.round + 1}/${N}`;
-  $("#total-label").textContent = `${fmt(runningTotal())} pts`;
+  const rl = $("#round-label");
+  if (CUSTOM) { rl.textContent = "Friend's riddle"; rl.classList.remove("frames"); }
+  else {
+    rl.classList.add("frames");
+    rl.setAttribute("aria-label", `Round ${state.round + 1} of ${N}`);
+    rl.innerHTML = Array.from({ length: N }, (_, i) => `<i class="${i < state.round ? "done" : i === state.round ? "now" : ""}${i === HARD_ROUND ? " hard" : ""}"></i>`).join("") + `<b>Riddle ${state.round + 1} of ${N}</b>`;
+  }
+  $("#total-label").textContent = `Score ${fmt(runningTotal())}`;
   $("#total-label").hidden = !!CUSTOM;
   const lv = levelOf(p), lvEl = $("#level");
   lvEl.hidden = !!CUSTOM;
   lvEl.className = `lvl lvl-${lv}`;
-  lvEl.textContent = `${lv === "hard" ? "💀 " : ""}${LEVELS[lv].label} · ${fmt(LEVELS[lv].max)}`;
+  lvEl.textContent = `${LEVELS[lv].label}, worth ${fmt(Math.round(LEVELS[lv].max * CLUE_MULT[n - 1]))}`;
   lvEl.title = `${LEVELS[lv].label} riddle: worth up to ${fmt(LEVELS[lv].max)} points`;
   $("#clue-count").textContent = r.done ? `${n} of ${maxC} clues used` : `Clue ${n} of ${maxC}`;
   $("#mult").textContent = multTxt(n);
   $("#mult").title = `Clue multiplier: your points this round are ${multTxt(n)}`;
   $("#next-clue").hidden = !!r.done || n >= maxC;
-  if (n < maxC) $("#next-cost").textContent = `(points ${multTxt(n + 1)})`;
+  if (n < maxC) $("#next-cost").textContent = `· round worth ${fmt(Math.round(LEVELS[lv].max * CLUE_MULT[n]))} after`;
 }
 
 $("#next-clue").addEventListener("click", () => {
@@ -200,11 +210,20 @@ function mercatorSafe(geo) {
   });
   return { type: "FeatureCollection", features };
 }
+// Board-game palette: the sea is the cream board, countries are colored tiles.
+// Newspaper map: warm paper sea, stone-grey land, fine borders, a faint grid.
+const SEA = "#f7f6f2", LAND = "#e6e3da", GRID = "rgba(18,18,18,.06)", EDGE = "#8f8b80";
+function graticule() {
+  const f = [], line = (c) => f.push({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: c } });
+  for (let lon = -180; lon <= 180; lon += 15) line(Array.from({ length: 35 }, (_, k) => [lon, -85 + k * 5]));
+  for (let lat = -75; lat <= 75; lat += 15) line(Array.from({ length: 73 }, (_, k) => [-180 + k * 5, lat]));
+  return { type: "FeatureCollection", features: f };
+}
 // State and province lines for the big countries (USA, Canada, Brazil, India, China, Russia,
 // Australia...), drawn on the light zoomed-out map. The street map has its own from STREET_ZOOM on.
 const EMPTY_LINES = { type: "FeatureCollection", features: [] };
 const STATES_LAYER = (extra = {}) => ({ id: "lo-states", type: "line", source: "states", minzoom: 2.5, ...extra,
-  paint: { "line-color": "#b5ad94", "line-width": ["interpolate", ["linear"], ["zoom"], 2.5, 0.5, 5, 1], "line-dasharray": [3, 2] } });
+  paint: { "line-color": "rgba(18,18,18,.12)", "line-width": ["interpolate", ["linear"], ["zoom"], 2.5, 0.5, 5, 1], "line-dasharray": [3, 2] } });
 function loadStates() {
   fetch("vendor/states-50m.json").then((r) => r.json()).then((g) => {
     map.states = g;
@@ -214,11 +233,12 @@ function loadStates() {
 function fallbackStyle() {
   return {
     version: 8,
-    sources: { land: { type: "geojson", data: mercatorSafe(map.land) }, states: { type: "geojson", data: map.states || EMPTY_LINES } },
+    sources: { land: { type: "geojson", data: mercatorSafe(map.land) }, states: { type: "geojson", data: map.states || EMPTY_LINES }, grid: { type: "geojson", data: graticule() } },
     layers: [
-      { id: "bg", type: "background", paint: { "background-color": "#cfe6f3" } },
-      { id: "land", type: "fill", source: "land", paint: { "fill-color": "#f1efe4" } },
-      { id: "borders", type: "line", source: "land", paint: { "line-color": "#c9c3ad", "line-width": 0.8 } },
+      { id: "bg", type: "background", paint: { "background-color": SEA } },
+      { id: "grid", type: "line", source: "grid", paint: { "line-color": GRID, "line-width": 1 } },
+      { id: "land", type: "fill", source: "land", paint: { "fill-color": LAND } },
+      { id: "borders", type: "line", source: "land", paint: { "line-color": EDGE, "line-width": 0.6 } },
       STATES_LAYER(),
     ],
   };
@@ -269,9 +289,11 @@ function addOverlays() {
     }
     const first = gl.getStyle().layers.find((l) => l.type !== "background")?.id;
     if (!gl.getSource("land")) gl.addSource("land", { type: "geojson", data: mercatorSafe(map.land) });
-    gl.addLayer({ id: "lo-ocean", type: "background", maxzoom: STREET_ZOOM, paint: { "background-color": "#cfe6f3" } }, first);
-    gl.addLayer({ id: "lo-land", type: "fill", source: "land", maxzoom: STREET_ZOOM, paint: { "fill-color": "#f1efe4" } }, first);
-    gl.addLayer({ id: "lo-borders", type: "line", source: "land", maxzoom: STREET_ZOOM, paint: { "line-color": "#c9c3ad", "line-width": 0.8 } }, first);
+    if (!gl.getSource("grid")) gl.addSource("grid", { type: "geojson", data: graticule() });
+    gl.addLayer({ id: "lo-ocean", type: "background", maxzoom: STREET_ZOOM, paint: { "background-color": SEA } }, first);
+    gl.addLayer({ id: "lo-grid", type: "line", source: "grid", maxzoom: STREET_ZOOM, paint: { "line-color": GRID, "line-width": 1 } }, first);
+    gl.addLayer({ id: "lo-land", type: "fill", source: "land", maxzoom: STREET_ZOOM, paint: { "fill-color": LAND } }, first);
+    gl.addLayer({ id: "lo-borders", type: "line", source: "land", maxzoom: STREET_ZOOM, paint: { "line-color": EDGE, "line-width": 0.6 } }, first);
     if (!gl.getSource("states")) gl.addSource("states", { type: "geojson", data: map.states || EMPTY_LINES });
     gl.addLayer(STATES_LAYER({ maxzoom: STREET_ZOOM }), first);
     // Show place names in English where the map has them.
@@ -284,12 +306,12 @@ function addOverlays() {
   for (const id of ["players", "crowd", "lines"]) if (!gl.getSource(id)) gl.addSource(id, { type: "geojson", data: fc([]) });
   if (!gl.getLayer("players")) gl.addLayer({ id: "players", type: "circle", source: "players", paint: {
     "circle-radius": ["interpolate", ["linear"], ["get", "n"], 1, 3.5, 50, 9, 300, 14],
-    "circle-color": "#19a463", "circle-opacity": 0.55, "circle-stroke-color": "#fff", "circle-stroke-width": 1 } });
+    "circle-color": "#4f7d5c", "circle-opacity": 0.55, "circle-stroke-color": "#fff", "circle-stroke-width": 1 } });
   if (!gl.getLayer("crowd")) gl.addLayer({ id: "crowd", type: "circle", source: "crowd", paint: {
-    "circle-radius": ["interpolate", ["linear"], ["zoom"], 0, 2.6, 6, 4.5], "circle-color": "#2f7cf6", "circle-opacity": 0.65,
+    "circle-radius": ["interpolate", ["linear"], ["zoom"], 0, 2.6, 6, 4.5], "circle-color": "#3d5a80", "circle-opacity": 0.65,
     "circle-stroke-color": "#fff", "circle-stroke-width": 0.8 } });
   if (!gl.getLayer("lines")) gl.addLayer({ id: "lines", type: "line", source: "lines",
-    layout: { "line-cap": "round" }, paint: { "line-color": "#17202e", "line-width": 2.5, "line-dasharray": [2, 1.6] } });
+    layout: { "line-cap": "round" }, paint: { "line-color": "#121212", "line-width": 1.5, "line-dasharray": [2, 1.6] } });
 }
 const setData = (id, data) => { const s = map.gl?.getSource(id); if (s) { s.setData(data); nudgeSoon(); } };
 // After new data or a big camera jump, MapLibre can skip drawing one copy of the world
@@ -341,11 +363,11 @@ function onMapClick(ll) {
 }
 
 // A few HTML markers (your pins, the answer stars) sit above the map layers.
-const PIN_SVG = `<svg viewBox="-10 -26 20 27" width="30" height="40"><path d="M0,0 C-2,-6 -8,-9 -8,-15 A8,8 0 1 1 8,-15 C8,-9 2,-6 0,0Z" fill="#e5484d" stroke="#fff" stroke-width="1.5"/><circle cy="-15" r="3" fill="#fff"/></svg>`;
+const PIN_SVG = `<svg viewBox="-10 -26 20 27" width="30" height="40"><path d="M0,0 C-2,-6 -8,-9 -8,-15 A8,8 0 1 1 8,-15 C8,-9 2,-6 0,0Z" fill="#d0402b" stroke="#121212" stroke-width="1.2"/><circle cy="-15" r="3" fill="#fff"/></svg>`;
 function pinEl() { const d = document.createElement("div"); d.className = "mk mk-pin"; d.innerHTML = PIN_SVG; return d; }
 function starEl(n) {
   const d = document.createElement("div"); d.className = "mk mk-star";
-  d.innerHTML = `<svg viewBox="-14 -14 28 28" width="38" height="38"><circle r="13" fill="#f5b301" fill-opacity=".28"/><path d="${d3.symbol(d3.symbolStar, n ? 300 : 240)()}" fill="#f5b301" stroke="#5b4300" stroke-width="1.2"/>${n ? `<text text-anchor="middle" dy="0.36em" class="answer-num">${n}</text>` : ""}</svg>`;
+  d.innerHTML = `<svg viewBox="-14 -14 28 28" width="38" height="38"><circle r="11" fill="#fff" stroke="#121212" stroke-width="1.5"/><circle r="4.5" fill="#121212"/>${n ? `<text text-anchor="middle" dy="0.36em" class="answer-num">${n}</text>` : ""}</svg>`;
   return d;
 }
 function setMarkers(kind, list, make, anchor) {
@@ -439,7 +461,7 @@ function updateLock() {
   const btn = $("#lock-btn");
   $("#lock-bar").hidden = view() !== "guess";
   btn.disabled = !cur().pin;
-  btn.textContent = cur().pin ? "📍 Pin it!" : "Drop a pin on the map";
+  btn.textContent = cur().pin ? "Lock in my answer" : "Tap the map to drop your pin";
 }
 
 $("#lock-btn").addEventListener("click", () => {
@@ -532,35 +554,34 @@ function streakInfo() {
 }
 
 /* ---------- result sheet ---------- */
-const spoilerBtn = () => hideAnswers() ? `<button class="ghost reveal-btn" id="reveal-btn">👀 Reveal the answer${N > 1 && view() === "final" ? "s" : ""}</button>` : "";
+const spoilerBtn = () => hideAnswers() ? `<button class="ghost reveal-btn" id="reveal-btn">Reveal the answer${N > 1 && view() === "final" ? "s" : ""}</button>` : "";
 
 function roundHTML() {
   const r = cur().done, p = curPuz(), last = state.round === N - 1;
   return `
     <div class="result-top">
       <div>
-        <div class="eyebrow">${CUSTOM ? `${esc(CUSTOM.by)}'s riddle` : `Round ${state.round + 1} of ${N}`} · the answer was ${levelPill(p)}</div>
+        <div class="eyebrow">${CUSTOM ? `${esc(CUSTOM.by)}'s riddle` : `Riddle ${state.round + 1} of ${N}`}. The answer:</div>
         <h2 class="spoiler">${esc(p.name)}</h2>
       </div>
       <div class="km"><b>${fmtKm(r.km)}</b><span>from the answer</span></div>
     </div>
     <div class="scorebar"><div class="fill" id="r-bar" data-w="${(r.score / maxFor(p) * 100).toFixed(1)}"></div></div>
     <div class="score-line">
-      <span>${roundSquare(r.km)} <b>${fmt(r.score)}</b> / ${fmt(maxFor(p))} points</span>
+      <span><b>${fmt(r.score)}</b> of ${fmt(maxFor(p))} points</span>
       ${CUSTOM ? "" : `<span class="muted">Total <b>${fmt(runningTotal())}</b></span>`}
     </div>
     ${p.fact ? `<p class="fact spoiler"><b>Did you know?</b> ${esc(p.fact)}</p>` : ""}
     ${spoilerBtn()}
-    <button class="guess" id="next-btn">${last ? (CUSTOM ? "See your score" : "See your final score") : "Next round →"}</button>`;
+    <button class="guess" id="next-btn">${last ? (CUSTOM ? "See your score" : "See your final score") : "Next riddle"}</button>`;
 }
 
 function streakHTML() {
   const s = streakInfo();
   const savedYesterday = s.saved.includes(DAY - 1);
   return `<div class="streak-box">
-      <span class="flame">🔥</span>
       <div><b>${s.count} day${s.count === 1 ? "" : "s"} in a row</b>
-        <span class="sub">${savedYesterday ? "🛟 Your weekly saver kept your streak alive yesterday." : s.saverReady ? "🛟 Streak saver ready: miss one day this week and your streak survives." : "🛟 Saver used this week. Come back tomorrow!"}</span></div>
+        <span class="sub">${savedYesterday ? "Your weekly saver kept your streak alive yesterday." : s.saverReady ? "Streak saver ready: miss one day this week and your streak survives." : "Saver used this week. Come back tomorrow!"}</span></div>
     </div>`;
 }
 
@@ -583,8 +604,8 @@ function finalHTML() {
     ${spoilerBtn()}
     <div class="share-row">
       <button class="guess small" id="share-btn">Tell ${esc(CUSTOM.by)} your score</button>
-      <button class="ghost" id="make-btn">✍️ Write one back</button>
-      <a class="ghost" href="/" id="daily-link">🌍 Play today's 5 places</a>
+      <button class="ghost" id="make-btn">Write one back</button>
+      <a class="ghost" href="/" id="daily-link">Play today's 5 places</a>
     </div>`;
   return `
     <div class="result-top">
@@ -601,9 +622,9 @@ function finalHTML() {
     <div class="share-row">
       <button class="guess small" id="share-btn" data-umami-event="Share result">Share result</button>
       <button class="ghost" id="card-btn" data-umami-event="Save image">Save image</button>
-      <button class="ghost" id="friends-btn">👥 ${friendCode ? "Friends board" : "Challenge friends"}</button>
-      <button class="ghost" id="result-boards" data-umami-event="Open leaderboard">🏆 Leaderboard</button>
-      <button class="ghost" id="make-btn">✍️ Write a riddle</button>
+      <button class="ghost" id="friends-btn">${friendCode ? "Friends board" : "Challenge friends"}</button>
+      <button class="ghost" id="result-boards" data-umami-event="Open leaderboard">Leaderboard</button>
+      <button class="ghost" id="make-btn">Write a riddle</button>
     </div>
     <div class="me-row">
       <label for="name-input">Your name on the board</label>
@@ -702,7 +723,7 @@ async function makeCard() {
   const ctx = c.getContext("2d");
   await document.fonts.ready;
   const g = ctx.createLinearGradient(0, 0, W, H);
-  g.addColorStop(0, "#ffffff"); g.addColorStop(1, "#e3f0f8");
+  g.addColorStop(0, "#ffffff"); g.addColorStop(1, "#f7f6f2");
   ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
   // faint world in the background (no pins)
@@ -710,22 +731,22 @@ async function makeCard() {
   ctx.globalAlpha = 0.5;
   const proj = d3.geoNaturalEarth1().fitExtent([[40, 210], [W - 40, 760]], { type: "Sphere" });
   const path = d3.geoPath(proj, ctx);
-  ctx.beginPath(); path({ type: "Sphere" }); ctx.fillStyle = "#cfe6f3"; ctx.fill();
-  ctx.beginPath(); path(map.land); ctx.fillStyle = "#f1efe4"; ctx.fill();
+  ctx.beginPath(); path({ type: "Sphere" }); ctx.fillStyle = "#f7f6f2"; ctx.fill();
+  ctx.beginPath(); path(map.land); ctx.fillStyle = "#e6e3da"; ctx.fill();
   ctx.restore();
 
   try {
     const logo = new Image(); logo.src = "favicon.svg"; await logo.decode();
     ctx.drawImage(logo, 70, 80, 60, 60);
   } catch {}
-  ctx.fillStyle = "#17202e"; ctx.font = "800 64px 'Bricolage Grotesque', Inter, sans-serif"; ctx.fillText("Somewhere", 148, 133);
-  ctx.fillStyle = "#5d6878"; ctx.font = "700 40px Inter, sans-serif"; ctx.textAlign = "right"; ctx.fillText(`#${DAY}`, W - 80, 130);
+  ctx.fillStyle = "#1f2a2c"; ctx.font = "800 64px Newsreader, Georgia, serif"; ctx.fillText("Somewhere", 148, 133);
+  ctx.fillStyle = "#5a6866"; ctx.font = "700 40px Inter, sans-serif"; ctx.textAlign = "right"; ctx.fillText(`#${DAY}`, W - 80, 130);
 
   ctx.textAlign = "center";
-  ctx.fillStyle = "#17202e"; ctx.font = "800 210px 'Bricolage Grotesque', Inter, sans-serif"; ctx.fillText(fmt(f.score), W / 2, 500);
-  ctx.fillStyle = "#5d6878"; ctx.font = "700 46px Inter, sans-serif"; ctx.fillText(`out of ${fmt(TOTAL)}`, W / 2, 575);
+  ctx.fillStyle = "#1f2a2c"; ctx.font = "800 210px Newsreader, Georgia, serif"; ctx.fillText(fmt(f.score), W / 2, 500);
+  ctx.fillStyle = "#5a6866"; ctx.font = "700 46px Inter, sans-serif"; ctx.fillText(`out of ${fmt(TOTAL)}`, W / 2, 575);
   const s = streakInfo().count;
-  ctx.fillStyle = "#17202e"; ctx.font = "700 40px Inter, sans-serif";
+  ctx.fillStyle = "#1f2a2c"; ctx.font = "700 40px Inter, sans-serif";
   ctx.fillText(`beat ${f.beat}% of players${s > 1 ? `  ·  🔥 ${s} days` : ""}`, W / 2, 665);
 
   // one tile per round: colour = how close, number = distance
@@ -735,14 +756,14 @@ async function makeCard() {
     const tx = x0 + i * (tw + gap);
     ctx.fillStyle = colors[roundSquare(x.done.km)]; ctx.beginPath(); ctx.roundRect(tx, 820, tw, 190, 28); ctx.fill();
     ctx.fillStyle = "rgba(255,255,255,.85)"; ctx.font = "800 30px Inter, sans-serif"; ctx.fillText(`#${i + 1}`, tx + tw / 2, 870);
-    ctx.fillStyle = "#fff"; ctx.font = "800 46px 'Bricolage Grotesque', Inter, sans-serif";
+    ctx.fillStyle = "#fff"; ctx.font = "800 46px Newsreader, Georgia, serif";
     const km = x.done.km;
     ctx.fillText(km < 1000 ? fmt(km) : (km / 1000).toFixed(km < 10000 ? 1 : 0) + "k", tx + tw / 2, 945);
     ctx.font = "700 26px Inter, sans-serif"; ctx.fillText("km off", tx + tw / 2, 985);
   });
-  ctx.fillStyle = "#17202e"; ctx.font = "700 50px Inter, sans-serif";
+  ctx.fillStyle = "#1f2a2c"; ctx.font = "700 50px Inter, sans-serif";
   ctx.fillText("Can you beat me?", W / 2, 1160);
-  ctx.fillStyle = "#c8402b"; ctx.font = "800 38px Inter, sans-serif";
+  ctx.fillStyle = "#d0402b"; ctx.font = "800 38px Inter, sans-serif";
   ctx.fillText(location.host || "somewhere", W / 2, 1225);
   return new Promise((res) => c.toBlob(res, "image/png"));
 }
@@ -823,7 +844,7 @@ async function joinFromLink() {
   } catch (e) { toast(e.message === "no such board" ? "That friends link doesn't work anymore." : "Couldn't join the friends board."); }
 }
 
-const HARD_BADGE = ` <span class="hard-badge" title="Cracked today's hard riddle">💀</span>`;
+const HARD_BADGE = ` <span class="hard-badge" title="Cracked today's hard riddle">Hard ✓</span>`;
 function friendsHTML() {
   if (preview) return `<p class="empty-note">Friends boards turn on once the database is connected. Then you can make a private board for you and your friends.</p>`;
   if (!friendCode) return `
@@ -908,7 +929,7 @@ function renderBoards() {
     meta.textContent = friendCode && friendsData ? `Your friends board · today's 5 places` : "";
     $("#friends-panel").innerHTML = friendsHTML();
   } else if (tab === "players") {
-    meta.textContent = s.players ? `${fmt(s.players)} players today · average ${fmt(s.avgScore)} / ${fmt(MAX_TOTAL)}${s.cracked != null ? ` · 💀 ${fmt(s.cracked)} cracked the hard riddle` : ""}` : "";
+    meta.textContent = s.players ? `${fmt(s.players)} players today · average ${fmt(s.avgScore)} / ${fmt(MAX_TOTAL)}${s.cracked != null ? ` · ${fmt(s.cracked)} cracked the hard riddle` : ""}` : "";
     const mine = state.final && !CUSTOM ? state.final : null;
     $("#board-players").innerHTML = s.top.length ? s.top.map((p, i) => `
       <li class="${mine && p.name === myName && p.score === mine.score ? "me" : ""}">

@@ -1,24 +1,30 @@
 /* Layout: full-screen map, with floating cards (riddle top-left, Guess bottom-center,
-   result sheet at the bottom, leaderboard drawer on the right). Bright "atlas" palette. */
+   result sheet at the bottom, leaderboard drawer on the right). Editorial look: paper, ink, serif. */
 :root {
-  --ocean: #cfe6f3;
-  --ocean-line: #b7d8ea;
-  --land: #f1efe4;
-  --land-edge: #c9c3ad;
-  --ink: #17202e;
-  --muted: #5d6878;
+  /* Editorial: warm paper, black ink, one red for your pin. */
+  --ocean: #f7f6f2;
+  --ocean-line: #ecebe6;
+  --land: #e6e3da;
+  --land-edge: #8f8b80;
+  --ink: #121212;
+  --muted: #6b6b6b;
   --card: #ffffff;
-  --card-line: #e3e7ee;
-  --go: #ff5a4e;          /* "Pin it!" button: Somewhere coral */
-  --go-dark: #c8402b;
-  --pin: #e5484d;         /* your pin */
-  --answer: #f5b301;      /* the answer */
-  --crowd: #2f7cf6;       /* other guesses */
-  --players: #19a463;     /* where people play from */
-  --shadow: 0 6px 24px rgba(23, 32, 46, .14), 0 1px 3px rgba(23, 32, 46, .08);
-  --radius: 16px;
-  --display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
-  --body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --card-line: #e2e0da;
+  --rule: #121212;
+  --wash: #f4f3ef;
+  --go: #121212;
+  --go-dark: #000000;
+  --pin: #d0402b;
+  --answer: #121212;
+  --crowd: #3d5a80;
+  --players: #4f7d5c;
+  --easy: #4f7d5c;
+  --medium: #a8711f;
+  --hard: #8a3b3b;
+  --shadow: none;
+  --radius: 4px;
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
   color-scheme: light;
 }
 
@@ -270,3 +276,101 @@ a.ghost { text-decoration: none; display: inline-flex; align-items: center; colo
 #clue-list li { white-space: pre-line; }
 .theme-line { font-size: 12.5px; font-weight: 800; letter-spacing: .02em; color: var(--ink); margin: -2px 0 8px; }
 .theme-line[hidden] { display: none; }
+
+/* ---------- Editorial look ---------- */
+body { font-size: 15px; }
+.card, .sheet, dialog, .drawer { border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: none; background: var(--card); }
+.drawer { border-width: 0 0 0 1px; }
+
+/* Masthead: serif name with a quiet dateline under it, no box */
+.brand { background: none; box-shadow: none; padding: 0; border: 0; flex-direction: column; align-items: flex-start; gap: 0; }
+.logo { display: none; }
+.title { font: 700 30px/1 var(--display); letter-spacing: -.02em; }
+.dateline { font: 500 12px/1.3 var(--body); color: var(--muted); margin-top: 3px; white-space: nowrap; }
+.dateline .day { font: inherit; color: inherit; max-width: none; }
+.top { align-items: flex-start; }
+.chip { height: 36px; border: 1px solid var(--card-line); box-shadow: none; background: var(--card); font: 600 13.5px var(--body); }
+.chip.btn:hover { background: var(--wash); }
+#boards-btn { background: var(--ink); color: #fff; border-color: var(--ink); }
+#boards-btn:hover { background: #2a2a2a; }
+.ico { flex: none; }
+
+/* Riddle card: kicker, italic title, hairline rule */
+.clues { padding: 0 0 16px; }
+.theme-line { display: block; margin: 0 0 14px; padding: 16px 20px 12px; border-bottom: 1px solid var(--rule); }
+.theme-line .kind { display: block; font: 700 10.5px var(--body); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 3px; }
+.theme-line .src { display: block; font: italic 600 24px/1.12 var(--display); letter-spacing: -.01em; }
+.clue-head, #clue-list, #next-clue { margin-left: 20px; margin-right: 20px; }
+.clue-head { gap: 10px; margin-bottom: 12px; font: 500 12.5px var(--body); color: var(--muted); }
+.round-label.frames { display: inline-flex; align-items: center; gap: 4px; background: none; color: var(--muted); padding: 0; font: inherit; }
+.round-label.frames i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--ink); }
+.round-label.frames i.done { background: var(--ink); }
+.round-label.frames i.now { background: var(--ink); box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--ink); margin: 0 2px; }
+.round-label.frames i.hard:not(.done):not(.now) { border-style: dashed; }
+.round-label.frames b { margin-left: 6px; font-weight: 600; color: var(--ink); }
+.round-label:not(.frames) { background: var(--ink); color: #fff; border-radius: 3px; font: 600 12px var(--body); padding: 2px 8px; }
+.lvl { background: none !important; padding: 0; border-radius: 0; font: 500 12.5px var(--body); }
+.lvl::before { content: "· "; color: var(--muted); }
+.lvl-easy { color: var(--easy); } .lvl-medium { color: var(--medium); } .lvl-hard { color: var(--hard); }
+.mult { display: none; }
+.total-label { margin-left: auto; background: none; padding: 0; font: 600 12.5px var(--body); color: var(--ink); }
+.collapse { background: none; width: 24px; height: 24px; display: grid; place-items: center; color: var(--ink); }
+#clue-list li { font: 16px/1.5 var(--display); color: var(--muted); grid-template-columns: 22px 1fr; gap: 8px; }
+#clue-list li::before { background: #fff; border: 1px solid var(--ink); color: var(--ink); font: 600 11px var(--body); margin-top: 3px; }
+#clue-list li:last-child { font: 500 21px/1.38 var(--display); color: var(--ink); }
+#clue-list li:last-child::before { background: var(--ink); color: #fff; margin-top: 6px; }
+.ghost { border: 1px solid var(--ink); background: #fff; border-radius: 999px; font: 600 13.5px var(--body); padding: 9px 16px; }
+.ghost:hover:not(:disabled) { background: var(--wash); }
+#next-cost { font-weight: 500; }
+
+/* Buttons */
+.guess { background: var(--ink); color: #fff; border-radius: 999px; box-shadow: none; font: 600 16px var(--body); letter-spacing: .01em; }
+.guess:hover:not(:disabled) { background: #2a2a2a; filter: none; }
+.guess:active:not(:disabled) { transform: translateY(1px); box-shadow: none; }
+.guess:disabled { background: #fff; color: var(--muted); border: 1px solid var(--card-line); box-shadow: none; font: 500 15px var(--body); }
+.guess.small { box-shadow: none; }
+
+/* The button already says what to do, so no floating hint */
+.map-hint { display: none !important; }
+.map-tools { box-shadow: none; border: 1px solid var(--rule); border-radius: var(--radius); background: #fff; }
+.tool + .tool { border-top-color: var(--rule); }
+.legend { background: rgba(247,246,242,.9); border: 0; box-shadow: none; font: 500 12px var(--body); color: var(--muted); padding: 4px 6px; }
+.legend i { border: 1px solid var(--ink); box-shadow: none; }
+.toast { border-radius: var(--radius); font: 600 13.5px var(--body); }
+
+/* Result: an answer box */
+.eyebrow { text-transform: none; letter-spacing: 0; font: 500 13px var(--body); color: var(--muted); }
+.result h2 { font: 700 30px/1.1 var(--display); letter-spacing: -.02em; margin-top: 2px; }
+.km b { font: 600 30px/1 var(--display); }
+.km span { font: 500 12px var(--body); }
+.scorebar { height: 4px; border-radius: 0; background: var(--card-line); margin: 16px 0 8px; }
+.scorebar .fill { background: var(--ink); border-radius: 0; }
+.score-line { font: 500 13.5px var(--body); }
+.fact { font: italic 15px/1.45 var(--display); color: var(--muted); border-left: 2px solid var(--ink); padding-left: 12px; margin: 12px 0 16px; }
+.fact b { font-style: normal; font: 700 10.5px var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); display: block; margin-bottom: 2px; }
+.streak-box { background: var(--wash); border: 0; border-left: 2px solid var(--ink); border-radius: 0; }
+.streak-box b { font: 600 17px var(--display); }
+.squares { font-size: 16px; }
+
+/* Leaderboard */
+.drawer h3, dialog h3 { font: 700 26px var(--display); letter-spacing: -.01em; }
+.tab { border-radius: 999px; font: 600 13px var(--body); }
+.tab.active { background: var(--ink); }
+.board li.me { background: var(--wash); border-radius: 0; }
+.board li:nth-child(1) .rank { color: var(--ink); }
+.invite { background: var(--wash); border-radius: var(--radius); }
+.banner { border-radius: var(--radius); }
+.hard-badge { font: 600 10.5px var(--body); color: var(--hard); border: 1px solid var(--hard); border-radius: 3px; padding: 0 4px; margin-left: 4px; vertical-align: 1px; }
+.answer-num { fill: #fff; }
+
+@media (max-width: 640px) {
+  .title { font-size: 26px; }
+  .dateline .live { display: none; }
+  .theme-line { padding: 13px 16px 10px; }
+  .theme-line .src { font-size: 21px; }
+  .clue-head, #clue-list, #next-clue { margin-left: 16px; margin-right: 16px; }
+  #clue-list li:last-child { font-size: 18.5px; }
+  .result h2 { font-size: 24px; }
+  .km b { font-size: 24px; }
+}
+.brand { background: rgba(247,246,242,.88); padding: 4px 10px 5px 8px; margin: -4px 0 0 -8px; border-radius: var(--radius); }
