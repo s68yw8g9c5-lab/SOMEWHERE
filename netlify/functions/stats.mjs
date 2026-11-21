@@ -10,11 +10,10 @@ export default async (req) => {
   try {
     const sql = await db();
     const crack = Math.round(LEVELS.hard.max / 2); // half the hard round's points = "cracked it"
-    const [tot, top, countries, cells, recent, hard] = await Promise.all([
+    const [tot, top, countries, recent, hard] = await Promise.all([
       sql`SELECT * FROM g_totals WHERE day = ${day}`,
       sql`SELECT name, country, score, km, (rounds->${HARD_ROUND}->>4)::int AS hard FROM games WHERE day = ${day} ORDER BY score DESC, ms ASC LIMIT 25`,
       sql`SELECT country, players, sum_score FROM g_country WHERE day = ${day} ORDER BY players DESC LIMIT 60`,
-      sql`SELECT lat, lon, players FROM g_cells WHERE day = ${day} ORDER BY players DESC LIMIT 3000`,
       sql`SELECT name, country, score FROM games WHERE day = ${day} ORDER BY created DESC LIMIT 8`,
       sql`SELECT count(*) FILTER (WHERE (rounds->${HARD_ROUND}->>4)::int >= ${crack}) AS cracked FROM games WHERE day = ${day}`,
     ]);
@@ -29,7 +28,6 @@ export default async (req) => {
       top: top.map((r) => ({ name: r.name, country: r.country, score: r.score, km: r.km, cracked: r.hard >= crack })),
       cracked: Number(hard[0]?.cracked || 0),   // players who cracked the hard riddle
       countries: countries.map((c) => ({ c: c.country, n: c.players, avg: Math.round(Number(c.sum_score) / c.players) })),
-      where: cells.map((c) => [c.lat, c.lon, c.players]),
       recent,
       at: Date.now(),
     }, { cacheSeconds: 15 });

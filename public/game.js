@@ -73,9 +73,18 @@ export function distanceKm(lat1, lon1, lat2, lon2) {
   return 2 * R * Math.asin(Math.min(1, Math.sqrt(a)));
 }
 
-export function scoreFor(km, cluesUsed, max = MAX_POINTS) {
+// Speed: distance earns 80% of a round's points, speed earns the last 20%.
+// Answer within 20 seconds for the whole speed bonus; it fades to nothing at 2 minutes.
+export const SPEED = { full: 20, zero: 120, share: 0.2 };
+export function speedFactor(secs) {
+  if (!Number.isFinite(secs) || secs < 0) return 0;
+  return Math.max(0, Math.min(1, (SPEED.zero - secs) / (SPEED.zero - SPEED.full)));
+}
+
+export function scoreFor(km, cluesUsed, max = MAX_POINTS, secs = 0) {
   const base = km <= 25 ? max : max * Math.exp(-(km - 25) / 2000);
-  return Math.round(base * CLUE_MULT[Math.min(Math.max(cluesUsed, 1), MAX_CLUES) - 1]);
+  const speed = 1 - SPEED.share + SPEED.share * speedFactor(secs);
+  return Math.round(base * CLUE_MULT[Math.min(Math.max(cluesUsed, 1), MAX_CLUES) - 1] * speed);
 }
 
 // One square per round for the share text: how close you got.

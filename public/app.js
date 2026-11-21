@@ -2,7 +2,7 @@
 // Also plays single riddles that friends write for each other (links with #r=...).
 import {
   dayNumber, nextPuzzleAt, puzzlesFor, dateFor, hasDate, distanceKm, scoreFor, roundSquare,
-  CLUE_MULT, MAX_CLUES, MAX_POINTS, MAX_TOTAL, LEVELS, HARD_ROUND, maxFor,
+  CLUE_MULT, SPEED, speedFactor, MAX_CLUES, MAX_POINTS, MAX_TOTAL, LEVELS, HARD_ROUND, maxFor,
 } from "./game.js";
 
 const $ = (s) => document.querySelector(s);
@@ -59,11 +59,14 @@ const crackedHard = () => !CUSTOM && state.rounds[HARD_ROUND]?.done && state.rou
 const STATE_KEY = CUSTOM ? `sw:custom:${CUSTOM.id}` : DEV ? `sw:dev:${DAY}` : `sw:game:${DAY}`;
 const fresh = () => ({
   round: 0, started: Date.now(), final: null,
-  rounds: Array.from({ length: N }, () => ({ clues: 1, pin: null, done: null })),
+  rounds: Array.from({ length: N }, (_, i) => ({ clues: 1, pin: null, done: null, shown: i === 0 ? Date.now() : null })),
 });
 let state = store.get(STATE_KEY, null);
 if (!state || !Array.isArray(state.rounds) || state.rounds.length !== N) state = fresh();
 const save = () => store.set(STATE_KEY, state);
+// The speed clock for each riddle starts when it first appears (reloading doesn't reset it).
+const startClock = () => { const r = state.rounds[state.round]; if (r && !r.done && !state.final && !r.shown) r.shown = Date.now(); };
+startClock();
 save();
 
 const cur = () => state.rounds[state.round];
@@ -84,7 +87,6 @@ if (!myName) { myName = randomName(); store.set("sw:name", myName); }
 
 let preview = location.protocol === "file:";
 let lastStats = null;
-let crowdPins = [];   // N lists of [lat, lon, score]
 
 // Streamer mode: answers stay blurred (and off the map) until you tap "Reveal".
 let streamer = params.has("streamer") || store.get("sw:streamer", false);
@@ -132,7 +134,8 @@ function renderClues(animateLast = false) {
     if (fp && fp.from) {
       const m = fp.from.match(/^(\S+)\s+(.*)$/), kind = m && m[1] === "📖" ? "Book" : "Film";
       th.dataset.level = fp.level || "";
-      th.innerHTML = `<span class="kind kind-${kind.toLowerCase()}">${kind}</span><span class="src">${esc(m ? m[2] : fp.from)}</span>`;
+      th.innerHTML = `<span class="kind kind-${kind.toLowerCase()}">${kind}</span><span class="src">${esc(m ? m[2] : fp.from)}</span><span class="clock" id="clock"></span>`;
+      drawClock();
     } else th.textContent = THEME.name;
     th.title = `Today's theme: ${THEME.about}`;
   }
@@ -306,13 +309,8 @@ function addOverlays() {
       }
     }
   }
-  for (const id of ["players", "crowd", "lines"]) if (!gl.getSource(id)) gl.addSource(id, { type: "geojson", data: fc([]) });
-  if (!gl.getLayer("players")) gl.addLayer({ id: "players", type: "circle", source: "players", paint: {
-    "circle-radius": ["interpolate", ["linear"], ["get", "n"], 1, 3.5, 50, 9, 300, 14],
-    "circle-color": "#4f7d5c", "circle-opacity": 0.55, "circle-stroke-color": "#fff", "circle-stroke-width": 1 } });
-  if (!gl.getLayer("crowd")) gl.addLayer({ id: "crowd", type: "circle", source: "crowd", paint: {
-    "circle-radius": ["interpolate", ["linear"], ["zoom"], 0, 2.6, 6, 4.5], "circle-color": "#3d5a80", "circle-opacity": 0.65,
-    "circle-stroke-color": "#fff", "circle-stroke-width": 0.8 } });
+  // No player dots or crowd dots on the map, ever: only your pin, the answer and the line between.
+  if (!gl.getSource("lines")) gl.addSource("lines", { type: "geojson", data: fc([]) });
   if (!gl.getLayer("lines")) gl.addLayer({ id: "lines", type: "line", source: "lines",
     layout: { "line-cap": "round" }, paint: { "line-color": "#121212", "line-width": 1.5, "line-dasharray": [2, 1.6] } });
 }
@@ -387,14 +385,6 @@ function revealed() {
   return [];
 }
 
-function drawPlayers() {
-  const where = [];   // the live "where people play" dots are turned off
-  setData("players", fc(where.map(([lat, lon, n]) => ({ type: "Feature", properties: { n }, geometry: { type: "Point", coordinates: [lon, lat] } }))));
-}
-function drawCrowd() {
-  const pins = view() === "final" && !hideAnswers() && !making ? crowdPins.flat() : [];
-  setData("crowd", fc(pins.map(([lat, lon]) => ({ type: "Feature", properties: {}, geometry: { type: "Point", coordinates: [lon, lat] } }))));
-}
 function drawMine() {
   let pins = view() === "guess"
     ? (cur().pin ? [cur().pin] : [])
@@ -413,15 +403,14 @@ function drawAnswer() {
     coordinates: arc([state.rounds[i].done.glat, state.rounds[i].done.glon], [PUZ[i].lat, PUZ[i].lon]) } }))));
   setMarkers("answer", idx.map((i) => [PUZ[i].lat, PUZ[i].lon, numbered ? i + 1 : 0]), starEl, "center");
 }
-function drawAll() { if (!map.ready || !map.gl.getSource("lines")) { renderLegend(); return; } drawPlayers(); drawCrowd(); drawAnswer(); drawMine(); renderLegend(); }
+function drawAll() { if (!map.ready || !map.gl.getSource("lines")) { renderLegend(); return; } drawAnswer(); drawMine(); renderLegend(); }
 
 function renderLegend() {
   const v = view();
   $("#legend").hidden = v === "guess" || making;
   $("#legend").innerHTML = v === "guess" || making
     ? ""
-    : `<span><i style="background:var(--pin)"></i>You</span><span><i style="background:var(--answer)"></i>Answer</span>`
-      + (v === "final" && !CUSTOM ? `<span><i style="background:var(--crowd)"></i>Everyone's guesses</span>` : "");
+    : `<span><i style="background:var(--pin)"></i>You</span><span><i style="background:var(--answer)"></i>Answer</span>`;
 }
 
 function fitToResult(animate = true) {
@@ -472,7 +461,8 @@ $("#lock-btn").addEventListener("click", () => {
   if (!r.pin || r.done) return;
   const [glat, glon] = r.pin;
   const km = Math.round(distanceKm(glat, glon, p.lat, p.lon) * 10) / 10;
-  r.done = { glat, glon, km, clues: r.clues, score: scoreFor(km, r.clues, maxFor(curPuz())) };
+  const secs = CUSTOM ? 0 : secsOn(r);   // friend riddles have no clock
+  r.done = { glat, glon, km, clues: r.clues, secs, score: scoreFor(km, r.clues, maxFor(curPuz()), secs) };
   spoilerOpen = false;
   save();
   track("Guess", { round: state.round + 1, clues: r.clues, distance: kmBucket(km), day: DAY, custom: !!CUSTOM });
@@ -481,7 +471,7 @@ $("#lock-btn").addEventListener("click", () => {
 
 function nextRound() {
   if (state.round < N - 1) {
-    state.round++; save();
+    state.round++; startClock(); save();
     render(false);
     resetZoom(true);
     $("#map-hint").style.opacity = 1;
@@ -505,18 +495,18 @@ async function finishGame() {
     try {
       const r = await fetch("/api/play", {
         method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ day: DAY, player, name: myName, ms, rounds: state.rounds.map((x) => ({ lat: x.done.glat, lon: x.done.glon, clues: x.done.clues })) }),
+        body: JSON.stringify({ day: DAY, player, name: myName, ms, rounds: state.rounds.map((x) => ({ lat: x.done.glat, lon: x.done.glon, clues: x.done.clues, secs: x.done.secs })) }),
       });
       if (r.ok) res = await r.json();
     } catch {}
   }
   if (res && Array.isArray(res.rounds)) {
     // Trust the server's numbers (and its copy, if this device already played today).
-    res.rounds.forEach((x, i) => { state.rounds[i].done = { glat: x[0], glon: x[1], clues: x[2], km: Number(x[3]), score: x[4] }; });
+    res.rounds.forEach((x, i) => { state.rounds[i].done = { glat: x[0], glon: x[1], clues: x[2], km: Number(x[3]), score: x[4], secs: x[5] }; });
     state.final = { score: res.score, km: Number(res.km), beat: res.beat, players: res.players };
   } else {
     const score = runningTotal();
-    state.final = { score, km: doneRounds().reduce((s, r) => s + r.done.km, 0), beat: estimateBeat(score), players: lastStats?.players || 1, local: true };
+    state.final = { score, km: doneRounds().reduce((s, r) => s + r.done.km, 0), beat: null, players: lastStats?.players || 1, local: true };
     if (!preview && !DEV) toast("Couldn't reach the server. Your result is saved on this device.");
   }
   save();
@@ -524,15 +514,8 @@ async function finishGame() {
   const st = streakInfo();
   track("Finish game", { score: scoreBucket(state.final.score), clues: totalClues(), streak: st.count, day: DAY, offline: !!state.final.local });
   render(true);
-  loadPins();
   refreshStats(true);
   loadFriends();
-}
-
-function estimateBeat(score) {
-  // Preview mode only: a rough guess from the average.
-  const avg = lastStats?.avgScore || 1800;
-  return Math.max(1, Math.min(99, Math.round(50 + (score - avg) / 40)));
 }
 
 /* ---------- streak, with one free "saver" a week ---------- */
@@ -575,9 +558,15 @@ function roundHTML() {
       <span><b>${fmt(r.score)}</b> of ${fmt(maxFor(p))} points</span>
       ${CUSTOM ? "" : `<span class="muted">Total <b>${fmt(runningTotal())}</b></span>`}
     </div>
+    ${r.secs != null ? `<p class="speed-line">Answered in ${fmtSecs(r.secs)}. ${speedNote(r.secs)}</p>` : ""}
     ${p.fact ? `<p class="fact spoiler"><b>Did you know?</b> ${esc(p.fact)}</p>` : ""}
     ${spoilerBtn()}
     <button class="guess" id="next-btn">${last ? (CUSTOM ? "See your score" : "See your final score") : "Next riddle"}</button>`;
+}
+
+function speedNote(t) {
+  const f = speedFactor(t);
+  return f >= 1 ? "Full speed bonus." : f > 0 ? `Speed bonus ${Math.round(f * 100)}%.` : `No speed bonus (answer within ${SPEED.full} seconds for all of it).`;
 }
 
 function streakHTML() {
@@ -593,7 +582,7 @@ function finalHTML() {
   const f = state.final;
   const rows = state.rounds.map((x, i) => `
     <li><span class="sq sq-${["🟩","🟨","🟧","🟥"].indexOf(roundSquare(x.done.km))}" aria-hidden="true"></span>
-      <span class="who">${N > 1 ? `${i + 1}. ` : ""}<span class="spoiler">${esc(PUZ[i].name)}</span><span class="sub">${CUSTOM ? "" : LEVELS[levelOf(PUZ[i])].label + " · "}${fmtKm(x.done.km)} · ${x.done.clues} clue${x.done.clues > 1 ? "s" : ""}</span></span>
+      <span class="who">${N > 1 ? `${i + 1}. ` : ""}<span class="spoiler">${esc(PUZ[i].name)}</span><span class="sub">${CUSTOM ? "" : LEVELS[levelOf(PUZ[i])].label + " · "}${fmtKm(x.done.km)} · ${x.done.clues} clue${x.done.clues > 1 ? "s" : ""}${x.done.secs != null && x.done.secs < 86400 ? ` · ${fmtSecs(x.done.secs)}` : ""}</span></span>
       <span class="val">${fmt(x.done.score)}</span></li>`).join("");
   if (CUSTOM) return `
     <div class="result-top">
@@ -617,7 +606,7 @@ function finalHTML() {
         <div class="eyebrow">Somewhere No. ${DAY} · ${THEME.name}</div>
         <h2>${fmt(f.score)} <span class="of">/ ${fmt(TOTAL)}</span></h2>
       </div>
-      <div class="km"><b>${f.beat}%</b><span>of players beaten</span></div>
+      ${f.beat != null ? `<div class="km"><b>${f.beat}%</b><span>of players beaten</span></div>` : `<div class="km"><b>${fmtKm(f.km)}</b><span>off in total</span></div>`}
     </div>
     <div class="scorebar"><div class="fill" id="r-bar" data-w="${(f.score / TOTAL * 100).toFixed(1)}"></div></div>
     ${streakHTML()}
@@ -662,7 +651,8 @@ function revealSpoilers() {
 }
 
 // First look: a brand-new player sees only the riddle, the map and one button until their first guess.
-const isNewcomer = () => !CUSTOM && state.round === 0 && !cur().done && !Object.keys(store.get("sw:history", {})).length;
+// Tester mode always shows it, so "Play again" looks exactly like a first visit.
+const isNewcomer = () => !CUSTOM && state.round === 0 && !cur().done && (DEV || !Object.keys(store.get("sw:history", {})).length);
 function render(animate) {
   const v = view(), sheet = $("#result");
   document.body.classList.toggle("first-look", isNewcomer());
@@ -701,7 +691,7 @@ function shareText() {
     `Somewhere #${DAY} · ${THEME.emoji} ${THEME.name}`,
     `🌍 ${fmt(f.score)} / ${fmt(TOTAL)}`,
     state.rounds.map((x) => roundSquare(x.done.km)).join(""),
-    `🔎 ${totalClues()} clues · beat ${f.beat}%${crackedHard() ? " · 💀 cracked the hard one" : ""}${s > 1 ? ` · 🔥 ${s}` : ""}`,
+    `🔎 ${totalClues()} clues${f.beat != null ? ` · beat ${f.beat}%` : ""}${crackedHard() ? " · 💀 cracked the hard one" : ""}${s > 1 ? ` · 🔥 ${s}` : ""}`,
     siteUrl(),
   ].filter(Boolean).join("\n");
 }
@@ -754,7 +744,7 @@ async function makeCard() {
   ctx.fillStyle = "#5a6866"; ctx.font = "700 46px Inter, sans-serif"; ctx.fillText(`out of ${fmt(TOTAL)}`, W / 2, 575);
   const s = streakInfo().count;
   ctx.fillStyle = "#1f2a2c"; ctx.font = "700 40px Inter, sans-serif";
-  ctx.fillText(`beat ${f.beat}% of players${s > 1 ? `  ·  🔥 ${s} days` : ""}`, W / 2, 665);
+  ctx.fillText(`${f.beat != null ? `beat ${f.beat}% of players` : `${fmtKm(f.km)} off in total`}${s > 1 ? `  ·  🔥 ${s} days` : ""}`, W / 2, 665);
 
   // one tile per round: colour = how close, number = distance
   const colors = { "🟩": "#19a463", "🟨": "#f5b301", "🟧": "#f08a24", "🟥": "#e5484d", "⬛": "#8a94a3" };
@@ -797,21 +787,12 @@ async function refreshStats(bust) {
       if (r.ok) s = await r.json(); else if (r.status === 404) preview = true;
     } catch { preview = true; }
   }
-  if (!s) { preview = true; s = sampleStats(); }
+  if (!s) { preview = true; s = emptyStats(); }
   $("#preview-banner").hidden = !preview;
   lastStats = s;
   $("#live-count").textContent = fmt(s.players);
-  drawPlayers();
+  $(".dateline .live").hidden = !s.players;
   renderBoards();
-}
-
-async function loadPins() {
-  if (!state.final || CUSTOM) return;
-  if (preview || state.final.local) { crowdPins = samplePins(); drawCrowd(); return; }
-  try {
-    const r = await fetch(`/api/pins?day=${DAY}&player=${encodeURIComponent(player)}`);
-    if (r.ok) { crowdPins = (await r.json()).pins; drawCrowd(); }
-  } catch {}
 }
 
 /* ---------- friends boards ---------- */
@@ -1041,47 +1022,24 @@ $("#streamer-toggle").addEventListener("change", (e) => {
 });
 document.body.classList.toggle("streamer", streamer);
 
-/* ---------- preview data (only used before the database is connected) ---------- */
-function seeded(seed) { return () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296); }
-const CITIES = [[40.7, -74], [34, -118.2], [41.9, -87.6], [19.4, -99.1], [-23.5, -46.6], [-34.6, -58.4], [4.7, -74.1], [51.5, -0.1],
-  [48.9, 2.4], [52.5, 13.4], [40.4, -3.7], [41.9, 12.5], [55.8, 37.6], [30, 31.2], [6.5, 3.4], [-1.3, 36.8], [-26.2, 28], [25.2, 55.3],
-  [28.6, 77.2], [19.1, 72.9], [13.8, 100.5], [1.35, 103.8], [-6.2, 106.8], [14.6, 121], [35.7, 139.7], [37.6, 127], [31.2, 121.5],
-  [-33.9, 151.2], [-37.8, 145], [43.7, -79.4], [45.5, -73.6], [59.3, 18.1], [50.1, 14.4], [39.9, 32.9], [33.7, 73.1], [23.8, 90.4]];
-const CC = ["US", "US", "US", "MX", "BR", "AR", "CO", "GB", "FR", "DE", "ES", "IT", "PL", "EG", "NG", "KE", "ZA", "AE", "IN", "IN", "TH", "SG", "ID", "PH", "JP", "KR", "CN", "AU", "AU", "CA", "CA", "SE", "CZ", "TR", "PK", "BD"];
-function sampleStats() {
-  const rnd = seeded(DAY * 7919);
-  const where = [], countries = {}, names = ["Mira", "Kenji", "Lola", "Tariq", "Ana", "Jonas", "Priya", "Sam", "Wei", "Chloe", "Diego", "Amara", "Leo", "Yuki", "Omar", "Ines"];
-  let players = 0;
-  CITIES.forEach(([la, lo], i) => {
-    const n = 8 + Math.floor(rnd() * 90);
-    players += n;
-    for (let j = 0; j < 4; j++) where.push([la + (rnd() - .5) * 3, lo + (rnd() - .5) * 3, Math.ceil(n / (j + 1) / 2)]);
-    const c = countries[CC[i]] || (countries[CC[i]] = { c: CC[i], n: 0, sum: 0 });
-    c.n += n; c.sum += n * (1000 + rnd() * 1800);
-  });
-  const top = Array.from({ length: 15 }, (_, i) => {
-    const km = Math.round((60 + i * i * 40 + rnd() * 80) * 10) / 10;
-    return { name: names[i % names.length] + " " + "ABCDEFGHJKLMNPRS"[Math.floor(rnd() * 16)] + ".", country: CC[Math.floor(rnd() * CC.length)], km, score: Math.round(4760 - i * 130 - rnd() * 60), cracked: i < 6 || rnd() < 0.3 };
-  }).sort((a, b) => b.score - a.score);
-  const recent = Array.from({ length: 8 }, () => ({ name: names[Math.floor(rnd() * names.length)], country: CC[Math.floor(rnd() * CC.length)], score: Math.floor(800 + rnd() * 3200) }));
-  return {
-    day: DAY, live: true, players, avgKm: 1900, avgScore: 1800, cracked: Math.round(players * 0.22), top, recent, where,
-    countries: Object.values(countries).map((c) => ({ c: c.c, n: c.n, avg: Math.round(c.sum / c.n) })),
-  };
+/* ---------- before the database is connected: empty boards, never made-up players ---------- */
+function emptyStats() {
+  return { day: DAY, live: true, players: 0, avgKm: null, avgScore: null, cracked: 0, top: [], recent: [], countries: [] };
 }
-function samplePins() {
-  const rnd = seeded(DAY * 104729);
-  return PUZ.map((p) => {
-    const pins = [];
-    for (let i = 0; i < 120; i++) {
-      const spread = rnd() < 0.55 ? 6 : rnd() < 0.7 ? 25 : 80;
-      const lat = Math.max(-85, Math.min(85, p.lat + (rnd() - .5) * spread));
-      const lon = ((p.lon + (rnd() - .5) * spread * 1.6 + 540) % 360) - 180;
-      pins.push([lat, lon, 0]);
-    }
-    return pins;
-  });
+
+/* ---------- speed clock ---------- */
+const secsOn = (r) => Math.max(0, Math.round((Date.now() - (r.shown || Date.now())) / 1000));
+const fmtSecs = (t) => `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`;
+function drawClock() {
+  const el = $("#clock");
+  if (!el) return;
+  const r = cur();
+  if (!r || r.done || state.final) { el.innerHTML = ""; return; }
+  const t = secsOn(r), f = speedFactor(t);
+  el.classList.toggle("fading", t > SPEED.full);
+  el.innerHTML = `<b>${fmtSecs(t)}</b><small>${f >= 1 ? "Full speed bonus" : f > 0 ? `Speed bonus ${Math.round(f * 100)}%` : "No speed bonus"}</small>`;
 }
+setInterval(drawClock, 1000);
 
 /* ---------- countdown & help ---------- */
 function tick() {
@@ -1109,11 +1067,9 @@ await initMap();
 await refreshStats();
 render(false);
 if (view() === "guess" && cur().pin) $("#map-hint").style.opacity = 0;
-if (state.final) loadPins();
 joinFromLink();
 loadFriends();
 setInterval(() => { if (!document.hidden) refreshStats(); }, 20000);
-setInterval(() => { if (!document.hidden && state.final) loadPins(); }, 60000);
 setInterval(() => { if (!document.hidden && !$("#boards").hidden && tab === "friends") loadFriends(); }, 30000);
 
 /* ---------- tester mode bar ---------- */

@@ -1,4 +1,4 @@
-// POST /api/play  { day, player, name, rounds: [{ lat, lon, clues } x5], ms }
+// POST /api/play  { day, player, name, rounds: [{ lat, lon, clues, secs } x5], ms }
 // Sent once, after the 5th round. The server recomputes every distance and score
 // itself, so nobody can fake points.
 import { dayNumber, puzzlesFor, distanceKm, scoreFor, maxFor, LAUNCH_UTC, MAX_CLUES, ROUNDS } from "../../public/game.js";
@@ -27,20 +27,24 @@ export default async (req, context) => {
     const lat = Number(r.lat), lon = Number(r.lon), clues = Math.round(Number(r.clues));
     if (!(lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180)) return json({ error: "bad pin" }, { status: 400 });
     if (!(clues >= 1 && clues <= MAX_CLUES)) return json({ error: "bad clues" }, { status: 400 });
+    // Seconds spent on this riddle (the speed bonus). Missing or odd values earn no bonus.
+    const secs = Number.isFinite(Number(r.secs)) ? Math.max(0, Math.min(86400, Math.round(Number(r.secs)))) : 86400;
     const km = Math.round(distanceKm(lat, lon, places[i].lat, places[i].lon) * 10) / 10;
-    rounds.push([Math.round(lat * 1e4) / 1e4, Math.round(lon * 1e4) / 1e4, clues, km, scoreFor(km, clues, maxFor(places[i]))]);
+    rounds.push([Math.round(lat * 1e4) / 1e4, Math.round(lon * 1e4) / 1e4, clues, km, scoreFor(km, clues, maxFor(places[i]), secs), secs]);
   }
   const km = Math.round(rounds.reduce((s, r) => s + r[3], 0) * 10) / 10;
-  const score = rounds.reduce((s, r) => s + r[4], 0);
   const ms = Math.max(0, Math.min(86400000, Math.round(Number(b.ms) || 0)));
+  // The riddle times can't add up to more than the whole game took.
+  if (rounds.reduce((s, r) => s + r[5], 0) > ms / 1000 + 5) {
+    rounds.forEach((r, i) => { r[5] = 86400; r[4] = scoreFor(r[3], r[2], maxFor(places[i]), 86400); });
+  }
+  const score = rounds.reduce((s, r) => s + r[4], 0);
 
   const geo = context.geo || {};
   const cc = geo.country?.code || "";
   const country = /^[A-Z]{2}$/.test(cc) ? cc : "XX";
-  // 0,0 means "unknown" (e.g. local testing), so leave those players off the map.
-  const hasGeo = Number.isFinite(geo.latitude) && Number.isFinite(geo.longitude) && (geo.latitude !== 0 || geo.longitude !== 0);
-  const plat = hasGeo ? Math.round(geo.latitude * 10) / 10 : null;
-  const plon = hasGeo ? Math.round(geo.longitude * 10) / 10 : null;
+  // Player locations are not stored or shown (no "where people play" dots).
+  const plat = null, plon = null;
   const name = cleanName(b.name);
 
   try {
@@ -62,11 +66,6 @@ export default async (req, context) => {
                    sum_score = g_country.sum_score + ${score}`;
         await tx`INSERT INTO g_hist (day, bucket, players) VALUES (${day}, ${Math.floor(score / BUCKET)}, 1)
                  ON CONFLICT (day, bucket) DO UPDATE SET players = g_hist.players + 1`;
-        if (plat != null && plon != null) {
-          await tx`INSERT INTO g_cells (day, lat, lon, players)
-                   VALUES (${day}, ${Math.round(plat * 2) / 2}, ${Math.round(plon * 2) / 2}, 1)
-                   ON CONFLICT (day, lat, lon) DO UPDATE SET players = g_cells.players + 1`;
-        }
       });
     }
 
