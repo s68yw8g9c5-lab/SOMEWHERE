@@ -2,1951 +2,2101 @@
  {
   "date": "11-21",
   "level": "easy",
-  "name": "Paris, France (first hot-air balloon flight)",
-  "lat": 48.859,
-  "lon": 2.269,
-  "clues": [
-   "Two men became the first humans ever to fly, lifted by smoke inside a giant bag of cloth and paper. Where did they rise?",
-   "The first people ever to fly took off from a royal park in this city, above the Seine. Where am I?",
-   "1783: the first manned hot-air balloon flight, in Paris."
-  ],
-  "fact": "The Montgolfier balloon flew about 9 km in 25 minutes before landing outside the city."
- },
- {
-  "date": "11-21",
-  "level": "easy",
-  "name": "Verrazzano-Narrows Bridge, New York City",
-  "lat": 40.6066,
-  "lon": -74.0447,
-  "clues": [
-   "I'm so long that the Earth's curve made my towers lean apart, and I tie an island of boroughs to another. Where am I?",
-   "Every November, thousands of marathon runners start their race by crossing me in this city. Where am I?",
-   "1964: the Verrazzano-Narrows Bridge opens, linking Staten Island and Brooklyn, New York."
-  ],
-  "fact": "Its towers are about 4 cm farther apart at the top than at the bottom because of the Earth's curve."
- },
- {
-  "date": "11-21",
-  "level": "medium",
-  "name": "Provincetown Harbor, Cape Cod, USA (Mayflower Compact)",
-  "lat": 42.05,
-  "lon": -70.19,
-  "clues": [
-   "Before they set foot on land, 41 men signed a promise on a ship that was meant to carry wine. Where were they anchored?",
-   "The Pilgrims signed their famous rules here, at the hooked tip of a Massachusetts peninsula, before moving on to Plymouth. Where am I?",
-   "1620: the Mayflower Compact is signed off the tip of Cape Cod, Massachusetts."
-  ],
-  "fact": "The Mayflower first anchored at Cape Cod, not Plymouth, after more than two months at sea."
- },
- {
-  "date": "11-21",
-  "level": "medium",
-  "name": "Dayton, Ohio, USA (Dayton Accords)",
-  "lat": 39.8261,
-  "lon": -84.0483,
-  "clues": [
-   "A war in Europe ended in a city of the American Midwest, at an air base named after two famous brothers. Where am I?",
-   "The birthplace of the aviation pioneers hosted the peace talks that ended the Bosnian War. Where am I?",
-   "1995: the Dayton Peace Agreement is initialed at Wright-Patterson Air Force Base, Ohio."
-  ],
-  "fact": "Leaders spent three weeks locked inside the base until they agreed."
- },
- {
-  "date": "11-21",
-  "level": "hard",
-  "name": "UCLA, Los Angeles, USA (first permanent internet link)",
-  "lat": 34.0689,
-  "lon": -118.4452,
-  "clues": [
-   "Here a computer said \"LO\" and crashed, yet that broken word grew into the web you're using now. Where am I?",
-   "The first permanent link of the internet's ancestor connected a university in this sunny city to Stanford. Where am I?",
-   "1969: the first permanent ARPANET link is set up between UCLA in Los Angeles and Stanford."
-  ],
-  "fact": "The first message attempt in October 1969 was meant to be LOGIN, but the system crashed after LO."
- },
- {
-  "date": "11-22",
-  "level": "easy",
-  "name": "Dealey Plaza, Dallas, USA",
-  "lat": 32.7788,
-  "lon": -96.8084,
-  "clues": [
-   "A grassy knoll, a book depository and an open car made a sunny lunchtime the darkest day of a decade. Where am I?",
-   "A US president was shot during a parade through downtown in this Texas city. Where am I?",
-   "1963: President John F. Kennedy is assassinated in Dealey Plaza, Dallas."
-  ],
-  "fact": "The Texas School Book Depository is now the Sixth Floor Museum."
- },
- {
-  "date": "11-22",
-  "level": "easy",
-  "name": "10 Downing Street, London",
-  "lat": 51.5034,
-  "lon": -0.1276,
-  "clues": [
-   "The Iron Lady stepped out of a black door with a number on it and said goodbye. Where am I?",
-   "Britain's first woman prime minister announced she would resign after 11 years in this address in the UK capital. Where am I?",
-   "1990: Margaret Thatcher announces her resignation at 10 Downing Street, London."
-  ],
-  "fact": "The famous black door can't be opened from the outside: it has no keyhole."
- },
- {
-  "date": "11-22",
-  "level": "medium",
-  "name": "Reichstag, Berlin, Germany",
-  "lat": 52.5186,
-  "lon": 13.3761,
-  "clues": [
-   "A scientist who grew up behind a wall became the most powerful woman in Europe, under a glass dome. Where am I?",
-   "Angela Merkel was sworn in as chancellor in the parliament of this capital city. Where am I?",
-   "2005: Angela Merkel becomes Germany's first female chancellor, in Berlin."
-  ],
-  "fact": "The Reichstag's glass dome lets visitors walk above the lawmakers."
- },
- {
-  "date": "11-22",
-  "level": "medium",
-  "name": "Cape of Good Hope, South Africa",
-  "lat": -34.3568,
-  "lon": 18.474,
-  "clues": [
-   "Sailors called me the Cape of Storms, but a king renamed me for hope. One explorer slipped past me on his way to India. Where am I?",
-   "Vasco da Gama rounded this rocky point near the southern tip of Africa. Where am I?",
-   "1497: Vasco da Gama's fleet rounds the Cape of Good Hope, South Africa."
-  ],
-  "fact": "Despite the legend, the Cape of Good Hope is not Africa's southernmost point; Cape Agulhas is."
- },
- {
-  "date": "11-22",
-  "level": "hard",
-  "name": "Dumbarton, Scotland (Cutty Sark launched)",
-  "lat": 55.944,
-  "lon": -4.564,
-  "clues": [
-   "I was named after a witch's short shirt in a famous poem, and I raced tea across the world. Where was I born?",
-   "The fastest tea clipper was launched on the River Clyde, west of Glasgow. Where am I?",
-   "1869: the clipper ship Cutty Sark is launched at Dumbarton, Scotland."
-  ],
-  "fact": "Cutty Sark now sits in dry dock in Greenwich, London."
- },
- {
-  "date": "11-23",
-  "level": "easy",
-  "name": "BBC Television Centre, London (Doctor Who)",
-  "lat": 51.51,
-  "lon": -0.2266,
-  "clues": [
-   "A man with two hearts first stepped out of a police box that's bigger on the inside. Where was he born?",
-   "A time-traveling TV hero first appeared on screens from this capital city, the day after a world-shaking news story. Where am I?",
-   "1963: Doctor Who first airs on the BBC in London."
-  ],
-  "fact": "The first episode was repeated the next week because news of JFK's death overshadowed it."
- },
- {
-  "date": "11-23",
-  "level": "easy",
-  "name": "New York City (first LIFE magazine)",
+  "from": "🎬 Spider-Man: Brand New Day",
+  "name": "New York City, USA",
   "lat": 40.758,
-  "lon": -73.9855,
-  "clues": [
-   "My first cover showed a giant dam, and for decades I let the world see the news instead of reading it. Where was I printed?",
-   "The famous photo magazine LIFE published its first issue in this city of skyscrapers. Where am I?",
-   "1936: the first issue of LIFE magazine comes out in New York."
-  ],
-  "fact": "The first cover photo, by Margaret Bourke-White, showed the Fort Peck Dam in Montana."
- },
- {
-  "date": "11-23",
-  "level": "medium",
-  "name": "San Francisco, USA (first jukebox)",
-  "lat": 37.788,
-  "lon": -122.4075,
-  "clues": [
-   "For a nickel, a box in a saloon played you a song through tubes in your ears. Where did the music start?",
-   "The first coin-operated phonograph, the jukebox's ancestor, was put in a saloon in this hilly Californian city. Where am I?",
-   "1889: the first jukebox goes into service at the Palais Royale Saloon, San Francisco."
-  ],
-  "fact": "It had no speakers: four people listened through stethoscope-like tubes."
- },
- {
-  "date": "11-23",
-  "level": "medium",
-  "name": "Irpinia, near Naples, Italy (1980 earthquake)",
-  "lat": 40.76,
-  "lon": 15.31,
-  "clues": [
-   "On a quiet Sunday evening the mountains east of a famous pizza city shook for over a minute. Where am I?",
-   "A huge earthquake struck the hills inland from Naples, in southern Italy. Where am I?",
-   "1980: the Irpinia earthquake strikes southern Italy, east of Naples."
-  ],
-  "fact": "It led Italy to create its national civil protection service."
- },
- {
-  "date": "11-23",
-  "level": "hard",
-  "name": "Tarawa, Kiribati",
-  "lat": 1.42,
-  "lon": 172.98,
-  "clues": [
-   "A tiny ring of coral near the equator saw one of the bloodiest three days of a world war. Where am I?",
-   "The Battle of Tarawa ended on this Pacific atoll, in today's Kiribati. Where am I?",
-   "1943: the Battle of Tarawa ends in the Gilbert Islands, now Kiribati."
-  ],
-  "fact": "Kiribati is the only country with islands in all four hemispheres."
- },
- {
-  "date": "11-24",
-  "level": "easy",
-  "name": "London (On the Origin of Species published)",
-  "lat": 51.509,
-  "lon": -0.142,
-  "clues": [
-   "A naturalist who sailed on a ship called the Beagle sold out his book in a single day, and it changed how we see apes. Where was it published?",
-   "Darwin's famous book on evolution was published in this capital city. Where am I?",
-   "1859: Charles Darwin's On the Origin of Species is published in London."
-  ],
-  "fact": "All 1,250 copies of the first printing sold out to booksellers on the first day."
- },
- {
-  "date": "11-24",
-  "level": "easy",
-  "name": "Tasmania, Australia (Abel Tasman sights it)",
-  "lat": -42.0,
-  "lon": 146.5,
-  "clues": [
-   "A Dutch sailor named me after his boss, but now I carry his own name, and a cartoon devil lives here. Where am I?",
-   "Abel Tasman became the first European to sight this island south of mainland Australia. Where am I?",
-   "1642: Abel Tasman sights Tasmania, which he named Van Diemen's Land."
-  ],
-  "fact": "The island was renamed Tasmania, after him, in 1856."
- },
- {
-  "date": "11-24",
-  "level": "medium",
-  "name": "Hadar, Ethiopia (Lucy found)",
-  "lat": 11.1,
-  "lon": 40.58,
-  "clues": [
-   "My bones were named after a Beatles song playing in the camp, and I'm about 3.2 million years old. Where was I found?",
-   "The famous human-ancestor skeleton Lucy was found in the Afar desert of this East African country. Where am I?",
-   "1974: the Lucy skeleton is discovered at Hadar, Ethiopia."
-  ],
-  "fact": "The team named her after Lucy in the Sky with Diamonds, which they played that night."
- },
- {
-  "date": "11-24",
-  "level": "medium",
-  "name": "Portland to Seattle, USA (D.B. Cooper)",
-  "lat": 45.95,
-  "lon": -122.56,
-  "clues": [
-   "A man in a suit took $200,000, jumped from a plane into the rainy night, and was never seen again. Where did he vanish?",
-   "D.B. Cooper parachuted from a hijacked jet over the forests between Portland and Seattle. Where am I?",
-   "1971: D.B. Cooper hijacks a flight from Portland and jumps somewhere over southwest Washington."
-  ],
-  "fact": "In 1980 a boy found $5,800 of the ransom money buried by the Columbia River."
- },
- {
-  "date": "11-24",
-  "level": "hard",
-  "name": "Tokyo, Japan (first B-29 raid)",
-  "lat": 35.6762,
-  "lon": 139.6503,
-  "clues": [
-   "A city that had never seen enemy planes in the war looked up at silver giants flying from an island 2,400 km away. Where am I?",
-   "The first big US bomber raid hit this capital, flying from Saipan. Where am I?",
-   "1944: the first B-29 bomber raid on Tokyo, Japan."
-  ],
-  "fact": "The bombers flew about 2,400 km each way from the Mariana Islands."
- },
- {
-  "date": "11-25",
-  "level": "easy",
-  "name": "Havana, Cuba (Fidel Castro dies)",
-  "lat": 23.1136,
-  "lon": -82.3666,
-  "clues": [
-   "A bearded man in green who survived hundreds of plots against him finally died at 90 in his island capital. Where am I?",
-   "Cuba's longtime leader Fidel Castro died in this Caribbean capital. Where am I?",
-   "2016: Fidel Castro dies in Havana, Cuba."
-  ],
-  "fact": "Castro led Cuba for almost 50 years."
- },
- {
-  "date": "11-25",
-  "level": "easy",
-  "name": "SARM Studios, London (Band Aid)",
-  "lat": 51.522,
-  "lon": -0.112,
-  "clues": [
-   "In one day, dozens of pop stars squeezed into one studio to ask if Africa knew it was Christmas. Where am I?",
-   "The Band Aid charity single was recorded in a studio in this capital city. Where am I?",
-   "1984: the Band Aid single is recorded at SARM Studios in London."
-  ],
-  "fact": "It became the UK's best-selling single for over a decade."
- },
- {
-  "date": "11-25",
-  "level": "medium",
-  "name": "Manhattan, New York City (Evacuation Day)",
-  "lat": 40.7033,
-  "lon": -74.017,
-  "clues": [
-   "The last redcoats sailed away, but left a flag on a greased pole for the Americans to fight with. Where am I?",
-   "British troops finally left this city at the end of the American Revolution. Where am I?",
-   "1783: the British evacuate New York City, ending the occupation."
-  ],
-  "fact": "A sailor climbed the greased flagpole to tear down the British flag."
- },
- {
-  "date": "11-25",
-  "level": "medium",
-  "name": "Arlington National Cemetery, near Washington DC",
-  "lat": 38.8814,
-  "lon": -77.0721,
-  "clues": [
-   "A little boy saluted his father, and an eternal flame was lit on a hill across the river from the capital. Where am I?",
-   "President Kennedy was buried here, in a cemetery across the Potomac from Washington DC. Where am I?",
-   "1963: John F. Kennedy is buried at Arlington National Cemetery."
-  ],
-  "fact": "It was his son John Jr.'s third birthday."
- },
- {
-  "date": "11-25",
-  "level": "hard",
-  "name": "Barfleur, Normandy, France (White Ship)",
-  "lat": 49.67,
-  "lon": -1.26,
-  "clues": [
-   "A drunken crew wrecked a king's only son, and England fell into 19 years of chaos. Where did the ship go down?",
-   "The White Ship sank off a Normandy harbor, drowning the heir to the English throne. Where am I?",
-   "1120: the White Ship sinks off Barfleur, Normandy."
-  ],
-  "fact": "Only one person, a butcher from Rouen, survived."
- },
- {
-  "date": "11-26",
-  "level": "easy",
-  "name": "Valley of the Kings, Luxor, Egypt",
-  "lat": 25.7402,
-  "lon": 32.6014,
-  "clues": [
-   "\"Can you see anything?\" \"Yes, wonderful things!\" A boy king's gold glittered in candlelight for the first time in 3,000 years. Where am I?",
-   "Howard Carter opened Tutankhamun's tomb in this royal desert valley across the Nile from Luxor. Where am I?",
-   "1922: Howard Carter first looks into Tutankhamun's tomb, Valley of the Kings, Egypt."
-  ],
-  "fact": "The tomb held more than 5,000 objects."
- },
- {
-  "date": "11-26",
-  "level": "easy",
-  "name": "Maui, Hawaii (Captain Cook arrives)",
-  "lat": 20.8,
-  "lon": -156.33,
-  "clues": [
-   "A captain who mapped half the world sighted a valley isle in the Pacific during the whale season. Where am I?",
-   "Captain James Cook first sighted this Hawaiian island, the second largest in the chain. Where am I?",
-   "1778: Captain James Cook sights Maui, Hawaii."
-  ],
-  "fact": "Maui's Haleakalā volcano rises over 3,000 m."
- },
- {
-  "date": "11-26",
-  "level": "medium",
-  "name": "Oxford, England (Alice in Wonderland)",
-  "lat": 51.752,
-  "lon": -1.2577,
-  "clues": [
-   "A math teacher told a girl about a white rabbit on a boat trip, and the book came out on this day. Where did the story begin?",
-   "Lewis Carroll created Alice's Adventures in Wonderland for a girl in this university city. Where am I?",
-   "1865: Alice's Adventures in Wonderland is published; it was born in Oxford."
-  ],
-  "fact": "Alice Liddell was the daughter of the dean of Christ Church, Oxford."
- },
- {
-  "date": "11-26",
-  "level": "medium",
-  "name": "Heathrow Airport, London (Brink's-Mat robbery)",
-  "lat": 51.47,
-  "lon": -0.4543,
-  "clues": [
-   "Robbers came for cash but found three tonnes of gold bars next to the world's busiest runway. Where am I?",
-   "The Brink's-Mat robbery happened at a warehouse by the main airport of this capital. Where am I?",
-   "1983: the Brink's-Mat gold robbery at Heathrow Airport, London."
-  ],
-  "fact": "Most of the gold was never found."
- },
- {
-  "date": "11-26",
-  "level": "hard",
-  "name": "Hammaguir, Algeria (France's first satellite)",
-  "lat": 30.88,
-  "lon": -3.04,
-  "clues": [
-   "A satellite named after a comic-book Gaul flew from the Sahara, making a country the third in space. Where am I?",
-   "France launched its first satellite, Astérix, from a desert base in this North African country. Where am I?",
-   "1965: France launches Astérix, its first satellite, from Hammaguir, Algeria."
-  ],
-  "fact": "Only the USSR and the US had launched satellites before."
- },
- {
-  "date": "11-27",
-  "level": "easy",
-  "name": "Macy's, New York City (first Thanksgiving parade)",
-  "lat": 40.751,
-  "lon": -73.989,
-  "clues": [
-   "Lions, bears and camels from a zoo marched down the avenues to a store's front door. Where am I?",
-   "The first Macy's Thanksgiving Day Parade marched through this city. Where am I?",
-   "1924: the first Macy's Thanksgiving Day Parade, New York City."
-  ],
-  "fact": "The first parade used live animals from the Central Park Zoo instead of balloons."
- },
- {
-  "date": "11-27",
-  "level": "easy",
-  "name": "Seattle, USA (Jimi Hendrix born)",
-  "lat": 47.6062,
-  "lon": -122.3321,
-  "clues": [
-   "A left-handed boy who'd later play a right-handed guitar upside down was born in a rainy port city. Where am I?",
-   "Jimi Hendrix was born in this city of the Pacific Northwest. Where am I?",
-   "1942: Jimi Hendrix is born in Seattle."
-  ],
-  "fact": "Hendrix learned on a one-string ukulele he found in the trash."
- },
- {
-  "date": "11-27",
-  "level": "medium",
-  "name": "Paris, France (Nobel's will)",
-  "lat": 48.871,
-  "lon": 2.3,
-  "clues": [
-   "A man who invented a blast wrote a will at a club that turned his fortune into peace. Where did he write it?",
-   "Alfred Nobel signed the will creating the Nobel Prizes in this European capital. Where am I?",
-   "1895: Alfred Nobel signs his will at the Swedish-Norwegian Club in Paris."
-  ],
-  "fact": "His family was stunned to learn most of his fortune went to the prizes."
- },
- {
-  "date": "11-27",
-  "level": "medium",
-  "name": "Clermont-Ferrand, France (First Crusade called)",
-  "lat": 45.7772,
-  "lon": 3.087,
-  "clues": [
-   "A pope stood in a field of volcanoes and the crowd shouted \"God wills it!\" Where am I?",
-   "Pope Urban II called the First Crusade at a council in central France. Where am I?",
-   "1095: Pope Urban II calls the First Crusade at Clermont, France."
-  ],
-  "fact": "The city is now home to the Michelin tire company."
- },
- {
-  "date": "11-27",
-  "level": "hard",
-  "name": "Toulon, France (fleet scuttled)",
-  "lat": 43.1242,
-  "lon": 5.928,
-  "clues": [
-   "A navy sank itself in its own harbor so the enemy couldn't sail it. Where am I?",
-   "The French fleet was scuttled in this Mediterranean naval port. Where am I?",
-   "1942: the French fleet scuttles itself at Toulon."
-  ],
-  "fact": "More than 70 ships were sunk."
- },
- {
-  "date": "11-28",
-  "level": "easy",
-  "name": "Nashville, USA (Grand Ole Opry)",
-  "lat": 36.1627,
-  "lon": -86.7816,
-  "clues": [
-   "A radio barn dance became the longest-running radio show in America, in a city of guitars. Where am I?",
-   "The Grand Ole Opry first went on air in this Tennessee city. Where am I?",
-   "1925: the Grand Ole Opry's first broadcast, Nashville."
-  ],
-  "fact": "The Opry has aired every week since 1925."
- },
- {
-  "date": "11-28",
-  "level": "easy",
-  "name": "Wellington, New Zealand (women vote)",
-  "lat": -41.2865,
-  "lon": 174.7762,
-  "clues": [
-   "A country at the bottom of the world let all women vote first in a national election. Where am I?",
-   "Women voted in a national election for the first time in this country; its capital is here. Where am I?",
-   "1893: New Zealand women vote in a national election, the first in the world."
-  ],
-  "fact": "Suffragist Kate Sheppard is on New Zealand's $10 note."
- },
- {
-  "date": "11-28",
-  "level": "medium",
-  "name": "Tehran, Iran (Tehran Conference)",
-  "lat": 35.6892,
-  "lon": 51.389,
-  "clues": [
-   "Three war leaders met for the first time in a city below snowy mountains to plan D-Day. Where am I?",
-   "Roosevelt, Churchill and Stalin first met together in this Middle Eastern capital. Where am I?",
-   "1943: the Tehran Conference begins."
-  ],
-  "fact": "Roosevelt stayed at the Soviet embassy for security."
- },
- {
-  "date": "11-28",
-  "level": "medium",
-  "name": "London (Royal Society founded)",
-  "lat": 51.5156,
-  "lon": -0.0919,
-  "clues": [
-   "Twelve men met after a lecture and founded a club whose motto means \"take nobody's word for it.\" Where am I?",
-   "The Royal Society, the world's oldest science academy, was founded in this city. Where am I?",
-   "1660: the Royal Society is founded at Gresham College, London."
-  ],
-  "fact": "Isaac Newton later became its president."
- },
- {
-  "date": "11-28",
-  "level": "hard",
-  "name": "Strait of Magellan, Chile",
-  "lat": -52.75,
-  "lon": -74.5,
-  "clues": [
-   "An explorer called an ocean \"peaceful\" after a terrifying 38-day maze of channels. Where did he escape?",
-   "Magellan's ships came out of this strait near the tip of South America into the Pacific. Where am I?",
-   "1520: Magellan's fleet enters the Pacific through the Strait of Magellan."
-  ],
-  "fact": "Magellan named the Pacific for its calm waters."
- },
- {
-  "date": "11-29",
-  "level": "easy",
-  "name": "Barcelona, Spain (FC Barcelona founded)",
-  "lat": 41.3809,
-  "lon": 2.1228,
-  "clues": [
-   "A Swiss man placed an ad in a newspaper and founded a club that's \"more than a club.\" Where am I?",
-   "FC Barcelona was founded in this Mediterranean city. Where am I?",
-   "1899: FC Barcelona is founded."
-  ],
-  "fact": "Its founder was Joan Gamper, who was Swiss."
- },
- {
-  "date": "11-29",
-  "level": "easy",
-  "name": "San Jose, California, USA (founded)",
-  "lat": 37.3382,
-  "lon": -121.8863,
-  "clues": [
-   "I began as a farm town for a Spanish mission, and now I'm the capital of a valley named after a chip. Where am I?",
-   "The first civilian town in Spanish California was founded here; now it's Silicon Valley's biggest city. Where am I?",
-   "1777: San Jose is founded as California's first Spanish civilian town."
-  ],
-  "fact": "San Jose was California's first state capital."
- },
- {
-  "date": "11-29",
-  "level": "medium",
-  "name": "Belfast, Northern Ireland (C.S. Lewis born)",
-  "lat": 54.5973,
-  "lon": -5.9301,
-  "clues": [
-   "A boy who would write about a wardrobe, a lion and a witch was born in a city famous for building a doomed ship. Where am I?",
-   "C.S. Lewis, author of Narnia, was born in this city in Northern Ireland. Where am I?",
-   "1898: C.S. Lewis is born in Belfast."
-  ],
-  "fact": "Belfast's shipyard also built the Titanic."
- },
- {
-  "date": "11-29",
-  "level": "medium",
-  "name": "Albuquerque, USA (Microsoft named)",
-  "lat": 35.0844,
-  "lon": -106.6504,
-  "clues": [
-   "Two young men named their software company in a letter, in a desert city of hot-air balloons. Where am I?",
-   "The name Micro-soft was first used in this New Mexico city, where the company began. Where am I?",
-   "1975: Bill Gates and Paul Allen first use the name Micro-soft, in Albuquerque."
-  ],
-  "fact": "Microsoft moved to the Seattle area in 1979."
- },
- {
-  "date": "11-29",
-  "level": "hard",
-  "name": "Germantown, Philadelphia, USA (Louisa May Alcott born)",
-  "lat": 40.0379,
-  "lon": -75.173,
-  "clues": [
-   "The woman who wrote about four sisters, Meg, Jo, Beth and Amy, was born in a city of liberty and cheesesteaks. Where am I?",
-   "Little Women author Louisa May Alcott was born in this Pennsylvania city. Where am I?",
-   "1832: Louisa May Alcott is born in Germantown, Philadelphia."
-  ],
-  "fact": "She shared her birthday with her father."
- },
- {
-  "date": "11-30",
-  "level": "easy",
-  "name": "Glasgow, Scotland (first international football match)",
-  "lat": 55.87,
-  "lon": -4.3,
-  "clues": [
-   "The first international football match ended 0-0, on a cricket ground on a saint's day. Where am I?",
-   "Scotland and England played the first official international football match in this Scottish city. Where am I?",
-   "1872: Scotland v England, the first international football match, Glasgow."
-  ],
-  "fact": "About 4,000 people watched."
- },
- {
-  "date": "11-30",
-  "level": "easy",
-  "name": "Barbados",
-  "lat": 13.1939,
-  "lon": -59.5432,
-  "clues": [
-   "I'm a Caribbean island that became free on this day, and a pop star with an umbrella grew up here. Where am I?",
-   "This easternmost Caribbean island became independent from Britain. Where am I?",
-   "1966: Barbados becomes independent."
-  ],
-  "fact": "Rihanna is from Barbados."
- },
- {
-  "date": "11-30",
-  "level": "medium",
-  "name": "Blenheim Palace, England (Churchill born)",
-  "lat": 51.8413,
-  "lon": -1.361,
-  "clues": [
-   "A war leader was born early, in a palace, during a party. Where am I?",
-   "Winston Churchill was born in this huge palace near Oxford. Where am I?",
-   "1874: Winston Churchill is born at Blenheim Palace."
-  ],
-  "fact": "Blenheim is the only non-royal house in England called a palace."
- },
- {
-  "date": "11-30",
-  "level": "medium",
-  "name": "Crystal Palace, London",
-  "lat": 51.4226,
-  "lon": -0.0753,
-  "clues": [
-   "A giant house of glass burned so bright that people saw the glow 80 km away. Where am I?",
-   "The Crystal Palace, a huge glass hall, burned down in this city. Where am I?",
-   "1936: the Crystal Palace burns down, London."
-  ],
-  "fact": "It was first built in Hyde Park for the Great Exhibition of 1851."
- },
- {
-  "date": "11-30",
-  "level": "hard",
-  "name": "Sylacauga, Alabama, USA (meteorite)",
-  "lat": 33.1729,
-  "lon": -86.2516,
-  "clues": [
-   "A woman napping on her couch was hit by a stone from space. Where am I?",
-   "The only confirmed person hit by a meteorite was in this town in Alabama. Where am I?",
-   "1954: a meteorite hits Ann Hodges in Sylacauga, Alabama."
-  ],
-  "fact": "She was bruised but fine."
- },
- {
-  "date": "12-01",
-  "level": "easy",
-  "name": "Montgomery, Alabama, USA (Rosa Parks)",
-  "lat": 32.377,
-  "lon": -86.309,
-  "clues": [
-   "She changed history by refusing to stand up, sitting tired on a city bus. Where am I?",
-   "Rosa Parks refused to give up her bus seat in the capital of Alabama. Where am I?",
-   "1955: Rosa Parks refuses to give up her bus seat in Montgomery, Alabama."
-  ],
-  "fact": "Her arrest started the Montgomery bus boycott, which lasted 381 days."
- },
- {
-  "date": "12-01",
-  "level": "easy",
-  "name": "English Channel (Channel Tunnel breakthrough)",
-  "lat": 51.01,
-  "lon": 1.5,
-  "clues": [
-   "An English digger and a French digger shook hands through a hole, 40 meters under the sea. Where am I?",
-   "Workers from Britain and France met for the first time under this sea channel, in the tunnel between them. Where am I?",
-   "1990: Channel Tunnel workers from England and France break through and meet."
-  ],
-  "fact": "The tunnel is about 50 km long, 38 km of it under the sea."
- },
- {
-  "date": "12-01",
-  "level": "medium",
-  "name": "Highland Park, Detroit, USA (Ford assembly line)",
-  "lat": 42.411,
-  "lon": -83.099,
-  "clues": [
-   "Cars started moving past the workers instead of the workers moving around the cars, and a car took 90 minutes instead of 12 hours. Where am I?",
-   "Henry Ford started his moving assembly line in this Michigan car city. Where am I?",
-   "1913: Ford's moving assembly line starts at Highland Park, in the Detroit area."
-  ],
-  "fact": "The Model T came in any color, Ford joked, as long as it's black."
- },
- {
-  "date": "12-01",
-  "level": "medium",
-  "name": "Washington DC, USA (Antarctic Treaty)",
-  "lat": 38.8977,
-  "lon": -77.0365,
-  "clues": [
-   "Twelve nations agreed that a whole continent belongs to no one and is only for penguins and science. Where did they sign?",
-   "The Antarctic Treaty was signed in the capital of the United States. Where am I?",
-   "1959: the Antarctic Treaty is signed in Washington DC."
-  ],
-  "fact": "It bans military activity and mining in Antarctica."
- },
- {
-  "date": "12-01",
-  "level": "hard",
-  "name": "San José, Costa Rica (army abolished)",
-  "lat": 9.9281,
-  "lon": -84.0907,
-  "clues": [
-   "A leader smashed a fortress wall with a hammer and handed the keys to a museum. His country has had no army since. Where am I?",
-   "Costa Rica abolished its army in its capital city. Where am I?",
-   "1948: Costa Rica abolishes its army, in San José."
-  ],
-  "fact": "The old army headquarters is now the National Museum."
- },
- {
-  "date": "12-02",
-  "level": "easy",
-  "name": "Notre-Dame, Paris, France (Napoleon crowned)",
-  "lat": 48.853,
-  "lon": 2.3499,
-  "clues": [
-   "The pope came all the way to crown him, but he grabbed the crown and put it on himself. Where am I?",
-   "Napoleon crowned himself emperor in the great cathedral of this capital. Where am I?",
-   "1804: Napoleon crowns himself emperor at Notre-Dame, Paris."
-  ],
-  "fact": "The painting of the scene by Jacques-Louis David is almost 10 m wide."
- },
- {
-  "date": "12-02",
-  "level": "easy",
-  "name": "Dubai, UAE (United Arab Emirates formed)",
-  "lat": 25.234,
-  "lon": 55.26,
-  "clues": [
-   "Six desert sheikhdoms became one country in a house by the sea, and a seventh joined soon after. Where am I?",
-   "The United Arab Emirates was born in a building in this Gulf city, now famous for the world's tallest tower. Where am I?",
-   "1971: the United Arab Emirates is formed, signed at Union House in Dubai."
-  ],
-  "fact": "Ras Al Khaimah joined as the seventh emirate in February 1972."
- },
- {
-  "date": "12-02",
-  "level": "medium",
-  "name": "University of Chicago, USA (first nuclear chain reaction)",
-  "lat": 41.7925,
-  "lon": -87.6,
-  "clues": [
-   "Under the seats of a football stadium, scientists started the first atomic chain reaction. Where am I?",
-   "The first controlled nuclear chain reaction happened in this windy Midwest city. Where am I?",
-   "1942: the first controlled nuclear chain reaction, Chicago Pile-1."
-  ],
-  "fact": "The message sent afterward was a code: \"The Italian navigator has landed in the New World.\""
- },
- {
-  "date": "12-02",
-  "level": "medium",
-  "name": "Salt Lake City, USA (first permanent artificial heart)",
-  "lat": 40.771,
-  "lon": -111.839,
-  "clues": [
-   "A dentist lived 112 days with a plastic heart that clicked so loudly people could hear it. Where am I?",
-   "The first permanent artificial heart was put in a patient at a university in the capital of Utah. Where am I?",
-   "1982: Barney Clark gets the first permanent artificial heart, Salt Lake City."
-  ],
-  "fact": "The Jarvik-7 heart was powered by an air compressor."
- },
- {
-  "date": "12-02",
-  "level": "hard",
-  "name": "Austerlitz (Slavkov), Czechia",
-  "lat": 49.128,
-  "lon": 16.762,
-  "clues": [
-   "On the first anniversary of his crowning, an emperor beat two other emperors in the fog. Where am I?",
-   "Napoleon's greatest victory, the Battle of the Three Emperors, was fought near Brno in today's Czechia. Where am I?",
-   "1805: Napoleon wins the Battle of Austerlitz."
-  ],
-  "fact": "A Paris train station, Gare d'Austerlitz, is named after it."
- },
- {
-  "date": "12-03",
-  "level": "easy",
-  "name": "Tokyo, Japan (PlayStation launches)",
-  "lat": 35.6895,
-  "lon": 139.6917,
-  "clues": [
-   "A gray box with a circle, a cross, a square and a triangle went on sale, and gamers lined up for hours. Where am I?",
-   "The first Sony PlayStation went on sale in this capital city. Where am I?",
-   "1994: the PlayStation launches in Japan."
-  ],
-  "fact": "It sold about 100,000 units on its first day."
- },
- {
-  "date": "12-03",
-  "level": "easy",
-  "name": "Cape Town, South Africa (first heart transplant)",
-  "lat": -33.941,
-  "lon": 18.462,
-  "clues": [
-   "A surgeon gave a man a new heart below a mountain with a flat top. Where am I?",
-   "The first human heart transplant happened at a hospital in this South African city. Where am I?",
-   "1967: Christiaan Barnard performs the first human heart transplant, Cape Town."
-  ],
-  "fact": "The hospital, Groote Schuur, now has a museum about it."
- },
- {
-  "date": "12-03",
-  "level": "medium",
-  "name": "Newbury, England (first text message)",
-  "lat": 51.401,
-  "lon": -1.323,
-  "clues": [
-   "A 22-year-old engineer typed \"Merry Christmas\" on a computer, and phones have never stopped buzzing. Where am I?",
-   "The first text message was sent to a phone at a company in this English town west of London. Where am I?",
-   "1992: the first SMS text message, \"Merry Christmas,\" is sent in Newbury, England."
-  ],
-  "fact": "The phone couldn't reply, because phones couldn't send texts yet."
- },
- {
-  "date": "12-03",
-  "level": "medium",
-  "name": "Ballarat, Australia (Eureka Stockade)",
-  "lat": -37.5622,
-  "lon": 143.8503,
-  "clues": [
-   "Gold miners built a wooden fort and raised a blue flag with stars. Where am I?",
-   "The Eureka Rebellion happened in this gold-rush town in Victoria, Australia. Where am I?",
-   "1854: the Eureka Stockade rebellion in Ballarat, Australia."
-  ],
-  "fact": "The Eureka flag is still a symbol of protest in Australia."
- },
- {
-  "date": "12-03",
-  "level": "hard",
-  "name": "Berdychiv, Ukraine (Joseph Conrad born)",
-  "lat": 49.899,
-  "lon": 28.602,
-  "clues": [
-   "A boy who learned English in his twenties grew up to write it like a master, and was born far from any sea. Where am I?",
-   "Joseph Conrad, author of Heart of Darkness, was born in this town in today's Ukraine. Where am I?",
-   "1857: Joseph Conrad is born in Berdychiv, now in Ukraine."
-  ],
-  "fact": "Conrad was a sailor for about 20 years before writing."
- },
- {
-  "date": "12-04",
-  "level": "easy",
-  "name": "Sun Studio, Memphis, USA (Million Dollar Quartet)",
-  "lat": 35.1393,
-  "lon": -90.0378,
-  "clues": [
-   "A king, a man in black, a wild piano man and a rockabilly star jammed together by chance. Where am I?",
-   "Elvis, Johnny Cash, Jerry Lee Lewis and Carl Perkins played together at a small studio in this Tennessee city. Where am I?",
-   "1956: the Million Dollar Quartet session at Sun Studio, Memphis."
-  ],
-  "fact": "The recording sat unheard for over 20 years."
- },
- {
-  "date": "12-04",
-  "level": "easy",
-  "name": "Miami, USA (first Burger King)",
-  "lat": 25.815,
-  "lon": -80.203,
-  "clues": [
-   "A king who sells burgers started his kingdom in a city of beaches and palms. Where am I?",
-   "The first Burger King restaurant under that name opened in this Florida city. Where am I?",
-   "1954: the first Burger King opens in Miami."
-  ],
-  "fact": "The Whopper arrived in 1957."
- },
- {
-  "date": "12-04",
-  "level": "medium",
-  "name": "London (The Observer first published)",
-  "lat": 51.513,
-  "lon": -0.106,
-  "clues": [
-   "I'm the oldest Sunday newspaper in the world, and I've been watching since 1791. Where was I born?",
-   "The Observer, the world's oldest Sunday paper, was first printed in this capital. Where am I?",
-   "1791: The Observer is first published in London."
-  ],
-  "fact": "Its founder hoped to get rich, but quickly ran into debt."
- },
- {
-  "date": "12-04",
-  "level": "medium",
-  "name": "Berkeley Hundred, Virginia, USA (Thanksgiving)",
-  "lat": 37.319,
-  "lon": -77.181,
-  "clues": [
-   "English settlers gave thanks two years before the Pilgrims, and Virginia still says it was first. Where am I?",
-   "A day of thanksgiving was held at this plantation on the James River in Virginia in 1619. Where am I?",
-   "1619: settlers hold a day of thanksgiving at Berkeley Hundred, Virginia."
-  ],
-  "fact": "Their orders said the day should be kept every year."
- },
- {
-  "date": "12-04",
-  "level": "hard",
-  "name": "Atlantic Ocean, between the Azores and Portugal (Mary Celeste)",
-  "lat": 38.3,
-  "lon": -17.2,
-  "clues": [
-   "A ship sailed on with no one aboard, food still in the stores, and no one ever learned why. Where was she found?",
-   "The ghost ship Mary Celeste was found drifting between the Azores and Portugal. Where am I?",
-   "1872: the Mary Celeste is found abandoned in the Atlantic."
-  ],
-  "fact": "Arthur Conan Doyle wrote a famous (made-up) story about her."
- },
- {
-  "date": "12-05",
-  "level": "easy",
-  "name": "Vienna, Austria (Mozart dies)",
-  "lat": 48.2082,
-  "lon": 16.3738,
-  "clues": [
-   "A genius died at 35 while writing music for the dead, and nobody knows where he's buried. Where am I?",
-   "Mozart died in this capital city of music while writing his Requiem. Where am I?",
-   "1791: Wolfgang Amadeus Mozart dies in Vienna."
-  ],
-  "fact": "He was buried in an unmarked grave in St. Marx Cemetery."
- },
- {
-  "date": "12-05",
-  "level": "easy",
-  "name": "Chicago, USA (Walt Disney born)",
-  "lat": 41.93,
-  "lon": -87.69,
-  "clues": [
-   "A boy who'd draw a famous mouse was born in a windy city, not in a castle. Where am I?",
-   "Walt Disney was born in this big city on Lake Michigan. Where am I?",
-   "1901: Walt Disney is born in Chicago."
-  ],
-  "fact": "His family moved to a farm in Missouri when he was four."
- },
- {
-  "date": "12-05",
-  "level": "medium",
-  "name": "Bermuda Triangle, off Florida (Flight 19)",
-  "lat": 26.5,
-  "lon": -79.0,
-  "clues": [
-   "Five planes flew out on a training flight, their compasses spun, and none ever came back. Where did they vanish?",
-   "Flight 19 disappeared in the ocean area off Florida known as the Bermuda Triangle. Where am I?",
-   "1945: Flight 19 vanishes off Florida, starting the Bermuda Triangle legend."
-  ],
-  "fact": "A rescue plane sent to find them also disappeared."
- },
- {
-  "date": "12-05",
-  "level": "medium",
-  "name": "Môle-Saint-Nicolas, Haiti (Columbus reaches Hispaniola)",
-  "lat": 19.8,
-  "lon": -73.38,
-  "clues": [
-   "An admiral found a big island and named it after his own country. Where did he land?",
-   "Columbus reached the island of Hispaniola at the tip of today's Haiti. Where am I?",
-   "1492: Christopher Columbus reaches Hispaniola, at today's Haiti."
-  ],
-  "fact": "Hispaniola is shared by Haiti and the Dominican Republic."
- },
- {
-  "date": "12-05",
-  "level": "hard",
-  "name": "Salt Lake City, USA (Prohibition ends)",
-  "lat": 40.7608,
-  "lon": -111.891,
-  "clues": [
-   "A state where many people don't drink cast the deciding vote to bring drinking back. Where am I?",
-   "Utah's vote ended Prohibition in the US, in its capital city. Where am I?",
-   "1933: Utah ratifies the 21st Amendment in Salt Lake City, ending Prohibition."
-  ],
-  "fact": "Prohibition had lasted almost 14 years."
- },
- {
-  "date": "12-06",
-  "level": "easy",
-  "name": "Washington Monument, Washington DC",
-  "lat": 38.8895,
-  "lon": -77.0353,
-  "clues": [
-   "My tip is aluminum, which was rarer than silver then, and I'm a different color halfway up. Where am I?",
-   "The giant obelisk in the US capital was finished with its capstone on this day. Where am I?",
-   "1884: the Washington Monument is completed in Washington DC."
-  ],
-  "fact": "The color changes because building stopped for over 20 years and new stone was used."
- },
- {
-  "date": "12-06",
-  "level": "easy",
-  "name": "Quito, Ecuador (founded)",
-  "lat": -0.22,
-  "lon": -78.512,
-  "clues": [
-   "I'm a capital city built near the middle of the world, high in the mountains. Where am I?",
-   "Spanish settlers founded this Andean capital near the equator. Where am I?",
-   "1534: Quito, Ecuador, is founded by the Spanish."
-  ],
-  "fact": "Quito is about 2,850 m above sea level."
- },
- {
-  "date": "12-06",
-  "level": "medium",
-  "name": "Halifax, Canada (Halifax Explosion)",
-  "lat": 44.67,
-  "lon": -63.6,
-  "clues": [
-   "Two ships collided in a harbor and made the biggest man-made blast before the atomic bomb. Where am I?",
-   "The Halifax Explosion hit this port city in Nova Scotia, Canada. Where am I?",
-   "1917: the Halifax Explosion, Nova Scotia."
-  ],
-  "fact": "Halifax still sends Boston a Christmas tree every year to thank it for its help."
- },
- {
-  "date": "12-06",
-  "level": "medium",
-  "name": "Edinburgh, Scotland (Encyclopaedia Britannica)",
-  "lat": 55.9533,
-  "lon": -3.1883,
-  "clues": [
-   "Three men set out to write down everything there is to know, in a city with a castle on a volcano. Where am I?",
-   "The first part of the Encyclopaedia Britannica came out in this Scottish capital. Where am I?",
-   "1768: the Encyclopaedia Britannica's first part is published in Edinburgh."
-  ],
-  "fact": "Britannica stopped printing in 2012 and went online only."
- },
- {
-  "date": "12-06",
-  "level": "hard",
-  "name": "Menlo Park, New Jersey, USA (Edison's phonograph)",
-  "lat": 40.564,
-  "lon": -74.336,
-  "clues": [
-   "A man who couldn't hear well recorded \"Mary had a little lamb\" and played it back. Where am I?",
-   "Edison recorded his voice on the first phonograph at his lab in this New Jersey village. Where am I?",
-   "1877: Thomas Edison records on his phonograph at Menlo Park, New Jersey."
-  ],
-  "fact": "Edison was called the Wizard of Menlo Park."
- },
- {
-  "date": "12-07",
-  "level": "easy",
-  "name": "Pearl Harbor, Hawaii",
-  "lat": 21.365,
-  "lon": -157.95,
-  "clues": [
-   "A Sunday morning on a peaceful island ended in \"a date which will live in infamy.\" Where am I?",
-   "Japan's surprise attack on the US fleet happened at this Hawaiian naval base. Where am I?",
-   "1941: the attack on Pearl Harbor, Hawaii."
-  ],
-  "fact": "The USS Arizona Memorial sits above the sunken ship."
- },
- {
-  "date": "12-07",
-  "level": "easy",
-  "name": "Cape Canaveral, Florida (Apollo 17)",
-  "lat": 28.6084,
-  "lon": -80.6043,
-  "clues": [
-   "The last people to walk on the Moon set off at night from here, and on the way took the famous Blue Marble photo. Where am I?",
-   "Apollo 17 launched from this spaceport on Florida's Atlantic coast. Where am I?",
-   "1972: Apollo 17 launches from Kennedy Space Center, Florida."
-  ],
-  "fact": "It was the only Apollo launch at night."
- },
- {
-  "date": "12-07",
-  "level": "medium",
-  "name": "New York City (New York Philharmonic's first concert)",
-  "lat": 40.723,
-  "lon": -74.0,
-  "clues": [
-   "The oldest orchestra in America played its very first note, in a city that never sleeps. Where am I?",
-   "The New York Philharmonic gave its first concert in this city. Where am I?",
-   "1842: the New York Philharmonic gives its first concert."
-  ],
-  "fact": "It played Beethoven's Fifth Symphony."
- },
- {
-  "date": "12-07",
-  "level": "medium",
-  "name": "Covent Garden, London (Royal Opera House opens)",
-  "lat": 51.5129,
-  "lon": -0.1222,
-  "clues": [
-   "A theater opened in a fruit-and-vegetable market and became home to a royal opera. Where am I?",
-   "The theater that became the Royal Opera House opened in this London district. Where am I?",
-   "1732: the theater that became the Royal Opera House opens in Covent Garden, London."
-  ],
-  "fact": "The market around it ran until 1974."
- },
- {
-  "date": "12-07",
-  "level": "hard",
-  "name": "Dover, Delaware, USA (first state)",
-  "lat": 39.1582,
-  "lon": -75.5244,
-  "clues": [
-   "A small state said yes to the new Constitution before anyone else, so it's always called first. Where am I?",
-   "Delaware became the first US state to ratify the Constitution; its capital is here. Where am I?",
-   "1787: Delaware becomes the first state to ratify the US Constitution."
-  ],
-  "fact": "Delaware's nickname is the First State."
- },
- {
-  "date": "12-08",
-  "level": "easy",
-  "name": "The Dakota, New York City",
-  "lat": 40.7764,
-  "lon": -73.9762,
-  "clues": [
-   "A musician who asked us to imagine peace was killed outside his building beside a famous park. Where am I?",
-   "John Lennon was shot outside his apartment building in this city. Where am I?",
-   "1980: John Lennon is killed outside the Dakota, New York City."
-  ],
-  "fact": "The Strawberry Fields memorial in Central Park is across the street."
- },
- {
-  "date": "12-08",
-  "level": "easy",
-  "name": "Vatican City, Rome (Second Vatican Council ends)",
-  "lat": 41.9022,
-  "lon": 12.4539,
-  "clues": [
-   "For three years, bishops from every land met under a famous dome and changed the Mass. Where am I?",
-   "The Second Vatican Council closed in St. Peter's Square, in this city. Where am I?",
-   "1965: the Second Vatican Council ends in Rome."
-  ],
-  "fact": "Afterward Mass could be said in local languages instead of Latin."
- },
- {
-  "date": "12-08",
-  "level": "medium",
-  "name": "Vienna, Austria (Beethoven's 7th premiere)",
-  "lat": 48.21,
-  "lon": 16.36,
-  "clues": [
-   "A composer going deaf conducted his Seventh Symphony, and the crowd made him play a part again. Where am I?",
-   "Beethoven's Seventh Symphony was first performed in this capital of music. Where am I?",
-   "1813: Beethoven's Seventh Symphony premieres in Vienna."
-  ],
-  "fact": "The slow second part was so loved it was encored that night."
- },
- {
-  "date": "12-08",
-  "level": "medium",
-  "name": "White House, Washington DC (INF Treaty)",
-  "lat": 38.8977,
-  "lon": -77.0365,
-  "clues": [
-   "Two leaders who once aimed missiles at each other agreed to destroy a whole class of them. Where am I?",
-   "Reagan and Gorbachev signed the INF Treaty in the White House. Where am I?",
-   "1987: Reagan and Gorbachev sign the INF Treaty in Washington DC."
-  ],
-  "fact": "It was the first treaty to wipe out a whole type of nuclear weapon."
- },
- {
-  "date": "12-08",
-  "level": "hard",
-  "name": "Belovezha Forest, Belarus (end of the USSR)",
-  "lat": 52.57,
-  "lon": 23.82,
-  "clues": [
-   "In a hunting lodge in an ancient forest of bison, three leaders signed away a superpower. Where am I?",
-   "The deal ending the Soviet Union was signed in a forest on the Belarus and Poland border. Where am I?",
-   "1991: the Belovezha Accords end the USSR."
-  ],
-  "fact": "The forest is home to Europe's largest herd of wild bison."
- },
- {
-  "date": "12-09",
-  "level": "easy",
-  "name": "Geneva, Switzerland (smallpox eradicated)",
-  "lat": 46.233,
-  "lon": 6.134,
-  "clues": [
-   "Experts announced that a disease that killed hundreds of millions was gone from Earth, in a city by a lake. Where am I?",
-   "The World Health Organization certified smallpox was wiped out at its headquarters in this Swiss city. Where am I?",
-   "1979: experts certify the eradication of smallpox, Geneva."
-  ],
-  "fact": "It is the only human disease ever wiped out."
- },
- {
-  "date": "12-09",
-  "level": "easy",
-  "name": "San Francisco, USA (Mother of All Demos)",
-  "lat": 37.784,
-  "lon": -122.401,
-  "clues": [
-   "A man showed off the mouse, video calls and links, in 1968. Where am I?",
-   "Douglas Engelbart gave the Mother of All Demos in this Californian city. Where am I?",
-   "1968: Douglas Engelbart's Mother of All Demos, San Francisco."
-  ],
-  "fact": "The first mouse was a wooden box with two wheels."
- },
- {
-  "date": "12-09",
-  "level": "medium",
-  "name": "Manchester, England (Coronation Street)",
-  "lat": 53.479,
-  "lon": -2.25,
-  "clues": [
-   "The world's longest-running TV soap began on a street that doesn't exist, in a rainy northern city. Where am I?",
-   "Coronation Street first aired from a TV studio in this English city. Where am I?",
-   "1960: Coronation Street first airs from Manchester."
-  ],
-  "fact": "It has more than 11,000 episodes."
- },
- {
-  "date": "12-09",
-  "level": "medium",
-  "name": "Warsaw, Poland (Lech Wałęsa elected)",
-  "lat": 52.2297,
-  "lon": 21.0122,
-  "clues": [
-   "An electrician who climbed a shipyard fence became his nation's first freely elected president. Where am I?",
-   "Lech Wałęsa was elected president of Poland; this is its capital. Where am I?",
-   "1990: Lech Wałęsa is elected president of Poland."
-  ],
-  "fact": "Wałęsa won the Nobel Peace Prize in 1983."
- },
- {
-  "date": "12-09",
-  "level": "hard",
-  "name": "Ayacucho, Peru",
-  "lat": -13.16,
-  "lon": -74.22,
-  "clues": [
-   "A battle in the Andes ended Spain's rule over South America. Where am I?",
-   "The Battle of Ayacucho was fought in the highlands of Peru. Where am I?",
-   "1824: the Battle of Ayacucho, Peru."
-  ],
-  "fact": "Ayacucho means \"corner of the dead\" in Quechua."
- },
- {
-  "date": "12-10",
-  "level": "easy",
-  "name": "Stockholm, Sweden (first Nobel Prizes)",
-  "lat": 59.3293,
-  "lon": 18.0686,
-  "clues": [
-   "On the anniversary of his death, a dynamite maker's fortune was handed out for the first time. Where am I?",
-   "The first Nobel Prizes were given in this Scandinavian capital. Where am I?",
-   "1901: the first Nobel Prizes are awarded in Stockholm."
-  ],
-  "fact": "The Peace Prize is given in Oslo instead."
- },
- {
-  "date": "12-10",
-  "level": "easy",
-  "name": "Paris, France (Universal Declaration of Human Rights)",
-  "lat": 48.862,
-  "lon": 2.288,
-  "clues": [
-   "Across the river from an iron tower, the world wrote down 30 rights that belong to everyone. Where am I?",
-   "The Universal Declaration of Human Rights was adopted in this capital city. Where am I?",
-   "1948: the Universal Declaration of Human Rights is adopted in Paris."
-  ],
-  "fact": "It's the most translated document in the world."
- },
- {
-  "date": "12-10",
-  "level": "medium",
-  "name": "Westminster, London (first traffic light)",
-  "lat": 51.501,
-  "lon": -0.126,
-  "clues": [
-   "The first traffic light ran on gas, had arms like a railway signal, and blew up a month later. Where am I?",
-   "The world's first traffic light was put up outside Parliament in this city. Where am I?",
-   "1868: the first traffic light is installed in Westminster, London."
-  ],
-  "fact": "It exploded in January 1869, injuring the policeman running it."
- },
- {
-  "date": "12-10",
-  "level": "medium",
-  "name": "Aswan, Egypt (Aswan Dam opens)",
-  "lat": 24.03,
-  "lon": 32.87,
-  "clues": [
-   "A dam was built on the world's longest river, near the islands of an ancient temple. Where am I?",
-   "The first Aswan Dam opened on the Nile in southern Egypt. Where am I?",
-   "1902: the first Aswan Dam opens on the Nile."
-  ],
-  "fact": "The later High Dam created Lake Nasser."
- },
- {
-  "date": "12-10",
-  "level": "hard",
-  "name": "Amherst, Massachusetts, USA (Emily Dickinson born)",
-  "lat": 42.373,
-  "lon": -72.518,
-  "clues": [
-   "A poet who rarely left her house wrote nearly 1,800 poems, most found only after she died. Where was she born?",
-   "Emily Dickinson was born in this college town in Massachusetts. Where am I?",
-   "1830: Emily Dickinson is born in Amherst, Massachusetts."
-  ],
-  "fact": "Fewer than a dozen of her poems were published while she was alive."
- },
- {
-  "date": "12-11",
-  "level": "easy",
-  "name": "Kyoto, Japan (Kyoto Protocol)",
-  "lat": 35.0116,
-  "lon": 135.7681,
-  "clues": [
-   "In a city of a thousand temples, the world first promised to cut the gases warming the planet. Where am I?",
-   "The Kyoto Protocol on climate change was adopted in this old Japanese capital. Where am I?",
-   "1997: the Kyoto Protocol is adopted in Kyoto, Japan."
-  ],
-  "fact": "It came into force in 2005."
- },
- {
-  "date": "12-11",
-  "level": "easy",
-  "name": "New York City (UNICEF created)",
-  "lat": 40.749,
-  "lon": -73.968,
-  "clues": [
-   "After a world war, a fund was set up to help children everywhere, by a river in a city of skyscrapers. Where am I?",
-   "UNICEF was created by the United Nations, headquartered in this city. Where am I?",
-   "1946: UNICEF is created by the UN in New York."
-  ],
-  "fact": "UNICEF won the Nobel Peace Prize in 1965."
- },
- {
-  "date": "12-11",
-  "level": "medium",
-  "name": "Windsor Castle, England (Edward VIII abdicates)",
-  "lat": 51.4839,
-  "lon": -0.6044,
-  "clues": [
-   "A king gave up his crown for the woman he loved and told the nation by radio from a castle. Where am I?",
-   "Edward VIII broadcast his abdication speech from this royal castle west of London. Where am I?",
-   "1936: Edward VIII broadcasts his abdication from Windsor Castle."
-  ],
-  "fact": "He married Wallis Simpson, an American divorcée, in 1937."
- },
- {
-  "date": "12-11",
-  "level": "medium",
-  "name": "Westminster, London (Statute of Westminster)",
-  "lat": 51.4995,
-  "lon": -0.1248,
-  "clues": [
-   "A law let Canada, Australia and New Zealand make their own laws, passed in a palace by the Thames. Where am I?",
-   "The Statute of Westminster was passed in the Parliament of this city. Where am I?",
-   "1931: the Statute of Westminster is passed in London."
-  ],
-  "fact": "It made the dominions equal partners with Britain."
- },
- {
-  "date": "12-11",
-  "level": "hard",
-  "name": "Clausthal, Germany (Robert Koch born)",
-  "lat": 51.8,
-  "lon": 10.34,
-  "clues": [
-   "A doctor who found the germ behind tuberculosis was born in a mining town in mountains of witches. Where am I?",
-   "Robert Koch was born in this town in Germany's Harz Mountains. Where am I?",
-   "1843: Robert Koch is born in Clausthal, Germany."
-  ],
-  "fact": "Koch won the Nobel Prize in 1905."
- },
- {
-  "date": "12-12",
-  "level": "easy",
-  "name": "Basilica of Guadalupe, Mexico City",
-  "lat": 19.4847,
-  "lon": -99.117,
-  "clues": [
-   "Roses bloomed in winter, and a picture appeared on a farmer's cloak on a hill in a big capital. Where am I?",
-   "The Virgin of Guadalupe is said to have appeared on a hill in this city, now home to her basilica. Where am I?",
-   "1531: the image of the Virgin of Guadalupe appears, by tradition, in Mexico City."
-  ],
-  "fact": "Millions of pilgrims visit the basilica every December 12."
- },
- {
-  "date": "12-12",
-  "level": "easy",
-  "name": "Nairobi, Kenya (Kenya independence)",
-  "lat": -1.2921,
-  "lon": 36.8219,
-  "clues": [
-   "At midnight a new flag went up and a city near giraffes and lions became a free nation's capital. Where am I?",
-   "Kenya became independent; its capital is here. Where am I?",
-   "1963: Kenya becomes independent."
-  ],
-  "fact": "Nairobi has a national park with lions inside the city limits."
- },
- {
-  "date": "12-12",
-  "level": "medium",
-  "name": "Signal Hill, St. John's, Canada (Marconi's transatlantic signal)",
-  "lat": 47.57,
-  "lon": -52.68,
-  "clues": [
-   "With a kite in a storm, a man heard three clicks that had crossed an ocean through the air. Where am I?",
-   "Marconi got the first radio signal across the Atlantic on a hill in Newfoundland. Where am I?",
-   "1901: Marconi receives the first transatlantic radio signal at Signal Hill, Newfoundland."
-  ],
-  "fact": "The signal was the letter S in Morse code."
- },
- {
-  "date": "12-12",
-  "level": "medium",
-  "name": "Hoboken, New Jersey, USA (Frank Sinatra born)",
-  "lat": 40.744,
-  "lon": -74.032,
-  "clues": [
-   "Ol' Blue Eyes was born across the river from the city he sang about, New York, New York. Where am I?",
-   "Frank Sinatra was born in this New Jersey city facing Manhattan. Where am I?",
-   "1915: Frank Sinatra is born in Hoboken, New Jersey."
-  ],
-  "fact": "He weighed about 6 kg at birth."
- },
- {
-  "date": "12-12",
-  "level": "hard",
-  "name": "San Luis Obispo, California, USA (first motel)",
-  "lat": 35.27,
-  "lon": -120.68,
-  "clues": [
-   "Halfway between two big cities, a hotel for cars was born and gave us a new word. Where am I?",
-   "The world's first motel opened in this town between Los Angeles and San Francisco. Where am I?",
-   "1925: the Milestone Mo-Tel, the first motel, opens in San Luis Obispo."
-  ],
-  "fact": "A room cost $1.25 a night."
- },
- {
-  "date": "12-13",
-  "level": "easy",
-  "name": "Carnegie Hall, New York City (An American in Paris)",
-  "lat": 40.7651,
-  "lon": -73.9799,
-  "clues": [
-   "Real taxi horns played in a concert about France, in a city across the ocean. Where am I?",
-   "Gershwin's An American in Paris premiered in a famous concert hall in this city. Where am I?",
-   "1928: George Gershwin's An American in Paris premieres at Carnegie Hall, New York."
-  ],
-  "fact": "Gershwin brought real Paris taxi horns home for it."
- },
- {
-  "date": "12-13",
-  "level": "easy",
-  "name": "Malta (becomes a republic)",
-  "lat": 35.9375,
-  "lon": 14.3754,
-  "clues": [
-   "A tiny island country between Sicily and Africa said goodbye to the British queen as its head of state. Where am I?",
-   "Malta became a republic; it's an island nation in the middle of the Mediterranean. Where am I?",
-   "1974: Malta becomes a republic."
-  ],
-  "fact": "Malta is one of the smallest countries in the EU."
- },
- {
-  "date": "12-13",
-  "level": "medium",
-  "name": "Plymouth, England (Drake sets sail)",
-  "lat": 50.37,
-  "lon": -4.14,
-  "clues": [
-   "A sea dog left a port city and came back nearly three years later, having sailed around the world. Where am I?",
-   "Francis Drake set out on his voyage around the world from this port in southwest England. Where am I?",
-   "1577: Francis Drake sets sail from Plymouth to circle the globe."
-  ],
-  "fact": "Legend says Drake finished a game of bowls here before facing the Spanish Armada."
- },
- {
-  "date": "12-13",
-  "level": "medium",
-  "name": "West Reading, Pennsylvania, USA (Taylor Swift born)",
-  "lat": 40.336,
-  "lon": -75.948,
-  "clues": [
-   "A girl who grew up on a Christmas tree farm and later filled stadiums was born in a small town in the Keystone State. Where am I?",
-   "Taylor Swift was born near Reading, in Pennsylvania. Where am I?",
-   "1989: Taylor Swift is born in West Reading, Pennsylvania."
-  ],
-  "fact": "Her family owned a Christmas tree farm."
- },
- {
-  "date": "12-13",
-  "level": "hard",
-  "name": "Trento, Italy (Council of Trent opens)",
-  "lat": 46.07,
-  "lon": 11.12,
-  "clues": [
-   "Church leaders met for 18 years in a mountain city to answer Martin Luther. Where am I?",
-   "The Council of Trent opened in this city in the Italian Alps. Where am I?",
-   "1545: the Council of Trent opens in Trento, Italy."
-  ],
-  "fact": "It met on and off until 1563."
- },
- {
-  "date": "12-14",
-  "level": "easy",
-  "name": "South Pole (Amundsen arrives)",
-  "lat": -90.0,
-  "lon": 0.0,
-  "clues": [
-   "Five men and their dogs reached a place where every direction is north, and beat a rival by 34 days. Where am I?",
-   "Roald Amundsen's team was the first to reach the bottom of the world. Where am I?",
-   "1911: Roald Amundsen reaches the South Pole."
-  ],
-  "fact": "Scott's team arrived on January 17, 1912, and found the Norwegian flag."
- },
- {
-  "date": "12-14",
-  "level": "easy",
-  "name": "Mount Vernon, Virginia, USA (George Washington dies)",
-  "lat": 38.7293,
-  "lon": -77.1073,
-  "clues": [
-   "The first president died at home on a hill above a river near the capital that carries his name. Where am I?",
-   "George Washington died at his estate on the Potomac, south of Washington DC. Where am I?",
-   "1799: George Washington dies at Mount Vernon, Virginia."
-  ],
-  "fact": "His last words were reportedly \"'Tis well.\""
- },
- {
-  "date": "12-14",
-  "level": "medium",
-  "name": "Berlin, Germany (quantum theory)",
-  "lat": 52.518,
-  "lon": 13.393,
-  "clues": [
-   "A physicist said energy comes in tiny packets, and the quantum age began in a capital on the Spree. Where am I?",
-   "Max Planck presented his quantum theory in this German capital. Where am I?",
-   "1900: Max Planck presents his quantum theory in Berlin."
-  ],
-  "fact": "Planck's constant is now used to define the kilogram."
- },
- {
-  "date": "12-14",
-  "level": "medium",
-  "name": "Glasgow, Scotland (Glasgow Subway opens)",
-  "lat": 55.86,
-  "lon": -4.27,
-  "clues": [
-   "The world's third-oldest underground train runs in one simple circle, so you can't get lost. Where am I?",
-   "The Glasgow Subway opened in this Scottish city. Where am I?",
-   "1896: the Glasgow Subway opens."
-  ],
-  "fact": "Locals call it the Clockwork Orange because of its orange trains."
- },
- {
-  "date": "12-14",
-  "level": "hard",
-  "name": "Saint-Rémy-de-Provence, France (Nostradamus born)",
-  "lat": 43.789,
-  "lon": 4.831,
-  "clues": [
-   "A man famous for predicting the future was born in a Provençal town where Van Gogh would later paint. Where am I?",
-   "Nostradamus was born in this town in Provence, France. Where am I?",
-   "1503: Nostradamus is born in Saint-Rémy-de-Provence."
-  ],
-  "fact": "Van Gogh painted The Starry Night in a hospital there."
- },
- {
-  "date": "12-15",
-  "level": "easy",
-  "name": "Atlanta, USA (Gone with the Wind premiere)",
-  "lat": 33.755,
-  "lon": -84.388,
-  "clues": [
-   "A film about a city that burned premiered in the same city, rebuilt, with a three-day party. Where am I?",
-   "Gone with the Wind premiered in the capital of Georgia. Where am I?",
-   "1939: Gone with the Wind premieres in Atlanta."
-  ],
-  "fact": "Hattie McDaniel, who won an Oscar for the film, was not allowed into the segregated premiere."
- },
- {
-  "date": "12-15",
-  "level": "easy",
-  "name": "Leaning Tower of Pisa, Italy (reopens)",
-  "lat": 43.723,
-  "lon": 10.3966,
-  "clues": [
-   "After ten years shut, engineers straightened me a little, but not too much, or no one would come. Where am I?",
-   "The famous leaning bell tower reopened after repairs in this Tuscan city. Where am I?",
-   "2001: the Leaning Tower of Pisa reopens after being partly straightened."
-  ],
-  "fact": "Engineers reduced the lean by about 45 cm."
- },
- {
-  "date": "12-15",
-  "level": "medium",
-  "name": "Les Invalides, Paris (Napoleon's return)",
-  "lat": 48.855,
-  "lon": 2.3125,
-  "clues": [
-   "An emperor who died on a far-off island came home nearly 20 years later under a golden dome. Where am I?",
-   "Napoleon's body was brought back from Saint Helena and laid to rest in this Paris monument. Where am I?",
-   "1840: Napoleon's remains arrive at Les Invalides, Paris."
-  ],
-  "fact": "His tomb is made of red quartzite."
- },
- {
-  "date": "12-15",
-  "level": "medium",
-  "name": "Anzio, Italy (Nero born)",
-  "lat": 41.447,
-  "lon": 12.63,
-  "clues": [
-   "A Roman emperor who was said to play music while his city burned was born in a seaside town. Where am I?",
-   "Emperor Nero was born in Antium, today's Anzio, on the coast south of Rome. Where am I?",
-   "37 AD: Emperor Nero is born in Antium, today's Anzio, Italy."
-  ],
-  "fact": "The fiddle story is a myth: fiddles didn't exist yet."
- },
- {
-  "date": "12-15",
-  "level": "hard",
-  "name": "Dijon, France (Gustave Eiffel born)",
-  "lat": 47.322,
-  "lon": 5.041,
-  "clues": [
-   "The man behind Paris's iron tower and the Statue of Liberty's skeleton was born in a city famous for mustard. Where am I?",
-   "Gustave Eiffel was born in this city in Burgundy, France. Where am I?",
-   "1832: Gustave Eiffel is born in Dijon."
-  ],
-  "fact": "He also designed the inner frame of the Statue of Liberty."
- },
- {
-  "date": "12-16",
-  "level": "easy",
-  "name": "Boston, USA (Boston Tea Party)",
-  "lat": 42.353,
-  "lon": -71.052,
-  "clues": [
-   "People dressed in disguise made the biggest cup of tea ever, and it wasn't to drink. Where am I?",
-   "Colonists dumped British tea into the harbor of this Massachusetts city. Where am I?",
-   "1773: the Boston Tea Party."
-  ],
-  "fact": "The 342 chests of tea would be worth about $1.7 million today."
- },
- {
-  "date": "12-16",
-  "level": "easy",
-  "name": "Bonn, Germany (Beethoven born)",
-  "lat": 50.7374,
-  "lon": 7.0982,
-  "clues": [
-   "A composer who couldn't hear his own symphonies was born in a city that later became a country's capital. Where am I?",
-   "Beethoven was born in this city on the Rhine, West Germany's former capital. Where am I?",
-   "1770: Ludwig van Beethoven is born in Bonn (baptized the next day)."
-  ],
-  "fact": "Beethoven's birth house in Bonn is now a museum."
- },
- {
-  "date": "12-16",
-  "level": "medium",
-  "name": "Bastogne, Belgium (Battle of the Bulge)",
-  "lat": 50.0,
-  "lon": 5.72,
-  "clues": [
-   "Surrounded in the snow and told to surrender, a general answered with one word: \"Nuts!\" Where am I?",
-   "The Battle of the Bulge began in the Ardennes forest, centered on this Belgian town. Where am I?",
-   "1944: the Battle of the Bulge begins in the Ardennes."
-  ],
-  "fact": "It was the biggest US battle of World War II."
- },
- {
-  "date": "12-16",
-  "level": "medium",
-  "name": "Dhaka, Bangladesh (Victory Day)",
-  "lat": 23.8103,
-  "lon": 90.4125,
-  "clues": [
-   "A nation won its freedom on the banks of a giant delta, and celebrates its Victory Day today. Where am I?",
-   "Bangladesh won its independence war; its capital is here. Where am I?",
-   "1971: Bangladesh wins its war of independence, Dhaka."
-  ],
-  "fact": "Bangladesh is one of the most densely populated countries in the world."
- },
- {
-  "date": "12-16",
-  "level": "hard",
-  "name": "Steventon, England (Jane Austen born)",
-  "lat": 51.228,
-  "lon": -1.224,
-  "clues": [
-   "The author of Pride and Prejudice was born in a village rectory in the south of England. Where am I?",
-   "Jane Austen was born in this Hampshire village. Where am I?",
-   "1775: Jane Austen is born in Steventon, Hampshire."
-  ],
-  "fact": "She's on the Bank of England £10 note."
- },
- {
-  "date": "12-17",
-  "level": "easy",
-  "name": "Kitty Hawk, North Carolina, USA (first powered flight)",
-  "lat": 36.019,
-  "lon": -75.669,
-  "clues": [
-   "Two bicycle makers flew for 12 seconds on a windy beach, and the world got smaller. Where am I?",
-   "The Wright brothers made the first powered flight on the Outer Banks of North Carolina. Where am I?",
-   "1903: the Wright brothers' first powered flight, Kitty Hawk."
-  ],
-  "fact": "The first flight was shorter than a Boeing 747's wingspan."
- },
- {
-  "date": "12-17",
-  "level": "easy",
-  "name": "Buenos Aires, Argentina (Pope Francis born)",
-  "lat": -34.6037,
-  "lon": -58.3816,
-  "clues": [
-   "The first pope from the Americas was born in a city of tango. Where am I?",
-   "Pope Francis was born in Argentina's capital. Where am I?",
-   "1936: Jorge Mario Bergoglio, later Pope Francis, is born in Buenos Aires."
-  ],
-  "fact": "He once worked as a nightclub bouncer."
- },
- {
-  "date": "12-17",
-  "level": "medium",
-  "name": "Zócalo, Mexico City (Aztec Sun Stone found)",
-  "lat": 19.4326,
-  "lon": -99.1332,
-  "clues": [
-   "Workers fixing a city square dug up a giant stone calendar that the Aztecs had carved. Where am I?",
-   "The Aztec Sun Stone was found under the main square of this capital. Where am I?",
-   "1790: the Aztec Sun Stone is found in the Zócalo, Mexico City."
-  ],
-  "fact": "It weighs about 24 tonnes."
- },
- {
-  "date": "12-17",
-  "level": "medium",
-  "name": "Berlin, Germany (nuclear fission)",
-  "lat": 52.45,
-  "lon": 13.28,
-  "clues": [
-   "Two chemists split an atom and found it was the key to unlocking enormous energy. Where am I?",
-   "Otto Hahn and Fritz Strassmann discovered nuclear fission in this German capital. Where am I?",
-   "1938: nuclear fission is discovered in Berlin."
-  ],
-  "fact": "Lise Meitner explained the result but was left out of Hahn's Nobel Prize."
- },
- {
-  "date": "12-17",
-  "level": "hard",
-  "name": "Sidi Bouzid, Tunisia (Arab Spring begins)",
-  "lat": 35.038,
-  "lon": 9.484,
-  "clues": [
-   "A fruit seller's protest in a small town sparked revolutions across a whole region. Where am I?",
-   "The Arab Spring began in this town in central Tunisia. Where am I?",
-   "2010: Mohamed Bouazizi's protest in Sidi Bouzid, Tunisia, starts the Arab Spring."
-  ],
-  "fact": "Tunisia's president fled less than a month later."
- },
- {
-  "date": "12-18",
-  "level": "easy",
-  "name": "Lusail, Qatar (Argentina wins the World Cup)",
-  "lat": 25.421,
-  "lon": 51.49,
-  "clues": [
-   "A little genius finally lifted the golden trophy, after a final with a hat-trick, in a desert stadium. Where am I?",
-   "Messi's Argentina won the World Cup final in a stadium in this Gulf country. Where am I?",
-   "2022: Argentina wins the World Cup at Lusail Stadium, Qatar."
-  ],
-  "fact": "The final ended 3-3, and Argentina won on penalties."
- },
- {
-  "date": "12-18",
-  "level": "easy",
-  "name": "Mariinsky Theatre, St. Petersburg, Russia (The Nutcracker)",
-  "lat": 59.9256,
-  "lon": 30.2961,
-  "clues": [
-   "A Christmas ballet with dancing candy and a toy soldier was first danced in a city of canals and white nights. Where am I?",
-   "Tchaikovsky's The Nutcracker premiered in this Russian city on the Baltic. Where am I?",
-   "1892: The Nutcracker premieres in St. Petersburg."
-  ],
-  "fact": "It flopped at first and only became a Christmas classic decades later."
- },
- {
-  "date": "12-18",
-  "level": "medium",
-  "name": "Cincinnati, USA (Steven Spielberg born)",
-  "lat": 39.1031,
-  "lon": -84.512,
-  "clues": [
-   "The director of a shark film, a lost alien and a dinosaur park was born on the Ohio River. Where am I?",
-   "Steven Spielberg was born in this Ohio city. Where am I?",
-   "1946: Steven Spielberg is born in Cincinnati."
-  ],
-  "fact": "He was rejected from film school more than once."
- },
- {
-  "date": "12-18",
-  "level": "medium",
-  "name": "Geological Society, London (Piltdown Man announced)",
-  "lat": 51.509,
-  "lon": -0.139,
-  "clues": [
-   "Scientists cheered the \"missing link\", but its skull was human and its jaw was an ape's. The hoax lasted 40 years. Where was it announced?",
-   "The Piltdown Man hoax was presented to scientists in this capital city. Where am I?",
-   "1912: Piltdown Man is announced at the Geological Society, London."
-  ],
-  "fact": "The hoax was exposed in 1953."
- },
- {
-  "date": "12-18",
-  "level": "hard",
-  "name": "Achères, France (first land speed record)",
-  "lat": 48.96,
-  "lon": 2.07,
-  "clues": [
-   "An electric car set the first land speed record, at 63 km/h, near Paris. Where am I?",
-   "The first official land speed record was set in this town west of Paris. Where am I?",
-   "1898: the first land speed record is set at Achères, France."
-  ],
-  "fact": "The car was electric, not gasoline."
- },
- {
-  "date": "12-19",
-  "level": "easy",
-  "name": "London (A Christmas Carol published)",
-  "lat": 51.51,
-  "lon": -0.12,
-  "clues": [
-   "Three ghosts visited a mean old man, and in six days his book sold out in a foggy city. Where am I?",
-   "Charles Dickens's A Christmas Carol was published in this capital. Where am I?",
-   "1843: A Christmas Carol is published in London."
-  ],
-  "fact": "Dickens wrote it in about six weeks."
- },
- {
-  "date": "12-19",
-  "level": "easy",
-  "name": "Paris, France (Édith Piaf born)",
-  "lat": 48.871,
-  "lon": 2.387,
-  "clues": [
-   "The Little Sparrow, who sang that she regretted nothing, was born in a city of love. Where am I?",
-   "Édith Piaf was born in the Belleville district of this capital. Where am I?",
-   "1915: Édith Piaf is born in Paris."
-  ],
-  "fact": "Piaf means \"sparrow\" in Paris slang."
- },
- {
-  "date": "12-19",
-  "level": "medium",
-  "name": "Williamsburg Bridge, New York City",
-  "lat": 40.7138,
-  "lon": -73.9724,
-  "clues": [
-   "When it opened, I was the longest suspension bridge on Earth, beating my famous neighbor to the south. Where am I?",
-   "The Williamsburg Bridge opened over the East River in this city. Where am I?",
-   "1903: the Williamsburg Bridge opens in New York City."
-  ],
-  "fact": "It was the first big suspension bridge with steel towers."
- },
- {
-  "date": "12-19",
-  "level": "medium",
-  "name": "Valley Forge, Pennsylvania, USA",
-  "lat": 40.097,
-  "lon": -75.437,
-  "clues": [
-   "A tired army spent a freezing winter in huts, and came out stronger. Where am I?",
-   "George Washington's army made its winter camp here, northwest of Philadelphia. Where am I?",
-   "1777: Washington's army arrives at Valley Forge."
-  ],
-  "fact": "A Prussian officer, von Steuben, drilled the troops there."
- },
- {
-  "date": "12-19",
-  "level": "hard",
-  "name": "Hanoi, Vietnam (Indochina War begins)",
-  "lat": 21.0285,
-  "lon": 105.8542,
-  "clues": [
-   "A city of lakes went dark and a war for independence began that lasted eight years. Where am I?",
-   "The First Indochina War began with fighting in Vietnam's capital. Where am I?",
-   "1946: the First Indochina War begins in Hanoi."
-  ],
-  "fact": "It ended with the battle of Dien Bien Phu in 1954."
- },
- {
-  "date": "12-20",
-  "level": "easy",
-  "name": "Macau",
-  "lat": 22.1987,
-  "lon": 113.5439,
-  "clues": [
-   "A city of casinos and old Portuguese streets became the last European colony in Asia to be handed back. Where am I?",
-   "Portugal handed this territory near Hong Kong back to China. Where am I?",
-   "1999: Portugal hands Macau back to China."
-  ],
-  "fact": "Macau's casinos earn more than Las Vegas."
- },
- {
-  "date": "12-20",
-  "level": "easy",
-  "name": "New York City (It's a Wonderful Life premiere)",
-  "lat": 40.759,
   "lon": -73.985,
   "clues": [
-   "A film about an angel earning wings flopped when it came out, then became a Christmas classic. Where did it premiere?",
-   "It's a Wonderful Life premiered in this city. Where am I?",
-   "1946: It's a Wonderful Life premieres in New York City."
+   "I'm the Big Apple, but you can't take a bite. My friendly neighbor swings between my skyscrapers every night. Where am I?",
+   "Spider-Man's hometown. Peter Parker grew up in my borough of Queens, across the river from Manhattan.",
+   "The biggest city in the USA, on the East Coast."
   ],
-  "fact": "It became a classic after its copyright lapsed and TV channels played it every Christmas."
+  "fact": "Peter Parker has been a Queens kid since his very first comic in 1962."
+ },
+ {
+  "date": "11-21",
+  "level": "easy",
+  "from": "📖 Harry Potter",
+  "name": "London, England",
+  "lat": 51.532,
+  "lon": -0.124,
+  "clues": [
+   "Look for a platform between 9 and 10 that only wizards can find. Everyone else just sees a busy train station in my city. Where am I?",
+   "The Hogwarts Express leaves from King's Cross station, in the capital of England.",
+   "The capital of the United Kingdom, on the River Thames."
+  ],
+  "fact": "King's Cross station has a luggage trolley 'vanishing' into the wall at Platform 9¾ for fans to pose with."
+ },
+ {
+  "date": "11-21",
+  "level": "medium",
+  "from": "🎬 Superman",
+  "name": "Cleveland, USA",
+  "lat": 41.499,
+  "lon": -81.694,
+  "clues": [
+   "Superman's city, Metropolis, doesn't exist. The real city that played it in 2025 is where two teenagers dreamed him up, and it also rocks and rolls. Where am I?",
+   "Superman's creators grew up in this city on Lake Erie, home of the Rock & Roll Hall of Fame.",
+   "A city in Ohio, on the south shore of Lake Erie."
+  ],
+  "fact": "Jerry Siegel and Joe Shuster created Superman in Cleveland in the 1930s."
+ },
+ {
+  "date": "11-21",
+  "level": "medium",
+  "from": "🎬 F1",
+  "name": "Abu Dhabi, UAE",
+  "lat": 24.467,
+  "lon": 54.603,
+  "clues": [
+   "Sand everywhere, but nobody's building castles. They're building speed. Brad Pitt's final race starts in sunshine and ends under floodlights in my desert city. Where am I?",
+   "F1's big finale is the season-ending Grand Prix at Yas Marina, in the capital of the UAE.",
+   "The capital of the United Arab Emirates, on the Persian Gulf."
+  ],
+  "fact": "F1 filmed during the real 2024 Abu Dhabi Grand Prix weekend."
+ },
+ {
+  "date": "11-21",
+  "level": "hard",
+  "from": "🎬 The Odyssey",
+  "name": "Troy, Turkey",
+  "lat": 39.957,
+  "lon": 26.239,
+  "clues": [
+   "Lesson learned: never accept a giant wooden horse. My city found that out the hard way, and Odysseus sailed home from my ruins. Where am I?",
+   "Troy's ruins are in modern-day Turkey, near the Dardanelles strait.",
+   "Northwest Turkey, near the town of Çanakkale."
+  ],
+  "fact": "Christopher Nolan's The Odyssey (2026) is based on Homer's ancient poem."
+ },
+ {
+  "date": "11-22",
+  "level": "easy",
+  "from": "📖 Into Thin Air",
+  "name": "Mount Everest, Nepal",
+  "lat": 27.988,
+  "lon": 86.925,
+  "clues": [
+   "I'm the top of the world, and climbers risk their lives to stand on me. Into Thin Air and the movie Everest tell of a deadly storm on my slopes. Where am I?",
+   "The tallest mountain on Earth, in the Himalayas.",
+   "On the border of Nepal and Tibet (China)."
+  ],
+  "fact": "Everest is 8,849 meters tall, according to a 2020 measurement."
+ },
+ {
+  "date": "11-22",
+  "level": "easy",
+  "from": "📖 The Fault in Our Stars",
+  "name": "Amsterdam, Netherlands",
+  "lat": 52.375,
+  "lon": 4.884,
+  "clues": [
+   "Hazel and Gus used their one wish to visit my city of canals and bikes, and shared their first kiss in the Anne Frank House. Where am I?",
+   "The Fault in Our Stars takes its couple to the capital of the Netherlands.",
+   "The capital of the Netherlands."
+  ],
+  "fact": "The movie was the first ever allowed to film inside the Anne Frank House."
+ },
+ {
+  "date": "11-22",
+  "level": "medium",
+  "from": "🎬 The Bourne Supremacy",
+  "name": "Goa, India",
+  "lat": 15.3,
+  "lon": 74.0,
+  "clues": [
+   "Jason Bourne tried to hide on my palm-lined beaches, until an assassin found him. I'm India's smallest state. Where am I?",
+   "The Bourne Supremacy opens in this beach state on India's west coast.",
+   "India's west coast, south of Mumbai."
+  ],
+  "fact": "Goa was a Portuguese colony until 1961."
+ },
+ {
+  "date": "11-22",
+  "level": "medium",
+  "from": "🎬 Twisters",
+  "name": "Oklahoma, USA",
+  "lat": 35.47,
+  "lon": -97.52,
+  "clues": [
+   "The wind comes sweeping down my plains. In Twisters, storm chasers drive straight into my tornadoes on purpose. Where am I?",
+   "Twisters is set in this US state in Tornado Alley, just north of Texas.",
+   "The state right above Texas."
+  ],
+  "fact": "Oklahoma gets dozens of tornadoes in a typical year."
+ },
+ {
+  "date": "11-22",
+  "level": "hard",
+  "from": "📖 Little Women",
+  "name": "Concord, Massachusetts, USA",
+  "lat": 42.46,
+  "lon": -71.35,
+  "clues": [
+   "Four sisters, Meg, Jo, Beth and Amy, grew up in my small town, just like the author and her own sisters did. Where am I?",
+   "Louisa May Alcott wrote Little Women at Orchard House in Concord.",
+   "Massachusetts, northwest of Boston."
+  ],
+  "fact": "Orchard House, where Alcott wrote Little Women, is now a museum."
+ },
+ {
+  "date": "11-23",
+  "level": "easy",
+  "from": "📖 The Godfather",
+  "name": "Sicily, Italy",
+  "lat": 37.81,
+  "lon": 13.3,
+  "clues": [
+   "Michael Corleone's family name is a real town on my island. I'm the ball being kicked by the boot of Italy. Where am I?",
+   "The Godfather's family came from Corleone, a town on this big Italian island.",
+   "The biggest island in the Mediterranean, at the toe of Italy."
+  ],
+  "fact": "Corleone is a real town in Sicily, south of Palermo."
+ },
+ {
+  "date": "11-23",
+  "level": "easy",
+  "from": "🎬 Scarface",
+  "name": "Miami, USA",
+  "lat": 25.774,
+  "lon": -80.19,
+  "clues": [
+   "Say hello to my little friend. Tony Montana arrived by boat and built his empire under my palm trees and neon lights. Where am I?",
+   "Scarface takes place in this sunny Florida city.",
+   "A big city near the southern tip of Florida."
+  ],
+  "fact": "Scarface (1983) is a remake of a 1932 gangster movie set in Chicago."
+ },
+ {
+  "date": "11-23",
+  "level": "medium",
+  "from": "🎬 Saving Private Ryan",
+  "name": "Omaha Beach, Normandy, France",
+  "lat": 49.369,
+  "lon": -0.873,
+  "clues": [
+   "The movie opens with soldiers storming my beach on D-Day. Then a squad is sent to find one private and bring him home. Where am I?",
+   "Saving Private Ryan starts at Omaha Beach, on this coast of France.",
+   "The north coast of France, across the Channel from England."
+  ],
+  "fact": "D-Day took place on June 6, 1944."
+ },
+ {
+  "date": "11-23",
+  "level": "medium",
+  "from": "🎬 Forrest Gump",
+  "name": "Monument Valley, USA",
+  "lat": 37.1,
+  "lon": -110.0,
+  "clues": [
+   "Forrest ran across the country for three years, then stopped on a road in front of my giant red rock towers and said, 'I'm pretty tired.' Where am I?",
+   "Forrest Gump stops running in Monument Valley, on Navajo land.",
+   "On the Arizona–Utah border."
+  ],
+  "fact": "The spot on US Route 163 is now nicknamed Forrest Gump Point."
+ },
+ {
+  "date": "11-23",
+  "level": "hard",
+  "from": "📖 Life of Pi",
+  "name": "Pondicherry, India",
+  "lat": 11.934,
+  "lon": 79.83,
+  "clues": [
+   "A boy shared a lifeboat with a tiger for 227 days. Before that, his family ran a zoo in my seaside town in India. Where am I?",
+   "Pi Patel grew up in Pondicherry, a former French town on India's east coast.",
+   "Southeast India, on the Bay of Bengal, south of Chennai."
+  ],
+  "fact": "Life of Pi won four Oscars, including Best Director for Ang Lee."
+ },
+ {
+  "date": "11-24",
+  "level": "easy",
+  "from": "🎬 Slumdog Millionaire",
+  "name": "Mumbai, India",
+  "lat": 19.076,
+  "lon": 72.878,
+  "clues": [
+   "A teenager from my slums is one question away from winning a game show, and everyone thinks he must be cheating. Where am I?",
+   "Slumdog Millionaire's Jamal grows up in this huge Indian city by the sea, home of Bollywood.",
+   "India's biggest city, on the west coast."
+  ],
+  "fact": "Slumdog Millionaire won eight Oscars, including Best Picture."
+ },
+ {
+  "date": "11-24",
+  "level": "easy",
+  "from": "🎬 Rio",
+  "name": "Rio de Janeiro, Brazil",
+  "lat": -22.951,
+  "lon": -43.21,
+  "clues": [
+   "A blue macaw who can't fly ends up in my city, right in the middle of Carnival. A giant statue with open arms watches over everything. Where am I?",
+   "Blu the parrot flies to this Brazilian city on the sea.",
+   "Brazil's famous beach city, home of the Christ the Redeemer statue."
+  ],
+  "fact": "Blu is a Spix's macaw, a real bird that was declared extinct in the wild in 2019."
+ },
+ {
+  "date": "11-24",
+  "level": "medium",
+  "from": "📖 Ulysses",
+  "name": "Dublin, Ireland",
+  "lat": 53.35,
+  "lon": -6.26,
+  "clues": [
+   "A whole huge novel takes place in one single day in my city: June 16, 1904. Fans dress up and walk its route every year. Where am I?",
+   "James Joyce's Ulysses follows Leopold Bloom around this Irish capital.",
+   "The capital of Ireland."
+  ],
+  "fact": "June 16 is celebrated in Dublin as Bloomsday."
+ },
+ {
+  "date": "11-24",
+  "level": "medium",
+  "from": "🎬 Schindler's List",
+  "name": "Kraków, Poland",
+  "lat": 50.047,
+  "lon": 19.961,
+  "clues": [
+   "A businessman saved more than a thousand Jewish workers by hiring them at his factory in my city during World War II. Where am I?",
+   "Schindler's List is set in this old royal city in southern Poland.",
+   "Southern Poland."
+  ],
+  "fact": "Oskar Schindler's factory in Kraków is now a museum."
+ },
+ {
+  "date": "11-24",
+  "level": "hard",
+  "from": "📖 To Kill a Mockingbird",
+  "name": "Monroeville, Alabama, USA",
+  "lat": 31.53,
+  "lon": -87.325,
+  "clues": [
+   "Scout and Atticus Finch lived in 'Maycomb', a sleepy town based on my small town, the author's real home. Where am I?",
+   "Harper Lee based Maycomb on Monroeville, Alabama.",
+   "Southwest Alabama."
+  ],
+  "fact": "Harper Lee's childhood friend Truman Capote inspired the character Dill."
+ },
+ {
+  "date": "11-25",
+  "level": "easy",
+  "from": "🎬 Godzilla Minus One",
+  "name": "Tokyo, Japan",
+  "lat": 35.67,
+  "lon": 139.765,
+  "clues": [
+   "A giant lizard keeps stomping through my streets, and I keep rebuilding. In Godzilla Minus One, he tears up my Ginza shopping district. Where am I?",
+   "Godzilla's favorite city to wreck: the capital of Japan.",
+   "The capital of Japan, on the main island of Honshu."
+  ],
+  "fact": "Godzilla Minus One won the Oscar for Best Visual Effects in 2024."
+ },
+ {
+  "date": "11-25",
+  "level": "easy",
+  "from": "📖 Murder on the Orient Express",
+  "name": "Istanbul, Turkey",
+  "lat": 41.011,
+  "lon": 28.977,
+  "clues": [
+   "Hercule Poirot boards a train in my city, where Europe meets Asia. Snow stops the train, and someone ends up dead. Where am I?",
+   "Agatha Christie's Orient Express starts in this Turkish city on the Bosphorus.",
+   "Turkey's biggest city, split between Europe and Asia."
+  ],
+  "fact": "Agatha Christie rode the real Orient Express herself."
+ },
+ {
+  "date": "11-25",
+  "level": "medium",
+  "from": "📖 The Sun Also Rises",
+  "name": "Pamplona, Spain",
+  "lat": 42.812,
+  "lon": -1.645,
+  "clues": [
+   "Every July, crowds run through my narrow streets in front of charging bulls. Hemingway made me famous in The Sun Also Rises. Where am I?",
+   "The running of the bulls happens in this city in northern Spain.",
+   "Northern Spain, near the French border."
+  ],
+  "fact": "The festival is called San Fermín and runs July 6 to 14."
+ },
+ {
+  "date": "11-25",
+  "level": "medium",
+  "from": "📖 My Brilliant Friend",
+  "name": "Naples, Italy",
+  "lat": 40.852,
+  "lon": 14.268,
+  "clues": [
+   "Two girls grow up as best friends and rivals in a poor part of my city, in the shadow of a volcano. Oh, and I invented pizza. Where am I?",
+   "Elena Ferrante's My Brilliant Friend is set in this southern Italian city near Vesuvius.",
+   "Southern Italy, on a bay facing Mount Vesuvius."
+  ],
+  "fact": "Pizza Margherita is said to have been named in Naples for Queen Margherita in 1889."
+ },
+ {
+  "date": "11-25",
+  "level": "hard",
+  "from": "🎬 In Bruges",
+  "name": "Bruges, Belgium",
+  "lat": 51.209,
+  "lon": 3.225,
+  "clues": [
+   "Two hitmen were told to lie low in my medieval town of canals and chocolate, and the movie is named after me. Where am I?",
+   "In Bruges is set in this city in Belgium.",
+   "Northwest Belgium, near the coast."
+  ],
+  "fact": "The belfry tower climbed in In Bruges has 366 steps."
+ },
+ {
+  "date": "11-26",
+  "level": "easy",
+  "from": "🎬 The Princess and the Frog",
+  "name": "New Orleans, USA",
+  "lat": 29.958,
+  "lon": -90.065,
+  "clues": [
+   "A girl kissed a frog and turned into one too. They hopped through bayous, jazz and gumbo in my city. Where am I?",
+   "Tiana opens her restaurant in this Louisiana city, home of Mardi Gras.",
+   "A city in Louisiana, near the mouth of the Mississippi River."
+  ],
+  "fact": "Tiana was Disney's first African American princess."
+ },
+ {
+  "date": "11-26",
+  "level": "easy",
+  "from": "🎬 Casablanca",
+  "name": "Casablanca, Morocco",
+  "lat": 33.573,
+  "lon": -7.59,
+  "clues": [
+   "Of all the gin joints in all the towns in all the world, she walks into mine. The movie is named after me, so this one's a freebie. Where am I?",
+   "Here's looking at you, kid. Rick's Café is in this city in Morocco.",
+   "Morocco's biggest city, on the Atlantic coast."
+  ],
+  "fact": "Casablanca (1942) was filmed almost entirely on a Hollywood studio lot."
+ },
+ {
+  "date": "11-26",
+  "level": "medium",
+  "from": "📖 Romeo and Juliet",
+  "name": "Verona, Italy",
+  "lat": 45.443,
+  "lon": 10.998,
+  "clues": [
+   "Two families, one balcony, a very bad ending. People still mail love letters to Juliet in my city. Where am I?",
+   "Shakespeare's Romeo and Juliet is set in this city in northern Italy.",
+   "Northern Italy, between Milan and Venice."
+  ],
+  "fact": "Volunteers called the Juliet Club answer thousands of letters to Juliet every year."
+ },
+ {
+  "date": "11-26",
+  "level": "medium",
+  "from": "📖 Robin Hood",
+  "name": "Nottingham, England",
+  "lat": 52.954,
+  "lon": -1.158,
+  "clues": [
+   "A man stole from the rich and gave to the poor, hiding in my forest from my Sheriff. Where am I?",
+   "Robin Hood fought the Sheriff of this English city near Sherwood Forest.",
+   "The middle of England."
+  ],
+  "fact": "The Major Oak in Sherwood Forest is said to have been Robin Hood's hideout."
+ },
+ {
+  "date": "11-26",
+  "level": "hard",
+  "from": "📖 The Call of the Wild",
+  "name": "Dawson City, Canada",
+  "lat": 64.06,
+  "lon": -139.43,
+  "clues": [
+   "Thousands rushed north to my frozen rivers to dig for gold. A big dog named Buck pulled sleds through my snow. Where am I?",
+   "The Klondike Gold Rush town of Dawson City, in Canada's Yukon.",
+   "Northwest Canada, near Alaska."
+  ],
+  "fact": "Jack London went to the Klondike himself in 1897."
+ },
+ {
+  "date": "11-27",
+  "level": "easy",
+  "from": "🎬 Pearl Harbor",
+  "name": "Pearl Harbor, Hawaii, USA",
+  "lat": 21.364,
+  "lon": -157.95,
+  "clues": [
+   "On a quiet Sunday morning in 1941, planes came out of the sky over my harbor and pulled the USA into a world war. Where am I?",
+   "Pearl Harbor, a navy base on the island of Oahu.",
+   "Next to Honolulu, Hawaii, in the middle of the Pacific."
+  ],
+  "fact": "The USS Arizona Memorial sits right over the sunken battleship."
+ },
+ {
+  "date": "11-27",
+  "level": "easy",
+  "from": "🎬 Parasite",
+  "name": "Seoul, South Korea",
+  "lat": 37.566,
+  "lon": 126.978,
+  "clues": [
+   "A poor family sneaks into a rich family's house one job at a time. The rich live up the hill and the poor live in a basement, in my city. Where am I?",
+   "Parasite, the first non-English Best Picture winner, is set in this capital.",
+   "The capital of South Korea."
+  ],
+  "fact": "Parasite won Best Picture in 2020, the first film not in English to do it."
+ },
+ {
+  "date": "11-27",
+  "level": "medium",
+  "from": "📖 The Count of Monte Cristo",
+  "name": "Marseille, France",
+  "lat": 43.28,
+  "lon": 5.325,
+  "clues": [
+   "Locked up for something he didn't do, Edmond Dantès spent 14 years in my island prison, then escaped in a dead man's sack. Where am I?",
+   "The prison, the Château d'If, is just off the coast of this French port city.",
+   "France's big port city on the Mediterranean."
+  ],
+  "fact": "The Château d'If is a real fortress, and you can visit it by boat."
+ },
+ {
+  "date": "11-27",
+  "level": "medium",
+  "from": "🎬 Hocus Pocus",
+  "name": "Salem, Massachusetts, USA",
+  "lat": 42.519,
+  "lon": -70.896,
+  "clues": [
+   "Three witch sisters came back from the dead on Halloween after a boy lit a black-flame candle in my town. Where am I?",
+   "Hocus Pocus takes place in this Massachusetts town, famous for its 1692 witch trials.",
+   "A coastal town just north of Boston."
+  ],
+  "fact": "Salem throws a giant Halloween festival every October."
+ },
+ {
+  "date": "11-27",
+  "level": "hard",
+  "from": "🎬 No Time to Die",
+  "name": "Matera, Italy",
+  "lat": 40.666,
+  "lon": 16.61,
+  "clues": [
+   "James Bond's car spun doughnuts in my stone square while bullets bounced off it. My old cave houses are carved into a canyon. Where am I?",
+   "No Time to Die opens in Matera, a cave town in southern Italy.",
+   "Basilicata, the arch of the Italian boot."
+  ],
+  "fact": "Matera's cave homes, the Sassi, are among the oldest lived-in places in the world."
+ },
+ {
+  "date": "11-28",
+  "level": "easy",
+  "from": "🎬 Lilo & Stitch",
+  "name": "Kauai, Hawaii, USA",
+  "lat": 22.07,
+  "lon": -159.5,
+  "clues": [
+   "I'm a state that doesn't touch any other state. A little blue alien crash-landed on my beaches and learned that ohana means family. Where am I?",
+   "Lilo lives on one of my islands, in the middle of the Pacific Ocean.",
+   "The 50th US state, a chain of islands far west of California. Lilo's island is Kauai."
+  ],
+  "fact": "The original 2002 movie is set on Kauai, and its little town was inspired by Hanapepe."
+ },
+ {
+  "date": "11-28",
+  "level": "easy",
+  "from": "📖 The Little Mermaid",
+  "name": "Copenhagen, Denmark",
+  "lat": 55.693,
+  "lon": 12.599,
+  "clues": [
+   "She gave up her voice for a pair of legs. A small bronze statue of her sits on a rock in my harbor. Where am I?",
+   "Hans Christian Andersen wrote The Little Mermaid in this Scandinavian capital.",
+   "The capital of Denmark."
+  ],
+  "fact": "The Little Mermaid statue has sat in Copenhagen harbor since 1913."
+ },
+ {
+  "date": "11-28",
+  "level": "medium",
+  "from": "🎬 Trainspotting",
+  "name": "Edinburgh, Scotland",
+  "lat": 55.953,
+  "lon": -3.189,
+  "clues": [
+   "Choose life. Renton and his mates ran down my streets in Trainspotting. I also have a castle on top of an old volcano. Where am I?",
+   "Trainspotting is set in this Scottish capital.",
+   "The capital of Scotland."
+  ],
+  "fact": "J.K. Rowling wrote early Harry Potter chapters in Edinburgh cafés."
+ },
+ {
+  "date": "11-28",
+  "level": "medium",
+  "from": "🎬 Anastasia",
+  "name": "St. Petersburg, Russia",
+  "lat": 59.94,
+  "lon": 30.315,
+  "clues": [
+   "Once upon a December, a lost princess danced in the palace of my city before the revolution. Where am I?",
+   "Anastasia starts at the royal palace in this Russian city that used to be the capital.",
+   "Russia's second-biggest city, on the Baltic Sea."
+  ],
+  "fact": "The Winter Palace in St. Petersburg is now the Hermitage Museum."
+ },
+ {
+  "date": "11-28",
+  "level": "hard",
+  "from": "🎬 Kong: Skull Island",
+  "name": "Ha Long Bay, Vietnam",
+  "lat": 20.91,
+  "lon": 107.18,
+  "clues": [
+   "Thousands of limestone islands rise from my green water. Kong: Skull Island filmed its monster island here. Where am I?",
+   "Ha Long Bay, in northern Vietnam.",
+   "Northern Vietnam, east of Hanoi."
+  ],
+  "fact": "Ha Long Bay has more than 1,600 islands."
+ },
+ {
+  "date": "11-29",
+  "level": "easy",
+  "from": "🎬 La La Land",
+  "name": "Los Angeles, USA",
+  "lat": 34.118,
+  "lon": -118.3,
+  "clues": [
+   "City of stars, are you shining just for me? Two dreamers danced above my lights at Griffith Observatory. Where am I?",
+   "La La Land is a nickname for my city, home of Hollywood.",
+   "The biggest city in California, in the south."
+  ],
+  "fact": "La La Land won six Oscars in 2017."
+ },
+ {
+  "date": "11-29",
+  "level": "easy",
+  "from": "📖 The Da Vinci Code",
+  "name": "Paris, France",
+  "lat": 48.861,
+  "lon": 2.336,
+  "clues": [
+   "A secret code hides behind the world's most famous smile, in a museum with a glass pyramid out front. Where am I?",
+   "The Da Vinci Code starts with a murder inside the Louvre, the museum that holds the Mona Lisa.",
+   "The capital of France, on the River Seine."
+  ],
+  "fact": "The Louvre's glass pyramid was finished in 1989 and is now the museum's main entrance."
+ },
+ {
+  "date": "11-29",
+  "level": "medium",
+  "from": "🎬 Invictus",
+  "name": "Johannesburg, South Africa",
+  "lat": -26.198,
+  "lon": 28.06,
+  "clues": [
+   "Nelson Mandela used a rugby team to bring his country together. They won the 1995 World Cup final in my city. Where am I?",
+   "Invictus ends at Ellis Park, in South Africa's biggest city.",
+   "South Africa's biggest city."
+  ],
+  "fact": "Morgan Freeman played Mandela in Invictus."
+ },
+ {
+  "date": "11-29",
+  "level": "medium",
+  "from": "📖 Memoirs of a Geisha",
+  "name": "Kyoto, Japan",
+  "lat": 35.0,
+  "lon": 135.775,
+  "clues": [
+   "A little girl was sold into a geisha house and grew up to be the most famous geisha in my old imperial city. Where am I?",
+   "Memoirs of a Geisha is set in Gion, the geisha district of this Japanese city.",
+   "Japan's old capital, near Osaka."
+  ],
+  "fact": "Kyoto was Japan's capital for more than 1,000 years."
+ },
+ {
+  "date": "11-29",
+  "level": "hard",
+  "from": "🎬 Cast Away",
+  "name": "Fiji",
+  "lat": -17.61,
+  "lon": 177.03,
+  "clues": [
+   "A FedEx worker was stranded on my tiny island for four years with only a volleyball named Wilson. Where am I?",
+   "Cast Away was filmed on Monuriki, an island in Fiji.",
+   "Fiji, in the South Pacific."
+  ],
+  "fact": "Monuriki is part of Fiji's Mamanuca Islands."
+ },
+ {
+  "date": "11-30",
+  "level": "easy",
+  "from": "🎬 Rocky",
+  "name": "Philadelphia, USA",
+  "lat": 39.966,
+  "lon": -75.181,
+  "clues": [
+   "A boxer ran up my 72 stone steps and threw his arms in the air. Now tourists do the same thing every day. Where am I?",
+   "Rocky's steps lead to this city's Museum of Art. The Declaration of Independence was signed here.",
+   "A big city in Pennsylvania, between New York and Washington, D.C."
+  ],
+  "fact": "There's a bronze Rocky statue at the bottom of the steps."
+ },
+ {
+  "date": "11-30",
+  "level": "easy",
+  "from": "🎬 Gladiator II",
+  "name": "Rome, Italy",
+  "lat": 41.89,
+  "lon": 12.492,
+  "clues": [
+   "I'm a giant stone ring with no roof, and gladiators fought for their lives on my floor. In Gladiator II my arena even floods for a sea battle. Where am I?",
+   "The Colosseum, in the city that ruled the Roman Empire.",
+   "The capital of Italy."
+  ],
+  "fact": "Historians think the real Colosseum may have been flooded for mock sea battles in its early years."
+ },
+ {
+  "date": "11-30",
+  "level": "medium",
+  "from": "🎬 Yesterday",
+  "name": "Liverpool, England",
+  "lat": 53.408,
+  "lon": -2.99,
+  "clues": [
+   "A musician wakes up in a world where nobody has heard of the Beatles, so he plays their songs as his own and visits their hometown: me. Where am I?",
+   "The Beatles came from this port city in northwest England.",
+   "Northwest England, on the River Mersey."
+  ],
+  "fact": "Penny Lane and Strawberry Field, from Beatles songs, are real places in Liverpool."
+ },
+ {
+  "date": "11-30",
+  "level": "medium",
+  "from": "🎬 Oppenheimer",
+  "name": "Los Alamos, USA",
+  "lat": 35.881,
+  "lon": -106.299,
+  "clues": [
+   "Scientists built a secret town on my mesa to make the first atomic bomb. In Oppenheimer, I go from empty land to a city nobody was allowed to know about. Where am I?",
+   "Los Alamos, in the mountains of New Mexico.",
+   "Northern New Mexico, near Santa Fe."
+  ],
+  "fact": "Oppenheimer won seven Oscars in 2024, including Best Picture."
+ },
+ {
+  "date": "11-30",
+  "level": "hard",
+  "from": "🎬 Michael",
+  "name": "Gary, Indiana, USA",
+  "lat": 41.593,
+  "lon": -87.346,
+  "clues": [
+   "I sound like a guy's name, not a place. The King of Pop grew up in a tiny house here before he ever moonwalked. Where am I?",
+   "Michael Jackson's family home is in this steel city in Indiana.",
+   "Northwest Indiana, on Lake Michigan, right next to Chicago."
+  ],
+  "fact": "The Jackson family's house at 2300 Jackson Street had just two bedrooms."
+ },
+ {
+  "date": "12-01",
+  "level": "easy",
+  "from": "🎬 The Dark Knight",
+  "name": "Hong Kong",
+  "lat": 22.285,
+  "lon": 114.159,
+  "clues": [
+   "Batman doesn't only visit Gotham. He leapt off one of my skyscrapers to grab a crook and got pulled up into a plane. Where am I?",
+   "In The Dark Knight, Batman flies to this skyscraper city on the south coast of China.",
+   "A huge harbor city in southern China, next to Macau."
+  ],
+  "fact": "Batman jumps from the IFC tower, one of Hong Kong's tallest buildings."
+ },
+ {
+  "date": "12-01",
+  "level": "easy",
+  "from": "🎬 Frozen",
+  "name": "Bergen, Norway",
+  "lat": 60.392,
+  "lon": 5.324,
+  "clues": [
+   "Elsa's kingdom of Arendelle is make-believe, but its fjords, wooden churches and snowy peaks are copied from my country. Let it go! Where am I?",
+   "Frozen was inspired by this Scandinavian country of fjords. Arendelle looks a lot like Bergen.",
+   "The long country on the west side of Scandinavia."
+  ],
+  "fact": "Disney's artists traveled to Norway to research the look of Frozen."
+ },
+ {
+  "date": "12-01",
+  "level": "medium",
+  "from": "🎬 Pompeii",
+  "name": "Pompeii, Italy",
+  "lat": 40.749,
+  "lon": 14.485,
+  "clues": [
+   "I was a busy Roman town until the mountain next door exploded and buried me in ash for 1,700 years. Where am I?",
+   "The movie Pompeii shows Mount Vesuvius erupting in 79 AD.",
+   "Southern Italy, near Naples."
+  ],
+  "fact": "Archaeologists are still digging up new rooms and paintings at Pompeii."
+ },
+ {
+  "date": "12-01",
+  "level": "medium",
+  "from": "🎬 Napoleon",
+  "name": "Waterloo, Belgium",
+  "lat": 50.68,
+  "lon": 4.41,
+  "clues": [
+   "Napoleon lost his last battle on my fields, and now my name means a final defeat. ABBA sang about me too. Where am I?",
+   "The Battle of Waterloo, shown in Ridley Scott's Napoleon, took place near this town.",
+   "Belgium, just south of Brussels."
+  ],
+  "fact": "The Battle of Waterloo was fought on June 18, 1815."
+ },
+ {
+  "date": "12-01",
+  "level": "hard",
+  "from": "🎬 Jaws",
+  "name": "Martha's Vineyard, USA",
+  "lat": 41.39,
+  "lon": -70.62,
+  "clues": [
+   "You're gonna need a bigger boat. A great white shark terrorized the beaches of 'Amity Island', which was really me. Where am I?",
+   "Jaws was filmed on Martha's Vineyard, an island off Massachusetts.",
+   "An island just south of Cape Cod, Massachusetts."
+  ],
+  "fact": "The mechanical shark in Jaws was nicknamed Bruce."
+ },
+ {
+  "date": "12-02",
+  "level": "easy",
+  "from": "📖 The Lord of the Rings",
+  "name": "Hobbiton, New Zealand",
+  "lat": -37.872,
+  "lon": 175.683,
+  "clues": [
+   "Hobbits live behind round green doors in my hills. I'm Middle-earth in the movies, but on a real map I'm two islands near the bottom of the world. Where am I?",
+   "The Lord of the Rings was filmed all over this country southeast of Australia. You can still visit Hobbiton.",
+   "Two big islands southeast of Australia. Hobbiton is on the North Island."
+  ],
+  "fact": "The Hobbiton set near Matamata is on a real farm, and you can visit it on a tour."
+ },
+ {
+  "date": "12-02",
+  "level": "easy",
+  "from": "🎬 Ratatouille",
+  "name": "Paris, France",
+  "lat": 48.853,
+  "lon": 2.35,
+  "clues": [
+   "Anyone can cook! A rat hid under a chef's hat and became the best cook in my city. Where am I?",
+   "Remy works in a fancy restaurant in this French capital, the city of the Eiffel Tower.",
+   "The capital of France."
+  ],
+  "fact": "The dish ratatouille comes from Provence, in the south of France."
+ },
+ {
+  "date": "12-02",
+  "level": "medium",
+  "from": "🎬 The Sisterhood of the Traveling Pants",
+  "name": "Santorini, Greece",
+  "lat": 36.46,
+  "lon": 25.376,
+  "clues": [
+   "One pair of jeans fit four friends, and one of them took the pants to my island of white houses and blue domes. Where am I?",
+   "The Sisterhood of the Traveling Pants was filmed in Oia, on this Greek island.",
+   "A Greek island in the southern Aegean Sea."
+  ],
+  "fact": "Santorini is the rim of a volcano that blew up about 3,600 years ago."
+ },
+ {
+  "date": "12-02",
+  "level": "medium",
+  "from": "📖 The Kite Runner",
+  "name": "Kabul, Afghanistan",
+  "lat": 34.53,
+  "lon": 69.17,
+  "clues": [
+   "For you, a thousand times over. Two boys flew kites through the winter sky of my city, before war tore it apart. Where am I?",
+   "The Kite Runner begins in this city, the capital of Afghanistan.",
+   "The capital of Afghanistan."
+  ],
+  "fact": "Khaled Hosseini's The Kite Runner came out in 2003 and became a worldwide best seller."
+ },
+ {
+  "date": "12-02",
+  "level": "hard",
+  "from": "📖 The Shining",
+  "name": "Estes Park, Colorado, USA",
+  "lat": 40.383,
+  "lon": -105.519,
+  "clues": [
+   "Here's Johnny! Stephen King spent one night in my nearly empty hotel and got the idea for The Shining. Where am I?",
+   "The Stanley Hotel in Estes Park inspired The Shining.",
+   "Colorado, at the edge of Rocky Mountain National Park."
+  ],
+  "fact": "Stephen King stayed in room 217 of the Stanley Hotel in 1974."
+ },
+ {
+  "date": "12-03",
+  "level": "easy",
+  "from": "🎬 The Lion King",
+  "name": "Kenya",
+  "lat": -0.91,
+  "lon": 36.32,
+  "clues": [
+   "Hakuna matata! It's Swahili for 'no worries.' Disney's artists came to my savanna to sketch real lions before drawing Pride Rock. Where am I?",
+   "This East African country inspired The Lion King. Its capital is Nairobi.",
+   "East Africa, on the Indian Ocean, just north of Tanzania."
+  ],
+  "fact": "Disney's animators went on a research trip to Kenya before making The Lion King."
+ },
+ {
+  "date": "12-03",
+  "level": "easy",
+  "from": "🎬 National Treasure",
+  "name": "Washington, D.C., USA",
+  "lat": 38.892,
+  "lon": -77.023,
+  "clues": [
+   "Nicolas Cage said he was going to steal the Declaration of Independence. It's kept in a building in my city, the capital. Where am I?",
+   "The National Archives in this city hold the Declaration, the Constitution and the Bill of Rights.",
+   "The capital of the USA, between Maryland and Virginia."
+  ],
+  "fact": "In National Treasure, the treasure map is written in invisible ink on the back of the Declaration."
+ },
+ {
+  "date": "12-03",
+  "level": "medium",
+  "from": "📖 Jurassic Park",
+  "name": "Costa Rica",
+  "lat": 9.93,
+  "lon": -84.08,
+  "clues": [
+   "Life finds a way. In the book and the movie, dinosaurs are brought back to life on an island off my Pacific coast. Where am I?",
+   "Jurassic Park's Isla Nublar is off the coast of this Central American country.",
+   "Central America, between Nicaragua and Panama."
+  ],
+  "fact": "Jurassic Park was actually filmed mostly on Kauai, Hawaii."
+ },
+ {
+  "date": "12-03",
+  "level": "medium",
+  "from": "📖 Persuasion",
+  "name": "Bath, England",
+  "lat": 51.381,
+  "lon": -2.359,
+  "clues": [
+   "Jane Austen sent her heroines to my city for balls and gossip and a sip of my hot spring water. I'm named after what the Romans built here. Where am I?",
+   "Persuasion and Northanger Abbey are set in this English city with Roman baths.",
+   "Southwest England, near Bristol."
+  ],
+  "fact": "Jane Austen lived in Bath from 1801 to 1806."
+ },
+ {
+  "date": "12-03",
+  "level": "hard",
+  "from": "📖 Pinocchio",
+  "name": "Collodi, Italy",
+  "lat": 43.9,
+  "lon": 10.65,
+  "clues": [
+   "Every time this wooden puppet lied, his nose grew. His author named himself after my little Tuscan village. Where am I?",
+   "Carlo Collodi took his pen name from Collodi, a village in Tuscany.",
+   "Tuscany, Italy, between Lucca and Florence."
+  ],
+  "fact": "Collodi has a Pinocchio park that opened in 1956."
+ },
+ {
+  "date": "12-04",
+  "level": "easy",
+  "from": "🎬 Madagascar",
+  "name": "Madagascar",
+  "lat": -19.0,
+  "lon": 46.9,
+  "clues": [
+   "A lion, a zebra, a giraffe and a hippo escaped from a New York zoo and washed up on my island, where King Julien likes to move it, move it. Where am I?",
+   "The movie is named after me: a big island off the east coast of Africa.",
+   "A huge island in the Indian Ocean, east of Mozambique."
+  ],
+  "fact": "Lemurs like King Julien live in the wild only on Madagascar."
+ },
+ {
+  "date": "12-04",
+  "level": "easy",
+  "from": "🎬 Interstellar",
+  "name": "Iceland",
+  "lat": 64.01,
+  "lon": -16.88,
+  "clues": [
+   "I played a frozen alien planet in Interstellar, and I really am fire and ice: glaciers on top, volcanoes underneath. Where am I?",
+   "Interstellar's ice planet was filmed on a glacier in this island country.",
+   "An island country in the North Atlantic, between Greenland and Norway."
+  ],
+  "fact": "The ice planet scenes were shot on the Svínafellsjökull glacier."
+ },
+ {
+  "date": "12-04",
+  "level": "medium",
+  "from": "🎬 Top Gun: Maverick",
+  "name": "San Diego, USA",
+  "lat": 32.868,
+  "lon": -117.142,
+  "clues": [
+   "I feel the need, the need for speed. The real Top Gun school started at a navy air base in my sunny city. Where am I?",
+   "Top Gun was based at Naval Air Station Miramar, in this Southern California city.",
+   "The southernmost big city in California, next to Mexico."
+  ],
+  "fact": "Top Gun: Maverick earned nearly $1.5 billion worldwide in 2022."
+ },
+ {
+  "date": "12-04",
+  "level": "medium",
+  "from": "🎬 Mission: Impossible",
+  "name": "Prague, Czech Republic",
+  "lat": 50.087,
+  "lon": 14.421,
+  "clues": [
+   "Ethan Hunt's very first mission goes wrong on my old bridges and cobblestone streets, and a restaurant fish tank explodes. Where am I?",
+   "The first Mission: Impossible (1996) was filmed in this Czech capital.",
+   "The capital of the Czech Republic."
+  ],
+  "fact": "Prague's Charles Bridge is more than 600 years old."
+ },
+ {
+  "date": "12-04",
+  "level": "hard",
+  "from": "📖 Anne of Green Gables",
+  "name": "Prince Edward Island, Canada",
+  "lat": 46.49,
+  "lon": -63.38,
+  "clues": [
+   "A red-haired orphan with a huge imagination came to live at Green Gables on my red-dirt island. Where am I?",
+   "Anne of Green Gables is set on Prince Edward Island, in Canada.",
+   "Eastern Canada, in the Gulf of St. Lawrence."
+  ],
+  "fact": "The Green Gables farm in Cavendish is a real place you can visit."
+ },
+ {
+  "date": "12-05",
+  "level": "easy",
+  "from": "🎬 Superman II",
+  "name": "Niagara Falls",
+  "lat": 43.08,
+  "lon": -79.075,
+  "clues": [
+   "I'm split between two countries, and I never stop pouring. Superman swooped in to catch a boy falling into my rushing water. Where am I?",
+   "This waterfall sits on the border between the USA and Canada.",
+   "Between New York State and Ontario, near Buffalo."
+  ],
+  "fact": "Niagara Falls is really three waterfalls side by side."
+ },
+ {
+  "date": "12-05",
+  "level": "easy",
+  "from": "🎬 The Fate of the Furious",
+  "name": "Havana, Cuba",
+  "lat": 23.136,
+  "lon": -82.359,
+  "clues": [
+   "My streets are full of 1950s cars in candy colors. Dom won a street race driving backwards, on fire, down my seaside road. Where am I?",
+   "The Fate of the Furious opens in this Caribbean capital.",
+   "The capital of Cuba."
+  ],
+  "fact": "It was the first big Hollywood movie to film in Cuba in decades."
+ },
+ {
+  "date": "12-05",
+  "level": "medium",
+  "from": "🎬 Iron Man 2",
+  "name": "Monaco",
+  "lat": 43.737,
+  "lon": 7.421,
+  "clues": [
+   "Tony Stark raced a car through my streets until a villain with electric whips attacked. I'm a tiny country, and my Grand Prix runs right through town. Where am I?",
+   "Iron Man 2's race scene is the Monaco Grand Prix, on the French Riviera.",
+   "A tiny country on the Mediterranean, next to Nice, France."
+  ],
+  "fact": "Monaco is the second-smallest country in the world, after Vatican City."
+ },
+ {
+  "date": "12-05",
+  "level": "medium",
+  "from": "🎬 The Pianist",
+  "name": "Warsaw, Poland",
+  "lat": 52.23,
+  "lon": 21.012,
+  "clues": [
+   "A pianist hid in the ruins of my city during World War II, and an enemy officer let him live after hearing him play. Where am I?",
+   "The Pianist is set in this capital, which was almost totally destroyed in the war.",
+   "The capital of Poland."
+  ],
+  "fact": "Warsaw's Old Town was rebuilt after the war and is now a UNESCO World Heritage Site."
+ },
+ {
+  "date": "12-05",
+  "level": "hard",
+  "from": "🎬 Harry Potter and the Chamber of Secrets",
+  "name": "Glenfinnan Viaduct, Scotland",
+  "lat": 56.876,
+  "lon": -5.432,
+  "clues": [
+   "The Hogwarts Express crosses my 21 stone arches, and Harry and Ron flew a car right alongside it. Where am I?",
+   "The Glenfinnan Viaduct, in the Scottish Highlands.",
+   "Western Scotland, near Fort William."
+  ],
+  "fact": "A real steam train, the Jacobite, still crosses the viaduct in summer."
+ },
+ {
+  "date": "12-06",
+  "level": "easy",
+  "from": "🎬 The Great Wall",
+  "name": "Great Wall of China",
+  "lat": 40.36,
+  "lon": 116.02,
+  "clues": [
+   "Matt Damon helped defend me from monsters in the movie named after me. I'm thousands of miles long and was built to keep invaders out. Where am I?",
+   "The Great Wall of China. Its most visited part is just north of Beijing.",
+   "Northern China, near Beijing."
+  ],
+  "fact": "It's a myth that you can see the Great Wall from space with your bare eyes."
+ },
+ {
+  "date": "12-06",
+  "level": "easy",
+  "from": "🎬 Mamma Mia!",
+  "name": "Skopelos, Greece",
+  "lat": 39.12,
+  "lon": 23.72,
+  "clues": [
+   "A bride invited three men to her wedding because one of them is her dad. Here we go again, on a sunny island in my country. Where am I?",
+   "Mamma Mia! is set on a Greek island. It was filmed on Skopelos, in the Aegean Sea.",
+   "Greece, in the Aegean Sea, east of the mainland."
+  ],
+  "fact": "The wedding chapel in Mamma Mia! is the real Agios Ioannis church on Skopelos."
+ },
+ {
+  "date": "12-06",
+  "level": "medium",
+  "from": "📖 Outlander",
+  "name": "Inverness, Scotland",
+  "lat": 57.478,
+  "lon": -4.225,
+  "clues": [
+   "Claire touched a standing stone and fell 200 years into the past, into a world of clans and kilts near my city in the Highlands. Where am I?",
+   "Outlander's standing stones are near this city, the capital of the Scottish Highlands.",
+   "Northern Scotland, at the top end of Loch Ness."
+  ],
+  "fact": "Diana Gabaldon's first Outlander book came out in 1991."
+ },
+ {
+  "date": "12-06",
+  "level": "medium",
+  "from": "🎬 Luca",
+  "name": "Cinque Terre, Italy",
+  "lat": 44.107,
+  "lon": 9.725,
+  "clues": [
+   "Two sea monsters turned into boys whenever they dried off, and spent a summer in a colorful fishing town on my cliffs. Where am I?",
+   "Luca's town of Portorosso is based on the Cinque Terre villages on the Italian Riviera.",
+   "Northwest Italy, on the coast near Genoa."
+  ],
+  "fact": "Luca's director Enrico Casarosa grew up in Genoa, near the Cinque Terre."
+ },
+ {
+  "date": "12-06",
+  "level": "hard",
+  "from": "📖 Midnight in the Garden of Good and Evil",
+  "name": "Savannah, Georgia, USA",
+  "lat": 32.08,
+  "lon": -81.09,
+  "clues": [
+   "My oak trees drip with Spanish moss, a murder in one of my mansions became a best-seller, and Forrest Gump's bench sat in one of my squares. Where am I?",
+   "This old city in Georgia is famous for its leafy squares.",
+   "The coast of Georgia, next to South Carolina."
+  ],
+  "fact": "Forrest Gump's bench sat in Chippewa Square."
+ },
+ {
+  "date": "12-07",
+  "level": "easy",
+  "from": "🎬 The Hangover Part II",
+  "name": "Bangkok, Thailand",
+  "lat": 13.756,
+  "lon": 100.502,
+  "clues": [
+   "The wolf pack swore it would never happen again. Then they woke up in my city with a face tattoo and a monkey. Where am I?",
+   "The Hangover Part II moves the chaos to the capital of Thailand.",
+   "The capital of Thailand, in Southeast Asia."
+  ],
+  "fact": "Bangkok's full name in Thai is one of the longest place names in the world."
+ },
+ {
+  "date": "12-07",
+  "level": "easy",
+  "from": "🎬 Paddington in Peru",
+  "name": "Machu Picchu, Peru",
+  "lat": -13.163,
+  "lon": -72.545,
+  "clues": [
+   "A bear in a blue coat came from 'darkest' jungle in my country. In his newest movie he came back home to look for his Aunt Lucy. Where am I?",
+   "Paddington in Peru: the bear's home country, in South America, with Machu Picchu in the Andes.",
+   "A country on the west coast of South America."
+  ],
+  "fact": "Michael Bond first had Paddington come from 'darkest Africa', then changed it to Peru."
+ },
+ {
+  "date": "12-07",
+  "level": "medium",
+  "from": "🎬 Apollo 13",
+  "name": "Houston, USA",
+  "lat": 29.552,
+  "lon": -95.098,
+  "clues": [
+   "When astronauts get in trouble, they call my name. '______, we have a problem!' Where am I?",
+   "NASA's Mission Control, in Apollo 13, is in this big Texas city.",
+   "The biggest city in Texas, near the Gulf of Mexico."
+  ],
+  "fact": "The real line was 'Houston, we've had a problem.'"
+ },
+ {
+  "date": "12-07",
+  "level": "medium",
+  "from": "📖 Frankenstein",
+  "name": "Geneva, Switzerland",
+  "lat": 46.204,
+  "lon": 6.143,
+  "clues": [
+   "A monster was born by my lake: Mary Shelley dreamed up Frankenstein during a stormy summer here, and Victor Frankenstein calls my city home. Where am I?",
+   "Frankenstein's creator is from this Swiss city on a big lake.",
+   "The tip of Lake Geneva in Switzerland, by the French border."
+  ],
+  "fact": "Mary Shelley started Frankenstein in 1816 at a villa near Geneva."
+ },
+ {
+  "date": "12-07",
+  "level": "hard",
+  "from": "🎬 Star Wars",
+  "name": "Southern Tunisia",
+  "lat": 33.3,
+  "lon": 10.2,
+  "clues": [
+   "Luke Skywalker's desert planet Tatooine is named after a real town in my country, and his underground home was filmed here too. Where am I?",
+   "Star Wars filmed Tatooine in southern Tunisia, near the towns of Tataouine and Matmata.",
+   "Southern Tunisia, in North Africa."
+  ],
+  "fact": "Luke's home in Matmata is a real hotel you can sleep in."
+ },
+ {
+  "date": "12-08",
+  "level": "easy",
+  "from": "📖 Inferno",
+  "name": "Florence, Italy",
+  "lat": 43.773,
+  "lon": 11.256,
+  "clues": [
+   "Robert Langdon wakes up with no memory and runs through my museums and secret passages, chasing clues from Dante. A giant red-domed cathedral watches. Where am I?",
+   "Dan Brown's Inferno races through this Tuscan city, where Dante was born.",
+   "The capital of Tuscany, in central Italy."
+  ],
+  "fact": "Dante, who wrote the poem Inferno, was born in Florence in 1265."
+ },
+ {
+  "date": "12-08",
+  "level": "easy",
+  "from": "📖 Fifty Shades of Grey",
+  "name": "Seattle, USA",
+  "lat": 47.606,
+  "lon": -122.332,
+  "clues": [
+   "It rains a lot in my city, but Christian Grey doesn't need an umbrella. He flies his own helicopter past my Space Needle. Where am I?",
+   "Fifty Shades of Grey is set in this rainy city in the Pacific Northwest.",
+   "The biggest city in Washington State, in the northwest USA."
+  ],
+  "fact": "The Fifty Shades books have sold more than 150 million copies."
+ },
+ {
+  "date": "12-08",
+  "level": "medium",
+  "from": "📖 Dune",
+  "name": "Wadi Rum, Jordan",
+  "lat": 29.57,
+  "lon": 35.42,
+  "clues": [
+   "I've played the desert planet in Dune and Mars in The Martian. My red sand and rock towers look like another world. Where am I?",
+   "Wadi Rum, a desert valley in Jordan.",
+   "Southern Jordan, near the Red Sea."
+  ],
+  "fact": "Lawrence of Arabia was also partly filmed in Wadi Rum."
+ },
+ {
+  "date": "12-08",
+  "level": "medium",
+  "from": "🎬 Train to Busan",
+  "name": "Busan, South Korea",
+  "lat": 35.115,
+  "lon": 129.04,
+  "clues": [
+   "Passengers fight zombies on a speeding train, and the only safe place is the city at the end of the line. That's me. Where am I?",
+   "Train to Busan heads for this port city in South Korea.",
+   "South Korea's second-biggest city, on the southeast coast."
+  ],
+  "fact": "Train to Busan (2016) became a hit all over the world."
+ },
+ {
+  "date": "12-08",
+  "level": "hard",
+  "from": "🎬 Close Encounters of the Third Kind",
+  "name": "Devils Tower, USA",
+  "lat": 44.59,
+  "lon": -104.715,
+  "clues": [
+   "People had visions of me and sculpted me out of mashed potatoes. In Close Encounters of the Third Kind, aliens land on my flat top. Where am I?",
+   "Devils Tower, a giant rock tower in the USA.",
+   "Northeast Wyoming."
+  ],
+  "fact": "Devils Tower became the first US National Monument, in 1906."
+ },
+ {
+  "date": "12-09",
+  "level": "easy",
+  "from": "🎬 Coco",
+  "name": "Mexico City, Mexico",
+  "lat": 19.432,
+  "lon": -99.133,
+  "clues": [
+   "Remember me! A boy who loves music crossed a bridge of orange marigold petals into the Land of the Dead on Día de los Muertos. Where am I?",
+   "Coco celebrates the Day of the Dead in this country just south of the USA.",
+   "The country just south of the USA. Its capital has the same name."
+  ],
+  "fact": "Pixar's team made several research trips to Mexico for Coco."
+ },
+ {
+  "date": "12-09",
+  "level": "easy",
+  "from": "🎬 Casino Royale",
+  "name": "Venice, Italy",
+  "lat": 45.437,
+  "lon": 12.334,
+  "clues": [
+   "My streets are made of water, so the taxis here are boats. In Casino Royale, a whole building sinks into my Grand Canal. Where am I?",
+   "James Bond ends up in this Italian city of canals, gondolas and bridges.",
+   "A city on a lagoon in northeast Italy, on the Adriatic Sea."
+  ],
+  "fact": "Venice is built on more than 100 small islands linked by hundreds of bridges."
+ },
+ {
+  "date": "12-09",
+  "level": "medium",
+  "from": "📖 Dracula",
+  "name": "Transylvania, Romania",
+  "lat": 45.515,
+  "lon": 25.367,
+  "clues": [
+   "Pack some garlic. The world's most famous vampire lives in a castle in my mountains. Where am I?",
+   "Count Dracula lives in this region of Romania, in the Carpathian Mountains.",
+   "Central Romania, in Eastern Europe."
+  ],
+  "fact": "Bran Castle is sold to tourists as 'Dracula's Castle', though Bram Stoker never went to Romania."
+ },
+ {
+  "date": "12-09",
+  "level": "medium",
+  "from": "📖 His Dark Materials",
+  "name": "Oxford, England",
+  "lat": 51.754,
+  "lon": -1.254,
+  "clues": [
+   "Lyra's version of my city has zeppelins and talking animal souls, but the colleges and towers are the same as the real ones. Where am I?",
+   "His Dark Materials starts at a college in this English university city.",
+   "A university city northwest of London."
+  ],
+  "fact": "Oxford is the oldest university in the English-speaking world."
+ },
+ {
+  "date": "12-09",
+  "level": "hard",
+  "from": "🎬 Up",
+  "name": "Angel Falls, Venezuela",
+  "lat": 5.967,
+  "lon": -62.535,
+  "clues": [
+   "Carl tied thousands of balloons to his house to fly it to 'Paradise Falls'. The real waterfall that inspired it is me, the tallest in the world. Where am I?",
+   "Angel Falls, in Venezuela.",
+   "Southeast Venezuela, in northern South America."
+  ],
+  "fact": "Angel Falls drops 979 meters, the tallest waterfall on Earth."
+ },
+ {
+  "date": "12-10",
+  "level": "easy",
+  "from": "🎬 Cool Runnings",
+  "name": "Jamaica",
+  "lat": 18.11,
+  "lon": -77.3,
+  "clues": [
+   "We've never seen snow, but we sent a bobsled team to the Winter Olympics. Feel the rhythm! Where am I?",
+   "Cool Runnings is about a bobsled team from this Caribbean island, home of reggae.",
+   "A Caribbean island south of Cuba."
+  ],
+  "fact": "Jamaica's real bobsled team first raced at the 1988 Winter Olympics in Calgary."
+ },
+ {
+  "date": "12-10",
+  "level": "easy",
+  "from": "📖 Eat Pray Love",
+  "name": "Bali, Indonesia",
+  "lat": -8.507,
+  "lon": 115.263,
+  "clues": [
+   "She ate her way through Italy and prayed in India. Then she found love on my island of rice terraces and temples. Where am I?",
+   "Eat Pray Love ends in Ubud, on this Indonesian island.",
+   "An island in Indonesia, just east of Java."
+  ],
+  "fact": "Elizabeth Gilbert's memoir Eat Pray Love has sold more than 10 million copies."
+ },
+ {
+  "date": "12-10",
+  "level": "medium",
+  "from": "🎬 Sinners",
+  "name": "Clarksdale, Mississippi, USA",
+  "lat": 34.2,
+  "lon": -90.57,
+  "clues": [
+   "Twin brothers open a juke joint where the blues are so good they wake up vampires. It's 1932, in the flat cotton country along my river. Where am I?",
+   "Sinners is set in the Mississippi Delta around Clarksdale, a birthplace of the blues.",
+   "Northwest Mississippi, along the Mississippi River."
+  ],
+  "fact": "Michael B. Jordan plays both twins in Sinners (2025)."
+ },
+ {
+  "date": "12-10",
+  "level": "medium",
+  "from": "🎬 Before Sunrise",
+  "name": "Vienna, Austria",
+  "lat": 48.208,
+  "lon": 16.373,
+  "clues": [
+   "Two strangers met on a train and got off together to wander my city for one night, before she had to leave at sunrise. Where am I?",
+   "Before Sunrise takes place in this Austrian capital.",
+   "The capital of Austria."
+  ],
+  "fact": "They ride Vienna's giant Ferris wheel, the Riesenrad, which dates from 1897."
+ },
+ {
+  "date": "12-10",
+  "level": "hard",
+  "from": "🎬 Star Wars: The Force Awakens",
+  "name": "Skellig Michael, Ireland",
+  "lat": 51.772,
+  "lon": -10.539,
+  "clues": [
+   "Luke Skywalker hid from the galaxy on a rocky island with stone beehive huts. That island is me. Where am I?",
+   "Skellig Michael, an island off the southwest coast of Ireland.",
+   "Off the coast of County Kerry, Ireland."
+  ],
+  "fact": "Monks lived on Skellig Michael more than 1,000 years ago."
+ },
+ {
+  "date": "12-11",
+  "level": "easy",
+  "from": "🎬 Mission: Impossible – Ghost Protocol",
+  "name": "Dubai, UAE",
+  "lat": 25.197,
+  "lon": 55.274,
+  "clues": [
+   "I'm so tall that Tom Cruise had to climb my outside with sticky gloves. I'm the tallest building in the world. Where am I?",
+   "The Burj Khalifa, in this glitzy desert city in the United Arab Emirates.",
+   "The biggest city in the UAE, on the Persian Gulf."
+  ],
+  "fact": "Tom Cruise did the climb himself, attached to safety cables."
+ },
+ {
+  "date": "12-11",
+  "level": "easy",
+  "from": "🎬 Inside Out",
+  "name": "San Francisco, USA",
+  "lat": 37.776,
+  "lon": -122.42,
+  "clues": [
+   "Riley's emotions panicked when her family moved to my hilly city, where even the pizza had broccoli on it. Look for a red bridge in the fog. Where am I?",
+   "Riley moves here from Minnesota. My Golden Gate Bridge is famous everywhere.",
+   "A city on the coast of Northern California."
+  ],
+  "fact": "Inside Out 2 (2024) became one of the highest-grossing animated movies ever."
+ },
+ {
+  "date": "12-11",
+  "level": "medium",
+  "from": "📖 Gone with the Wind",
+  "name": "Atlanta, USA",
+  "lat": 33.749,
+  "lon": -84.388,
+  "clues": [
+   "Frankly, my dear, I don't give a damn. Scarlett O'Hara fled as my city burned in the Civil War. Where am I?",
+   "Gone with the Wind's big fire scene is the burning of this Georgia city.",
+   "The capital of Georgia, in the southeast USA."
+  ],
+  "fact": "Margaret Mitchell wrote Gone with the Wind in her Atlanta apartment."
+ },
+ {
+  "date": "12-11",
+  "level": "medium",
+  "from": "🎬 Star Wars: Attack of the Clones",
+  "name": "Lake Como, Italy",
+  "lat": 45.985,
+  "lon": 9.203,
+  "clues": [
+   "Anakin and Padmé had their secret wedding at a villa on my shore. I'm a lake shaped like an upside-down Y. Where am I?",
+   "Lake Como, in northern Italy near the Swiss border.",
+   "Northern Italy, north of Milan."
+  ],
+  "fact": "The wedding was filmed at Villa del Balbianello, which also appears in Casino Royale."
+ },
+ {
+  "date": "12-11",
+  "level": "hard",
+  "from": "📖 Twilight",
+  "name": "Forks, Washington, USA",
+  "lat": 47.95,
+  "lon": -124.385,
+  "clues": [
+   "It rains so much in my small town that vampires can go out in the daytime. Team Edward or Team Jacob? Where am I?",
+   "Twilight is set in Forks, a small town in Washington State.",
+   "The Olympic Peninsula, in the far northwest corner of Washington State."
+  ],
+  "fact": "Forks is one of the rainiest towns in the USA."
+ },
+ {
+  "date": "12-12",
+  "level": "easy",
+  "from": "📖 Crazy Rich Asians",
+  "name": "Singapore",
+  "lat": 1.283,
+  "lon": 103.86,
+  "clues": [
+   "Rachel thought she was meeting her boyfriend's family. Turns out they're crazy rich, with parties at a rooftop pool shaped like a ship. Where am I?",
+   "Crazy Rich Asians is set in this tiny, rich island country with the Marina Bay Sands hotel.",
+   "A city-state at the southern tip of Malaysia."
+  ],
+  "fact": "Crazy Rich Asians is based on Kevin Kwan's 2013 novel."
+ },
+ {
+  "date": "12-12",
+  "level": "easy",
+  "from": "📖 War and Peace",
+  "name": "Moscow, Russia",
+  "lat": 55.752,
+  "lon": 37.617,
+  "clues": [
+   "Napoleon marched all the way to me and found me empty and on fire. My red fortress is called the Kremlin. Where am I?",
+   "Tolstoy's War and Peace shows Napoleon taking this Russian city in 1812.",
+   "The capital of Russia."
+  ],
+  "fact": "War and Peace is more than 1,000 pages long."
+ },
+ {
+  "date": "12-12",
+  "level": "medium",
+  "from": "📖 Heidi",
+  "name": "Swiss Alps",
+  "lat": 47.01,
+  "lon": 9.53,
+  "clues": [
+   "An orphan girl was sent to live with her grumpy grandfather on my mountain and fell in love with the goats and meadows. Where am I?",
+   "Heidi is set in the Alps of this country, famous for chocolate and watches.",
+   "Eastern Switzerland, near Liechtenstein."
+  ],
+  "fact": "Heidi was written in 1881 and is one of the best-selling books ever."
+ },
+ {
+  "date": "12-12",
+  "level": "medium",
+  "from": "📖 Don Quixote",
+  "name": "La Mancha, Spain",
+  "lat": 39.457,
+  "lon": -3.608,
+  "clues": [
+   "An old knight charged at my windmills because he thought they were giants. Where am I?",
+   "Don Quixote comes from La Mancha, a flat region of central Spain full of windmills.",
+   "Central Spain, south of Madrid."
+  ],
+  "fact": "Don Quixote, from 1605, is often called the first modern novel."
+ },
+ {
+  "date": "12-12",
+  "level": "hard",
+  "from": "🎬 3 Idiots",
+  "name": "Pangong Lake, India",
+  "lat": 33.75,
+  "lon": 78.67,
+  "clues": [
+   "At the end of 3 Idiots, the friends finally find Rancho by my lake. I'm 4,000 meters up and change color through the day. Where am I?",
+   "Pangong Lake, high in the mountains of Ladakh, India.",
+   "Far northern India, on the border with Tibet."
+  ],
+  "fact": "3 Idiots (2009) was one of the biggest Indian movies of its time."
+ },
+ {
+  "date": "12-13",
+  "level": "easy",
+  "from": "📖 The Alchemist",
+  "name": "Pyramids of Giza, Egypt",
+  "lat": 29.979,
+  "lon": 31.134,
+  "clues": [
+   "A shepherd boy dreamed of treasure buried at my feet, so he crossed the whole desert to find it. I'm 4,500 years old and shaped like triangles. Where am I?",
+   "In The Alchemist, Santiago travels from Spain to these famous pyramids in Egypt.",
+   "Right next to Cairo, the capital of Egypt."
+  ],
+  "fact": "The Alchemist by Paulo Coelho is one of the best-selling books of all time."
+ },
+ {
+  "date": "12-13",
+  "level": "easy",
+  "from": "🎬 North by Northwest",
+  "name": "Mount Rushmore, USA",
+  "lat": 43.879,
+  "lon": -103.459,
+  "clues": [
+   "Four presidents' faces are carved into me, and Cary Grant dangled from their noses in North by Northwest. Where am I?",
+   "Mount Rushmore, in the Black Hills.",
+   "South Dakota, in the northern Great Plains of the USA."
+  ],
+  "fact": "Each face on Mount Rushmore is about 18 meters (60 feet) tall."
+ },
+ {
+  "date": "12-13",
+  "level": "medium",
+  "from": "🎬 Free Solo",
+  "name": "Yosemite, USA",
+  "lat": 37.734,
+  "lon": -119.637,
+  "clues": [
+   "A man climbed my 900-meter granite wall with no rope at all. The movie about it, Free Solo, won an Oscar. Where am I?",
+   "El Capitan, in Yosemite National Park.",
+   "California's Sierra Nevada mountains."
+  ],
+  "fact": "Alex Honnold climbed El Capitan without ropes in 2017, in under four hours."
+ },
+ {
+  "date": "12-13",
+  "level": "medium",
+  "from": "🎬 Tangled",
+  "name": "Mont-Saint-Michel, France",
+  "lat": 48.636,
+  "lon": -1.511,
+  "clues": [
+   "Rapunzel's kingdom is an island town that climbs a rock up to a castle, and it was inspired by me. At high tide, the sea surrounds me. Where am I?",
+   "Mont-Saint-Michel, an island abbey off the coast of Normandy.",
+   "Northwest France, between Normandy and Brittany."
+  ],
+  "fact": "The tides around Mont-Saint-Michel are some of the biggest in Europe."
+ },
+ {
+  "date": "12-13",
+  "level": "hard",
+  "from": "📖 Hamlet",
+  "name": "Helsingør, Denmark",
+  "lat": 56.039,
+  "lon": 12.621,
+  "clues": [
+   "To be or not to be. A prince sees his father's ghost on the walls of my castle. Where am I?",
+   "Hamlet's Elsinore is Kronborg Castle in Helsingør, Denmark.",
+   "Northeast Denmark, across the water from Sweden."
+  ],
+  "fact": "Hamlet is performed at Kronborg Castle almost every summer."
+ },
+ {
+  "date": "12-14",
+  "level": "easy",
+  "from": "🎬 Brave",
+  "name": "Scottish Highlands",
+  "lat": 56.8,
+  "lon": -4.2,
+  "clues": [
+   "Merida shot for her own hand and turned her mum into a bear. Her kingdom of misty highlands, castles and lochs is on a real map. Where am I?",
+   "Brave takes place in this country at the north end of Great Britain.",
+   "The northern part of the United Kingdom."
+  ],
+  "fact": "Merida is voiced by Scottish actress Kelly Macdonald."
+ },
+ {
+  "date": "12-14",
+  "level": "easy",
+  "from": "🎬 Thelma & Louise",
+  "name": "Grand Canyon, USA",
+  "lat": 36.1,
+  "lon": -112.11,
+  "clues": [
+   "Two friends on the run hit the gas and flew off my edge instead of giving up. I'm a mile deep and carved by a river. Where am I?",
+   "Thelma & Louise ends at this giant canyon carved by the Colorado River.",
+   "Northern Arizona, USA."
+  ],
+  "fact": "The final scene was actually filmed at Dead Horse Point in Utah."
+ },
+ {
+  "date": "12-14",
+  "level": "medium",
+  "from": "📖 Death on the Nile",
+  "name": "Aswan, Egypt",
+  "lat": 24.088,
+  "lon": 32.899,
+  "clues": [
+   "Hercule Poirot goes on a river cruise past ancient temples, and of course, someone gets murdered on the boat. Where am I?",
+   "Death on the Nile begins at a famous hotel in this city in southern Egypt.",
+   "Southern Egypt, on the Nile, near the big dam."
+  ],
+  "fact": "Agatha Christie stayed at the Old Cataract Hotel in Aswan."
+ },
+ {
+  "date": "12-14",
+  "level": "medium",
+  "from": "🎬 The Sound of Music",
+  "name": "Salzburg, Austria",
+  "lat": 47.809,
+  "lon": 13.055,
+  "clues": [
+   "The hills are alive with the sound of music! Maria sang and danced with seven kids through my gardens and mountains. Where am I?",
+   "The Sound of Music takes place in this Austrian city, where Mozart was born.",
+   "Austria, right by the German border."
+  ],
+  "fact": "Mozart was born in Salzburg in 1756."
+ },
+ {
+  "date": "12-14",
+  "level": "hard",
+  "from": "📖 Moby-Dick",
+  "name": "Nantucket, USA",
+  "lat": 41.283,
+  "lon": -70.099,
+  "clues": [
+   "Call me Ishmael. Captain Ahab's whaling ship sailed from my little island to hunt a white whale. Where am I?",
+   "Moby-Dick's ship sails from Nantucket, an island off Massachusetts.",
+   "An island south of Cape Cod, Massachusetts."
+  ],
+  "fact": "Nantucket was the whaling capital of the world in the early 1800s."
+ },
+ {
+  "date": "12-15",
+  "level": "easy",
+  "from": "🎬 Home Alone",
+  "name": "Chicago, USA",
+  "lat": 42.0,
+  "lon": -87.7,
+  "clues": [
+   "My family flew to Paris and forgot me at home for Christmas, so I fought off two burglars with paint cans and a tarantula in a big house outside my city. Where am I?",
+   "Kevin McCallister's house is in a suburb of this windy city on Lake Michigan.",
+   "The biggest city in Illinois, on Lake Michigan."
+  ],
+  "fact": "The real Home Alone house is in Winnetka, just north of Chicago."
+ },
+ {
+  "date": "12-15",
+  "level": "easy",
+  "from": "🎬 The Devil Wears Prada 2",
+  "name": "Milan, Italy",
+  "lat": 45.464,
+  "lon": 9.19,
+  "clues": [
+   "My country is shaped like a boot, and here people wear their best ones. Miranda Priestly flew in to sit in the front row at my fashion week. Where am I?",
+   "Italy's fashion capital, in the north, not far from the Alps.",
+   "The big city in northern Italy, between Turin and Venice."
+  ],
+  "fact": "The sequel filmed at a real Dolce & Gabbana show during Milan Fashion Week in 2025."
+ },
+ {
+  "date": "12-15",
+  "level": "medium",
+  "from": "🎬 Indiana Jones and the Last Crusade",
+  "name": "Petra, Jordan",
+  "lat": 30.322,
+  "lon": 35.452,
+  "clues": [
+   "Indiana Jones rode up to my pink stone front door looking for the Holy Grail. I'm a whole city carved into a cliff. Where am I?",
+   "The Last Crusade's ending was filmed at the Treasury in Petra, an ancient city.",
+   "Southern Jordan, in the Middle East."
+  ],
+  "fact": "Petra was carved by the Nabataeans more than 2,000 years ago."
+ },
+ {
+  "date": "12-15",
+  "level": "medium",
+  "from": "🎬 Independence Day",
+  "name": "Area 51, Nevada, USA",
+  "lat": 37.235,
+  "lon": -115.811,
+  "clues": [
+   "I don't officially exist, but in Independence Day the President found a crashed alien spaceship hidden under my desert. Where am I?",
+   "Area 51, the secret air base in the Nevada desert.",
+   "Southern Nevada, north of Las Vegas."
+  ],
+  "fact": "The US government only officially admitted Area 51 exists in 2013."
+ },
+ {
+  "date": "12-15",
+  "level": "hard",
+  "from": "📖 Wuthering Heights",
+  "name": "Haworth, England",
+  "lat": 53.83,
+  "lon": -1.955,
+  "clues": [
+   "Heathcliff and Cathy ran wild across my windy moors. Emily Brontë wrote the book while living in my village. Where am I?",
+   "Wuthering Heights is set on the Yorkshire moors around Haworth, England.",
+   "Northern England, west of Leeds."
+  ],
+  "fact": "A new Wuthering Heights movie with Margot Robbie came out in 2026."
+ },
+ {
+  "date": "12-16",
+  "level": "easy",
+  "from": "🎬 Turning Red",
+  "name": "Toronto, Canada",
+  "lat": 43.653,
+  "lon": -79.383,
+  "clues": [
+   "Whenever Mei gets too excited, she poofs into a giant red panda, right in the middle of my city, under my tall CN Tower. Where am I?",
+   "Turning Red is set in this big Canadian city on Lake Ontario.",
+   "Canada's biggest city, on Lake Ontario."
+  ],
+  "fact": "Turning Red is set in 2002, and Mei's family looks after a temple in Toronto's Chinatown."
+ },
+ {
+  "date": "12-16",
+  "level": "easy",
+  "from": "🎬 Bridge of Spies",
+  "name": "Berlin, Germany",
+  "lat": 52.52,
+  "lon": 13.4,
+  "clues": [
+   "A wall cut my city in half for 28 years. In Bridge of Spies, two spies are swapped on a bridge at my edge during the Cold War. Where am I?",
+   "The Berlin Wall split this German capital from 1961 to 1989.",
+   "The capital of Germany."
+  ],
+  "fact": "The real spy swap of 1962 happened on the Glienicke Bridge between Berlin and Potsdam."
+ },
+ {
+  "date": "12-16",
+  "level": "medium",
+  "from": "🎬 Fargo",
+  "name": "Fargo, North Dakota, USA",
+  "lat": 46.877,
+  "lon": -96.79,
+  "clues": [
+   "The movie is named after me, but almost none of it happens here. Most of it is across the river in snowy Minnesota. Where am I?",
+   "Fargo is a city in North Dakota.",
+   "Eastern North Dakota, on the Minnesota border."
+  ],
+  "fact": "Fargo (1996) won Oscars for Frances McDormand and for its screenplay."
+ },
+ {
+  "date": "12-16",
+  "level": "medium",
+  "from": "📖 A Song of Ice and Fire",
+  "name": "Dubrovnik, Croatia",
+  "lat": 42.641,
+  "lon": 18.108,
+  "clues": [
+   "Winter is coming, but not to me. My old city walls played King's Landing in Game of Thrones. Where am I?",
+   "This walled city on Croatia's coast played King's Landing on screen.",
+   "Southern Croatia, on the Adriatic Sea."
+  ],
+  "fact": "Dubrovnik's city walls are almost 2 km long."
+ },
+ {
+  "date": "12-16",
+  "level": "hard",
+  "from": "🎬 127 Hours",
+  "name": "Canyonlands, Utah, USA",
+  "lat": 38.4,
+  "lon": -110.2,
+  "clues": [
+   "A hiker got his arm stuck under a boulder in my slot canyon for 127 hours, and got out the hardest way possible. Where am I?",
+   "127 Hours happened in Blue John Canyon, in the Utah desert.",
+   "Southeast Utah, next to Canyonlands National Park."
+  ],
+  "fact": "Aron Ralston, the real hiker, kept climbing mountains afterward."
+ },
+ {
+  "date": "12-17",
+  "level": "easy",
+  "from": "🎬 Dunkirk",
+  "name": "Dunkirk, France",
+  "lat": 51.034,
+  "lon": 2.377,
+  "clues": [
+   "Soldiers were trapped on my beach, so ordinary people sailed their little boats across the sea to bring them home. The movie has my name. Where am I?",
+   "Christopher Nolan's Dunkirk: a French port on the English Channel, in 1940.",
+   "A port in northern France, near Belgium."
+  ],
+  "fact": "More than 330,000 soldiers were rescued from Dunkirk in 1940."
+ },
+ {
+  "date": "12-17",
+  "level": "easy",
+  "from": "🎬 Finding Nemo",
+  "name": "Sydney, Australia",
+  "lat": -33.857,
+  "lon": 151.215,
+  "clues": [
+   "P. Sherman, 42 Wallaby Way. A dad fish swam across the ocean to find that address and his son, in my harbor. Where am I?",
+   "Nemo ends up in a dentist's fish tank in this Australian city, famous for its Opera House.",
+   "The biggest city in Australia, on the southeast coast."
+  ],
+  "fact": "Marlin swims from the Great Barrier Reef all the way down the coast to Sydney Harbour."
+ },
+ {
+  "date": "12-17",
+  "level": "medium",
+  "from": "🎬 Evita",
+  "name": "Buenos Aires, Argentina",
+  "lat": -34.608,
+  "lon": -58.371,
+  "clues": [
+   "Don't cry for me! Eva Perón sang to the crowds from the balcony of the Pink House in my city. Where am I?",
+   "Evita is about Argentina's first lady. The Casa Rosada is in this capital.",
+   "The capital of Argentina."
+  ],
+  "fact": "Madonna sang from the real Casa Rosada balcony for Evita."
+ },
+ {
+  "date": "12-17",
+  "level": "medium",
+  "from": "🎬 Encanto",
+  "name": "Colombia",
+  "lat": 5.0,
+  "lon": -75.0,
+  "clues": [
+   "We don't talk about Bruno, but we do talk about me: the magic family's house, mountains and coffee fields come from my country. Where am I?",
+   "Encanto takes place in this South American country, famous for coffee.",
+   "The top of South America, next to Panama."
+  ],
+  "fact": "'We Don't Talk About Bruno' hit No. 1 on the Billboard Hot 100."
+ },
+ {
+  "date": "12-17",
+  "level": "hard",
+  "from": "🎬 Avatar",
+  "name": "Zhangjiajie, China",
+  "lat": 29.32,
+  "lon": 110.43,
+  "clues": [
+   "My stone pillars poke out of the clouds like floating mountains. Avatar's Hallelujah Mountains were inspired by me. Where am I?",
+   "Zhangjiajie National Forest Park, in China.",
+   "Hunan province, in south-central China."
+  ],
+  "fact": "One of Zhangjiajie's pillars was renamed 'Avatar Hallelujah Mountain' after the movie."
+ },
+ {
+  "date": "12-18",
+  "level": "easy",
+  "from": "🎬 Elf",
+  "name": "New York City, USA",
+  "lat": 40.769,
+  "lon": -73.974,
+  "clues": [
+   "Santa's sleigh crash-landed in my park, and an elf in yellow tights went looking for his dad. The best way to spread Christmas cheer is singing loud for all to hear. Where am I?",
+   "Buddy the Elf travels from the North Pole to this city. Santa lands in Central Park.",
+   "The biggest city in the USA."
+  ],
+  "fact": "Elf (2003) was directed by Jon Favreau, who also plays the doctor."
+ },
+ {
+  "date": "12-18",
+  "level": "easy",
+  "from": "🎬 The Hangover",
+  "name": "Las Vegas, USA",
+  "lat": 36.117,
+  "lon": -115.173,
+  "clues": [
+   "What happens here stays here. Four friends woke up with a tiger in the bathroom and no memory of last night in my city. Where am I?",
+   "The Hangover's bachelor party goes wrong in this desert city of casinos.",
+   "A casino city in the Nevada desert."
+  ],
+  "fact": "Caesars Palace, where the guys stay in The Hangover, opened in 1966."
+ },
+ {
+  "date": "12-18",
+  "level": "medium",
+  "from": "🎬 Sleeping Beauty",
+  "name": "Neuschwanstein Castle, Germany",
+  "lat": 47.557,
+  "lon": 10.749,
+  "clues": [
+   "I'm the real castle that inspired Sleeping Beauty's, the one Disney fans know by heart. A 'fairy-tale king' built me on a hill. Where am I?",
+   "Neuschwanstein Castle, in Bavaria.",
+   "Southern Germany, near the Austrian border."
+  ],
+  "fact": "King Ludwig II started building Neuschwanstein in 1869."
+ },
+ {
+  "date": "12-18",
+  "level": "medium",
+  "from": "🎬 Elvis",
+  "name": "Memphis, USA",
+  "lat": 35.046,
+  "lon": -90.026,
+  "clues": [
+   "The King of Rock and Roll lived in a mansion called Graceland in my city. Thank you, thank you very much. Where am I?",
+   "Elvis recorded his first songs at Sun Studio in this Tennessee city on the Mississippi.",
+   "Tennessee's biggest city, in the southwest corner."
+  ],
+  "fact": "Graceland is one of the most visited homes in the USA."
+ },
+ {
+  "date": "12-18",
+  "level": "hard",
+  "from": "📖 The Jungle Book",
+  "name": "Pench, India",
+  "lat": 21.7,
+  "lon": 79.3,
+  "clues": [
+   "A boy raised by wolves made friends with a bear and a panther in my jungle. Kipling set The Jungle Book in my hills. Where am I?",
+   "The Jungle Book takes place around Seoni, in central India, where Pench National Park is now.",
+   "Madhya Pradesh, right in the middle of India."
+  ],
+  "fact": "Pench National Park is home to real Bengal tigers like Shere Khan."
+ },
+ {
+  "date": "12-19",
+  "level": "easy",
+  "from": "🎬 Good Will Hunting",
+  "name": "Boston, USA",
+  "lat": 42.36,
+  "lon": -71.06,
+  "clues": [
+   "A janitor at a famous university solved the math problems nobody else could. How do you like them apples? Where am I?",
+   "Good Will Hunting is set in this city and next door at MIT and Harvard.",
+   "The biggest city in New England, on the coast of Massachusetts."
+  ],
+  "fact": "Matt Damon and Ben Affleck won the Oscar for writing Good Will Hunting."
+ },
+ {
+  "date": "12-19",
+  "level": "easy",
+  "from": "📖 Into the Wild",
+  "name": "Alaska, USA",
+  "lat": 63.868,
+  "lon": -149.769,
+  "clues": [
+   "A young man gave away his savings and walked into my wilderness to live off the land, inside an old abandoned bus. Where am I?",
+   "Into the Wild ends in the biggest US state, far to the north.",
+   "The far northwest corner of North America, next to Canada. The bus was near Denali."
+  ],
+  "fact": "The real bus was airlifted out in 2020 and is now at a museum in Fairbanks."
+ },
+ {
+  "date": "12-19",
+  "level": "medium",
+  "from": "🎬 Titanic",
+  "name": "Belfast, Northern Ireland",
+  "lat": 54.608,
+  "lon": -5.91,
+  "clues": [
+   "The ship that 'couldn't sink' was built in my shipyard. Jack and Rose met on board, and it didn't end well. Where am I?",
+   "The Titanic was built in this city in Northern Ireland.",
+   "The capital of Northern Ireland."
+  ],
+  "fact": "Titanic Belfast, a museum shaped like ship bows, stands where the ship was built."
+ },
+ {
+  "date": "12-19",
+  "level": "medium",
+  "from": "📖 The Beach",
+  "name": "Maya Bay, Thailand",
+  "lat": 7.678,
+  "lon": 98.766,
+  "clues": [
+   "A backpacker found a map to a secret paradise beach. It turned out to be me, a lagoon walled in by cliffs, and now everyone knows. Where am I?",
+   "The Beach was filmed at Maya Bay, in Thailand's Phi Phi Islands.",
+   "Southern Thailand, near Phuket."
+  ],
+  "fact": "Maya Bay was closed for years to let its coral recover from too many tourists."
+ },
+ {
+  "date": "12-19",
+  "level": "hard",
+  "from": "🎬 Master and Commander",
+  "name": "Galápagos Islands, Ecuador",
+  "lat": -0.75,
+  "lon": -90.4,
+  "clues": [
+   "Darwin studied my giant tortoises and finches and came up with evolution. In Master and Commander, the ship's doctor explores my islands. Where am I?",
+   "The Galápagos Islands, in the Pacific Ocean.",
+   "In the Pacific, about 1,000 km west of Ecuador."
+  ],
+  "fact": "Galápagos giant tortoises can live for more than 100 years."
+ },
+ {
+  "date": "12-20",
+  "level": "easy",
+  "from": "🎬 Love Actually",
+  "name": "London, England",
+  "lat": 51.5,
+  "lon": -0.12,
+  "clues": [
+   "Love actually is all around, especially at Christmas. A boy runs through my airport and a prime minister dances down the stairs in my city. Where am I?",
+   "Love Actually starts and ends at Heathrow, this city's big airport.",
+   "The capital of the United Kingdom."
+  ],
+  "fact": "Love Actually opens and closes with real footage of people hugging at Heathrow arrivals."
+ },
+ {
+  "date": "12-20",
+  "level": "easy",
+  "from": "📖 The Wizard of Oz",
+  "name": "Kansas, USA",
+  "lat": 38.5,
+  "lon": -98.0,
+  "clues": [
+   "There's no place like home, and Dorothy's home is me. Just keep an eye on the sky: my tornadoes can blow you all the way to Oz. Where am I?",
+   "A flat, farm-filled state right in the middle of the USA.",
+   "In the center of the USA, between Colorado and Missouri."
+  ],
+  "fact": "L. Frank Baum's book came out in 1900, and the famous movie followed in 1939."
  },
  {
   "date": "12-20",
   "level": "medium",
-  "name": "New Orleans, USA (Louisiana Purchase)",
-  "lat": 29.9575,
-  "lon": -90.063,
+  "from": "📖 The Snows of Kilimanjaro",
+  "name": "Mount Kilimanjaro, Tanzania",
+  "lat": -3.067,
+  "lon": 37.355,
   "clues": [
-   "A flag came down in a square by the Mississippi, and the United States doubled in size. Where am I?",
-   "The US took over the Louisiana Purchase in a ceremony in this city. Where am I?",
-   "1803: the Louisiana Purchase is handed over in New Orleans."
+   "I'm a mountain with snow on top, even though I'm close to the equator. Hemingway wrote about my snows. Where am I?",
+   "Mount Kilimanjaro, Africa's tallest mountain.",
+   "Northern Tanzania, near the Kenyan border."
   ],
-  "fact": "The US paid about 3 cents an acre."
+  "fact": "Kilimanjaro is 5,895 meters tall."
  },
  {
   "date": "12-20",
   "level": "medium",
-  "name": "Charleston, South Carolina, USA (secession)",
-  "lat": 32.7765,
-  "lon": -79.9311,
+  "from": "🎬 8 Mile",
+  "name": "Detroit, USA",
+  "lat": 42.331,
+  "lon": -83.046,
   "clues": [
-   "A state left the Union, and the first shots of the war came months later in its own harbor. Where am I?",
-   "South Carolina left the Union at a convention in this port city. Where am I?",
-   "1860: South Carolina secedes from the Union in Charleston."
+   "You only get one shot. Eminem's character battle-rapped his way up from a trailer park on the road that marks my city's edge. Where am I?",
+   "8 Mile is a real road on the north edge of this Michigan city, the Motor City.",
+   "Michigan's biggest city, across the river from Canada."
   ],
-  "fact": "The Civil War started at Fort Sumter in Charleston Harbor."
+  "fact": "Eminem won an Oscar for 'Lose Yourself' from 8 Mile."
  },
  {
   "date": "12-20",
   "level": "hard",
-  "name": "Arco, Idaho, USA (first nuclear electricity)",
-  "lat": 43.511,
-  "lon": -112.69,
+  "from": "🎬 Gladiator",
+  "name": "Aït Benhaddou, Morocco",
+  "lat": 31.047,
+  "lon": -7.13,
   "clues": [
-   "Four light bulbs lit up using atoms in a desert lab. Where am I?",
-   "The first electricity from nuclear power was made at a lab near this Idaho town. Where am I?",
-   "1951: the first nuclear electricity lights four bulbs near Arco, Idaho."
+   "Before he fought in Rome, Maximus battled as a slave in a mud-brick town in my North African country. Where am I?",
+   "Gladiator filmed its slave-arena scenes at Aït Benhaddou, a walled village in Morocco.",
+   "Central Morocco, near Ouarzazate, south of the Atlas Mountains."
   ],
-  "fact": "In 1955 Arco became the first town powered by nuclear energy."
+  "fact": "Aït Benhaddou has also appeared in Game of Thrones."
  }
 ]

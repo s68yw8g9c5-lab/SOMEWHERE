@@ -2,7 +2,7 @@
 // Also plays single riddles that friends write for each other (links with #r=...).
 import {
   dayNumber, nextPuzzleAt, puzzlesFor, distanceKm, scoreFor, roundSquare,
-  CLUE_MULT, MAX_CLUES, MAX_POINTS, MAX_TOTAL, LEVELS, HARD_ROUND, maxFor, dateLabel, hasDate,
+  CLUE_MULT, MAX_CLUES, MAX_POINTS, MAX_TOTAL, LEVELS, HARD_ROUND, maxFor,
 } from "./game.js";
 
 const $ = (s) => document.querySelector(s);
@@ -49,7 +49,7 @@ const CUSTOM = parseCustom();
 const PUZ = CUSTOM ? [CUSTOM] : puzzlesFor(DAY);
 const N = PUZ.length;
 const TOTAL = CUSTOM ? MAX_POINTS : MAX_TOTAL;
-const THEME = { emoji: "📅", name: hasDate(DAY) ? `On this day, ${dateLabel(DAY)}` : "From the history vault", about: "each riddle points to where something happened on this date in history" };
+const THEME = { emoji: "🍿", name: "Books & movies", about: "each riddle points to a real place from a famous book or movie" };
 const levelOf = (p) => (LEVELS[p.level] ? p.level : "medium");
 const levelPill = (p) => CUSTOM ? "" : `<span class="lvl lvl-${levelOf(p)}">${LEVELS[levelOf(p)].label}</span>`;
 const crackedHard = () => !CUSTOM && state.rounds[HARD_ROUND]?.done && state.rounds[HARD_ROUND].done.score >= LEVELS.hard.max / 2;
@@ -124,7 +124,11 @@ function renderClues(animateLast = false) {
   $("#day-label").textContent = CUSTOM ? `✍️ by ${CUSTOM.by}` : `#${DAY}`;
   const th = $("#theme-line");
   th.hidden = !!CUSTOM;
-  if (!CUSTOM) { th.textContent = `${THEME.emoji} ${THEME.name}`; th.title = `Today's theme: ${THEME.about}`; }
+  if (!CUSTOM) {
+    const fp = view() !== "final" && curPuz();
+    th.textContent = fp && fp.from ? fp.from : `${THEME.emoji} ${THEME.name}`;
+    th.title = `Today's theme: ${THEME.about}`;
+  }
   const v = view();
   $("#clues").hidden = v === "final";
   if (v === "final") return;
