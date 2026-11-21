@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#121212"/><text x="32" y="47" text-anchor="middle" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-weight="700" font-size="46" fill="#ffffff">S</text><circle cx="49" cy="46" r="4" fill="#d0402b"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><clipPath id="g"><circle cx="24" cy="40" r="13"/></clipPath></defs>
+<rect x="2" y="2" width="60" height="60" rx="16" fill="#2f4a35"/>
+<g transform="rotate(-40 24 40)"><rect x="30" y="33" width="28" height="14" rx="4" fill="#e2b45a"/><rect x="44" y="31" width="16" height="18" rx="4" fill="#c9983e"/><rect x="36" y="33" width="3" height="14" fill="#c9983e"/></g>
+<circle cx="24" cy="40" r="17" fill="#c9983e"/><circle cx="24" cy="40" r="13" fill="#fbf3e0"/>
+<g clip-path="url(#g)" fill="none" stroke="#2f4a35" stroke-width="2.2"><ellipse cx="24" cy="40" rx="5.5" ry="13"/><path d="M10 40h28M10 34h28M10 46h28"/></g></svg>

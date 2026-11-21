@@ -162,7 +162,7 @@ function renderClues(animateLast = false) {
   else {
     rl.classList.add("frames");
     rl.setAttribute("aria-label", `Round ${state.round + 1} of ${N}`);
-    rl.innerHTML = Array.from({ length: N }, (_, i) => `<i class="${i < state.round ? "done" : i === state.round ? "now" : ""}${PUZ[i]?.level === "hard" ? " hard" : ""}"></i>`).join("") + `<b>Riddle ${state.round + 1} of ${N}</b>`;
+    rl.innerHTML = Array.from({ length: N }, (_, i) => `<i class="${i < state.round ? "done" : i === state.round ? "now" : ""}${PUZ[i]?.level === "hard" ? " hard" : ""}"></i>`).join("") + `<b>Scene ${state.round + 1} of ${N}</b>`;
   }
   $("#total-label").textContent = `Score ${fmt(runningTotal())}`;
   $("#total-label").hidden = !!CUSTOM;
@@ -218,7 +218,7 @@ function mercatorSafe(geo) {
 }
 // Board-game palette: the sea is the cream board, countries are colored tiles.
 // Newspaper map: warm paper sea, stone-grey land, fine borders, a faint grid.
-const SEA = "#f7f6f2", LAND = "#e6e3da", GRID = "rgba(18,18,18,.06)", EDGE = "#8f8b80";
+const SEA = "#a9cbc0", LAND = "#f6eed9", GRID = "rgba(40,90,80,.10)", EDGE = "#c9b68a";
 function graticule() {
   const f = [], line = (c) => f.push({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: c } });
   for (let lon = -180; lon <= 180; lon += 15) line(Array.from({ length: 35 }, (_, k) => [lon, -85 + k * 5]));
@@ -312,7 +312,7 @@ function addOverlays() {
   // No player dots or crowd dots on the map, ever: only your pin, the answer and the line between.
   if (!gl.getSource("lines")) gl.addSource("lines", { type: "geojson", data: fc([]) });
   if (!gl.getLayer("lines")) gl.addLayer({ id: "lines", type: "line", source: "lines",
-    layout: { "line-cap": "round" }, paint: { "line-color": "#121212", "line-width": 1.5, "line-dasharray": [2, 1.6] } });
+    layout: { "line-cap": "round" }, paint: { "line-color": "#2f4a35", "line-width": 3, "line-dasharray": [0.1, 2] } });
 }
 const setData = (id, data) => { const s = map.gl?.getSource(id); if (s) { s.setData(data); nudgeSoon(); } };
 // After new data or a big camera jump, MapLibre can skip drawing one copy of the world
@@ -364,12 +364,12 @@ function onMapClick(ll) {
 }
 
 // A few HTML markers (your pins, the answer stars) sit above the map layers.
-const PIN_SVG = `<svg viewBox="-10 -26 20 27" width="30" height="40"><path d="M0,0 C-2,-6 -8,-9 -8,-15 A8,8 0 1 1 8,-15 C8,-9 2,-6 0,0Z" fill="#d0402b" stroke="#121212" stroke-width="1.2"/><circle cy="-15" r="3" fill="#fff"/></svg>`;
+const PIN_SVG = `<svg viewBox="-10 -26 20 27" width="30" height="40"><path d="M0,0 C-2,-6 -8,-9 -8,-15 A8,8 0 1 1 8,-15 C8,-9 2,-6 0,0Z" fill="#ee7a3b" stroke="#fff" stroke-width="1.6"/><circle cy="-15" r="3" fill="#fff"/></svg>`;
 function pinEl() { const d = document.createElement("div"); d.className = "mk mk-pin"; d.innerHTML = PIN_SVG; return d; }
 function starEl(n) {
   const d = document.createElement("div"); d.className = "mk mk-star";
   // Numbered (final screen): the number replaces the centre dot so the two don't overlap.
-  d.innerHTML = `<svg viewBox="-14 -14 28 28" width="38" height="38"><circle r="11" fill="#fff" stroke="#121212" stroke-width="1.5"/>${n ? `<text text-anchor="middle" dy="0.36em" class="answer-num">${n}</text>` : `<circle r="4.5" fill="#121212"/>`}</svg>`;
+  d.innerHTML = `<svg viewBox="-14 -14 28 28" width="38" height="38"><circle r="11" fill="#2f4a35" stroke="#fff" stroke-width="2.5"/>${n ? `<text text-anchor="middle" dy="0.36em" class="answer-num">${n}</text>` : `<circle r="4" fill="#fff"/>`}</svg>`;
   return d;
 }
 function setMarkers(kind, list, make, anchor) {
@@ -454,7 +454,7 @@ function updateLock() {
   const btn = $("#lock-btn");
   $("#lock-bar").hidden = view() !== "guess";
   btn.disabled = !cur().pin;
-  btn.textContent = cur().pin ? "Lock in my answer" : "Tap the map to drop your pin";
+  btn.textContent = cur().pin ? "Mark the spot" : "Tap the map to mark the spot";
 }
 
 $("#lock-btn").addEventListener("click", () => {
@@ -544,15 +544,22 @@ function streakInfo() {
 /* ---------- result sheet ---------- */
 const spoilerBtn = () => hideAnswers() ? `<button class="ghost reveal-btn" id="reveal-btn">Reveal the answer${N > 1 && view() === "final" ? "s" : ""}</button>` : "";
 
+// Scout calls each round: a speech bubble and up to 3 stars, from the share of points won.
+function gradeHTML(score, max) {
+  const p = score / max, n = p >= .85 ? 3 : p >= .6 ? 2 : p >= .3 ? 1 : 0;
+  const star = (on) => `<svg viewBox="0 0 24 24" width="22" height="22" class="${on ? "on" : ""}" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z" stroke-linejoin="round" stroke-width="2"/></svg>`;
+  return `<div class="grade"><span class="stars" aria-label="${n} of 3 stars">${[0, 1, 2].map((i) => star(i < n)).join("")}</span><b>${["Cut! Try again", "Nice try", "So close!", "That's a wrap!"][n]}</b></div>`;
+}
+
 function roundHTML() {
   const r = cur().done, p = curPuz(), last = state.round === N - 1;
-  return `
+  return `${gradeHTML(r.score, maxFor(p))}
     <div class="result-top">
       <div>
-        <div class="eyebrow">${CUSTOM ? `${esc(CUSTOM.by)}'s riddle` : `Riddle ${state.round + 1} of ${N}`}. The answer:</div>
+        <div class="eyebrow">${CUSTOM ? `${esc(CUSTOM.by)}'s riddle` : `Scene ${state.round + 1} of ${N}`}. The location:</div>
         <h2 class="spoiler">${esc(p.name)}</h2>
       </div>
-      <div class="km"><b>${fmtKm(r.km)}</b><span>from the answer</span></div>
+      <div class="km"><b>${fmtKm(r.km)}</b><span>off the mark</span></div>
     </div>
     <div class="scorebar"><div class="fill" id="r-bar" data-w="${(r.score / maxFor(p) * 100).toFixed(1)}"></div></div>
     <div class="score-line">
@@ -560,9 +567,9 @@ function roundHTML() {
       ${CUSTOM ? "" : `<span class="muted">Total <b>${fmt(runningTotal())}</b></span>`}
     </div>
     ${r.secs != null ? `<p class="speed-line">Answered in ${fmtSecs(r.secs)}. ${speedNote(r.secs)}</p>` : ""}
-    ${p.fact ? `<p class="fact spoiler"><b>Did you know?</b> ${esc(p.fact)}</p>` : ""}
+    ${p.fact ? `<p class="fact spoiler"><b>Scout's notes</b> ${esc(p.fact)}</p>` : ""}
     ${spoilerBtn()}
-    <button class="guess" id="next-btn">${last ? (CUSTOM ? "See your score" : "See your final score") : "Next riddle"}</button>`;
+    <button class="guess" id="next-btn">${last ? (CUSTOM ? "See your score" : "See today's reel") : "Next scene"}</button>`;
 }
 
 function speedNote(t) {
@@ -617,7 +624,7 @@ function finalHTML() {
       <button class="guess small" id="share-btn" data-umami-event="Share result">Share result</button>
       <button class="ghost" id="card-btn" data-umami-event="Save image">Save image</button>
       <button class="ghost" id="friends-btn">${friendCode ? "Friends board" : "Challenge friends"}</button>
-      <button class="ghost" id="result-boards" data-umami-event="Open leaderboard">Leaderboard</button>
+      <button class="ghost" id="result-boards" data-umami-event="Open leaderboard">Top scouts</button>
       <button class="ghost" id="make-btn">Write a riddle</button>
     </div>
     <div class="me-row">
@@ -717,8 +724,8 @@ async function saveCard() {
 // never where the places are, so it is safe to post before your friends have played.
 async function makeCard() {
   const f = state.final, W = 1080, H = 1350;
-  const INK = "#121212", MUTED = "#6b6b6b", PAPER = "#f7f6f2", RULE = "#d9d6cd";
-  const SERIF = "Newsreader, Georgia, serif", SANS = "'Libre Franklin', Helvetica, Arial, sans-serif";
+  const INK = "#3f3224", MUTED = "#857561", PAPER = "#f6eed9", RULE = "#e3d7bd";
+  const SERIF = "Fredoka, Nunito, sans-serif", SANS = "Nunito, Helvetica, Arial, sans-serif";
   const c = document.createElement("canvas"); c.width = W; c.height = H;
   const ctx = c.getContext("2d");
   await document.fonts.ready;
@@ -727,13 +734,13 @@ async function makeCard() {
   // faint world in the background (no pins, so no spoilers)
   const proj = d3.geoNaturalEarth1().fitExtent([[60, 230], [W - 60, 760]], { type: "Sphere" });
   const path = d3.geoPath(proj, ctx);
-  ctx.beginPath(); path(map.land); ctx.fillStyle = "#e6e3da"; ctx.fill();
+  ctx.beginPath(); path(map.land); ctx.fillStyle = "#e7dcc0"; ctx.fill();
 
   // masthead, like a newspaper puzzle page
   ctx.fillStyle = INK; ctx.font = `600 76px ${SERIF}`; ctx.textAlign = "left"; ctx.fillText("Somewhere", 80, 150);
   ctx.fillStyle = MUTED; ctx.font = `500 34px ${SANS}`; ctx.textAlign = "right";
   ctx.fillText(`No. ${DAY} · ${dateFor(DAY).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" })}`, W - 80, 148);
-  ctx.fillStyle = INK; ctx.fillRect(80, 185, W - 160, 3); ctx.fillRect(80, 195, W - 160, 1);
+  ctx.fillStyle = "#2f4a35"; ctx.fillRect(80, 185, W - 160, 6);
 
   ctx.textAlign = "center";
   ctx.fillStyle = INK; ctx.font = `600 220px ${SERIF}`; ctx.fillText(fmt(f.score), W / 2, 540);
@@ -748,16 +755,16 @@ async function makeCard() {
   state.rounds.forEach((x, i) => {
     const tx = x0 + i * (tw + gap);
     ctx.fillStyle = colors[roundSquare(x.done.km)]; ctx.beginPath(); ctx.roundRect(tx, 820, tw, 190, 6); ctx.fill();
-    ctx.fillStyle = "rgba(255,255,255,.8)"; ctx.font = `600 26px ${SANS}`; ctx.fillText(`Riddle ${i + 1}`, tx + tw / 2, 866);
+    ctx.fillStyle = "rgba(255,255,255,.8)"; ctx.font = `600 26px ${SANS}`; ctx.fillText(`Scene ${i + 1}`, tx + tw / 2, 866);
     ctx.fillStyle = "#fff"; ctx.font = `600 52px ${SERIF}`;
     const km = x.done.km;
     ctx.fillText(km < 1000 ? fmt(km) : (km / 1000).toFixed(km < 10000 ? 1 : 0) + "k", tx + tw / 2, 945);
     ctx.font = `500 24px ${SANS}`; ctx.fillText("km off", tx + tw / 2, 983);
   });
   ctx.fillStyle = RULE; ctx.fillRect(80, 1090, W - 160, 1);
-  ctx.fillStyle = INK; ctx.font = `italic 600 56px ${SERIF}`;
+  ctx.fillStyle = INK; ctx.font = `600 56px ${SERIF}`;
   ctx.fillText("Can you beat me?", W / 2, 1180);
-  ctx.fillStyle = "#d0402b"; ctx.font = `600 36px ${SANS}`;
+  ctx.fillStyle = "#c85a1e"; ctx.font = `700 36px ${SANS}`;
   ctx.fillText(location.host || "somewheredaily.com", W / 2, 1245);
   return new Promise((res) => c.toBlob(res, "image/png"));
 }
