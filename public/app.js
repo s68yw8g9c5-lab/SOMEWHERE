@@ -6,6 +6,7 @@ import {
   dateLabel,
 } from "./game.js";
 import { STAMPS, SETS, stampSVG, stampById, setOf, streakAt, earnedNow, historyContexts, nearest } from "./stamps.js";
+const stampDate = (day) => dateFor(day).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" }).toUpperCase();
 
 const $ = (s) => document.querySelector(s);
 const fmt = (n) => Math.round(Number(n)).toLocaleString("en-US");
@@ -560,7 +561,8 @@ let freshStamps = [], revealPlayed = false;
 const gamesPlayed = () => Math.max(Object.keys(store.get("sw:history", {})).length, DEV ? 1 : 0);
 function stampContext() {
   const h = store.get("sw:history", {}), prevs = Object.keys(h).map(Number).filter((d) => d < DAY);
-  return { day: DAY, score: state.final?.score || 0, played: gamesPlayed(), streak: streakInfo(), prev: prevs.length ? Math.max(...prevs) : null };
+  const total = Object.values(h).reduce((a, v) => a + (Number(v) || 0), 0) + (DEV ? state.final?.score || 0 : 0);
+  return { day: DAY, score: state.final?.score || 0, played: gamesPlayed(), total, streak: streakInfo(), prev: prevs.length ? Math.max(...prevs) : null };
 }
 // Backdate stamps from past days, so early players get theirs right away.
 function backdateStamps() {
@@ -574,7 +576,7 @@ function backdateStamps() {
 // Right after a game ends: check this game's result for new stamps.
 function awardStamps() {
   if (CUSTOM) return;
-  const c = { ...stampContext(), hour: new Date().getHours(), rounds: state.rounds.map((x, i) => ({ km: Number(x.done.km), score: x.done.score, secs: x.done.secs, level: levelOf(PUZ[i]) })) };
+  const c = { ...stampContext(), hour: new Date().getHours(), rounds: state.rounds.map((x, i) => ({ km: Number(x.done.km), score: x.done.score, secs: x.done.secs, level: levelOf(PUZ[i]), lat: PUZ[i].lat, lon: PUZ[i].lon, kind: /^📖/.test(PUZ[i].from || "") ? "book" : "film" })) };
   freshStamps = earnedNow(c, stampBook.got);
   freshStamps.forEach((st) => { stampBook.got[st.id] = { day: DAY, at: Date.now(), seen: true }; track("Earn stamp", { stamp: st.id, day: DAY }); });
   if (freshStamps.length) saveStamps();
@@ -590,17 +592,17 @@ function revealHTML() {
   return `<div class="stamp-reveal${play ? " play" : ""}">
       <div class="sr-head"><img src="scout.svg" alt="" width="52" height="52">
         <div class="sr-bubble"><small>Scout's notes: new stamp${freshStamps.length > 1 ? "s" : ""}!</small><b>${esc(shown[0].note)}</b></div></div>
-      <div class="sr-page">${shown.map((st, i) => `<div class="sr-stamp" style="--i:${i};--tilt:${tilt(st.id)}deg"><span class="sr-ink">${stampSVG(st, true, 104)}</span><span class="sr-name">${esc(st.name)}</span></div>`).join("")}</div>
+      <div class="sr-page">${shown.map((st, i) => `<div class="sr-stamp" style="--i:${i};--tilt:${tilt(st.id)}deg"><span class="sr-ink">${stampSVG(st, true, 112, stampDate(DAY))}</span><span class="sr-name">${esc(st.name)}</span></div>`).join("")}</div>
       ${more > 0 ? `<p class="sr-more">Plus ${more} more in your passport.</p>` : ""}
       <div class="sr-actions"><button class="guess small" id="stamp-share">Show off</button><button class="ghost" id="stamp-passport">See passport</button></div>
     </div>`;
 }
 
 function nearMissHTML() {
-  const n = nearest({ streak: streakInfo(), played: gamesPlayed() }, stampBook.got);
+  const n = nearest(stampContext(), stampBook.got);
   if (!n) return "";
   const unit = n.stamp.unit;
-  return `<p class="near-miss">${stampSVG(n.stamp, false, 40)}<span><b>${n.left} more ${unit}${n.left === 1 ? "" : "s"}</b> to the <b>${esc(n.stamp.name)}</b> stamp</span></p>`;
+  return `<p class="near-miss">${stampSVG(n.stamp, false, 40)}<span><b>${fmt(n.left)} more ${unit}${n.left === 1 ? "" : "s"}</b> to the <b>${esc(n.stamp.name)}</b> stamp</span></p>`;
 }
 
 /* ---------- the passport page ---------- */
@@ -610,7 +612,7 @@ function bestStreak() {
   return Math.max(0, ...historyContexts(store.get("sw:history", {})).map((c) => c.streak.count));
 }
 function passportHTML() {
-  const got = stampBook.got, have = STAMPS.filter((st) => got[st.id]).length, ctx = { streak: streakInfo(), played: gamesPlayed() };
+  const got = stampBook.got, have = STAMPS.filter((st) => got[st.id]).length, ctx = stampContext();
   return `<div class="pp-cover">
       <img src="favicon.svg" alt="" width="40" height="40">
       <div><small>Scout's Passport</small><b>${esc(myName || "Scout")}</b></div>
@@ -626,10 +628,10 @@ function passportHTML() {
       <ul class="pp-grid">${STAMPS.filter((st) => st.set === set.id).map((st) => {
         const on = !!got[st.id], pr = !on && st.progress ? st.progress(ctx) : null;
         return `<li><button class="pp-stamp${on ? " on" : ""}${on && !got[st.id].seen ? " new" : ""}" data-id="${st.id}" style="--tilt:${on ? tilt(st.id) : 0}deg">
-          ${stampSVG(st, on, 84)}
+          ${stampSVG(st, on, 92, on ? stampDate(got[st.id].day) : "")}
           <b>${on || set.id !== "sealed" ? esc(st.name) : "Sealed"}</b>
           <span>${on ? `Stamped ${dateLabel(got[st.id].day)}` : esc(set.id === "sealed" ? st.hint : st.rule)}</span>
-          ${pr ? `<i class="pp-bar"><i style="width:${Math.min(100, pr[0] / pr[1] * 100).toFixed(0)}%"></i></i><span class="pp-prog">${Math.min(pr[0], pr[1])} of ${pr[1]}</span>` : ""}
+          ${pr ? `<i class="pp-bar"><i style="width:${Math.min(100, pr[0] / pr[1] * 100).toFixed(0)}%"></i></i><span class="pp-prog">${fmt(Math.min(pr[0], pr[1]))} of ${fmt(pr[1])}</span>` : ""}
         </button></li>`;
       }).join("")}</ul></section>`).join("")}
     <div class="pp-detail" id="pp-detail" hidden></div>`;
@@ -649,7 +651,7 @@ function showStamp(id) {
   const st = stampById(id), g = stampBook.got[id], set = setOf(st), det = $("#pp-detail");
   const sealed = !g && set.id === "sealed";
   det.innerHTML = `<div class="pp-detail-card">
-      <div class="pp-big" style="--tilt:${g ? tilt(id) : 0}deg">${stampSVG(st, !!g, 168)}</div>
+      <div class="pp-big" style="--tilt:${g ? tilt(id) : 0}deg">${stampSVG(st, !!g, 180, g ? stampDate(g.day) : "")}</div>
       <h4>${sealed ? "A sealed envelope" : esc(st.name)}</h4>
       <p class="pp-when">${g ? `Stamped ${dateLabel(g.day)}, day No. ${g.day}` : set.name}</p>
       <p>${g ? esc(st.note) : esc(sealed ? st.hint : st.rule)}</p>
