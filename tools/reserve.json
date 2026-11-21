@@ -1,0 +1,93 @@
+[
+ {
+  "level": "easy",
+  "from": "📖 Harry Potter",
+  "name": "London, England",
+  "lat": 51.532,
+  "lon": -0.124,
+  "clues": [
+   "Look for a platform between 9 and 10 that only wizards can find. Everyone else just sees a busy train station in my city. Where am I?",
+   "The Hogwarts Express leaves from King's Cross station, in the capital of England.",
+   "The capital of the United Kingdom, on the River Thames."
+  ],
+  "fact": "King's Cross station has a luggage trolley 'vanishing' into the wall at Platform 9¾ for fans to pose with."
+ },
+ {
+  "level": "easy",
+  "from": "📖 The Fault in Our Stars",
+  "name": "Amsterdam, Netherlands",
+  "lat": 52.375,
+  "lon": 4.884,
+  "clues": [
+   "Hazel and Gus used their one wish to visit my city of canals and bikes, and shared their first kiss in the Anne Frank House. Where am I?",
+   "The Fault in Our Stars takes its couple to the capital of the Netherlands.",
+   "The capital of the Netherlands."
+  ],
+  "fact": "The movie was the first ever allowed to film inside the Anne Frank House."
+ },
+ {
+  "level": "easy",
+  "from": "🎬 Scarface",
+  "name": "Miami, USA",
+  "lat": 25.774,
+  "lon": -80.19,
+  "clues": [
+   "Say hello to my little friend. Tony Montana arrived by boat and built his empire under my palm trees and neon lights. Where am I?",
+   "Scarface takes place in this sunny Florida city.",
+   "A big city near the southern tip of Florida."
+  ],
+  "fact": "Scarface (1983) is a remake of a 1932 gangster movie set in Chicago."
+ },
+ {
+  "level": "easy",
+  "from": "📖 Murder on the Orient Express",
+  "name": "Istanbul, Turkey",
+  "lat": 41.011,
+  "lon": 28.977,
+  "clues": [
+   "Hercule Poirot boards a train in my city, where Europe meets Asia. Snow stops the train, and someone ends up dead. Where am I?",
+   "Agatha Christie's Orient Express starts in this Turkish city on the Bosphorus.",
+   "Turkey's biggest city, split between Europe and Asia."
+  ],
+  "fact": "Agatha Christie rode the real Orient Express herself."
+ },
+ {
+  "level": "easy",
+  "from": "📖 The Little Mermaid",
+  "name": "Copenhagen, Denmark",
+  "lat": 55.693,
+  "lon": 12.599,
+  "clues": [
+   "She gave up her voice for a pair of legs. A small bronze statue of her sits on a rock in my harbor. Where am I?",
+   "Hans Christian Andersen wrote The Little Mermaid in this Scandinavian capital.",
+   "The capital of Denmark."
+  ],
+  "fact": "The Little Mermaid statue has sat in Copenhagen harbor since 1913."
+ },
+ {
+  "level": "easy",
+  "from": "🎬 La La Land",
+  "name": "Los Angeles, USA",
+  "lat": 34.118,
+  "lon": -118.3,
+  "clues": [
+   "City of stars, are you shining just for me? Two dreamers danced above my lights at Griffith Observatory. Where am I?",
+   "La La Land is a nickname for my city, home of Hollywood.",
+   "The biggest city in California, in the south."
+  ],
+  "fact": "La La Land won six Oscars in 2017."
+ },
+ {
+  "level": "easy",
+  "from": "🎬 Rocky",
+  "name": "Philadelphia, USA",
+  "lat": 39.966,
+  "lon": -75.181,
+  "clues": [
+   "A boxer ran up my 72 stone steps and threw his arms in the air. Now tourists do the same thing every day. Where am I?",
+   "Rocky's steps lead to this city's Museum of Art. The Declaration of Independence was signed here.",
+   "A big city in Pennsylvania, between New York and Washington, D.C."
+  ],
+  "fact": "There's a bronze Rocky statue at the bottom of the steps."
+ }
+]
