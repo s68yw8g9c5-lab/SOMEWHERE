@@ -3,7 +3,9 @@
 import {
   dayNumber, nextPuzzleAt, puzzlesFor, dateFor, hasDate, distanceKm, scoreFor, roundSquare,
   CLUE_MULT, SPEED, speedFactor, MAX_CLUES, MAX_POINTS, MAX_TOTAL, LEVELS, HARD_ROUND, maxFor,
+  dateLabel,
 } from "./game.js";
+import { STAMPS, SETS, stampSVG, stampById, setOf, streakAt, earnedNow, historyContexts, nearest } from "./stamps.js";
 
 const $ = (s) => document.querySelector(s);
 const fmt = (n) => Math.round(Number(n)).toLocaleString("en-US");
@@ -525,6 +527,7 @@ async function finishGame() {
   }
   save();
   recordHistory();
+  awardStamps();
   const st = streakInfo();
   track("Finish game", { score: scoreBucket(state.final.score), clues: totalClues(), streak: st.count, day: DAY, offline: !!state.final.local });
   render(true);
@@ -543,17 +546,136 @@ function recordHistory() {
 // so one busy day doesn't wipe out a long streak.
 function streakInfo() {
   if (DEV && params.has("streak")) return { count: Number(params.get("streak")) || 0, saved: [], saverReady: true }; // tester preview
-  const h = store.get("sw:history", {});
-  const week = (d) => Math.floor((d - 1) / 7);
-  const usedWeeks = new Set(), saved = [];
-  let d = h[DAY] != null ? DAY : DAY - 1, count = 0;
-  while (d >= 1) {
-    if (h[d] != null) { count++; d--; continue; }
-    if (h[d - 1] != null && !usedWeeks.has(week(d))) { usedWeeks.add(week(d)); saved.push(d); d--; continue; }
-    break;
-  }
-  return { count, saved, saverReady: !usedWeeks.has(week(DAY)) };
+  return streakAt(store.get("sw:history", {}), DAY);
 }
+
+/* ---------- Scout's Passport: stamps ---------- */
+// Saved as { got: { id: { day, at, seen } } }. Tester mode keeps its own book, so testers can see unlocks.
+const STAMP_KEY = DEV ? "sw:dev:stamps" : "sw:stamps";
+const stampBook = store.get(STAMP_KEY, { got: {} });
+if (!stampBook.got) stampBook.got = {};
+if (DEV && params.get("stamps") === "all") STAMPS.forEach((st, i) => { stampBook.got[st.id] ||= { day: Math.max(1, DAY - i), at: Date.now(), seen: true }; });
+const saveStamps = () => { if (!(DEV && params.get("stamps") === "all")) store.set(STAMP_KEY, stampBook); };
+let freshStamps = [], revealPlayed = false;
+const gamesPlayed = () => Math.max(Object.keys(store.get("sw:history", {})).length, DEV ? 1 : 0);
+function stampContext() {
+  const h = store.get("sw:history", {}), prevs = Object.keys(h).map(Number).filter((d) => d < DAY);
+  return { day: DAY, score: state.final?.score || 0, played: gamesPlayed(), streak: streakInfo(), prev: prevs.length ? Math.max(...prevs) : null };
+}
+// Backdate stamps from past days, so early players get theirs right away.
+function backdateStamps() {
+  if (DEV || CUSTOM) return;
+  let added = 0;
+  for (const c of historyContexts(store.get("sw:history", {}))) {
+    for (const st of earnedNow(c, stampBook.got)) { stampBook.got[st.id] = { day: c.day, at: Date.now(), seen: false }; added++; }
+  }
+  if (added) saveStamps();
+}
+// Right after a game ends: check this game's result for new stamps.
+function awardStamps() {
+  if (CUSTOM) return;
+  const c = { ...stampContext(), hour: new Date().getHours(), rounds: state.rounds.map((x, i) => ({ km: Number(x.done.km), score: x.done.score, secs: x.done.secs, level: levelOf(PUZ[i]) })) };
+  freshStamps = earnedNow(c, stampBook.got);
+  freshStamps.forEach((st) => { stampBook.got[st.id] = { day: DAY, at: Date.now(), seen: true }; track("Earn stamp", { stamp: st.id, day: DAY }); });
+  if (freshStamps.length) saveStamps();
+  updatePassportDot();
+}
+const stampsToday = () => STAMPS.filter((st) => stampBook.got[st.id]?.day === DAY);
+const tilt = (id) => { let h = 0; for (const ch of id) h = (h * 31 + ch.charCodeAt(0)) | 0; return ((Math.abs(h) % 15) - 7); };
+
+// The unlock: the stamp drops onto a passport page with a thunk, and Scout says a line.
+function revealHTML() {
+  const shown = freshStamps.slice(0, 3), more = freshStamps.length - shown.length, play = !revealPlayed;
+  revealPlayed = true;
+  return `<div class="stamp-reveal${play ? " play" : ""}">
+      <div class="sr-head"><img src="scout.svg" alt="" width="52" height="52">
+        <div class="sr-bubble"><small>Scout's notes: new stamp${freshStamps.length > 1 ? "s" : ""}!</small><b>${esc(shown[0].note)}</b></div></div>
+      <div class="sr-page">${shown.map((st, i) => `<div class="sr-stamp" style="--i:${i};--tilt:${tilt(st.id)}deg"><span class="sr-ink">${stampSVG(st, true, 104)}</span><span class="sr-name">${esc(st.name)}</span></div>`).join("")}</div>
+      ${more > 0 ? `<p class="sr-more">Plus ${more} more in your passport.</p>` : ""}
+      <div class="sr-actions"><button class="guess small" id="stamp-share">Show off</button><button class="ghost" id="stamp-passport">See passport</button></div>
+    </div>`;
+}
+
+function nearMissHTML() {
+  const n = nearest({ streak: streakInfo(), played: gamesPlayed() }, stampBook.got);
+  if (!n) return "";
+  const unit = n.stamp.unit;
+  return `<p class="near-miss">${stampSVG(n.stamp, false, 40)}<span><b>${n.left} more ${unit}${n.left === 1 ? "" : "s"}</b> to the <b>${esc(n.stamp.name)}</b> stamp</span></p>`;
+}
+
+/* ---------- the passport page ---------- */
+const passport = $("#passport");
+function bestStreak() {
+  if (DEV) return streakInfo().count;
+  return Math.max(0, ...historyContexts(store.get("sw:history", {})).map((c) => c.streak.count));
+}
+function passportHTML() {
+  const got = stampBook.got, have = STAMPS.filter((st) => got[st.id]).length, ctx = { streak: streakInfo(), played: gamesPlayed() };
+  return `<div class="pp-cover">
+      <img src="favicon.svg" alt="" width="40" height="40">
+      <div><small>Scout's Passport</small><b>${esc(myName || "Scout")}</b></div>
+      <button class="pp-close" id="pp-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="pp-facts">
+      <div><b>${ctx.streak.count}</b><span>day streak</span></div>
+      <div><b>${bestStreak()}</b><span>best streak</span></div>
+      <div><b>${have} <small>of ${STAMPS.length}</small></b><span>stamps</span></div>
+    </div>
+    ${SETS.map((set) => `<section class="pp-set">
+      <h4>${set.name}</h4><p>${set.blurb}</p>
+      <ul class="pp-grid">${STAMPS.filter((st) => st.set === set.id).map((st) => {
+        const on = !!got[st.id], pr = !on && st.progress ? st.progress(ctx) : null;
+        return `<li><button class="pp-stamp${on ? " on" : ""}${on && !got[st.id].seen ? " new" : ""}" data-id="${st.id}" style="--tilt:${on ? tilt(st.id) : 0}deg">
+          ${stampSVG(st, on, 84)}
+          <b>${on || set.id !== "sealed" ? esc(st.name) : "Sealed"}</b>
+          <span>${on ? `Stamped ${dateLabel(got[st.id].day)}` : esc(set.id === "sealed" ? st.hint : st.rule)}</span>
+          ${pr ? `<i class="pp-bar"><i style="width:${Math.min(100, pr[0] / pr[1] * 100).toFixed(0)}%"></i></i><span class="pp-prog">${Math.min(pr[0], pr[1])} of ${pr[1]}</span>` : ""}
+        </button></li>`;
+      }).join("")}</ul></section>`).join("")}
+    <div class="pp-detail" id="pp-detail" hidden></div>`;
+}
+function openPassport() {
+  passport.innerHTML = passportHTML();
+  passport.showModal();
+  passport.scrollTop = 0;
+  track("Open passport");
+  // Opening the passport counts as seeing every stamp in it.
+  let changed = false;
+  for (const v of Object.values(stampBook.got)) if (!v.seen) { v.seen = true; changed = true; }
+  if (changed) saveStamps();
+  updatePassportDot();
+}
+function showStamp(id) {
+  const st = stampById(id), g = stampBook.got[id], set = setOf(st), det = $("#pp-detail");
+  const sealed = !g && set.id === "sealed";
+  det.innerHTML = `<div class="pp-detail-card">
+      <div class="pp-big" style="--tilt:${g ? tilt(id) : 0}deg">${stampSVG(st, !!g, 168)}</div>
+      <h4>${sealed ? "A sealed envelope" : esc(st.name)}</h4>
+      <p class="pp-when">${g ? `Stamped ${dateLabel(g.day)}, day No. ${g.day}` : set.name}</p>
+      <p>${g ? esc(st.note) : esc(sealed ? st.hint : st.rule)}</p>
+      <div class="pp-detail-actions">${g ? `<button class="guess small" data-share="${id}">Show off</button>` : ""}<button class="ghost" id="pp-back">Back to passport</button></div>
+    </div>`;
+  det.hidden = false;
+}
+function shareStamp(id) {
+  const st = stampById(id);
+  track("Share stamp", { stamp: id });
+  copyOrShare(`I earned the ${st.name} stamp in Somewhere, the daily riddle game about places from books and movies.\n${siteUrl() || "https://somewheredaily.com"}`, "Copied! Paste it anywhere.");
+}
+passport.addEventListener("click", (e) => {
+  const t = e.target.closest("button");
+  if (e.target === passport || t?.id === "pp-close") return passport.close();
+  if (!t) return;
+  if (t.id === "pp-back") { $("#pp-detail").hidden = true; return; }
+  if (t.dataset.share) return shareStamp(t.dataset.share);
+  if (t.dataset.id) showStamp(t.dataset.id);
+});
+function updatePassportDot() {
+  $("#passport-dot").hidden = !Object.values(stampBook.got).some((v) => !v.seen);
+}
+$("#passport-btn").addEventListener("click", openPassport);
+backdateStamps();
+updatePassportDot();
 
 /* ---------- result sheet ---------- */
 const spoilerBtn = () => hideAnswers() ? `<button class="ghost reveal-btn" id="reveal-btn">Reveal the answer${N > 1 && view() === "final" ? "s" : ""}</button>` : "";
@@ -597,19 +719,30 @@ function streakHTML() {
   return `<div class="streak-box">
       <div><b>${s.count} day${s.count === 1 ? "" : "s"} in a row</b>
         <span class="sub">${savedYesterday ? "Your weekly saver kept your streak alive yesterday." : s.saverReady ? "Streak saver ready: miss one day this week and your streak survives." : "Saver used this week. Come back tomorrow!"}</span></div>
+      ${nearMissHTML()}
     </div>`;
 }
 
-// The day is done: say so clearly and invite players back for the next one.
+// The day is done: a "that's a wrap" title card, with the next showing and a countdown.
 function doneHTML() {
   const at = new Date(nextPuzzleAt()).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
   const st = streakInfo().count;
   return `<div class="done-box">
-      <img src="scout.svg" alt="" width="64" height="64">
-      <div>
-        <b>That's a wrap for today!</b>
-        <span>Scout's back with 5 new riddles in <strong id="countdown">--</strong> (${at} your time).${st >= 1 ? ` Come back to make it ${st + 1} days in a row.` : ""}</span>
+      <i class="film-edge" aria-hidden="true"></i>
+      <div class="done-main">
+        <img class="done-scout" src="scout-chair.svg" alt="" width="86" height="106">
+        <div class="done-text">
+          <span class="done-eyebrow">Today's reel is in the can</span>
+          <b class="done-title">That's a wrap!</b>
+          <div class="marquee"><div class="marquee-in">
+            <span class="mq-label">Next showing</span>
+            <strong id="countdown">--</strong>
+            <span class="mq-at">5 new scenes at ${at} your time</span>
+          </div></div>
+          ${st >= 1 ? `<span class="done-streak">Come back to make it ${st + 1} days in a row.</span>` : ""}
+        </div>
       </div>
+      <i class="film-edge" aria-hidden="true"></i>
     </div>`;
 }
 
@@ -637,6 +770,7 @@ function finalHTML() {
     </div>`;
   return `
     ${doneHTML()}
+    ${freshStamps.length ? revealHTML() : ""}
     <div class="result-top">
       <div>
         <div class="eyebrow">Somewhere No. ${DAY} · ${THEME.name}</div>
@@ -673,6 +807,8 @@ function bindSheet() {
   $("#make-btn")?.addEventListener("click", openMaker);
   $("#name-save")?.addEventListener("click", rename);
   $("#reveal-btn")?.addEventListener("click", revealSpoilers);
+  $("#stamp-passport")?.addEventListener("click", openPassport);
+  $("#stamp-share")?.addEventListener("click", () => shareStamp(freshStamps[0].id));
 }
 
 function revealSpoilers() {
@@ -727,6 +863,7 @@ function shareText() {
     `🌍 ${fmt(f.score)} / ${fmt(TOTAL)}`,
     state.rounds.map((x) => roundSquare(x.done.km)).join(""),
     `🔎 ${totalClues()} clues${f.beat != null ? ` · beat ${f.beat}%` : ""}${crackedHard() ? " · 💀 cracked the last one" : ""}${s > 1 ? ` · 🔥 ${s}` : ""}`,
+    stampsToday().length ? `New stamp: ${stampsToday().map((st) => st.name).join(", ")}` : "",
     siteUrl(),
   ].filter(Boolean).join("\n");
 }
@@ -1115,5 +1252,5 @@ if (DEV) {
     <button id="dev-reset">Play again</button><a href="/">Exit</a>`;
   document.body.appendChild(bar);
   $("#dev-day").addEventListener("change", (e) => { location.search = `?dev&day=${e.target.value}`; });
-  $("#dev-reset").addEventListener("click", () => { try { localStorage.removeItem(STATE_KEY); } catch {} location.reload(); });
+  $("#dev-reset").addEventListener("click", () => { try { localStorage.removeItem(STATE_KEY); localStorage.removeItem("sw:dev:stamps"); } catch {} location.reload(); });
 }
