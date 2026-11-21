@@ -133,7 +133,7 @@ function renderClues(animateLast = false) {
   for (let i = 0; i < shown; i++) {
     const li = document.createElement("li");
     li.dataset.n = i + 1;
-    li.textContent = p.clues[i];
+    li.textContent = p.clues[i].replace(" / ", "\n"); // rhymes: one line per verse
     if (animateLast && i === shown - 1) li.className = "reveal";
     if (r.done && i >= n) li.classList.add("unused");
     if (i === n - 1) li.classList.add("current");
