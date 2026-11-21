@@ -758,7 +758,7 @@ async function makeCard() {
   ctx.fillStyle = INK; ctx.font = `italic 600 56px ${SERIF}`;
   ctx.fillText("Can you beat me?", W / 2, 1180);
   ctx.fillStyle = "#d0402b"; ctx.font = `600 36px ${SANS}`;
-  ctx.fillText(location.host || "playsomewhere.netlify.app", W / 2, 1245);
+  ctx.fillText(location.host || "somewheredaily.com", W / 2, 1245);
   return new Promise((res) => c.toBlob(res, "image/png"));
 }
 
