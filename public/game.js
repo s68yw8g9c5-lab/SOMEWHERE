@@ -4,7 +4,7 @@ import { PUZZLES } from "./puzzles.js";
 
 // Day #1 starts at midnight UTC on this date. Everyone on Earth switches together.
 // Tip: set this to your launch day so your first public game is #1.
-export const LAUNCH_UTC = Date.UTC(2026, 10, 20);
+export const LAUNCH_UTC = Date.UTC(2026, 10, 22); // Sun Nov 22, 2026 = No. 1
 export const ROUNDS = 5;            // places per day
 export const MAX_CLUES = 3;         // clues per place
 export const MAX_POINTS = 1000;     // a medium round (and a friend's riddle)
