@@ -135,7 +135,7 @@ with sample players, so you can show it to people before deploying.
 
 ## Add more riddles
 
-There are 150 riddles (60 easy, 60 medium, 30 hard = 30 days) and they loop after that.
+Riddles are "on this day in history": each has a `"date"` (MM-DD) and the game shows that date's 5 events, easy to hard. There are 30 dates now (Nov 21 to Dec 20); days without their own date reuse older ones, so add more dates before then.
 Each riddle has a `"level"` of `easy`, `medium` or `hard`; keep that 2:2:1 ratio when adding more. To add more, edit
 `tools/puzzles.json` (name, lat, lon, 3 clues from hardest to easiest, and a fun fact), then:
 

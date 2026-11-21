@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Somewhere: 5 riddles, 5 places, the whole world guessing</title>
+  <title>Somewhere: 5 riddles about this day in history</title>
   <meta name="description" content="Every day, 5 riddles point to 5 spots on Earth. Read the clues, drop your pins, and see how you rank against the whole planet and your friends. Free, no sign-up.">
   <meta name="theme-color" content="#cfe6f3">
   <meta property="og:title" content="Somewhere 🌍 5 riddles. 5 places. The whole world guessing.">
@@ -45,6 +45,7 @@
   <div id="preview-banner" class="banner" hidden>Preview mode: sample players. The live leaderboard turns on once the database is connected.</div>
 
   <section class="clues card" id="clues" aria-live="polite">
+    <div class="theme-line" id="theme-line"></div>
     <div class="clue-head">
       <span class="round-label" id="round-label">Round 1/5</span>
       <span class="lvl lvl-easy" id="level">Easy · 700</span>
@@ -92,7 +93,7 @@
   <dialog id="help">
     <h3>How to play</h3>
     <ol>
-      <li>Every day, the whole world gets the <b>same 5 riddles</b>. Each one points to a place on Earth.</li>
+      <li>Every day, the whole world gets the <b>same 5 riddles</b>. Each one points to a place where something happened <b>on this day in history</b>.</li>
       <li>Read the clue. Stuck? Reveal up to 3 clues, but each one lowers your points for that round.</li>
       <li>Tap the map to drop your pin, then hit <b>Pin it!</b>. One shot per place.</li>
       <li>Each day climbs from <b>easy</b> to <b>hard</b>: 2 easy riddles (up to 700 points), 2 medium (1,000) and one 💀 hard riddle (1,600). 5,000 a day in all.</li>

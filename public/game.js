@@ -39,22 +39,31 @@ function decode(b64) {
 
 // The 5 places for a given day, easy to hard. 150 riddles (60 easy, 60 medium,
 // 30 hard) = 30 days before they repeat.
-let pools = null;
-function getPools() {
-  if (!pools) {
-    pools = { easy: [], medium: [], hard: [] };
-    for (const enc of PUZZLES) { const p = decode(enc); (pools[p.level] || pools.medium).push(p); }
+// "On this day in history": every riddle is tied to a calendar date (MM-DD), and
+// day N of the game shows that date's 5 events, easy to hard.
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+export const dateFor = (day) => new Date(LAUNCH_UTC + (day - 1) * 86400000);
+export const dateLabel = (day) => { const d = dateFor(day); return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}`; };
+const mmdd = (d) => String(d.getUTCMonth() + 1).padStart(2, "0") + "-" + String(d.getUTCDate()).padStart(2, "0");
+
+let byDate = null;
+function getDates() {
+  if (!byDate) {
+    byDate = {};
+    for (const enc of PUZZLES) { const p = decode(enc); (byDate[p.date] = byDate[p.date] || []).push(p); }
+    const rank = { easy: 0, medium: 1, hard: 2 };
+    for (const k in byDate) byDate[k].sort((a, b) => rank[a.level] - rank[b.level]);
   }
-  return pools;
+  return byDate;
 }
+// True when this day has its own "on this day" riddles (otherwise older dates are reused).
+export const hasDate = (day) => !!getDates()[mmdd(dateFor(day))];
+
 export function puzzlesFor(day) {
-  const P = getPools(), seen = {};
-  return DAY_PLAN.map((lvl) => {
-    const k = seen[lvl] = (seen[lvl] || 0) + 1;
-    const per = DAY_PLAN.filter((l) => l === lvl).length;
-    const pool = P[lvl];
-    return pool[((day - 1) * per + k - 1) % pool.length];
-  });
+  const all = getDates();
+  const keys = Object.keys(all).sort();
+  const list = all[mmdd(dateFor(day))] || all[keys[(day - 1) % keys.length]];
+  return list.slice(0, ROUNDS);
 }
 
 export function distanceKm(lat1, lon1, lat2, lon2) {

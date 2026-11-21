@@ -268,3 +268,5 @@ a.ghost { text-decoration: none; display: inline-flex; align-items: center; colo
 .mult, .total-label, .round-label { white-space: nowrap; }
 #clue-count { display: none; } /* the numbered clues already show this; room for the difficulty pill */
 #clue-list li { white-space: pre-line; }
+.theme-line { font-size: 12.5px; font-weight: 800; letter-spacing: .02em; color: var(--ink); margin: -2px 0 8px; }
+.theme-line[hidden] { display: none; }

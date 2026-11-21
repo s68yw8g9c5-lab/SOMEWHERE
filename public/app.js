@@ -2,7 +2,7 @@
 // Also plays single riddles that friends write for each other (links with #r=...).
 import {
   dayNumber, nextPuzzleAt, puzzlesFor, distanceKm, scoreFor, roundSquare,
-  CLUE_MULT, MAX_CLUES, MAX_POINTS, MAX_TOTAL, LEVELS, HARD_ROUND, maxFor,
+  CLUE_MULT, MAX_CLUES, MAX_POINTS, MAX_TOTAL, LEVELS, HARD_ROUND, maxFor, dateLabel, hasDate,
 } from "./game.js";
 
 const $ = (s) => document.querySelector(s);
@@ -49,6 +49,7 @@ const CUSTOM = parseCustom();
 const PUZ = CUSTOM ? [CUSTOM] : puzzlesFor(DAY);
 const N = PUZ.length;
 const TOTAL = CUSTOM ? MAX_POINTS : MAX_TOTAL;
+const THEME = { emoji: "📅", name: hasDate(DAY) ? `On this day, ${dateLabel(DAY)}` : "From the history vault", about: "each riddle points to where something happened on this date in history" };
 const levelOf = (p) => (LEVELS[p.level] ? p.level : "medium");
 const levelPill = (p) => CUSTOM ? "" : `<span class="lvl lvl-${levelOf(p)}">${LEVELS[levelOf(p)].label}</span>`;
 const crackedHard = () => !CUSTOM && state.rounds[HARD_ROUND]?.done && state.rounds[HARD_ROUND].done.score >= LEVELS.hard.max / 2;
@@ -121,6 +122,9 @@ async function copyOrShare(text, okMsg, files) {
 /* ---------- clues ---------- */
 function renderClues(animateLast = false) {
   $("#day-label").textContent = CUSTOM ? `✍️ by ${CUSTOM.by}` : `#${DAY}`;
+  const th = $("#theme-line");
+  th.hidden = !!CUSTOM;
+  if (!CUSTOM) { th.textContent = `${THEME.emoji} ${THEME.name}`; th.title = `Today's theme: ${THEME.about}`; }
   const v = view();
   $("#clues").hidden = v === "final";
   if (v === "final") return;
@@ -581,7 +585,7 @@ function finalHTML() {
   return `
     <div class="result-top">
       <div>
-        <div class="eyebrow">Somewhere #${DAY} · your score</div>
+        <div class="eyebrow">Somewhere #${DAY} · ${THEME.emoji} ${THEME.name}</div>
         <h2>${fmt(f.score)} <span class="of">/ ${fmt(TOTAL)}</span></h2>
       </div>
       <div class="km"><b>${f.beat}%</b><span>of players beaten</span></div>
@@ -662,7 +666,8 @@ function shareText() {
   if (CUSTOM) return `I got ${fmt(f.score)} / ${fmt(TOTAL)} on your Somewhere riddle ${roundSquare(f.km)} (${fmtKm(f.km)} off)\n${location.href}`;
   const s = streakInfo().count;
   return [
-    `Somewhere #${DAY} 🌍 ${fmt(f.score)} / ${fmt(TOTAL)}`,
+    `Somewhere #${DAY} · ${THEME.emoji} ${THEME.name}`,
+    `🌍 ${fmt(f.score)} / ${fmt(TOTAL)}`,
     state.rounds.map((x) => roundSquare(x.done.km)).join(""),
     `🔎 ${totalClues()} clues · beat ${f.beat}%${crackedHard() ? " · 💀 cracked the hard one" : ""}${s > 1 ? ` · 🔥 ${s}` : ""}`,
     siteUrl(),
