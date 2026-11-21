@@ -1,705 +1,5 @@
 [
  {
-  "date": "12-11",
-  "level": "easy",
-  "from": "🎬 Mission: Impossible – Ghost Protocol",
-  "name": "Dubai, UAE",
-  "lat": 25.197,
-  "lon": 55.274,
-  "clues": [
-   "I'm so tall that Tom Cruise had to climb my outside with sticky gloves. I'm the tallest building in the world. Where am I?",
-   "The Burj Khalifa, in this glitzy desert city in the United Arab Emirates.",
-   "The biggest city in the UAE, on the Persian Gulf."
-  ],
-  "fact": "Tom Cruise did the climb himself, attached to safety cables."
- },
- {
-  "date": "12-11",
-  "level": "easy",
-  "from": "🎬 Inside Out",
-  "name": "San Francisco, USA",
-  "lat": 37.776,
-  "lon": -122.42,
-  "clues": [
-   "Riley's emotions panicked when her family moved to my hilly city, where even the pizza had broccoli on it. Look for a red bridge in the fog. Where am I?",
-   "Riley moves here from Minnesota. My Golden Gate Bridge is famous everywhere.",
-   "A city on the coast of Northern California."
-  ],
-  "fact": "Inside Out 2 (2024) became one of the highest-grossing animated movies ever."
- },
- {
-  "date": "12-11",
-  "level": "medium",
-  "from": "📖 Gone with the Wind",
-  "name": "Atlanta, USA",
-  "lat": 33.749,
-  "lon": -84.388,
-  "clues": [
-   "Frankly, my dear, I don't give a damn. Scarlett O'Hara fled as my city burned in the Civil War. Where am I?",
-   "Gone with the Wind's big fire scene is the burning of this Georgia city.",
-   "The capital of Georgia, in the southeast USA."
-  ],
-  "fact": "Margaret Mitchell wrote Gone with the Wind in her Atlanta apartment."
- },
- {
-  "date": "12-11",
-  "level": "medium",
-  "from": "🎬 Star Wars: Attack of the Clones",
-  "name": "Lake Como, Italy",
-  "lat": 45.985,
-  "lon": 9.203,
-  "clues": [
-   "Anakin and Padmé had their secret wedding at a villa on my shore. I'm a lake shaped like an upside-down Y. Where am I?",
-   "Lake Como, in northern Italy near the Swiss border.",
-   "Northern Italy, north of Milan."
-  ],
-  "fact": "The wedding was filmed at Villa del Balbianello, which also appears in Casino Royale."
- },
- {
-  "date": "12-11",
-  "level": "hard",
-  "from": "📖 Twilight",
-  "name": "Forks, Washington, USA",
-  "lat": 47.95,
-  "lon": -124.385,
-  "clues": [
-   "It rains so much in my small town that vampires can go out in the daytime. Team Edward or Team Jacob? Where am I?",
-   "Twilight is set in Forks, a small town in Washington State.",
-   "The Olympic Peninsula, in the far northwest corner of Washington State."
-  ],
-  "fact": "Forks is one of the rainiest towns in the USA."
- },
- {
-  "date": "12-12",
-  "level": "easy",
-  "from": "📖 Crazy Rich Asians",
-  "name": "Singapore",
-  "lat": 1.283,
-  "lon": 103.86,
-  "clues": [
-   "Rachel thought she was meeting her boyfriend's family. Turns out they're crazy rich, with parties at a rooftop pool shaped like a ship. Where am I?",
-   "Crazy Rich Asians is set in this tiny, rich island country with the Marina Bay Sands hotel.",
-   "A city-state at the southern tip of Malaysia."
-  ],
-  "fact": "Crazy Rich Asians is based on Kevin Kwan's 2013 novel."
- },
- {
-  "date": "12-12",
-  "level": "easy",
-  "from": "📖 War and Peace",
-  "name": "Moscow, Russia",
-  "lat": 55.752,
-  "lon": 37.617,
-  "clues": [
-   "Napoleon marched all the way to me and found me empty and on fire. My red fortress is called the Kremlin. Where am I?",
-   "Tolstoy's War and Peace shows Napoleon taking this Russian city in 1812.",
-   "The capital of Russia."
-  ],
-  "fact": "War and Peace is more than 1,000 pages long."
- },
- {
-  "date": "12-12",
-  "level": "medium",
-  "from": "📖 Heidi",
-  "name": "Swiss Alps",
-  "lat": 47.01,
-  "lon": 9.53,
-  "clues": [
-   "An orphan girl was sent to live with her grumpy grandfather on my mountain and fell in love with the goats and meadows. Where am I?",
-   "Heidi is set in the Alps of this country, famous for chocolate and watches.",
-   "Eastern Switzerland, near Liechtenstein."
-  ],
-  "fact": "Heidi was written in 1881 and is one of the best-selling books ever."
- },
- {
-  "date": "12-12",
-  "level": "medium",
-  "from": "📖 Don Quixote",
-  "name": "La Mancha, Spain",
-  "lat": 39.457,
-  "lon": -3.608,
-  "clues": [
-   "An old knight charged at my windmills because he thought they were giants. Where am I?",
-   "Don Quixote comes from La Mancha, a flat region of central Spain full of windmills.",
-   "Central Spain, south of Madrid."
-  ],
-  "fact": "Don Quixote, from 1605, is often called the first modern novel."
- },
- {
-  "date": "12-12",
-  "level": "hard",
-  "from": "🎬 3 Idiots",
-  "name": "Pangong Lake, India",
-  "lat": 33.75,
-  "lon": 78.67,
-  "clues": [
-   "At the end of 3 Idiots, the friends finally find Rancho by my lake. I'm 4,000 meters up and change color through the day. Where am I?",
-   "Pangong Lake, high in the mountains of Ladakh, India.",
-   "Far northern India, on the border with Tibet."
-  ],
-  "fact": "3 Idiots (2009) was one of the biggest Indian movies of its time."
- },
- {
-  "date": "12-13",
-  "level": "easy",
-  "from": "📖 The Alchemist",
-  "name": "Pyramids of Giza, Egypt",
-  "lat": 29.979,
-  "lon": 31.134,
-  "clues": [
-   "A shepherd boy dreamed of treasure buried at my feet, so he crossed the whole desert to find it. I'm 4,500 years old and shaped like triangles. Where am I?",
-   "In The Alchemist, Santiago travels from Spain to these famous pyramids in Egypt.",
-   "Right next to Cairo, the capital of Egypt."
-  ],
-  "fact": "The Alchemist by Paulo Coelho is one of the best-selling books of all time."
- },
- {
-  "date": "12-13",
-  "level": "easy",
-  "from": "🎬 North by Northwest",
-  "name": "Mount Rushmore, USA",
-  "lat": 43.879,
-  "lon": -103.459,
-  "clues": [
-   "Four presidents' faces are carved into me, and Cary Grant dangled from their noses in North by Northwest. Where am I?",
-   "Mount Rushmore, in the Black Hills.",
-   "South Dakota, in the northern Great Plains of the USA."
-  ],
-  "fact": "Each face on Mount Rushmore is about 18 meters (60 feet) tall."
- },
- {
-  "date": "12-13",
-  "level": "medium",
-  "from": "🎬 Free Solo",
-  "name": "Yosemite, USA",
-  "lat": 37.734,
-  "lon": -119.637,
-  "clues": [
-   "A man climbed my 900-meter granite wall with no rope at all. The movie about it, Free Solo, won an Oscar. Where am I?",
-   "El Capitan, in Yosemite National Park.",
-   "California's Sierra Nevada mountains."
-  ],
-  "fact": "Alex Honnold climbed El Capitan without ropes in 2017, in under four hours."
- },
- {
-  "date": "12-13",
-  "level": "medium",
-  "from": "🎬 Tangled",
-  "name": "Mont-Saint-Michel, France",
-  "lat": 48.636,
-  "lon": -1.511,
-  "clues": [
-   "Rapunzel's kingdom is an island town that climbs a rock up to a castle, and it was inspired by me. At high tide, the sea surrounds me. Where am I?",
-   "Mont-Saint-Michel, an island abbey off the coast of Normandy.",
-   "Northwest France, between Normandy and Brittany."
-  ],
-  "fact": "The tides around Mont-Saint-Michel are some of the biggest in Europe."
- },
- {
-  "date": "12-13",
-  "level": "hard",
-  "from": "📖 Hamlet",
-  "name": "Helsingør, Denmark",
-  "lat": 56.039,
-  "lon": 12.621,
-  "clues": [
-   "To be or not to be. A prince sees his father's ghost on the walls of my castle. Where am I?",
-   "Hamlet's Elsinore is Kronborg Castle in Helsingør, Denmark.",
-   "Northeast Denmark, across the water from Sweden."
-  ],
-  "fact": "Hamlet is performed at Kronborg Castle almost every summer."
- },
- {
-  "date": "12-14",
-  "level": "easy",
-  "from": "🎬 Brave",
-  "name": "Scottish Highlands",
-  "lat": 56.8,
-  "lon": -4.2,
-  "clues": [
-   "Merida shot for her own hand and turned her mum into a bear. Her kingdom of misty highlands, castles and lochs is on a real map. Where am I?",
-   "Brave takes place in this country at the north end of Great Britain.",
-   "The northern part of the United Kingdom."
-  ],
-  "fact": "Merida is voiced by Scottish actress Kelly Macdonald."
- },
- {
-  "date": "12-14",
-  "level": "easy",
-  "from": "🎬 Thelma & Louise",
-  "name": "Grand Canyon, USA",
-  "lat": 36.1,
-  "lon": -112.11,
-  "clues": [
-   "Two friends on the run hit the gas and flew off my edge instead of giving up. I'm a mile deep and carved by a river. Where am I?",
-   "Thelma & Louise ends at this giant canyon carved by the Colorado River.",
-   "Northern Arizona, USA."
-  ],
-  "fact": "The final scene was actually filmed at Dead Horse Point in Utah."
- },
- {
-  "date": "12-14",
-  "level": "medium",
-  "from": "📖 Death on the Nile",
-  "name": "Aswan, Egypt",
-  "lat": 24.088,
-  "lon": 32.899,
-  "clues": [
-   "Hercule Poirot goes on a river cruise past ancient temples, and of course, someone gets murdered on the boat. Where am I?",
-   "Death on the Nile begins at a famous hotel in this city in southern Egypt.",
-   "Southern Egypt, on the Nile, near the big dam."
-  ],
-  "fact": "Agatha Christie stayed at the Old Cataract Hotel in Aswan."
- },
- {
-  "date": "12-14",
-  "level": "medium",
-  "from": "🎬 The Sound of Music",
-  "name": "Salzburg, Austria",
-  "lat": 47.809,
-  "lon": 13.055,
-  "clues": [
-   "The hills are alive with the sound of music! Maria sang and danced with seven kids through my gardens and mountains. Where am I?",
-   "The Sound of Music takes place in this Austrian city, where Mozart was born.",
-   "Austria, right by the German border."
-  ],
-  "fact": "Mozart was born in Salzburg in 1756."
- },
- {
-  "date": "12-14",
-  "level": "hard",
-  "from": "📖 Moby-Dick",
-  "name": "Nantucket, USA",
-  "lat": 41.283,
-  "lon": -70.099,
-  "clues": [
-   "Call me Ishmael. Captain Ahab's whaling ship sailed from my little island to hunt a white whale. Where am I?",
-   "Moby-Dick's ship sails from Nantucket, an island off Massachusetts.",
-   "An island south of Cape Cod, Massachusetts."
-  ],
-  "fact": "Nantucket was the whaling capital of the world in the early 1800s."
- },
- {
-  "date": "12-15",
-  "level": "easy",
-  "from": "🎬 Home Alone",
-  "name": "Chicago, USA",
-  "lat": 42.0,
-  "lon": -87.7,
-  "clues": [
-   "My family flew to Paris and forgot me at home for Christmas, so I fought off two burglars with paint cans and a tarantula in a big house outside my city. Where am I?",
-   "Kevin McCallister's house is in a suburb of this windy city on Lake Michigan.",
-   "The biggest city in Illinois, on Lake Michigan."
-  ],
-  "fact": "The real Home Alone house is in Winnetka, just north of Chicago."
- },
- {
-  "date": "12-15",
-  "level": "easy",
-  "from": "🎬 The Devil Wears Prada 2",
-  "name": "Milan, Italy",
-  "lat": 45.464,
-  "lon": 9.19,
-  "clues": [
-   "My country is shaped like a boot, and here people wear their best ones. Miranda Priestly flew in to sit in the front row at my fashion week. Where am I?",
-   "Italy's fashion capital, in the north, not far from the Alps.",
-   "The big city in northern Italy, between Turin and Venice."
-  ],
-  "fact": "The sequel filmed at a real Dolce & Gabbana show during Milan Fashion Week in 2025."
- },
- {
-  "date": "12-15",
-  "level": "medium",
-  "from": "🎬 Indiana Jones and the Last Crusade",
-  "name": "Petra, Jordan",
-  "lat": 30.322,
-  "lon": 35.452,
-  "clues": [
-   "Indiana Jones rode up to my pink stone front door looking for the Holy Grail. I'm a whole city carved into a cliff. Where am I?",
-   "The Last Crusade's ending was filmed at the Treasury in Petra, an ancient city.",
-   "Southern Jordan, in the Middle East."
-  ],
-  "fact": "Petra was carved by the Nabataeans more than 2,000 years ago."
- },
- {
-  "date": "12-15",
-  "level": "medium",
-  "from": "🎬 Independence Day",
-  "name": "Area 51, Nevada, USA",
-  "lat": 37.235,
-  "lon": -115.811,
-  "clues": [
-   "I don't officially exist, but in Independence Day the President found a crashed alien spaceship hidden under my desert. Where am I?",
-   "Area 51, the secret air base in the Nevada desert.",
-   "Southern Nevada, north of Las Vegas."
-  ],
-  "fact": "The US government only officially admitted Area 51 exists in 2013."
- },
- {
-  "date": "12-15",
-  "level": "hard",
-  "from": "📖 Wuthering Heights",
-  "name": "Haworth, England",
-  "lat": 53.83,
-  "lon": -1.955,
-  "clues": [
-   "Heathcliff and Cathy ran wild across my windy moors. Emily Brontë wrote the book while living in my village. Where am I?",
-   "Wuthering Heights is set on the Yorkshire moors around Haworth, England.",
-   "Northern England, west of Leeds."
-  ],
-  "fact": "A new Wuthering Heights movie with Margot Robbie came out in 2026."
- },
- {
-  "date": "12-16",
-  "level": "easy",
-  "from": "🎬 Turning Red",
-  "name": "Toronto, Canada",
-  "lat": 43.653,
-  "lon": -79.383,
-  "clues": [
-   "Whenever Mei gets too excited, she poofs into a giant red panda, right in the middle of my city, under my tall CN Tower. Where am I?",
-   "Turning Red is set in this big Canadian city on Lake Ontario.",
-   "Canada's biggest city, on Lake Ontario."
-  ],
-  "fact": "Turning Red is set in 2002, and Mei's family looks after a temple in Toronto's Chinatown."
- },
- {
-  "date": "12-16",
-  "level": "easy",
-  "from": "🎬 Bridge of Spies",
-  "name": "Berlin, Germany",
-  "lat": 52.52,
-  "lon": 13.4,
-  "clues": [
-   "A wall cut my city in half for 28 years. In Bridge of Spies, two spies are swapped on a bridge at my edge during the Cold War. Where am I?",
-   "The Berlin Wall split this German capital from 1961 to 1989.",
-   "The capital of Germany."
-  ],
-  "fact": "The real spy swap of 1962 happened on the Glienicke Bridge between Berlin and Potsdam."
- },
- {
-  "date": "12-16",
-  "level": "medium",
-  "from": "🎬 Fargo",
-  "name": "Fargo, North Dakota, USA",
-  "lat": 46.877,
-  "lon": -96.79,
-  "clues": [
-   "The movie is named after me, but almost none of it happens here. Most of it is across the river in snowy Minnesota. Where am I?",
-   "Fargo is a city in North Dakota.",
-   "Eastern North Dakota, on the Minnesota border."
-  ],
-  "fact": "Fargo (1996) won Oscars for Frances McDormand and for its screenplay."
- },
- {
-  "date": "12-16",
-  "level": "medium",
-  "from": "📖 A Song of Ice and Fire",
-  "name": "Dubrovnik, Croatia",
-  "lat": 42.641,
-  "lon": 18.108,
-  "clues": [
-   "Winter is coming, but not to me. My old city walls played King's Landing in Game of Thrones. Where am I?",
-   "This walled city on Croatia's coast played King's Landing on screen.",
-   "Southern Croatia, on the Adriatic Sea."
-  ],
-  "fact": "Dubrovnik's city walls are almost 2 km long."
- },
- {
-  "date": "12-16",
-  "level": "hard",
-  "from": "🎬 127 Hours",
-  "name": "Canyonlands, Utah, USA",
-  "lat": 38.4,
-  "lon": -110.2,
-  "clues": [
-   "A hiker got his arm stuck under a boulder in my slot canyon for 127 hours, and got out the hardest way possible. Where am I?",
-   "127 Hours happened in Blue John Canyon, in the Utah desert.",
-   "Southeast Utah, next to Canyonlands National Park."
-  ],
-  "fact": "Aron Ralston, the real hiker, kept climbing mountains afterward."
- },
- {
-  "date": "12-17",
-  "level": "easy",
-  "from": "🎬 Dunkirk",
-  "name": "Dunkirk, France",
-  "lat": 51.034,
-  "lon": 2.377,
-  "clues": [
-   "Soldiers were trapped on my beach, so ordinary people sailed their little boats across the sea to bring them home. The movie has my name. Where am I?",
-   "Christopher Nolan's Dunkirk: a French port on the English Channel, in 1940.",
-   "A port in northern France, near Belgium."
-  ],
-  "fact": "More than 330,000 soldiers were rescued from Dunkirk in 1940."
- },
- {
-  "date": "12-17",
-  "level": "easy",
-  "from": "🎬 Finding Nemo",
-  "name": "Sydney, Australia",
-  "lat": -33.857,
-  "lon": 151.215,
-  "clues": [
-   "P. Sherman, 42 Wallaby Way. A dad fish swam across the ocean to find that address and his son, in my harbor. Where am I?",
-   "Nemo ends up in a dentist's fish tank in this Australian city, famous for its Opera House.",
-   "The biggest city in Australia, on the southeast coast."
-  ],
-  "fact": "Marlin swims from the Great Barrier Reef all the way down the coast to Sydney Harbour."
- },
- {
-  "date": "12-17",
-  "level": "medium",
-  "from": "🎬 Evita",
-  "name": "Buenos Aires, Argentina",
-  "lat": -34.608,
-  "lon": -58.371,
-  "clues": [
-   "Don't cry for me! Eva Perón sang to the crowds from the balcony of the Pink House in my city. Where am I?",
-   "Evita is about Argentina's first lady. The Casa Rosada is in this capital.",
-   "The capital of Argentina."
-  ],
-  "fact": "Madonna sang from the real Casa Rosada balcony for Evita."
- },
- {
-  "date": "12-17",
-  "level": "medium",
-  "from": "🎬 Encanto",
-  "name": "Colombia",
-  "lat": 5.0,
-  "lon": -75.0,
-  "clues": [
-   "We don't talk about Bruno, but we do talk about me: the magic family's house, mountains and coffee fields come from my country. Where am I?",
-   "Encanto takes place in this South American country, famous for coffee.",
-   "The top of South America, next to Panama."
-  ],
-  "fact": "'We Don't Talk About Bruno' hit No. 1 on the Billboard Hot 100."
- },
- {
-  "date": "12-17",
-  "level": "hard",
-  "from": "🎬 Avatar",
-  "name": "Zhangjiajie, China",
-  "lat": 29.32,
-  "lon": 110.43,
-  "clues": [
-   "My stone pillars poke out of the clouds like floating mountains. Avatar's Hallelujah Mountains were inspired by me. Where am I?",
-   "Zhangjiajie National Forest Park, in China.",
-   "Hunan province, in south-central China."
-  ],
-  "fact": "One of Zhangjiajie's pillars was renamed 'Avatar Hallelujah Mountain' after the movie."
- },
- {
-  "date": "12-18",
-  "level": "easy",
-  "from": "🎬 Elf",
-  "name": "New York City, USA",
-  "lat": 40.769,
-  "lon": -73.974,
-  "clues": [
-   "Santa's sleigh crash-landed in my park, and an elf in yellow tights went looking for his dad. The best way to spread Christmas cheer is singing loud for all to hear. Where am I?",
-   "Buddy the Elf travels from the North Pole to this city. Santa lands in Central Park.",
-   "The biggest city in the USA."
-  ],
-  "fact": "Elf (2003) was directed by Jon Favreau, who also plays the doctor."
- },
- {
-  "date": "12-18",
-  "level": "easy",
-  "from": "🎬 The Hangover",
-  "name": "Las Vegas, USA",
-  "lat": 36.117,
-  "lon": -115.173,
-  "clues": [
-   "What happens here stays here. Four friends woke up with a tiger in the bathroom and no memory of last night in my city. Where am I?",
-   "The Hangover's bachelor party goes wrong in this desert city of casinos.",
-   "A casino city in the Nevada desert."
-  ],
-  "fact": "Caesars Palace, where the guys stay in The Hangover, opened in 1966."
- },
- {
-  "date": "12-18",
-  "level": "medium",
-  "from": "🎬 Sleeping Beauty",
-  "name": "Neuschwanstein Castle, Germany",
-  "lat": 47.557,
-  "lon": 10.749,
-  "clues": [
-   "I'm the real castle that inspired Sleeping Beauty's, the one Disney fans know by heart. A 'fairy-tale king' built me on a hill. Where am I?",
-   "Neuschwanstein Castle, in Bavaria.",
-   "Southern Germany, near the Austrian border."
-  ],
-  "fact": "King Ludwig II started building Neuschwanstein in 1869."
- },
- {
-  "date": "12-18",
-  "level": "medium",
-  "from": "🎬 Elvis",
-  "name": "Memphis, USA",
-  "lat": 35.046,
-  "lon": -90.026,
-  "clues": [
-   "The King of Rock and Roll lived in a mansion called Graceland in my city. Thank you, thank you very much. Where am I?",
-   "Elvis recorded his first songs at Sun Studio in this Tennessee city on the Mississippi.",
-   "Tennessee's biggest city, in the southwest corner."
-  ],
-  "fact": "Graceland is one of the most visited homes in the USA."
- },
- {
-  "date": "12-18",
-  "level": "hard",
-  "from": "📖 The Jungle Book",
-  "name": "Pench, India",
-  "lat": 21.7,
-  "lon": 79.3,
-  "clues": [
-   "A boy raised by wolves made friends with a bear and a panther in my jungle. Kipling set The Jungle Book in my hills. Where am I?",
-   "The Jungle Book takes place around Seoni, in central India, where Pench National Park is now.",
-   "Madhya Pradesh, right in the middle of India."
-  ],
-  "fact": "Pench National Park is home to real Bengal tigers like Shere Khan."
- },
- {
-  "date": "12-19",
-  "level": "easy",
-  "from": "🎬 Good Will Hunting",
-  "name": "Boston, USA",
-  "lat": 42.36,
-  "lon": -71.06,
-  "clues": [
-   "A janitor at a famous university solved the math problems nobody else could. How do you like them apples? Where am I?",
-   "Good Will Hunting is set in this city and next door at MIT and Harvard.",
-   "The biggest city in New England, on the coast of Massachusetts."
-  ],
-  "fact": "Matt Damon and Ben Affleck won the Oscar for writing Good Will Hunting."
- },
- {
-  "date": "12-19",
-  "level": "easy",
-  "from": "📖 Into the Wild",
-  "name": "Alaska, USA",
-  "lat": 63.868,
-  "lon": -149.769,
-  "clues": [
-   "A young man gave away his savings and walked into my wilderness to live off the land, inside an old abandoned bus. Where am I?",
-   "Into the Wild ends in the biggest US state, far to the north.",
-   "The far northwest corner of North America, next to Canada. The bus was near Denali."
-  ],
-  "fact": "The real bus was airlifted out in 2020 and is now at a museum in Fairbanks."
- },
- {
-  "date": "12-19",
-  "level": "medium",
-  "from": "🎬 Titanic",
-  "name": "Belfast, Northern Ireland",
-  "lat": 54.608,
-  "lon": -5.91,
-  "clues": [
-   "The ship that 'couldn't sink' was built in my shipyard. Jack and Rose met on board, and it didn't end well. Where am I?",
-   "The Titanic was built in this city in Northern Ireland.",
-   "The capital of Northern Ireland."
-  ],
-  "fact": "Titanic Belfast, a museum shaped like ship bows, stands where the ship was built."
- },
- {
-  "date": "12-19",
-  "level": "medium",
-  "from": "📖 The Beach",
-  "name": "Maya Bay, Thailand",
-  "lat": 7.678,
-  "lon": 98.766,
-  "clues": [
-   "A backpacker found a map to a secret paradise beach. It turned out to be me, a lagoon walled in by cliffs, and now everyone knows. Where am I?",
-   "The Beach was filmed at Maya Bay, in Thailand's Phi Phi Islands.",
-   "Southern Thailand, near Phuket."
-  ],
-  "fact": "Maya Bay was closed for years to let its coral recover from too many tourists."
- },
- {
-  "date": "12-19",
-  "level": "hard",
-  "from": "🎬 Master and Commander",
-  "name": "Galápagos Islands, Ecuador",
-  "lat": -0.75,
-  "lon": -90.4,
-  "clues": [
-   "Darwin studied my giant tortoises and finches and came up with evolution. In Master and Commander, the ship's doctor explores my islands. Where am I?",
-   "The Galápagos Islands, in the Pacific Ocean.",
-   "In the Pacific, about 1,000 km west of Ecuador."
-  ],
-  "fact": "Galápagos giant tortoises can live for more than 100 years."
- },
- {
-  "date": "12-20",
-  "level": "easy",
-  "from": "🎬 Love Actually",
-  "name": "London, England",
-  "lat": 51.5,
-  "lon": -0.12,
-  "clues": [
-   "Love actually is all around, especially at Christmas. A boy runs through my airport and a prime minister dances down the stairs in my city. Where am I?",
-   "Love Actually starts and ends at Heathrow, this city's big airport.",
-   "The capital of the United Kingdom."
-  ],
-  "fact": "Love Actually opens and closes with real footage of people hugging at Heathrow arrivals."
- },
- {
-  "date": "12-20",
-  "level": "easy",
-  "from": "📖 The Wizard of Oz",
-  "name": "Kansas, USA",
-  "lat": 38.5,
-  "lon": -98.0,
-  "clues": [
-   "There's no place like home, and Dorothy's home is me. Just keep an eye on the sky: my tornadoes can blow you all the way to Oz. Where am I?",
-   "A flat, farm-filled state right in the middle of the USA.",
-   "In the center of the USA, between Colorado and Missouri."
-  ],
-  "fact": "L. Frank Baum's book came out in 1900, and the famous movie followed in 1939."
- },
- {
-  "date": "12-20",
-  "level": "medium",
-  "from": "📖 The Snows of Kilimanjaro",
-  "name": "Mount Kilimanjaro, Tanzania",
-  "lat": -3.067,
-  "lon": 37.355,
-  "clues": [
-   "I'm a mountain with snow on top, even though I'm close to the equator. Hemingway wrote about my snows. Where am I?",
-   "Mount Kilimanjaro, Africa's tallest mountain.",
-   "Northern Tanzania, near the Kenyan border."
-  ],
-  "fact": "Kilimanjaro is 5,895 meters tall."
- },
- {
-  "date": "12-20",
-  "level": "medium",
-  "from": "🎬 8 Mile",
-  "name": "Detroit, USA",
-  "lat": 42.331,
-  "lon": -83.046,
-  "clues": [
-   "You only get one shot. Eminem's character battle-rapped his way up from a trailer park on the road that marks my city's edge. Where am I?",
-   "8 Mile is a real road on the north edge of this Michigan city, the Motor City.",
-   "Michigan's biggest city, across the river from Canada."
-  ],
-  "fact": "Eminem won an Oscar for 'Lose Yourself' from 8 Mile."
- },
- {
-  "date": "12-20",
-  "level": "hard",
-  "from": "🎬 Gladiator",
-  "name": "Aït Benhaddou, Morocco",
-  "lat": 31.047,
-  "lon": -7.13,
-  "clues": [
-   "Before he fought in Rome, Maximus battled as a slave in a mud-brick town in my North African country. Where am I?",
-   "Gladiator filmed its slave-arena scenes at Aït Benhaddou, a walled village in Morocco.",
-   "Central Morocco, near Ouarzazate, south of the Atlas Mountains."
-  ],
-  "fact": "Aït Benhaddou has also appeared in Game of Thrones."
- },
- {
   "date": "11-21",
   "level": "easy",
   "from": "🎬 Spider-Man: Brand New Day",
@@ -2098,5 +1398,1055 @@
    "The moors of West Yorkshire, England, rolling and wide, / near Haworth, with Brontë country on every side."
   ],
   "fact": "Emily Brontë wrote Wuthering Heights in the parsonage at Haworth, on the edge of the West Yorkshire moors."
+ },
+ {
+  "date": "12-11",
+  "level": "easy",
+  "from": "🎬 Inside Out",
+  "name": "San Francisco, USA",
+  "lat": 37.776,
+  "lon": -122.42,
+  "clues": [
+   "Inside a girl's head, little feelings take turns: / Joy, Sadness and Anger, as everyone learns. / She moved to my hills from the Midwest's cold snow, / and found broccoli pizza, which made her feel low.",
+   "My cable cars climb and my fog rolls in gray, / past a bright orange bridge on a big Pacific bay.",
+   "A Northern California city on a foggy bay, / with the Golden Gate Bridge. Find me today."
+  ],
+  "fact": "Inside Out 2 (2024) became one of the highest-grossing animated movies ever."
+ },
+ {
+  "date": "12-11",
+  "level": "medium",
+  "from": "📖 Gone with the Wind",
+  "name": "Atlanta, USA",
+  "lat": 33.749,
+  "lon": -84.388,
+  "clues": [
+   "A Southern belle swore she'd never go hungry again, / while my city burned down and the war took its men. / I rose from the ashes, a phoenix, they say, / and I'm home to a soda that's sold every day.",
+   "Coca-Cola was born here, and Martin Luther King too, / in the American South, where the peaches grow true.",
+   "The capital of Georgia, USA, see? / Where Gone with the Wind was written. That's me."
+  ],
+  "fact": "Margaret Mitchell wrote Gone with the Wind in her Atlanta apartment."
+ },
+ {
+  "date": "12-11",
+  "level": "medium",
+  "from": "🎬 Star Wars: Attack of the Clones",
+  "name": "Lake Como, Italy",
+  "lat": 45.985,
+  "lon": 9.203,
+  "clues": [
+   "A Jedi and a senator wed on my shore, / at a villa with gardens and a lakeside door. / I'm shaped like a person with legs running wide, / and movie stars buy their villas by my side.",
+   "George Clooney has a villa near my water, I hear, / in northern Italy, where the Alps rise near.",
+   "A Y-shaped lake north of Milan, in Italy, see? / With Bellagio on its point. That's me."
+  ],
+  "fact": "The wedding was filmed at Villa del Balbianello, which also appears in Casino Royale."
+ },
+ {
+  "date": "12-11",
+  "level": "hard",
+  "from": "🎬 3 Idiots",
+  "name": "Pangong Lake, India",
+  "lat": 33.75,
+  "lon": 78.67,
+  "clues": [
+   "Three college friends searched for a buddy who'd gone, / and found him by me, where the blue goes on and on. / I'm high in the mountains, my water's so bright / it turns blue, green and purple depending on light.",
+   "I'm shared by two countries, way up past the clouds, / in Ladakh's cold desert, far away from the crowds.",
+   "A high lake in Ladakh, India, by the Chinese line, / where the 3 Idiots ending made my blue water shine."
+  ],
+  "fact": "3 Idiots (2009) was one of the biggest Indian movies of its time."
+ },
+ {
+  "date": "12-12",
+  "level": "easy",
+  "from": "🎬 North by Northwest",
+  "name": "Mount Rushmore, USA",
+  "lat": 43.879,
+  "lon": -103.459,
+  "clues": [
+   "A man on the run climbed down giant stone faces, / chased by spies through the most dangerous of places. / Four presidents stare from my granite so tall, / and they're sixty feet high, with their noses and all.",
+   "Washington, Jefferson, Roosevelt, Lincoln, all here, / in the Black Hills, where the tourists come every year.",
+   "In South Dakota's Black Hills, a mountain carved, see? / Four presidents' faces. That's me."
+  ],
+  "fact": "Each face on Mount Rushmore is about 18 meters (60 feet) tall."
+ },
+ {
+  "date": "12-12",
+  "level": "medium",
+  "from": "📖 War and Peace",
+  "name": "Moscow, Russia",
+  "lat": 55.752,
+  "lon": 37.617,
+  "clues": [
+   "A huge book of battles has Napoleon come / to my city, then leave when the winter turned glum. / My onion domes swirl like a candy-striped treat, / by a fortress of red where my big square meets.",
+   "The Kremlin, Red Square and Saint Basil's are mine, / in Russia, where winters are cold, not fine.",
+   "Russia's capital city, on the Moskva River, see? / With the Kremlin's red walls. That's me."
+  ],
+  "fact": "War and Peace is more than 1,000 pages long."
+ },
+ {
+  "date": "12-12",
+  "level": "medium",
+  "from": "📖 Don Quixote",
+  "name": "La Mancha, Spain",
+  "lat": 39.457,
+  "lon": -3.608,
+  "clues": [
+   "An old knight in tin charged my windmills to fight, / thinking they were giants, which wasn't quite right. / My plains are wide open, all dusty and dry, / with white windmills standing up against the sky.",
+   "My Manchego cheese and my saffron are prized, / in Spain's central plains, where the windmills arise.",
+   "A region of central Spain, south of Madrid, you see, / where Don Quixote fought windmills. That's me."
+  ],
+  "fact": "Don Quixote, from 1605, is often called the first modern novel."
+ },
+ {
+  "date": "12-13",
+  "level": "easy",
+  "from": "📖 The Alchemist",
+  "name": "Pyramids of Giza, Egypt",
+  "lat": 29.979,
+  "lon": 31.134,
+  "clues": [
+   "A shepherd boy dreamed of a treasure in sand / and set off from Spain to a faraway land. / I'm three giant triangles, older than old, / and a lion-man statue sits guarding my gold.",
+   "The Sphinx sits beside me, near Cairo's big sprawl, / the last ancient Wonder of the World standing tall.",
+   "Egypt's great pyramids, at Giza, west of the Nile, see? / Built by pharaohs. That's me."
+  ],
+  "fact": "The Alchemist by Paulo Coelho is one of the best-selling books of all time."
+ },
+ {
+  "date": "12-13",
+  "level": "medium",
+  "from": "📖 Heidi",
+  "name": "Swiss Alps",
+  "lat": 47.01,
+  "lon": 9.53,
+  "clues": [
+   "A little girl lived with her grandpa up high, / with goats and fresh cheese and a hay bed nearby. / My meadows are green and my peaks wear white snow, / and my cows wear big bells everywhere that they go.",
+   "Chocolate and watches and cheese full of holes, / in my mountains, where the yodeling rolls.",
+   "The Alps of Switzerland, near the Liechtenstein line, / Heidi's mountain home, with peaks so fine."
+  ],
+  "fact": "Heidi was written in 1881 and is one of the best-selling books ever."
+ },
+ {
+  "date": "12-13",
+  "level": "medium",
+  "from": "🎬 Tangled",
+  "name": "Mont-Saint-Michel, France",
+  "lat": 48.636,
+  "lon": -1.511,
+  "clues": [
+   "A princess with hair that was seventy feet / lived in a kingdom where the tide and land meet. / That kingdom was drawn from my abbey so steep, / on a rock that the sea circles when the tides are deep.",
+   "When the tide's out, you can walk to my door, / on France's north coast, by Normandy's shore.",
+   "A tidal island abbey in Normandy, France, see? / Mont-Saint-Michel. That's me."
+  ],
+  "fact": "The tides around Mont-Saint-Michel are some of the biggest in Europe."
+ },
+ {
+  "date": "12-13",
+  "level": "hard",
+  "from": "📖 Hamlet",
+  "name": "Helsingør, Denmark",
+  "lat": 56.039,
+  "lon": 12.621,
+  "clues": [
+   "A prince saw his father's ghost walk on my wall, / then he talked to a skull, and it ended badly for all. / My castle guards the strait where the ships paid a fee, / and you can see Sweden across the water from me.",
+   "Kronborg Castle is mine, 'Elsinore' in the play, / on Denmark's coast, north of Copenhagen's bay.",
+   "A Danish town where the strait to Sweden is thin, see? / Hamlet's castle. That's me."
+  ],
+  "fact": "Hamlet is performed at Kronborg Castle almost every summer."
+ },
+ {
+  "date": "12-14",
+  "level": "easy",
+  "from": "🎬 Thelma & Louise",
+  "name": "Grand Canyon, USA",
+  "lat": 36.1,
+  "lon": -112.11,
+  "clues": [
+   "Two friends on the run drove their car off my edge, / holding hands as they flew from my red rocky ledge. / A river spent millions of years carving me, / a mile deep and so wide, it's a wonder to see.",
+   "The Colorado River runs along my floor, / in the American Southwest, with red rocks galore.",
+   "A giant canyon in northern Arizona, see? / One of the world's wonders. That's me."
+  ],
+  "fact": "The final scene was actually filmed at Dead Horse Point in Utah."
+ },
+ {
+  "date": "12-14",
+  "level": "medium",
+  "from": "📖 Crazy Rich Asians",
+  "name": "Singapore",
+  "lat": 1.283,
+  "lon": 103.86,
+  "clues": [
+   "A New Yorker flew in to meet her guy's family, / and learned they were richer than kings, actually. / A hotel with a boat on its roof lights my bay, / and giant metal supertrees glow every day.",
+   "I'm a city and a country, both small and both one, / at the tip of a peninsula, under the equator's sun.",
+   "A tiny island nation off Malaysia's tip, see? / The Lion City. That's me."
+  ],
+  "fact": "Crazy Rich Asians is based on Kevin Kwan's 2013 novel."
+ },
+ {
+  "date": "12-14",
+  "level": "hard",
+  "from": "📖 Moby-Dick",
+  "name": "Nantucket, USA",
+  "lat": 41.283,
+  "lon": -70.099,
+  "clues": [
+   "A captain with one leg went chasing a whale, / a white one that tore up his ship and his sail. / His crew sailed from my island, the whaling town's pride, / with cobblestone streets and grey shingles outside.",
+   "Thirty miles off Cape Cod, a whaling port past, / in Massachusetts, where my grey shingles last.",
+   "An island south of Cape Cod, Martha's Vineyard's neighbor, see? / Once the whaling capital. That's me."
+  ],
+  "fact": "Nantucket was the whaling capital of the world in the early 1800s."
+ },
+ {
+  "date": "12-15",
+  "level": "easy",
+  "from": "🎬 Finding Nemo",
+  "name": "Sydney, Australia",
+  "lat": -33.857,
+  "lon": 151.215,
+  "clues": [
+   "A clownfish dad crossed the ocean to find / his son in a dentist's fish tank, left behind. / My opera house looks like white sails on the bay, / and fireworks light my big bridge when the new year comes my way.",
+   "P. Sherman, 42 Wallaby Way: / that's my city, on Australia's east coast bay.",
+   "Australia's biggest city, on its southeast coast, see? / With a famous opera house. That's me."
+  ],
+  "fact": "Marlin swims from the Great Barrier Reef all the way down the coast to Sydney Harbour."
+ },
+ {
+  "date": "12-15",
+  "level": "medium",
+  "from": "🎬 The Devil Wears Prada 2",
+  "name": "Milan, Italy",
+  "lat": 45.464,
+  "lon": 9.19,
+  "clues": [
+   "A fashion boss and her assistant fly in / for the runway shows, where the models all spin. / My cathedral has spires like a lacy white cake, / and a famous Last Supper is mine, for art's sake.",
+   "Fashion Week struts through my streets every year, / in northern Italy, with the Alps quite near.",
+   "Italy's fashion capital, on the Lombardy plain, see? / Home of the Duomo. That's me."
+  ],
+  "fact": "The sequel filmed at a real Dolce & Gabbana show during Milan Fashion Week in 2025."
+ },
+ {
+  "date": "12-15",
+  "level": "medium",
+  "from": "🎬 Independence Day",
+  "name": "Area 51, Nevada, USA",
+  "lat": 37.235,
+  "lon": -115.811,
+  "clues": [
+   "When aliens attacked, the heroes all flew / to a secret base hiding a spaceship or two. / My base is so secret, for years no one would say / it even existed, out here far away.",
+   "I'm out in the Nevada desert, north of Las Vegas' light, / where people swear UFOs zoom through the night.",
+   "A top-secret air base in southern Nevada, see? / Near the Extraterrestrial Highway. That's me."
+  ],
+  "fact": "The US government only officially admitted Area 51 exists in 2013."
+ },
+ {
+  "level": "easy",
+  "from": "📖 The Fault in Our Stars",
+  "name": "Amsterdam, Netherlands",
+  "lat": 52.375,
+  "lon": 4.884,
+  "clues": [
+   "Two teens used one wish to come visit my town, / and they ate by my canals as the sun went down. / I've more bikes than people and houseboats galore, / and tulips and windmills just outside my door.",
+   "Anne Frank hid in a house on one of my canals, / in a low, flat country of bikes and old mills.",
+   "The capital of the Netherlands, see? / Canals and bicycles. That's me."
+  ],
+  "fact": "The movie was the first ever allowed to film inside the Anne Frank House.",
+  "date": "12-16"
+ },
+ {
+  "date": "12-16",
+  "level": "medium",
+  "from": "🎬 Turning Red",
+  "name": "Toronto, Canada",
+  "lat": 43.653,
+  "lon": -79.383,
+  "clues": [
+   "A girl turned into a big red panda, oh dear, / whenever her feelings got too much, I hear. / My tall needle tower looks over the lake, / and my Chinatown's dumplings are worth the trip to take.",
+   "The CN Tower's mine, by Lake Ontario's shore, / Canada's biggest city, with hockey and more.",
+   "Ontario's capital, Canada's largest city, see? / The CN Tower's home. That's me."
+  ],
+  "fact": "Turning Red is set in 2002, and Mei's family looks after a temple in Toronto's Chinatown."
+ },
+ {
+  "date": "12-16",
+  "level": "medium",
+  "from": "📖 A Song of Ice and Fire",
+  "name": "Dubrovnik, Croatia",
+  "lat": 42.641,
+  "lon": 18.108,
+  "clues": [
+   "A cruel boy king ruled from a city by the sea, / and the show filmed his capital mostly on me. / My old walls wrap round me, you can walk the whole ring, / and my roofs glow bright orange in summer and spring.",
+   "They call me the Pearl of the Adriatic Sea, / on Croatia's south coast. Can you find me?",
+   "A walled city in southern Croatia, see? / King's Landing in the show. That's me."
+  ],
+  "fact": "Dubrovnik's city walls are almost 2 km long."
+ },
+ {
+  "date": "12-16",
+  "level": "hard",
+  "from": "🎬 127 Hours",
+  "name": "Canyonlands, Utah, USA",
+  "lat": 38.4,
+  "lon": -110.2,
+  "clues": [
+   "A hiker got stuck when a rock pinned his arm, / alone in a canyon, far from help or alarm. / He spent five days trapped, then he did something brave, / and walked out of my maze from that slot-canyon grave.",
+   "My canyons were carved by the Green and the Colorado, / in Utah's red desert, near Moab, you know.",
+   "A national park in southeast Utah, see? / Near Moab and Arches. That's me."
+  ],
+  "fact": "Aron Ralston, the real hiker, kept climbing mountains afterward."
+ },
+ {
+  "level": "easy",
+  "from": "🎬 Rocky",
+  "name": "Philadelphia, USA",
+  "lat": 39.966,
+  "lon": -75.181,
+  "clues": [
+   "A boxer ran up all my museum's stone stairs, / threw his arms in the air, and he didn't have cares. / The Liberty Bell has a crack, but it's mine, / and my cheesesteaks are messy and greasy and fine.",
+   "The Declaration was signed here in 1776, / in Pennsylvania, with cheesesteaks and Rocky's old tricks.",
+   "Pennsylvania's biggest city, see? / The City of Brotherly Love. That's me."
+  ],
+  "fact": "There's a bronze Rocky statue at the bottom of the steps.",
+  "date": "12-17"
+ },
+ {
+  "date": "12-17",
+  "level": "medium",
+  "from": "🎬 Evita",
+  "name": "Buenos Aires, Argentina",
+  "lat": -34.608,
+  "lon": -58.371,
+  "clues": [
+   "A poor girl rose up to be first lady here, / and she waved from my pink palace balcony to cheers. / I dance the tango in my colorful streets, / and steak on the grill is my favorite of treats.",
+   "My Casa Rosada is painted bright pink, / on the Río de la Plata, a wide river's brink.",
+   "The capital of Argentina, see? / Home of the tango. That's me."
+  ],
+  "fact": "Madonna sang from the real Casa Rosada balcony for Evita."
+ },
+ {
+  "date": "12-17",
+  "level": "medium",
+  "from": "🎬 Encanto",
+  "name": "Colombia",
+  "lat": 5.0,
+  "lon": -75.0,
+  "clues": [
+   "A family had magic, each kid had a gift, / in a house that could dance and could shake and could shift. / Their town sat in my mountains, with coffee and green, / and wax palm trees taller than any you've seen.",
+   "My coffee is famous, my emeralds too, / in South America's north, by two oceans of blue.",
+   "A South American country, with Bogotá as capital, see? / Where Encanto takes place. That's me."
+  ],
+  "fact": "'We Don't Talk About Bruno' hit No. 1 on the Billboard Hot 100."
+ },
+ {
+  "date": "12-18",
+  "level": "easy",
+  "from": "🎬 The Hangover",
+  "name": "Las Vegas, USA",
+  "lat": 36.117,
+  "lon": -115.173,
+  "clues": [
+   "Four friends had a party they couldn't recall, / with a tiger, a baby, and no groom at all. / My Strip has a pyramid and an Eiffel Tower too, / and my fountains dance music the whole night through.",
+   "What happens here stays here, as the slogan goes, / in the Nevada desert, where the neon glows.",
+   "Nevada's biggest city, the gambling capital, see? / Sin City. That's me."
+  ],
+  "fact": "Caesars Palace, where the guys stay in The Hangover, opened in 1966."
+ },
+ {
+  "date": "12-18",
+  "level": "medium",
+  "from": "🎬 Sleeping Beauty",
+  "name": "Neuschwanstein Castle, Germany",
+  "lat": 47.557,
+  "lon": 10.749,
+  "clues": [
+   "A princess slept long in a castle so fine, / and Disney's castle copied the towers of mine. / A dreamy king built me up high on a hill, / with swans and with towers, and folks visit me still.",
+   "I was built by a fairy-tale king, Ludwig the Second, / in Bavaria's Alps, where the forests beckon.",
+   "A fairy-tale castle in southern Germany, see? / Near Füssen, in Bavaria. That's me."
+  ],
+  "fact": "King Ludwig II started building Neuschwanstein in 1869."
+ },
+ {
+  "date": "12-18",
+  "level": "medium",
+  "from": "🎬 Elvis",
+  "name": "Memphis, USA",
+  "lat": 35.046,
+  "lon": -90.026,
+  "clues": [
+   "A boy with a guitar and a curl in his hair / made his first records in my studio there. / He bought a big mansion with a jungle-themed room, / and my blues on Beale Street can still make you swoon.",
+   "Graceland is mine, and Sun Studio too, / on the Mississippi River, with a Tennessee view.",
+   "A big city in Tennessee, on the Mississippi, see? / Home of the King of Rock 'n' Roll. That's me."
+  ],
+  "fact": "Graceland is one of the most visited homes in the USA."
+ },
+ {
+  "date": "12-18",
+  "level": "hard",
+  "from": "📖 The Jungle Book",
+  "name": "Pench, India",
+  "lat": 21.7,
+  "lon": 79.3,
+  "clues": [
+   "A boy raised by wolves had a bear for a friend, / and a tiger who hunted him right to the end. / The writer imagined my forests and streams, / with real tigers prowling through teak trees and dreams.",
+   "My tiger reserve sits in the heart of my land, / in central India, where the teak forests stand.",
+   "A tiger reserve in central India, near Nagpur, see? / Mowgli's real jungle. That's me."
+  ],
+  "fact": "Pench National Park is home to real Bengal tigers like Shere Khan."
+ },
+ {
+  "level": "easy",
+  "from": "📖 The Little Mermaid",
+  "name": "Copenhagen, Denmark",
+  "lat": 55.693,
+  "lon": 12.599,
+  "clues": [
+   "A mermaid gave up her sweet voice for some feet, / and her bronze statue sits on a rock by my street. / My harbor has houses painted every bright hue, / and an old amusement park, Tivoli, too.",
+   "Nyhavn's bright houses line my harbor's canal, / in Scandinavia, where a bike is everyone's pal.",
+   "The capital of Denmark, see? / The Little Mermaid statue. That's me."
+  ],
+  "fact": "The Little Mermaid statue has sat in Copenhagen harbor since 1913.",
+  "date": "12-19"
+ },
+ {
+  "date": "12-19",
+  "level": "medium",
+  "from": "🎬 Good Will Hunting",
+  "name": "Boston, USA",
+  "lat": 42.36,
+  "lon": -71.06,
+  "clues": [
+   "A janitor solved the hard math on the board / at a famous school, and the professors were floored. / He talked with his therapist on a bench by my lake, / in my city of baked beans and a famous tea break.",
+   "My harbor's tea party helped start a war, / in Massachusetts, with Harvard next door.",
+   "The capital of Massachusetts, see? / Beantown. That's me."
+  ],
+  "fact": "Matt Damon and Ben Affleck won the Oscar for writing Good Will Hunting."
+ },
+ {
+  "date": "12-19",
+  "level": "hard",
+  "from": "🎬 Master and Commander",
+  "name": "Galápagos Islands, Ecuador",
+  "lat": -0.75,
+  "lon": -90.4,
+  "clues": [
+   "A captain chased a French ship to my shores, / where his doctor found creatures he'd not seen before. / My tortoises are giant, my iguanas swim, / and a scientist's big idea came from finches, not whim.",
+   "Darwin came here and his big idea took flight, / out in the Pacific, on the equator's line, right.",
+   "Islands in the Pacific, part of Ecuador, see? / Giant tortoises. That's me."
+  ],
+  "fact": "Galápagos giant tortoises can live for more than 100 years."
+ },
+ {
+  "date": "12-20",
+  "level": "easy",
+  "from": "📖 The Wizard of Oz",
+  "name": "Kansas, USA",
+  "lat": 38.5,
+  "lon": -98.0,
+  "clues": [
+   "A twister scooped up a girl and her pup, / and her house landed far after spinning way up. / She clicked her red heels to come home to me, / to my flat golden wheat fields as far as you see.",
+   "I'm the middle of the USA, flat and wide, / with wheat fields and twisters on every side.",
+   "A US state in the middle, north of Oklahoma, see? / Dorothy's home. That's me."
+  ],
+  "fact": "L. Frank Baum's book came out in 1900, and the famous movie followed in 1939."
+ },
+ {
+  "date": "12-20",
+  "level": "medium",
+  "from": "📖 The Snows of Kilimanjaro",
+  "name": "Mount Kilimanjaro, Tanzania",
+  "lat": -3.067,
+  "lon": 37.355,
+  "clues": [
+   "A dying writer lay down on safari below / and dreamed of my top, wrapped in shining white snow. / I stand all alone, not part of a range, / and snow near the equator seems wonderfully strange.",
+   "I'm Africa's tallest, a volcano asleep, / in East Africa, where the safari trails sweep.",
+   "Africa's highest mountain, in Tanzania, see? / Near the Kenya border. That's me."
+  ],
+  "fact": "Kilimanjaro is 5,895 meters tall."
+ },
+ {
+  "date": "12-20",
+  "level": "medium",
+  "from": "🎬 8 Mile",
+  "name": "Detroit, USA",
+  "lat": 42.331,
+  "lon": -83.046,
+  "clues": [
+   "A rapper battled with words on my stage, / from my 8 Mile Road, full of hunger and rage. / I'm the Motor City, where cars came to be, / and Motown's great music was recorded in me.",
+   "Ford built his cars here, and Motown sang too, / in Michigan, by a river with a Canadian view.",
+   "Michigan's biggest city, across from Canada, see? / The Motor City. That's me."
+  ],
+  "fact": "Eminem won an Oscar for 'Lose Yourself' from 8 Mile."
+ },
+ {
+  "date": "12-20",
+  "level": "hard",
+  "from": "🎬 Gladiator",
+  "name": "Aït Benhaddou, Morocco",
+  "lat": 31.047,
+  "lon": -7.13,
+  "clues": [
+   "A general turned slave fought for crowds in the ring, / and his first fights were held in my clay-walled ring. / My mud-brick towers stack up on a hill, / at the edge of the desert, where films come here still.",
+   "Game of Thrones filmed here, and so did old Rome's tales, / in Morocco's south, near the Sahara's sand trails.",
+   "A clay-brick fortress village near Ouarzazate, Morocco, see? / Hollywood's favorite. That's me."
+  ],
+  "fact": "Aït Benhaddou has also appeared in Game of Thrones."
+ },
+ {
+  "level": "easy",
+  "from": "🎬 Scarface",
+  "name": "Miami, USA",
+  "lat": 25.774,
+  "lon": -80.19,
+  "clues": [
+   "A gangster arrived on a boat by my shore / and built a big empire, then wanted more. / My beaches have art deco hotels, pastel-bright, / and my Little Havana plays salsa all night.",
+   "South Beach is mine, with its neon and sun, / at Florida's tip, where the cruise ships run.",
+   "A big city at the southeast tip of Florida, see? / Hot beaches and salsa. That's me."
+  ],
+  "fact": "Scarface (1983) is a remake of a 1932 gangster movie set in Chicago.",
+  "date": "12-21"
+ },
+ {
+  "level": "easy",
+  "from": "📖 Murder on the Orient Express",
+  "name": "Istanbul, Turkey",
+  "lat": 41.011,
+  "lon": 28.977,
+  "clues": [
+   "A detective boarded a train in my town, / then snow stopped the train, and a man was struck down. / I'm half in Europe and half in Asia, it's true, / with a mosque that is famous for being so blue.",
+   "The Bosphorus splits me, with bazaars full of spice, / in Turkey, where the tea and the sweets are so nice.",
+   "Turkey's biggest city, once Constantinople, see? / On two continents. That's me."
+  ],
+  "fact": "Agatha Christie rode the real Orient Express herself.",
+  "date": "12-22"
+ },
+ {
+  "date": "12-22",
+  "level": "medium",
+  "from": "🎬 Bridge of Spies",
+  "name": "Berlin, Germany",
+  "lat": 52.52,
+  "lon": 13.4,
+  "clues": [
+   "A lawyer arranged a spy swap near my lake, / when a wall split me in two for politics' sake. / Now it's mostly torn down, with art on the rest, / and my Brandenburg Gate joins my east and my west.",
+   "Checkpoint Charlie stands here, where the Cold War stood tall, / the capital of Germany, without its wall.",
+   "The capital of Germany, on the Spree River, see? / The Berlin Wall's city. That's me."
+  ],
+  "fact": "The real spy swap of 1962 happened on the Glienicke Bridge between Berlin and Potsdam."
+ },
+ {
+  "date": "12-23",
+  "level": "easy",
+  "from": "🎬 Home Alone",
+  "name": "Chicago, USA",
+  "lat": 42.0,
+  "lon": -87.7,
+  "clues": [
+   "A boy left behind when his family flew / set traps for two burglars, a painful debut. / My Bean is a mirror, my pizza is deep, / and the wind off my lake makes the cold winter creep.",
+   "The Willis Tower's mine, by Lake Michigan's side, / the Windy City, in the Midwest, with pride.",
+   "Illinois's biggest city, on Lake Michigan, see? / The Windy City. That's me."
+  ],
+  "fact": "The real Home Alone house is in Winnetka, just north of Chicago."
+ },
+ {
+  "date": "12-24",
+  "level": "easy",
+  "from": "🎬 Elf",
+  "name": "New York City, USA",
+  "lat": 40.769,
+  "lon": -73.974,
+  "clues": [
+   "A tall man raised by elves came looking for his dad, / in a big city where everyone seemed kind of sad. / He spun in revolving doors, ate syrup on spaghetti, / and my giant tree glows by the ice rink, all ready.",
+   "Rockefeller Center's tree lights my December nights, / in America's biggest city, with Times Square's lights.",
+   "The Big Apple, on the US East Coast, see? / Where Buddy the Elf found his dad. That's me."
+  ],
+  "fact": "Elf (2003) was directed by Jon Favreau, who also plays the doctor."
+ },
+ {
+  "level": "medium",
+  "from": "🎬 Die Hard",
+  "name": "Los Angeles, USA",
+  "lat": 34.118,
+  "lon": -118.3,
+  "clues": [
+   "A cop in bare feet saved a party one night / from thieves in a tower, a Christmas Eve fight. / My hills have big letters, my stars line a walk, / and the freeways are jammed while the movie stars talk.",
+   "Hollywood's mine, and the palm trees and sun, / in Southern California, where the movies are done.",
+   "California's biggest city, see? / The City of Angels. That's me."
+  ],
+  "fact": "Die Hard's Nakatomi Plaza is really Fox Plaza, an office tower in Century City, Los Angeles.",
+  "date": "12-24"
+ },
+ {
+  "date": "12-25",
+  "level": "easy",
+  "from": "🎬 Love Actually",
+  "name": "London, England",
+  "lat": 51.5,
+  "lon": -0.12,
+  "clues": [
+   "At Christmas, a prime minister danced down the stair, / and a boy ran through the airport to show he would care. / My big clock bongs by the river at night, / and my red buses glow in the holiday lights.",
+   "Heathrow's arrivals gate is where the film starts and ends, / in England's capital, with Big Ben and friends.",
+   "The capital of the UK, on the Thames, see? / Big Ben's home. That's me."
+  ],
+  "fact": "Love Actually opens and closes with real footage of people hugging at Heathrow arrivals."
+ },
+ {
+  "date": "12-11",
+  "level": "hard",
+  "from": "🎬 Black Panther",
+  "name": "Iguazu Falls, Argentina/Brazil",
+  "lat": -25.6953,
+  "lon": -54.4367,
+  "clues": [
+   "A king fought for his crown by a waterfall's edge, / and the falls that they used came from me, ledge after ledge. / I'm hundreds of waterfalls, wide as can be, / and a 'Devil's Throat' swallows the river through me.",
+   "I'm shared by Argentina and Brazil, in the green, / with rainbows and toucans and mist in between.",
+   "Iguazu Falls, near where three countries meet, see? / South America's mighty falls. That's me."
+  ],
+  "fact": "Black Panther used aerial shots of Iguazu Falls for Wakanda's Warrior Falls. Iguazu is made of about 275 separate drops."
+ },
+ {
+  "date": "12-12",
+  "level": "hard",
+  "from": "🎬 Lara Croft: Tomb Raider",
+  "name": "Angkor Wat, Cambodia",
+  "lat": 13.4125,
+  "lon": 103.867,
+  "clues": [
+   "A tomb-raiding hero ran through my old halls, / where tree roots like snakes have swallowed my walls. / I'm the biggest religious monument known, / and my five lotus towers are carved out of stone.",
+   "I'm on my country's flag, in a jungle so green, / in Southeast Asia, near Siem Reap I'm seen.",
+   "A giant temple in Cambodia, near Siem Reap, see? / Angkor Wat. That's me."
+  ],
+  "fact": "Lara Croft: Tomb Raider (2001) filmed at Angkor, including Ta Prohm, where giant tree roots grow over the temple walls."
+ },
+ {
+  "date": "12-12",
+  "level": "hard",
+  "from": "🎬 Goldfinger",
+  "name": "Fort Knox, Kentucky, USA",
+  "lat": 37.8836,
+  "lon": -85.9625,
+  "clues": [
+   "A villain named after a metal so bright / planned to poison my gold in one terrible night. / I'm the vault that's the hardest to get into, they say, / and few people have ever been inside me to this day.",
+   "The US keeps tons of its gold bars in me, / in Kentucky, south of Louisville. Can you see?",
+   "An army post in Kentucky, south of Louisville, see? / The famous gold vault. That's me."
+  ],
+  "fact": "In Goldfinger, the villain plans to make Fort Knox's gold radioactive. The real vault holds more than half of the US government's gold."
+ },
+ {
+  "date": "12-13",
+  "level": "hard",
+  "from": "🎬 Star Wars: The Last Jedi",
+  "name": "Salar de Uyuni, Bolivia",
+  "lat": -20.1338,
+  "lon": -67.4891,
+  "clues": [
+   "Rebels skidded across a planet of white, / and their speeders kicked up bright red dust in the fight. / I'm the biggest salt flat in the world, flat as glass, / and when it rains, I'm a mirror where clouds slowly pass.",
+   "I sit high in the Andes, in a landlocked land, / where flamingos stand pink by my salty white sand.",
+   "The world's biggest salt flat, in southwest Bolivia, see? / Salar de Uyuni. That's me."
+  ],
+  "fact": "The Last Jedi's salt planet Crait was inspired by Salar de Uyuni, the largest salt flat on Earth."
+ },
+ {
+  "date": "12-14",
+  "level": "medium",
+  "from": "🎬 Zorba the Greek",
+  "name": "Crete, Greece",
+  "lat": 35.2401,
+  "lon": 24.8093,
+  "clues": [
+   "A wild man danced on my beach, arms out wide, / teaching a shy writer to live life with pride. / A king kept a monster in a maze on my land, / half bull and half man, as the old stories planned.",
+   "Knossos is mine, an old palace of kings, / the biggest Greek island, with olives and springs.",
+   "Greece's biggest island, south in the Med, see? / Heraklion and Chania. That's me."
+  ],
+  "fact": "Zorba the Greek (1964) was filmed on Crete, and Zorba's beach dance, the sirtaki, became famous around the world."
+ },
+ {
+  "date": "12-14",
+  "level": "hard",
+  "from": "🎬 Spirited Away",
+  "name": "Jiufen, Taiwan",
+  "lat": 25.1099,
+  "lon": 121.8452,
+  "clues": [
+   "A girl's parents turned into pigs at a feast, / near a spirit bathhouse with lanterns, at least. / My steep old street, full of red lanterns' glow, / looks so much like that movie, the fans say so.",
+   "An old gold-mining town on a hill by the sea, / near Taipei, where teahouses look out from me.",
+   "A hillside town in northern Taiwan, near Taipei, see? / Red lanterns and tea. That's me."
+  ],
+  "fact": "Fans often link Jiufen's lantern-lit streets to Spirited Away, though Studio Ghibli has said the town wasn't a direct model."
+ },
+ {
+  "date": "12-15",
+  "level": "hard",
+  "from": "📖 The Hound of the Baskervilles",
+  "name": "Dartmoor, England",
+  "lat": 50.5719,
+  "lon": -3.9207,
+  "clues": [
+   "A giant hound howled in the mist on my moor, / and a detective came down to find out what for. / My hills have stone tors and my ponies run free, / and a misty old prison stands in the middle of me.",
+   "Wild ponies and granite tors cover my land, / in Devon, in England's southwest, rugged and grand.",
+   "A national park moor in Devon, England, see? / The Hound of the Baskervilles' home. That's me."
+  ],
+  "fact": "Arthur Conan Doyle set The Hound of the Baskervilles on Dartmoor after visiting Devon. Dartmoor Prison opened in 1809."
+ },
+ {
+  "date": "12-15",
+  "level": "hard",
+  "from": "🎬 The Gods Must Be Crazy",
+  "name": "Kalahari Desert, Botswana",
+  "lat": -22.3,
+  "lon": 23.5,
+  "clues": [
+   "A soda bottle fell from a plane to the ground, / and a man set out to return it, the whole world round. / I'm a dry sandy savanna, red, wide and hot, / where meerkats stand watch over their spot.",
+   "I cover most of Botswana, with sand and with scrub, / where lions roam wild, far from any town hub.",
+   "A big sandy savanna in Botswana and Namibia, see? / The Kalahari. That's me."
+  ],
+  "fact": "The Gods Must Be Crazy (1980) was filmed in the Kalahari, in Botswana and what is now Namibia."
+ },
+ {
+  "date": "12-16",
+  "level": "hard",
+  "from": "🎬 Argo",
+  "name": "Tehran, Iran",
+  "lat": 35.6892,
+  "lon": 51.389,
+  "clues": [
+   "Six Americans hid when my embassy fell, / and a fake movie crew helped them get out as well. / Snowy mountains stand tall behind me, you'll see, / a huge capital in the old land of Persia: me.",
+   "My Milad and Azadi towers stand tall, / in the Middle East, where Persian carpets fill every hall.",
+   "The capital of Iran, below the Alborz Mountains, see? / Where Argo's rescue happened. That's me."
+  ],
+  "fact": "Argo tells the true story of six US diplomats who escaped Tehran in 1980 by pretending to be a Canadian film crew."
+ },
+ {
+  "date": "12-17",
+  "level": "hard",
+  "from": "🎬 Rogue One",
+  "name": "Maldives",
+  "lat": 3.2028,
+  "lon": 73.2207,
+  "clues": [
+   "Rebels fought on a beach planet's shore / to steal some big plans, then they couldn't do more. / My islands are tiny and my lagoons are so blue, / and my huts stand on stilts in the water for you.",
+   "I'm made of over a thousand tiny coral isles, / in the Indian Ocean, southwest of India by miles.",
+   "An island nation of atolls southwest of Sri Lanka, see? / The lowest country on Earth. That's me."
+  ],
+  "fact": "Rogue One's beach planet Scarif was filmed partly in the Maldives. It is the lowest-lying country in the world."
+ },
+ {
+  "date": "12-17",
+  "level": "hard",
+  "from": "🎬 300",
+  "name": "Thermopylae, Greece",
+  "lat": 38.7967,
+  "lon": 22.5367,
+  "clues": [
+   "Three hundred soldiers held a narrow pass / against a giant army that came marching en masse. / My name means 'hot gates' for the springs at my feet, / and the Spartans stood here and refused to retreat.",
+   "A bronze statue of King Leonidas stands by my road, / in central Greece, where the battle's tale is told.",
+   "A narrow mountain pass in central Greece, see? / Where the 300 Spartans fought. That's me."
+  ],
+  "fact": "A bronze statue of Leonidas stands at Thermopylae, where 300 Spartans and their allies held the pass in 480 BC."
+ },
+ {
+  "date": "12-18",
+  "level": "hard",
+  "from": "🎬 Quantum of Solace",
+  "name": "Atacama Desert, Chile",
+  "lat": -24.5,
+  "lon": -69.25,
+  "clues": [
+   "A spy blew up a hotel in my desert so dry, / where some spots go years without rain from the sky. / Big telescopes perch on my mountains of red, / to look at the stars, since my skies are clear overhead.",
+   "I'm one of the driest places on Earth, you see, / in northern Chile, where the Andes meet me.",
+   "The desert of northern Chile, near San Pedro, see? / The driest desert outside the poles. That's me."
+  ],
+  "fact": "Quantum of Solace's desert hotel is really the residence of the Paranal Observatory in the Atacama, one of the best places on Earth to see the stars."
+ },
+ {
+  "date": "12-19",
+  "level": "medium",
+  "from": "🎬 Skyfall",
+  "name": "Shanghai, China",
+  "lat": 31.2304,
+  "lon": 121.4737,
+  "clues": [
+   "A spy fought a hitman high up in a tower, / with glowing jellyfish screens and neon power. / My skyline's a forest of futuristic spires, / across from my Bund, all old banks and bright fires.",
+   "The Pearl Tower's pink balls light up my sky, / on China's east coast, where the Huangpu flows by.",
+   "China's biggest city, near the Yangtze's mouth, see? / The Bund and Pudong. That's me."
+  ],
+  "fact": "Skyfall's skyscraper fight is set in Shanghai's Pudong district, though much of it was filmed on a set near London."
+ },
+ {
+  "date": "12-19",
+  "level": "hard",
+  "from": "🎬 Groundhog Day",
+  "name": "Punxsutawney, Pennsylvania, USA",
+  "lat": 40.9437,
+  "lon": -78.9709,
+  "clues": [
+   "A weatherman lived the same day again and again, / stuck in my town till he learned to be kind to all men. / Each February a furry fellow pops out of his hole / to look for his shadow, and that's his whole role.",
+   "Phil the groundhog lives here and predicts the spring, / in western Pennsylvania, where the crowds cheer and sing.",
+   "A small town in western Pennsylvania, see? / Home of the groundhog Phil. That's me."
+  ],
+  "fact": "Groundhog Day was filmed in Woodstock, Illinois, but it's set in Punxsutawney, where the real Groundhog Day festival has run since 1887."
+ },
+ {
+  "date": "12-20",
+  "level": "hard",
+  "from": "🎬 Harry Potter and the Philosopher's Stone",
+  "name": "Alnwick Castle, England",
+  "lat": 55.4155,
+  "lon": -1.706,
+  "clues": [
+   "A boy wizard learned how to fly on my grass, / in the very first film, in his flying class. / I'm a real English castle, still lived in today, / near the Scottish border, a long way northeast away.",
+   "A duke's family lives here, in Northumberland's green, / in England's far north, where Hogwarts was seen.",
+   "A castle in Northumberland, England, see? / Hogwarts' flying lessons. That's me."
+  ],
+  "fact": "Alnwick Castle played Hogwarts in the first two Harry Potter films, including Harry's first flying lesson."
+ },
+ {
+  "date": "12-21",
+  "level": "medium",
+  "from": "🎬 City of God",
+  "name": "Rio de Janeiro, Brazil",
+  "lat": -22.9068,
+  "lon": -43.1729,
+  "clues": [
+   "Two boys grew up where my hillside homes climb; / one took photographs, one turned to crime. / A stone man with open arms watches my bay, / and my beaches dance samba by night and by day.",
+   "Copacabana and Sugarloaf Mountain are mine, / on Brazil's southeast coast, where the sun's always fine.",
+   "Brazil's famous beach city, with Christ the Redeemer, see? / Carnival's capital. That's me."
+  ],
+  "fact": "City of God (2002) is set in a real Rio neighborhood, Cidade de Deus, and many of its actors came from Rio's favelas."
+ },
+ {
+  "date": "12-21",
+  "level": "medium",
+  "from": "📖 The Girl with the Dragon Tattoo",
+  "name": "Stockholm, Sweden",
+  "lat": 59.3293,
+  "lon": 18.0686,
+  "clues": [
+   "A hacker with a dragon tattoo and a writer teamed up / to solve an old family mystery, then cracked it right up. / I'm built on fourteen islands joined by bridges between, / and the Nobel Prize dinner is held here, a grand scene.",
+   "ABBA's museum is here, and my old town's narrow lanes, / in Scandinavia, where the long winter reigns.",
+   "The capital of Sweden, on the Baltic Sea, see? / Built on islands. That's me."
+  ],
+  "fact": "Stieg Larsson's Millennium books are set in Stockholm, where the Nobel Prize banquet is held at City Hall every December."
+ },
+ {
+  "date": "12-21",
+  "level": "hard",
+  "from": "🎬 For Your Eyes Only",
+  "name": "Meteora, Greece",
+  "lat": 39.7217,
+  "lon": 21.6306,
+  "clues": [
+   "A spy climbed a cliff to a monastery's door, / on a rock tower high above the valley floor. / My monks once were hauled up in nets on a rope, / to live on my pillars, way up with their hope.",
+   "My name means 'suspended in the air,' they say, / in central Greece, where the monks still pray.",
+   "Rock pillars topped with monasteries in central Greece, see? / Meteora. That's me."
+  ],
+  "fact": "In For Your Eyes Only (1981), Bond climbs to the Holy Trinity monastery at Meteora. Monks once reached some monasteries by being pulled up in nets."
+ },
+ {
+  "date": "12-21",
+  "level": "hard",
+  "from": "🎬 The Truman Show",
+  "name": "Seaside, Florida, USA",
+  "lat": 30.3209,
+  "lon": -86.1386,
+  "clues": [
+   "A man's whole life was a TV show, / but he lived in my town and he didn't know. / My houses are pastel, with white picket fences, / and the Gulf's turquoise beach is right past my benches.",
+   "I'm a planned beach town on Florida's Panhandle coast, / where the pastel cottages charm visitors most.",
+   "A small town on the Florida Panhandle, near Panama City, see? / Truman's Seahaven. That's me."
+  ],
+  "fact": "The Truman Show was filmed in Seaside, Florida, a planned beach town started in 1981."
+ },
+ {
+  "date": "12-22",
+  "level": "medium",
+  "from": "📖 The Shadow of the Wind",
+  "name": "Barcelona, Spain",
+  "lat": 41.3874,
+  "lon": 2.1686,
+  "clues": [
+   "A boy found a book in a library of lost books, / and the author's dark secret was hidden in nooks. / My church has been under construction for years, / and my wavy-roofed buildings bring artists to tears.",
+   "Gaudí built my wild buildings and park, / on Spain's Mediterranean coast, lively till dark.",
+   "Catalonia's capital, on Spain's northeast coast, see? / La Sagrada Família. That's me."
+  ],
+  "fact": "The Shadow of the Wind is set in Barcelona. Gaudí's Sagrada Família has been under construction since 1882."
+ },
+ {
+  "date": "12-22",
+  "level": "hard",
+  "from": "🎬 The Last Emperor",
+  "name": "Forbidden City, Beijing, China",
+  "lat": 39.9163,
+  "lon": 116.3972,
+  "clues": [
+   "A boy became emperor when he was just three, / and lived in my palace, where few could be free. / I've nearly a thousand buildings with roofs of gold-yellow, / and for centuries, no ordinary person could come in, fellow.",
+   "Tiananmen Square stands right at my gate, / in China's capital, where emperors sat in state.",
+   "The old imperial palace in the middle of Beijing, see? / The Forbidden City. That's me."
+  ],
+  "fact": "The Last Emperor (1987) was the first Western feature film allowed to shoot inside the Forbidden City."
+ },
+ {
+  "date": "12-22",
+  "level": "hard",
+  "from": "🎬 Crocodile Dundee",
+  "name": "Kakadu National Park, Australia",
+  "lat": -12.84,
+  "lon": 132.47,
+  "clues": [
+   "A bushman with a big knife wrestled crocs in my streams, / then went to New York and made it big, it seems. / My rock art was painted thousands of years ago, / and my wetlands are wild, where the crocodiles go.",
+   "I'm a huge national park in the Top End's wild heat, / in northern Australia, where the floodplains meet.",
+   "A national park in Australia's Northern Territory, east of Darwin, see? / Crocodile country. That's me."
+  ],
+  "fact": "Crocodile Dundee (1986) was filmed in and around Kakadu National Park, which has rock art made over thousands of years."
+ },
+ {
+  "date": "12-23",
+  "level": "medium",
+  "from": "📖 Angels & Demons",
+  "name": "Vatican City",
+  "lat": 41.9029,
+  "lon": 12.4534,
+  "clues": [
+   "A professor raced bombs through my halls and my squares, / while cardinals voted inside, unawares. / I'm the smallest country on Earth, it is true, / with a famous painted ceiling, and Swiss Guards too.",
+   "Saint Peter's Basilica's dome is mine, / surrounded by Rome, with the Sistine Chapel's shine.",
+   "The world's smallest country, inside Rome, see? / Where the pope lives. That's me."
+  ],
+  "fact": "Angels & Demons wasn't allowed to film inside the Vatican, so the crew rebuilt St. Peter's Square and the Sistine Chapel as sets."
+ },
+ {
+  "date": "12-23",
+  "level": "medium",
+  "from": "🎬 Good Morning, Vietnam",
+  "name": "Ho Chi Minh City, Vietnam",
+  "lat": 10.8231,
+  "lon": 106.6297,
+  "clues": [
+   "A DJ shouted 'good morning' on the radio here, / to soldiers at war, bringing jokes and some cheer. / My streets are a river of scooters and noise, / and my noodle soup stalls are a breakfast of joys.",
+   "I used to be called Saigon, near the Mekong's wide mouth, / Vietnam's biggest city, way down in the south.",
+   "Vietnam's biggest city, once Saigon, see? / In the south. That's me."
+  ],
+  "fact": "Good Morning, Vietnam is based on Adrian Cronauer, a real US Armed Forces radio DJ in Saigon in 1965."
+ },
+ {
+  "date": "12-23",
+  "level": "hard",
+  "from": "🎬 Mission: Impossible – Fallout",
+  "name": "Preikestolen, Norway",
+  "lat": 58.9864,
+  "lon": 6.1904,
+  "clues": [
+   "Two men fought on the edge of a cliff that's so flat, / six hundred meters straight down, imagine that. / I'm a square rock pulpit above a long fjord, / and hikers sit on my edge, and they never get bored.",
+   "My name means 'Pulpit Rock,' above the Lysefjord's blue, / in Norway's southwest, with a hike to the view.",
+   "A flat cliff above Lysefjord near Stavanger, Norway, see? / Pulpit Rock. That's me."
+  ],
+  "fact": "Mission: Impossible – Fallout filmed its cliff-top finale on Preikestolen, about 600 meters above the Lysefjord."
+ },
+ {
+  "date": "12-23",
+  "level": "hard",
+  "from": "📖 The God of Small Things",
+  "name": "Kerala, India",
+  "lat": 9.6,
+  "lon": 76.5,
+  "clues": [
+   "Twin kids grew up by a river so green, / in a story of love and the things in between. / My backwaters wind through palm trees and rice, / and houseboats float by, all lazy and nice.",
+   "God's Own Country, they call me, with spices and tea, / on India's southwest coast, by the Arabian Sea.",
+   "A state in southwest India, Kochi's my port, see? / Backwaters and houseboats. That's me."
+  ],
+  "fact": "Arundhati Roy's The God of Small Things is set in Ayemenem, a village in Kerala, and won the Booker Prize in 1997."
+ },
+ {
+  "date": "12-24",
+  "level": "medium",
+  "from": "🎬 Doctor Strange",
+  "name": "Kathmandu, Nepal",
+  "lat": 27.7172,
+  "lon": 85.324,
+  "clues": [
+   "A surgeon with broken hands traveled to me / and learned how to bend time and space, magically. / My temples have eyes painted high on their tops, / and prayer flags flutter over my streets and my shops.",
+   "I'm the gateway to Everest, in a valley up high, / in a Himalayan country where the mountains touch sky.",
+   "The capital of Nepal, see? / Doctor Strange's magic school. That's me."
+  ],
+  "fact": "Doctor Strange filmed scenes on Kathmandu's streets in 2015, playing the home of the Kamar-Taj school."
+ },
+ {
+  "date": "12-24",
+  "level": "hard",
+  "from": "📖 The Talented Mr. Ripley",
+  "name": "Amalfi Coast, Italy",
+  "lat": 40.634,
+  "lon": 14.6027,
+  "clues": [
+   "A con man made friends with a rich young man here, / then took over his life, which was rather severe. / My towns cling to cliffs in pink, yellow and white, / and my lemons are huge, and my sea's turquoise bright.",
+   "Positano tumbles down to my shore, / in southern Italy, with limoncello galore.",
+   "A cliffside coast south of Naples, Italy, see? / Positano and Ravello. That's me."
+  ],
+  "fact": "Ripley's village of 'Mongibello' is fictional, but it's based on the coast south of Naples, and the 2024 series filmed in Atrani on the Amalfi Coast."
+ },
+ {
+  "date": "12-24",
+  "level": "hard",
+  "from": "🎬 Field of Dreams",
+  "name": "Dyersville, Iowa, USA",
+  "lat": 42.4977,
+  "lon": -91.0553,
+  "clues": [
+   "A farmer heard a voice in his tall green corn, / and he built a ballfield where ghosts would be born. / Old players walked out from the stalks to play, / and folks still come to toss balls there today.",
+   "In 2021 the big leagues came to play / by my cornfield in Iowa, a magical day.",
+   "A small farm town in eastern Iowa, see? / The Field of Dreams. That's me."
+  ],
+  "fact": "The Field of Dreams diamond near Dyersville still stands, and in 2021 Major League Baseball played a real game beside it."
+ },
+ {
+  "date": "12-25",
+  "level": "medium",
+  "from": "🎬 Thunderball",
+  "name": "Nassau, Bahamas",
+  "lat": 25.0443,
+  "lon": -77.3504,
+  "clues": [
+   "A spy swam with sharks in my clear, warm sea, / chasing stolen bombs hidden under me. / My waters are turquoise, my houses pastel, / and pirates once ruled here and partied as well.",
+   "Pirates like Blackbeard once ran me, they say, / on an island in the Bahamas, off Florida's way.",
+   "The capital of the Bahamas, on New Providence, see? / Cruise ships stop here. That's me."
+  ],
+  "fact": "Thunderball (1965) was filmed around Nassau, and its underwater battle was one of the biggest ever filmed at the time."
+ },
+ {
+  "date": "12-25",
+  "level": "medium",
+  "from": "📖 The Book Thief",
+  "name": "Munich, Germany",
+  "lat": 48.1351,
+  "lon": 11.582,
+  "clues": [
+   "A girl stole books during a war long ago, / and hid a friend in her basement below. / Her town is near me, where the beer halls are loud, / and each fall my Oktoberfest draws a huge crowd.",
+   "Oktoberfest happens here, with pretzels and beer, / the capital of Bavaria, with the Alps near.",
+   "Germany's third-biggest city, in Bavaria, see? / Oktoberfest. That's me."
+  ],
+  "fact": "The Book Thief's town of Molching is fictional, based on Olching, just outside Munich."
+ },
+ {
+  "date": "12-25",
+  "level": "hard",
+  "from": "🎬 The Godfather Part II",
+  "name": "Ellis Island, New York, USA",
+  "lat": 40.6995,
+  "lon": -74.0396,
+  "clues": [
+   "A small boy from Sicily came by boat to my door, / sick and alone, to a new country's shore. / Twelve million came through my great hall to start new, / with Lady Liberty watching them all coming through.",
+   "I'm a small island in New York's harbor bay, / where immigrants landed in the old days.",
+   "An island in New York Harbor, by the Statue of Liberty, see? / The old immigration station. That's me."
+  ],
+  "fact": "About 12 million immigrants came through Ellis Island between 1892 and 1954. In The Godfather Part II, young Vito arrives there in 1901."
+ },
+ {
+  "date": "12-25",
+  "level": "hard",
+  "from": "🎬 The Nativity Story",
+  "name": "Bethlehem",
+  "lat": 31.7054,
+  "lon": 35.2024,
+  "clues": [
+   "A couple came riding a donkey by night, / and the inns were all full, so a stable felt right. / A baby was born, and a star shone above, / and shepherds came running to see him with love.",
+   "The Church of the Nativity stands on my square, / just south of Jerusalem, with Christmas everywhere.",
+   "A town in the West Bank, south of Jerusalem, see? / Where the Christmas story began. That's me."
+  ],
+  "fact": "Bethlehem's Church of the Nativity, first built in the 300s, is one of the oldest churches still in use."
  }
 ]
