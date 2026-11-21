@@ -192,14 +192,26 @@ function mercatorSafe(geo) {
   });
   return { type: "FeatureCollection", features };
 }
+// State and province lines for the big countries (USA, Canada, Brazil, India, China, Russia,
+// Australia...), drawn on the light zoomed-out map. The street map has its own from STREET_ZOOM on.
+const EMPTY_LINES = { type: "FeatureCollection", features: [] };
+const STATES_LAYER = (extra = {}) => ({ id: "lo-states", type: "line", source: "states", minzoom: 2.5, ...extra,
+  paint: { "line-color": "#b5ad94", "line-width": ["interpolate", ["linear"], ["zoom"], 2.5, 0.5, 5, 1], "line-dasharray": [3, 2] } });
+function loadStates() {
+  fetch("vendor/states-50m.json").then((r) => r.json()).then((g) => {
+    map.states = g;
+    map.gl?.getSource("states")?.setData(g);
+  }).catch(() => {});
+}
 function fallbackStyle() {
   return {
     version: 8,
-    sources: { land: { type: "geojson", data: mercatorSafe(map.land) } },
+    sources: { land: { type: "geojson", data: mercatorSafe(map.land) }, states: { type: "geojson", data: map.states || EMPTY_LINES } },
     layers: [
       { id: "bg", type: "background", paint: { "background-color": "#cfe6f3" } },
       { id: "land", type: "fill", source: "land", paint: { "fill-color": "#f1efe4" } },
       { id: "borders", type: "line", source: "land", paint: { "line-color": "#c9c3ad", "line-width": 0.8 } },
+      STATES_LAYER(),
     ],
   };
 }
@@ -207,6 +219,7 @@ function fallbackStyle() {
 async function initMap() {
   const topo = await fetch("vendor/countries-50m.json").then((r) => r.json());
   map.land = topojson.feature(topo, topo.objects.countries);   // also used for the share card
+  loadStates();
   const gl = map.gl = new maplibregl.Map({
     container: "map", style: STYLE_URL, center: [10, 22], zoom: 1, minZoom: 0, maxZoom: MAX_ZOOM, maxTileCacheSize: 600,
     dragRotate: false, pitchWithRotate: false, maxPitch: 0, fadeDuration: 0, pixelRatio: Math.min(devicePixelRatio || 1, 2), attributionControl: { compact: true },
@@ -251,6 +264,8 @@ function addOverlays() {
     gl.addLayer({ id: "lo-ocean", type: "background", maxzoom: STREET_ZOOM, paint: { "background-color": "#cfe6f3" } }, first);
     gl.addLayer({ id: "lo-land", type: "fill", source: "land", maxzoom: STREET_ZOOM, paint: { "fill-color": "#f1efe4" } }, first);
     gl.addLayer({ id: "lo-borders", type: "line", source: "land", maxzoom: STREET_ZOOM, paint: { "line-color": "#c9c3ad", "line-width": 0.8 } }, first);
+    if (!gl.getSource("states")) gl.addSource("states", { type: "geojson", data: map.states || EMPTY_LINES });
+    gl.addLayer(STATES_LAYER({ maxzoom: STREET_ZOOM }), first);
     // Show place names in English where the map has them.
     for (const l of gl.getStyle().layers) {
       if (l.type === "symbol" && l.layout && l.layout["text-field"]) {
