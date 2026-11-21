@@ -51,7 +51,7 @@ const DAY = DEV && DEV_DAYS.includes(Number(params.get("day"))) ? Number(params.
 const CUSTOM = parseCustom();
 const PUZ = CUSTOM ? [CUSTOM] : puzzlesFor(DAY);
 const N = PUZ.length;
-const TOTAL = CUSTOM ? MAX_POINTS : MAX_TOTAL;
+const TOTAL = CUSTOM ? MAX_POINTS : PUZ.reduce((t, p) => t + maxFor(p), 0); // 5,000 once a day has the 1-2-2 mix
 const THEME = { emoji: "🍿", name: "Books & movies", about: "each riddle points to a real place from a famous book or movie" };
 const levelOf = (p) => (LEVELS[p.level] ? p.level : "medium");
 const levelPill = (p) => CUSTOM ? "" : `<span class="lvl lvl-${levelOf(p)}">${LEVELS[levelOf(p)].label}</span>`;
@@ -162,7 +162,7 @@ function renderClues(animateLast = false) {
   else {
     rl.classList.add("frames");
     rl.setAttribute("aria-label", `Round ${state.round + 1} of ${N}`);
-    rl.innerHTML = Array.from({ length: N }, (_, i) => `<i class="${i < state.round ? "done" : i === state.round ? "now" : ""}${i === HARD_ROUND ? " hard" : ""}"></i>`).join("") + `<b>Riddle ${state.round + 1} of ${N}</b>`;
+    rl.innerHTML = Array.from({ length: N }, (_, i) => `<i class="${i < state.round ? "done" : i === state.round ? "now" : ""}${PUZ[i]?.level === "hard" ? " hard" : ""}"></i>`).join("") + `<b>Riddle ${state.round + 1} of ${N}</b>`;
   }
   $("#total-label").textContent = `Score ${fmt(runningTotal())}`;
   $("#total-label").hidden = !!CUSTOM;
@@ -917,7 +917,7 @@ function renderBoards() {
     meta.textContent = friendCode && friendsData ? `Your friends board · today's 5 places` : "";
     $("#friends-panel").innerHTML = friendsHTML();
   } else if (tab === "players") {
-    meta.textContent = s.players ? `${fmt(s.players)} players today · average ${fmt(s.avgScore)} / ${fmt(MAX_TOTAL)}${s.cracked != null ? ` · ${fmt(s.cracked)} cracked the hard riddle` : ""}` : "";
+    meta.textContent = s.players ? `${fmt(s.players)} players today · average ${fmt(s.avgScore)} / ${fmt(TOTAL)}${s.cracked != null ? ` · ${fmt(s.cracked)} cracked the hard riddle` : ""}` : "";
     const mine = state.final && !CUSTOM ? state.final : null;
     $("#board-players").innerHTML = s.top.length ? s.top.map((p, i) => `
       <li class="${mine && p.name === myName && p.score === mine.score ? "me" : ""}">

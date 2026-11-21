@@ -8,15 +8,15 @@ export const LAUNCH_UTC = Date.UTC(2026, 10, 20);
 export const ROUNDS = 5;            // places per day
 export const MAX_CLUES = 3;         // clues per place
 export const MAX_POINTS = 1000;     // a medium round (and a friend's riddle)
-// Every day climbs: 2 easy, 2 medium, then 1 hard "boss" riddle. Harder = more points.
+// Every day climbs: 1 easy, 2 medium, then 2 hard riddles (the last is the "boss"). Harder = more points.
 export const LEVELS = {
-  easy:   { label: "Easy",   max: 700 },
-  medium: { label: "Medium", max: 1000 },
-  hard:   { label: "Hard",   max: 1600 },
+  easy:   { label: "Easy",   max: 600 },
+  medium: { label: "Medium", max: 900 },
+  hard:   { label: "Hard",   max: 1300 },
 };
-export const DAY_PLAN = ["easy", "easy", "medium", "medium", "hard"];
+export const DAY_PLAN = ["easy", "medium", "medium", "hard", "hard"];
 export const MAX_TOTAL = DAY_PLAN.reduce((s, l) => s + LEVELS[l].max, 0); // 5,000
-export const HARD_ROUND = DAY_PLAN.indexOf("hard");
+export const HARD_ROUND = DAY_PLAN.lastIndexOf("hard"); // the boss riddle
 export const maxFor = (p) => (LEVELS[p && p.level] || LEVELS.medium).max;
 // Points multiplier for how many clues you opened before guessing.
 export const CLUE_MULT = [1, 0.7, 0.4];
@@ -63,7 +63,10 @@ export function puzzlesFor(day) {
   const all = getDates();
   const keys = Object.keys(all).sort();
   const list = all[mmdd(dateFor(day))] || all[keys[(day - 1) % keys.length]];
-  return list.slice(0, ROUNDS);
+  // Follow the day plan when the date has the right mix; otherwise keep the date's own order.
+  const pool = list.slice(), picked = [];
+  for (const lv of DAY_PLAN) { const i = pool.findIndex((p) => p.level === lv); if (i < 0) return list.slice(0, ROUNDS); picked.push(pool.splice(i, 1)[0]); }
+  return picked;
 }
 
 export function distanceKm(lat1, lon1, lat2, lon2) {
