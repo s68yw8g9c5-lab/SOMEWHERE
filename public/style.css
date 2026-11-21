@@ -402,3 +402,12 @@ body { font-size: 15px; }
 .theme-line:has(.clock:not(:empty)) .src { padding-right: 120px; }
 .speed-line { font-size: 13.5px; color: var(--muted); margin: 6px 0 0; }
 @media (max-width: 640px) { .theme-line .clock { top: 13px; right: 16px; } .theme-line .clock b { font-size: 18px; } }
+
+/* Rhyming riddles: one verse line per row; a long line wraps with a hanging indent */
+#clue-list li { white-space: normal; }
+#clue-list .ln { display: block; padding-left: .9em; text-indent: -.9em; }
+@media (max-width: 640px) {
+  #clue-list li:last-child { font-size: 15.5px; line-height: 1.4; }
+  #clue-list li { grid-template-columns: 20px 1fr; gap: 7px; }
+  #clue-list li { font-size: 14.5px; }
+}
