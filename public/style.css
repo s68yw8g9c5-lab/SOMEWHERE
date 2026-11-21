@@ -614,3 +614,11 @@ body { font-family: var(--font-body); color: var(--ink); background: var(--sea);
 @keyframes hintwiggle { 0%, 70%, 100% { transform: none; } 76% { transform: rotate(-2deg); } 82% { transform: rotate(2deg); } 88% { transform: rotate(-1deg); } }
 @media (max-width: 640px) { #next-clue { font-size: 13.5px; padding: 8px 10px 8px 12px; gap: 6px; } #next-clue .hint-cost { font-size: 12px; padding: 2px 7px; } }
 @media (prefers-reduced-motion: reduce) { #next-clue.nudge { animation: none; } }
+
+/* Done for today: a clear "come back tomorrow" banner at the top of the final screen */
+.done-box { display: flex; gap: 12px; align-items: center; background: #2f4a35; color: #fffdf8; border-radius: 20px; padding: 12px 16px 12px 10px; margin: 0 0 16px; }
+.done-box img { flex: none; width: 64px; height: 64px; }
+.done-box b { display: block; font: 600 20px var(--font-head, var(--display)); color: #fffdf8; margin-bottom: 2px; }
+.done-box span { display: block; font: 600 14px/1.45 var(--font-body); color: #e7efe4; }
+.done-box strong { color: #f7b27f; font-variant-numeric: tabular-nums; font-weight: 800; white-space: nowrap; }
+@media (max-width: 640px) { .done-box img { width: 54px; height: 54px; } .done-box b { font-size: 18px; } .done-box span { font-size: 13.5px; } }
