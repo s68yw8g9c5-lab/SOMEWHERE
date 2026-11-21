@@ -7,8 +7,17 @@ import { PUZZLES } from "./puzzles.js";
 export const LAUNCH_UTC = Date.UTC(2026, 10, 20);
 export const ROUNDS = 5;            // places per day
 export const MAX_CLUES = 3;         // clues per place
-export const MAX_POINTS = 1000;     // per round
-export const MAX_TOTAL = MAX_POINTS * ROUNDS;
+export const MAX_POINTS = 1000;     // a medium round (and a friend's riddle)
+// Every day climbs: 2 easy, 2 medium, then 1 hard "boss" riddle. Harder = more points.
+export const LEVELS = {
+  easy:   { label: "Easy",   max: 700 },
+  medium: { label: "Medium", max: 1000 },
+  hard:   { label: "Hard",   max: 1600 },
+};
+export const DAY_PLAN = ["easy", "easy", "medium", "medium", "hard"];
+export const MAX_TOTAL = DAY_PLAN.reduce((s, l) => s + LEVELS[l].max, 0); // 5,000
+export const HARD_ROUND = DAY_PLAN.indexOf("hard");
+export const maxFor = (p) => (LEVELS[p && p.level] || LEVELS.medium).max;
 // Points multiplier for how many clues you opened before guessing.
 export const CLUE_MULT = [1, 0.7, 0.4];
 
@@ -28,9 +37,24 @@ function decode(b64) {
   return JSON.parse(new TextDecoder().decode(bytes));
 }
 
-// The 5 places for a given day. 150 riddles = 30 days before they repeat.
+// The 5 places for a given day, easy to hard. 150 riddles (60 easy, 60 medium,
+// 30 hard) = 30 days before they repeat.
+let pools = null;
+function getPools() {
+  if (!pools) {
+    pools = { easy: [], medium: [], hard: [] };
+    for (const enc of PUZZLES) { const p = decode(enc); (pools[p.level] || pools.medium).push(p); }
+  }
+  return pools;
+}
 export function puzzlesFor(day) {
-  return Array.from({ length: ROUNDS }, (_, r) => decode(PUZZLES[((day - 1) * ROUNDS + r) % PUZZLES.length]));
+  const P = getPools(), seen = {};
+  return DAY_PLAN.map((lvl) => {
+    const k = seen[lvl] = (seen[lvl] || 0) + 1;
+    const per = DAY_PLAN.filter((l) => l === lvl).length;
+    const pool = P[lvl];
+    return pool[((day - 1) * per + k - 1) % pool.length];
+  });
 }
 
 export function distanceKm(lat1, lon1, lat2, lon2) {
@@ -40,8 +64,8 @@ export function distanceKm(lat1, lon1, lat2, lon2) {
   return 2 * R * Math.asin(Math.min(1, Math.sqrt(a)));
 }
 
-export function scoreFor(km, cluesUsed) {
-  const base = km <= 25 ? MAX_POINTS : MAX_POINTS * Math.exp(-(km - 25) / 2000);
+export function scoreFor(km, cluesUsed, max = MAX_POINTS) {
+  const base = km <= 25 ? max : max * Math.exp(-(km - 25) / 2000);
   return Math.round(base * CLUE_MULT[Math.min(Math.max(cluesUsed, 1), MAX_CLUES) - 1]);
 }
 

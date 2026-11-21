@@ -2,7 +2,7 @@
 // Also plays single riddles that friends write for each other (links with #r=...).
 import {
   dayNumber, nextPuzzleAt, puzzlesFor, distanceKm, scoreFor, roundSquare,
-  CLUE_MULT, MAX_CLUES, MAX_POINTS,
+  CLUE_MULT, MAX_CLUES, MAX_POINTS, MAX_TOTAL, LEVELS, HARD_ROUND, maxFor,
 } from "./game.js";
 
 const $ = (s) => document.querySelector(s);
@@ -48,7 +48,10 @@ const DAY = dayNumber();
 const CUSTOM = parseCustom();
 const PUZ = CUSTOM ? [CUSTOM] : puzzlesFor(DAY);
 const N = PUZ.length;
-const TOTAL = N * MAX_POINTS;
+const TOTAL = CUSTOM ? MAX_POINTS : MAX_TOTAL;
+const levelOf = (p) => (LEVELS[p.level] ? p.level : "medium");
+const levelPill = (p) => CUSTOM ? "" : `<span class="lvl lvl-${levelOf(p)}">${LEVELS[levelOf(p)].label}</span>`;
+const crackedHard = () => !CUSTOM && state.rounds[HARD_ROUND]?.done && state.rounds[HARD_ROUND].done.score >= LEVELS.hard.max / 2;
 const STATE_KEY = CUSTOM ? `sw:custom:${CUSTOM.id}` : `sw:game:${DAY}`;
 const fresh = () => ({
   round: 0, started: Date.now(), final: null,
@@ -139,8 +142,14 @@ function renderClues(animateLast = false) {
   $("#round-label").textContent = CUSTOM ? "Friend's riddle" : `Round ${state.round + 1}/${N}`;
   $("#total-label").textContent = `${fmt(runningTotal())} pts`;
   $("#total-label").hidden = !!CUSTOM;
+  const lv = levelOf(p), lvEl = $("#level");
+  lvEl.hidden = !!CUSTOM;
+  lvEl.className = `lvl lvl-${lv}`;
+  lvEl.textContent = `${lv === "hard" ? "💀 " : ""}${LEVELS[lv].label} · ${fmt(LEVELS[lv].max)}`;
+  lvEl.title = `${LEVELS[lv].label} riddle: worth up to ${fmt(LEVELS[lv].max)} points`;
   $("#clue-count").textContent = r.done ? `${n} of ${maxC} clues used` : `Clue ${n} of ${maxC}`;
-  $("#mult").textContent = `Points ${multTxt(n)}`;
+  $("#mult").textContent = multTxt(n);
+  $("#mult").title = `Clue multiplier: your points this round are ${multTxt(n)}`;
   $("#next-clue").hidden = !!r.done || n >= maxC;
   if (n < maxC) $("#next-cost").textContent = `(points ${multTxt(n + 1)})`;
 }
@@ -409,7 +418,7 @@ $("#lock-btn").addEventListener("click", () => {
   if (!r.pin || r.done) return;
   const [glat, glon] = r.pin;
   const km = Math.round(distanceKm(glat, glon, p.lat, p.lon) * 10) / 10;
-  r.done = { glat, glon, km, clues: r.clues, score: scoreFor(km, r.clues) };
+  r.done = { glat, glon, km, clues: r.clues, score: scoreFor(km, r.clues, maxFor(curPuz())) };
   spoilerOpen = false;
   save();
   track("Guess", { round: state.round + 1, clues: r.clues, distance: kmBucket(km), day: DAY, custom: !!CUSTOM });
@@ -501,14 +510,14 @@ function roundHTML() {
   return `
     <div class="result-top">
       <div>
-        <div class="eyebrow">${CUSTOM ? `${esc(CUSTOM.by)}'s riddle` : `Round ${state.round + 1} of ${N}`} · the answer was</div>
+        <div class="eyebrow">${CUSTOM ? `${esc(CUSTOM.by)}'s riddle` : `Round ${state.round + 1} of ${N}`} · the answer was ${levelPill(p)}</div>
         <h2 class="spoiler">${esc(p.name)}</h2>
       </div>
       <div class="km"><b>${fmtKm(r.km)}</b><span>from the answer</span></div>
     </div>
-    <div class="scorebar"><div class="fill" id="r-bar" data-w="${(r.score / MAX_POINTS * 100).toFixed(1)}"></div></div>
+    <div class="scorebar"><div class="fill" id="r-bar" data-w="${(r.score / maxFor(p) * 100).toFixed(1)}"></div></div>
     <div class="score-line">
-      <span>${roundSquare(r.km)} <b>${fmt(r.score)}</b> / ${fmt(MAX_POINTS)} points</span>
+      <span>${roundSquare(r.km)} <b>${fmt(r.score)}</b> / ${fmt(maxFor(p))} points</span>
       ${CUSTOM ? "" : `<span class="muted">Total <b>${fmt(runningTotal())}</b></span>`}
     </div>
     ${p.fact ? `<p class="fact spoiler"><b>Did you know?</b> ${esc(p.fact)}</p>` : ""}
@@ -530,7 +539,7 @@ function finalHTML() {
   const f = state.final;
   const rows = state.rounds.map((x, i) => `
     <li><span class="sq">${roundSquare(x.done.km)}</span>
-      <span class="who">${N > 1 ? `${i + 1}. ` : ""}<span class="spoiler">${esc(PUZ[i].name)}</span><span class="sub">${fmtKm(x.done.km)} · ${x.done.clues} clue${x.done.clues > 1 ? "s" : ""}</span></span>
+      <span class="who">${N > 1 ? `${i + 1}. ` : ""}<span class="spoiler">${esc(PUZ[i].name)}</span><span class="sub">${CUSTOM ? "" : LEVELS[levelOf(PUZ[i])].label + " · "}${fmtKm(x.done.km)} · ${x.done.clues} clue${x.done.clues > 1 ? "s" : ""}</span></span>
       <span class="val">${fmt(x.done.score)}</span></li>`).join("");
   if (CUSTOM) return `
     <div class="result-top">
@@ -634,7 +643,7 @@ function shareText() {
   return [
     `Somewhere #${DAY} 🌍 ${fmt(f.score)} / ${fmt(TOTAL)}`,
     state.rounds.map((x) => roundSquare(x.done.km)).join(""),
-    `🔎 ${totalClues()} clues · beat ${f.beat}%${s > 1 ? ` · 🔥 ${s}` : ""}`,
+    `🔎 ${totalClues()} clues · beat ${f.beat}%${crackedHard() ? " · 💀 cracked the hard one" : ""}${s > 1 ? ` · 🔥 ${s}` : ""}`,
     siteUrl(),
   ].filter(Boolean).join("\n");
 }
@@ -784,6 +793,7 @@ async function joinFromLink() {
   } catch (e) { toast(e.message === "no such board" ? "That friends link doesn't work anymore." : "Couldn't join the friends board."); }
 }
 
+const HARD_BADGE = ` <span class="hard-badge" title="Cracked today's hard riddle">💀</span>`;
 function friendsHTML() {
   if (preview) return `<p class="empty-note">Friends boards turn on once the database is connected. Then you can make a private board for you and your friends.</p>`;
   if (!friendCode) return `
@@ -796,7 +806,7 @@ function friendsHTML() {
   const rows = d ? d.board.map((p, i) => `
       <li class="${p.me ? "me" : ""}">
         <span class="rank">${p.score == null ? "" : i + 1}</span>
-        <span class="who">${p.country ? flag(p.country) + " " : ""}${esc(p.name)}${p.me ? " (you)" : ""}</span>
+        <span class="who">${p.country ? flag(p.country) + " " : ""}${esc(p.name)}${p.me ? " (you)" : ""}${p.cracked ? HARD_BADGE : ""}</span>
         <span class="sub">${p.score == null ? "hasn't played yet" : fmtKm(p.km) + " total"}</span>
         <span class="val">${p.score == null ? "–" : fmt(p.score)}</span>
       </li>`).join("") : `<li class="empty">Loading…</li>`;
@@ -868,12 +878,12 @@ function renderBoards() {
     meta.textContent = friendCode && friendsData ? `Your friends board · today's 5 places` : "";
     $("#friends-panel").innerHTML = friendsHTML();
   } else if (tab === "players") {
-    meta.textContent = s.players ? `${fmt(s.players)} players today · average ${fmt(s.avgScore)} / ${fmt(5 * MAX_POINTS)}` : "";
+    meta.textContent = s.players ? `${fmt(s.players)} players today · average ${fmt(s.avgScore)} / ${fmt(MAX_TOTAL)}${s.cracked != null ? ` · 💀 ${fmt(s.cracked)} cracked the hard riddle` : ""}` : "";
     const mine = state.final && !CUSTOM ? state.final : null;
     $("#board-players").innerHTML = s.top.length ? s.top.map((p, i) => `
       <li class="${mine && p.name === myName && p.score === mine.score ? "me" : ""}">
         <span class="rank">${i + 1}</span>
-        <span class="who">${flag(p.country)} ${esc(p.name)}</span>
+        <span class="who">${flag(p.country)} ${esc(p.name)}${p.cracked ? HARD_BADGE : ""}</span>
         <span class="sub">${fmtKm(p.km)} total</span>
         <span class="val">${fmt(p.score)}</span>
       </li>`).join("") : empty("No one has played yet today. Be the first!");
@@ -993,11 +1003,11 @@ function sampleStats() {
   });
   const top = Array.from({ length: 15 }, (_, i) => {
     const km = Math.round((60 + i * i * 40 + rnd() * 80) * 10) / 10;
-    return { name: names[i % names.length] + " " + "ABCDEFGHJKLMNPRS"[Math.floor(rnd() * 16)] + ".", country: CC[Math.floor(rnd() * CC.length)], km, score: Math.round(4760 - i * 130 - rnd() * 60) };
+    return { name: names[i % names.length] + " " + "ABCDEFGHJKLMNPRS"[Math.floor(rnd() * 16)] + ".", country: CC[Math.floor(rnd() * CC.length)], km, score: Math.round(4760 - i * 130 - rnd() * 60), cracked: i < 6 || rnd() < 0.3 };
   }).sort((a, b) => b.score - a.score);
   const recent = Array.from({ length: 8 }, () => ({ name: names[Math.floor(rnd() * names.length)], country: CC[Math.floor(rnd() * CC.length)], score: Math.floor(800 + rnd() * 3200) }));
   return {
-    day: DAY, live: true, players, avgKm: 1900, avgScore: 1800, top, recent, where,
+    day: DAY, live: true, players, avgKm: 1900, avgScore: 1800, cracked: Math.round(players * 0.22), top, recent, where,
     countries: Object.values(countries).map((c) => ({ c: c.c, n: c.n, avg: Math.round(c.sum / c.n) })),
   };
 }

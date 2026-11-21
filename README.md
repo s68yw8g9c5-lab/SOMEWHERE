@@ -135,7 +135,8 @@ with sample players, so you can show it to people before deploying.
 
 ## Add more riddles
 
-There are 150 riddles (30 days of 5) and they loop after that. To add more, edit
+There are 150 riddles (60 easy, 60 medium, 30 hard = 30 days) and they loop after that.
+Each riddle has a `"level"` of `easy`, `medium` or `hard`; keep that 2:2:1 ratio when adding more. To add more, edit
 `tools/puzzles.json` (name, lat, lon, 3 clues from hardest to easiest, and a fun fact), then:
 
 ```bash
@@ -146,7 +147,8 @@ and push or deploy. Tip: find exact coordinates by right-clicking a spot in Goog
 
 ## How scoring works
 
-- Up to 1,000 points per place, 5,000 per day. Within 25 km is a perfect score, then it drops
+- Every day climbs: 2 easy places (up to 700 points), 2 medium (1,000) and 1 hard (1,600), 5,000 per day.
+  The leaderboard marks players who scored at least half on the hard riddle with 💀. Within 25 km is a perfect score, then it drops
   off with distance.
 - Clue multiplier: 1 clue ×1, 2 clues ×0.7, 3 clues ×0.4.
 - Ties on the leaderboard go to whoever locked in faster.

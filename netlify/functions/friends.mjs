@@ -1,7 +1,7 @@
 // Friends boards. A board is just a short private code that friends share by link.
 //   POST /api/friends { action: "create" | "join" | "leave", code?, player, name }
 //   GET  /api/friends?code=ABC123&day=N&player=...  -> today's scores for everyone on the board
-import { dayNumber } from "../../public/game.js";
+import { dayNumber, HARD_ROUND, LEVELS } from "../../public/game.js";
 import { db } from "../../lib/db.mjs";
 import { json, cleanName, validPlayer, readJson, fail } from "../../lib/http.mjs";
 
@@ -20,7 +20,7 @@ export default async (req) => {
       if (!validCode(code)) return json({ error: "bad code" }, { status: 400 });
       const day = Math.min(Math.max(1, Math.round(Number(url.searchParams.get("day")) || dayNumber())), dayNumber());
       const rows = await sql`
-        SELECT f.player, COALESCE(g.name, f.name) AS name, g.country, g.score, g.km
+        SELECT f.player, COALESCE(g.name, f.name) AS name, g.country, g.score, g.km, (g.rounds->${HARD_ROUND}->>4)::int AS hard
         FROM friends f LEFT JOIN games g ON g.day = ${day} AND g.player = f.player
         WHERE f.code = ${code}
         ORDER BY g.score DESC NULLS LAST, f.joined ASC
@@ -28,7 +28,7 @@ export default async (req) => {
       // Never send other players' ids back, only a "this is you" flag.
       return json({
         code, day, members: rows.length,
-        board: rows.map((r) => ({ name: r.name, country: r.country, score: r.score, km: r.km == null ? null : Number(r.km), me: r.player === player })),
+        board: rows.map((r) => ({ name: r.name, country: r.country, score: r.score, km: r.km == null ? null : Number(r.km), me: r.player === player, cracked: r.hard != null && r.hard >= LEVELS.hard.max / 2 })),
       });
     }
 

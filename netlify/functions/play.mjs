@@ -1,7 +1,7 @@
 // POST /api/play  { day, player, name, rounds: [{ lat, lon, clues } x5], ms }
 // Sent once, after the 5th round. The server recomputes every distance and score
 // itself, so nobody can fake points.
-import { dayNumber, puzzlesFor, distanceKm, scoreFor, LAUNCH_UTC, MAX_CLUES, ROUNDS } from "../../public/game.js";
+import { dayNumber, puzzlesFor, distanceKm, scoreFor, maxFor, LAUNCH_UTC, MAX_CLUES, ROUNDS } from "../../public/game.js";
 import { db } from "../../lib/db.mjs";
 import { json, cleanName, validPlayer, readJson, fail } from "../../lib/http.mjs";
 
@@ -28,7 +28,7 @@ export default async (req, context) => {
     if (!(lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180)) return json({ error: "bad pin" }, { status: 400 });
     if (!(clues >= 1 && clues <= MAX_CLUES)) return json({ error: "bad clues" }, { status: 400 });
     const km = Math.round(distanceKm(lat, lon, places[i].lat, places[i].lon) * 10) / 10;
-    rounds.push([Math.round(lat * 1e4) / 1e4, Math.round(lon * 1e4) / 1e4, clues, km, scoreFor(km, clues)]);
+    rounds.push([Math.round(lat * 1e4) / 1e4, Math.round(lon * 1e4) / 1e4, clues, km, scoreFor(km, clues, maxFor(places[i]))]);
   }
   const km = Math.round(rounds.reduce((s, r) => s + r[3], 0) * 10) / 10;
   const score = rounds.reduce((s, r) => s + r[4], 0);

@@ -8,7 +8,8 @@
    "Riddle me this: the most remote people on Earth carved giants, then raced each spring to fetch a single bird's egg.",
    "Giant carved heads called moai. Part of Chile, deep in the Pacific."
   ],
-  "fact": "Most moai face inland, watching over the villages that carved them."
+  "fact": "Most moai face inland, watching over the villages that carved them.",
+  "level": "easy"
  },
  {
   "name": "Hermitage Museum, St Petersburg, Russia",
@@ -19,7 +20,8 @@
    "Once an emperor's winter home, now my halls of green and white would take you years to walk through.",
    "A giant art museum on the Neva River."
   ],
-  "fact": "The Hermitage was founded by Catherine the Great in 1764."
+  "fact": "The Hermitage was founded by Catherine the Great in 1764.",
+  "level": "medium"
  },
  {
   "name": "Taipei 101, Taiwan",
@@ -30,7 +32,8 @@
    "I'm stacked like eight bamboo stalks, and I count my floors with a number you'd use to start a class.",
    "A skyscraper in Taiwan's capital."
   ],
-  "fact": "Taipei 101 was the tallest building in the world from 2004 to 2010."
+  "fact": "Taipei 101 was the tallest building in the world from 2004 to 2010.",
+  "level": "medium"
  },
  {
   "name": "Plitvice Lakes, Croatia",
@@ -41,7 +44,8 @@
    "My colors change with the minerals and the light, and only wooden boardwalks let you walk on my water.",
    "A national park of terraced lakes in Croatia."
   ],
-  "fact": "The lakes are separated by natural dams of travertine that are still growing."
+  "fact": "The lakes are separated by natural dams of travertine that are still growing.",
+  "level": "medium"
  },
  {
   "name": "Okavango Delta, Botswana",
@@ -52,7 +56,8 @@
    "Every winter, rain that fell far away arrives late, and my sand turns to a swamp full of elephants.",
    "A giant inland delta in Botswana."
   ],
-  "fact": "The Okavango floods at the height of the dry season, because the rain falls months earlier in Angola."
+  "fact": "The Okavango floods at the height of the dry season, because the rain falls months earlier in Angola.",
+  "level": "hard"
  },
  {
   "name": "Matterhorn, Switzerland and Italy",
@@ -63,7 +68,8 @@
    "I'm a pyramid no pharaoh built, and the first men to reach my top paid for it on the way down.",
    "A pyramid-shaped peak above Zermatt."
   ],
-  "fact": "The Matterhorn was first climbed in 1865 by Edward Whymper's team."
+  "fact": "The Matterhorn was first climbed in 1865 by Edward Whymper's team.",
+  "level": "medium"
  },
  {
   "name": "Meteora, Greece",
@@ -74,7 +80,8 @@
    "My name means 'suspended in the air', and I am a handful of monasteries perched on rock towers.",
    "Monasteries on top of rock pillars in central Greece."
   ],
-  "fact": "Six of Meteora's monasteries are still active today."
+  "fact": "Six of Meteora's monasteries are still active today.",
+  "level": "medium"
  },
  {
   "name": "Chichen Itza, Mexico",
@@ -85,7 +92,8 @@
    "Twice a year, the sunset sends a feathered serpent of shadow sliding down my staircase.",
    "The great Maya pyramid of El Castillo in the Yucatán."
   ],
-  "fact": "El Castillo has 91 steps on each of its four sides, plus the top platform, for 365 in all."
+  "fact": "El Castillo has 91 steps on each of its four sides, plus the top platform, for 365 in all.",
+  "level": "easy"
  },
  {
   "name": "Golden Gate Bridge, San Francisco, USA",
@@ -96,7 +104,8 @@
    "Fog swallows me most mornings, yet I'm the most photographed way to cross a famous strait.",
    "A red-orange suspension bridge across a Californian strait."
   ],
-  "fact": "When it opened in 1937, the Golden Gate had the longest main span of any suspension bridge in the world."
+  "fact": "When it opened in 1937, the Golden Gate had the longest main span of any suspension bridge in the world.",
+  "level": "easy"
  },
  {
   "name": "Charles Bridge, Prague, Czechia",
@@ -107,7 +116,8 @@
    "I'm a stone path over a river where kings once walked to be crowned and kings' enemies' heads were hung.",
    "A medieval stone bridge over the Vltava River."
   ],
-  "fact": "Construction of Charles Bridge began in 1357."
+  "fact": "Construction of Charles Bridge began in 1357.",
+  "level": "medium"
  },
  {
   "name": "Cliffs of Moher, Ireland",
@@ -118,7 +128,8 @@
    "Puffins nest on my face, and wizards and pirates have both been filmed on my edge.",
    "Famous sea cliffs in County Clare, Ireland."
   ],
-  "fact": "The Cliffs of Moher stretch for about 14 km."
+  "fact": "The Cliffs of Moher stretch for about 14 km.",
+  "level": "medium"
  },
  {
   "name": "Giant's Causeway, Northern Ireland",
@@ -129,7 +140,8 @@
    "I'm made of forty thousand stone columns, mostly six-sided, as if a honeycomb turned to rock.",
    "Basalt columns on the coast of County Antrim."
   ],
-  "fact": "The columns formed about 60 million years ago when lava cooled and cracked."
+  "fact": "The columns formed about 60 million years ago when lava cooled and cracked.",
+  "level": "medium"
  },
  {
   "name": "Baikonur Cosmodrome, Kazakhstan",
@@ -140,7 +152,8 @@
    "I'm a launch pad in the middle of the desert, rented by one country from another.",
    "The world's first and largest spaceport, on the Kazakh steppe."
   ],
-  "fact": "Yuri Gagarin launched from Baikonur on 12 April 1961."
+  "fact": "Yuri Gagarin launched from Baikonur on 12 April 1961.",
+  "level": "hard"
  },
  {
   "name": "Machu Picchu, Peru",
@@ -151,7 +164,8 @@
    "An Inca emperor's mountain retreat, I'm guarded today by llamas and a peak shaped like a sleeping face.",
    "The Inca citadel in the Andes of Peru."
   ],
-  "fact": "Machu Picchu was built in the 1400s, likely as an estate for the Inca emperor Pachacuti."
+  "fact": "Machu Picchu was built in the 1400s, likely as an estate for the Inca emperor Pachacuti.",
+  "level": "easy"
  },
  {
   "name": "Iguazu Falls, Argentina and Brazil",
@@ -162,7 +176,8 @@
    "I sit where two countries meet, and you can feel my spray from either side.",
    "Giant waterfalls on the Argentina and Brazil border."
   ],
-  "fact": "Iguazu is made of about 275 separate waterfalls spread over nearly 3 km."
+  "fact": "Iguazu is made of about 275 separate waterfalls spread over nearly 3 km.",
+  "level": "easy"
  },
  {
   "name": "Milford Sound, New Zealand",
@@ -173,7 +188,8 @@
    "My cliffs rise straight from the water, and waterfalls appear on them after every storm.",
    "A deep fjord in the far southwest of New Zealand's South Island."
   ],
-  "fact": "Milford Sound gets about 6.8 m of rain a year, making it one of the wettest places on Earth."
+  "fact": "Milford Sound gets about 6.8 m of rain a year, making it one of the wettest places on Earth.",
+  "level": "medium"
  },
  {
   "name": "Golden Temple, Amritsar, India",
@@ -184,7 +200,8 @@
    "Anyone may eat at my table, no matter their faith, as long as they cover their head.",
    "The holiest shrine of Sikhism, covered in gold."
   ],
-  "fact": "Anyone can eat at the Golden Temple's langar, whatever their religion."
+  "fact": "Anyone can eat at the Golden Temple's langar, whatever their religion.",
+  "level": "medium"
  },
  {
   "name": "Serengeti, Tanzania",
@@ -195,7 +212,8 @@
    "Lions rule my grass, and the greatest migration on land crosses me before heading north.",
    "A famous savanna national park in Tanzania."
   ],
-  "fact": "The great migration includes about 1.5 million wildebeest plus hundreds of thousands of zebras."
+  "fact": "The great migration includes about 1.5 million wildebeest plus hundreds of thousands of zebras.",
+  "level": "easy"
  },
  {
   "name": "Twelve Apostles, Australia",
@@ -206,7 +224,8 @@
    "We're limestone stacks standing in the surf beside a famous coastal road.",
    "Limestone stacks along the Great Ocean Road."
   ],
-  "fact": "The cliffs here retreat about 2 cm a year."
+  "fact": "The cliffs here retreat about 2 cm a year.",
+  "level": "medium"
  },
  {
   "name": "Great Pyramid of Giza, Egypt",
@@ -217,7 +236,8 @@
    "I'm the last of seven wonders still standing, and a king's tomb sits inside my stone.",
    "The great pyramids just outside Cairo."
   ],
-  "fact": "The Great Pyramid was originally covered in polished white limestone that made it shine in the sun."
+  "fact": "The Great Pyramid was originally covered in polished white limestone that made it shine in the sun.",
+  "level": "easy"
  },
  {
   "name": "Pamukkale, Turkey",
@@ -228,7 +248,8 @@
    "My name means 'cotton castle', and a Roman city sits on my white terraces.",
    "Pamukkale, in southwestern Turkey."
   ],
-  "fact": "Visitors to Pamukkale must walk the terraces barefoot to protect the soft travertine."
+  "fact": "Visitors to Pamukkale must walk the terraces barefoot to protect the soft travertine.",
+  "level": "medium"
  },
  {
   "name": "Uluru, Australia",
@@ -239,7 +260,8 @@
    "My owners asked visitors to stop climbing me, and in 2019 they finally did.",
    "Uluru, also called Ayers Rock."
   ],
-  "fact": "Uluru is about 348 m high and 9.4 km around at its base."
+  "fact": "Uluru is about 348 m high and 9.4 km around at its base.",
+  "level": "easy"
  },
  {
   "name": "Bran Castle, Romania",
@@ -250,7 +272,8 @@
    "I sit high on a rock in Transylvania, and my towers look exactly like a horror film poster.",
    "A castle in the Carpathians near Brașov."
   ],
-  "fact": "Bram Stoker never visited Romania."
+  "fact": "Bram Stoker never visited Romania.",
+  "level": "medium"
  },
  {
   "name": "Stonehenge, England",
@@ -261,7 +284,8 @@
    "Nobody knows exactly how my stones were dragged here, some of them from 200 km away.",
    "Stonehenge, on Salisbury Plain."
   ],
-  "fact": "Stonehenge's biggest stones, the sarsens, weigh around 25 tonnes each."
+  "fact": "Stonehenge's biggest stones, the sarsens, weigh around 25 tonnes each.",
+  "level": "easy"
  },
  {
   "name": "Stone Town, Zanzibar, Tanzania",
@@ -272,7 +296,8 @@
    "A rock star was born in my maze of alleys, on a spice island off East Africa.",
    "The old town of a spice island off Tanzania."
   ],
-  "fact": "Zanzibar was famous for cloves and was once the world's largest producer."
+  "fact": "Zanzibar was famous for cloves and was once the world's largest producer.",
+  "level": "hard"
  },
  {
   "name": "Reine, Lofoten, Norway",
@@ -283,7 +308,8 @@
    "My mountains rise straight from the water, and the midnight sun lights me all summer.",
    "A fishing village in the Lofoten Islands."
   ],
-  "fact": "Lofoten is far north of the Arctic Circle but has a mild climate thanks to the Gulf Stream."
+  "fact": "Lofoten is far north of the Arctic Circle but has a mild climate thanks to the Gulf Stream.",
+  "level": "hard"
  },
  {
   "name": "Pripyat and Chernobyl, Ukraine",
@@ -294,7 +320,8 @@
    "My Ferris wheel never had its opening day, and the reactor next to me is why.",
    "The abandoned city next to the Chernobyl nuclear plant."
   ],
-  "fact": "The New Safe Confinement arch over Chernobyl's reactor is one of the largest movable structures ever built."
+  "fact": "The New Safe Confinement arch over Chernobyl's reactor is one of the largest movable structures ever built.",
+  "level": "medium"
  },
  {
   "name": "St Peter's Basilica, Vatican City",
@@ -305,7 +332,8 @@
    "My dome was designed by a man who also painted a famous ceiling next door.",
    "The great church of the Pope."
   ],
-  "fact": "Vatican City covers just 0.44 square kilometers."
+  "fact": "Vatican City covers just 0.44 square kilometers.",
+  "level": "easy"
  },
  {
   "name": "Kīlauea, Hawaii, USA",
@@ -316,7 +344,8 @@
    "My name means 'spewing', and I'm one of the most active volcanoes on Earth.",
    "A volcano on Hawaii's Big Island."
   ],
-  "fact": "Kīlauea erupted almost continuously from 1983 to 2018."
+  "fact": "Kīlauea erupted almost continuously from 1983 to 2018.",
+  "level": "medium"
  },
  {
   "name": "Venice, Italy",
@@ -327,7 +356,8 @@
    "I'm sinking slowly, and my rush hour happens on boats.",
    "The Italian city of gondolas and canals."
   ],
-  "fact": "The wooden piles under Venice have lasted centuries because, without oxygen underwater, they slowly turned almost to stone."
+  "fact": "The wooden piles under Venice have lasted centuries because, without oxygen underwater, they slowly turned almost to stone.",
+  "level": "easy"
  },
  {
   "name": "Great Blue Hole, Belize",
@@ -338,7 +368,8 @@
    "Divers drop into me to see stalactites that formed when I was dry land.",
    "The Great Blue Hole, off the coast of Belize."
   ],
-  "fact": "The Great Blue Hole is about 300 m across and 125 m deep."
+  "fact": "The Great Blue Hole is about 300 m across and 125 m deep.",
+  "level": "hard"
  },
  {
   "name": "Acropolis, Athens, Greece",
@@ -349,7 +380,8 @@
    "My most famous temple has no straight lines, every column is curved to look straight.",
    "The rock above Athens, crowned by the Parthenon."
   ],
-  "fact": "The Parthenon was finished in 432 BC and dedicated to the goddess Athena."
+  "fact": "The Parthenon was finished in 432 BC and dedicated to the goddess Athena.",
+  "level": "easy"
  },
  {
   "name": "Mont-Saint-Michel, France",
@@ -360,7 +392,8 @@
    "My tides race in 'as fast as a galloping horse', around a monastery on a rock.",
    "A tidal island abbey off the coast of Normandy."
   ],
-  "fact": "The tides around Mont-Saint-Michel are among the strongest in Europe, up to 14 m."
+  "fact": "The tides around Mont-Saint-Michel are among the strongest in Europe, up to 14 m.",
+  "level": "easy"
  },
  {
   "name": "Zhangjiajie, China",
@@ -371,7 +404,8 @@
    "I'm a forest of sandstone towers, with a glass bridge strung between them.",
    "A forest park of stone towers in Hunan."
   ],
-  "fact": "One pillar was renamed 'Avatar Hallelujah Mountain' in 2010."
+  "fact": "One pillar was renamed 'Avatar Hallelujah Mountain' in 2010.",
+  "level": "medium"
  },
  {
   "name": "Old Faithful, Yellowstone, USA",
@@ -382,7 +416,8 @@
    "I sit in the world's first national park, on top of a sleeping supervolcano.",
    "The famous geyser in the world's first national park."
   ],
-  "fact": "Old Faithful erupts roughly every 60 to 110 minutes."
+  "fact": "Old Faithful erupts roughly every 60 to 110 minutes.",
+  "level": "easy"
  },
  {
   "name": "Terracotta Army, Xi'an, China",
@@ -393,7 +428,8 @@
    "A farmer digging a well found us in 1974, an emperor's army made of clay.",
    "Clay warriors guarding China's first emperor."
   ],
-  "fact": "About 8,000 soldiers, 130 chariots and 670 horses are thought to be buried there."
+  "fact": "About 8,000 soldiers, 130 chariots and 670 horses are thought to be buried there.",
+  "level": "easy"
  },
  {
   "name": "Varanasi, India",
@@ -404,7 +440,8 @@
    "Fires burn on my riverbank day and night, because dying here is said to free the soul.",
    "One of the oldest living cities, on the Ganges."
   ],
-  "fact": "Varanasi has more than 80 ghats along the Ganges."
+  "fact": "Varanasi has more than 80 ghats along the Ganges.",
+  "level": "medium"
  },
  {
   "name": "Sossusvlei, Namibia",
@@ -415,7 +452,8 @@
    "My name means 'dead-end marsh', a place where a river gives up in the sand.",
    "Red sand dunes in the Namib Desert."
   ],
-  "fact": "The Namib is often called the oldest desert in the world, at around 55 million years."
+  "fact": "The Namib is often called the oldest desert in the world, at around 55 million years.",
+  "level": "hard"
  },
  {
   "name": "Bagan, Myanmar",
@@ -426,7 +464,8 @@
    "Kings built me in a building spree a thousand years ago along the Irrawaddy.",
    "An ancient temple city on the Irrawaddy River in Myanmar."
   ],
-  "fact": "Over 10,000 temples were built at Bagan between the 11th and 13th centuries."
+  "fact": "Over 10,000 temples were built at Bagan between the 11th and 13th centuries.",
+  "level": "medium"
  },
  {
   "name": "Taj Mahal, India",
@@ -437,7 +476,8 @@
    "My white marble is inlaid with gems, and my four towers lean slightly out on purpose.",
    "The Taj Mahal in Agra."
   ],
-  "fact": "The four minarets of the Taj Mahal lean slightly outward so they would fall away from the tomb in an earthquake."
+  "fact": "The four minarets of the Taj Mahal lean slightly outward so they would fall away from the tomb in an earthquake.",
+  "level": "easy"
  },
  {
   "name": "Statue of Liberty, New York, USA",
@@ -448,7 +488,8 @@
    "I hold a torch and a tablet, and millions once saw me as their first view of a new home.",
    "A torch-bearing gift from France in New York Harbor."
   ],
-  "fact": "The Statue of Liberty's index finger is about 2.4 m long."
+  "fact": "The Statue of Liberty's index finger is about 2.4 m long.",
+  "level": "easy"
  },
  {
   "name": "Gorée Island, Senegal",
@@ -459,7 +500,8 @@
    "I'm a small island with pastel houses off a capital city, now a place of memory.",
    "A small island off Dakar, Senegal."
   ],
-  "fact": "Gorée became one of UNESCO's first World Heritage Sites in 1978."
+  "fact": "Gorée became one of UNESCO's first World Heritage Sites in 1978.",
+  "level": "hard"
  },
  {
   "name": "Lake Natron, Tanzania",
@@ -470,7 +512,8 @@
    "Animals that die in me can turn as stiff as statues, thanks to my soda and salt.",
    "A red soda lake in northern Tanzania."
   ],
-  "fact": "Lake Natron's red color comes from tiny salt-loving microorganisms."
+  "fact": "Lake Natron's red color comes from tiny salt-loving microorganisms.",
+  "level": "hard"
  },
  {
   "name": "Mount Kilimanjaro, Tanzania",
@@ -481,7 +524,8 @@
    "I'm the roof of a continent, made of three volcanoes.",
    "Africa's highest peak, in Tanzania."
   ],
-  "fact": "Kilimanjaro's summit, Uhuru Peak, is 5,895 m above sea level."
+  "fact": "Kilimanjaro's summit, Uhuru Peak, is 5,895 m above sea level.",
+  "level": "easy"
  },
  {
   "name": "Hollywood Sign, Los Angeles, USA",
@@ -492,7 +536,8 @@
    "I lost four letters in 1949, and now I'm the most famous name in film.",
    "White letters on a hillside above Los Angeles."
   ],
-  "fact": "The sign originally read HOLLYWOODLAND. The last four letters were removed in 1949."
+  "fact": "The sign originally read HOLLYWOODLAND. The last four letters were removed in 1949.",
+  "level": "easy"
  },
  {
   "name": "Wadi Rum, Jordan",
@@ -503,7 +548,8 @@
    "A famous British officer rode through my red sands and pink cliffs a century ago.",
    "The Valley of the Moon desert in southern Jordan."
   ],
-  "fact": "Wadi Rum has stood in for Mars in films like The Martian."
+  "fact": "Wadi Rum has stood in for Mars in films like The Martian.",
+  "level": "medium"
  },
  {
   "name": "Tristan da Cunha",
@@ -514,7 +560,8 @@
    "I'm a volcano with one village, and a ship visits just a few times a year.",
    "A volcanic island in the middle of the South Atlantic."
   ],
-  "fact": "Tristan da Cunha has no airport. It takes about a week by boat from South Africa."
+  "fact": "Tristan da Cunha has no airport. It takes about a week by boat from South Africa.",
+  "level": "hard"
  },
  {
   "name": "Chocolate Hills, Bohol, Philippines",
@@ -525,7 +572,8 @@
    "Legend says giants threw mud at each other here, and the hills are what's left.",
    "Cone-shaped hills on Bohol island."
   ],
-  "fact": "There are at least 1,260 Chocolate Hills."
+  "fact": "There are at least 1,260 Chocolate Hills.",
+  "level": "hard"
  },
  {
   "name": "Lake Baikal, Russia",
@@ -536,7 +584,8 @@
    "I freeze so clear in winter that you can see the fish through my ice, and my seals live nowhere else.",
    "Lake Baikal."
   ],
-  "fact": "Lake Baikal is about 25 million years old and more than 1,600 m deep."
+  "fact": "Lake Baikal is about 25 million years old and more than 1,600 m deep.",
+  "level": "medium"
  },
  {
   "name": "Nazca Lines, Peru",
@@ -547,7 +596,8 @@
    "My pictures are scratched in the desert, and they've barely changed in two thousand years.",
    "Giant desert drawings in southern Peru."
   ],
-  "fact": "The lines have survived so long because the area gets almost no rain or wind."
+  "fact": "The lines have survived so long because the area gets almost no rain or wind.",
+  "level": "medium"
  },
  {
   "name": "Petra, Jordan",
@@ -558,7 +608,8 @@
    "Caravans once paid my traders for water, and adventurers in films ride out of my canyon.",
    "The ancient Nabataean city of Petra."
   ],
-  "fact": "Scientists estimate that around 85% of Petra is still buried and unexcavated."
+  "fact": "Scientists estimate that around 85% of Petra is still buried and unexcavated.",
+  "level": "easy"
  },
  {
   "name": "Great Wall of China (Badaling)",
@@ -569,7 +620,8 @@
    "Millions walk my oldest-looking section near a capital, and it's often busier than a city street.",
    "The Great Wall of China, at Badaling near Beijing."
   ],
-  "fact": "All the sections of the Great Wall added together stretch about 21,000 km."
+  "fact": "All the sections of the Great Wall added together stretch about 21,000 km.",
+  "level": "easy"
  },
  {
   "name": "Mount Bromo, Indonesia",
@@ -580,7 +632,8 @@
    "Once a year, people throw vegetables and goats into my crater as offerings.",
    "An active volcano in East Java."
   ],
-  "fact": "The Tenggerese people hold the Yadnya Kasada festival at Bromo every year."
+  "fact": "The Tenggerese people hold the Yadnya Kasada festival at Bromo every year.",
+  "level": "hard"
  },
  {
   "name": "Bora Bora, French Polynesia",
@@ -591,7 +644,8 @@
    "An extinct volcano sits in my middle, ringed by a reef and a few small islands.",
    "An island in French Polynesia."
   ],
-  "fact": "Overwater bungalows were invented in French Polynesia in the 1960s."
+  "fact": "Overwater bungalows were invented in French Polynesia in the 1960s.",
+  "level": "easy"
  },
  {
   "name": "Lake Hillier, Australia",
@@ -602,7 +656,8 @@
    "Tiny algae give me my color, on an island off the south coast of a huge country.",
    "A pink lake on an island off Western Australia."
   ],
-  "fact": "Lake Hillier's color comes from salt-loving algae and microbes."
+  "fact": "Lake Hillier's color comes from salt-loving algae and microbes.",
+  "level": "hard"
  },
  {
   "name": "Victoria Peak, Hong Kong",
@@ -613,7 +668,8 @@
    "From my top, the harbor lights look like a carpet of stars.",
    "The highest hill on Hong Kong Island."
   ],
-  "fact": "Hong Kong has more skyscrapers than any other city in the world."
+  "fact": "Hong Kong has more skyscrapers than any other city in the world.",
+  "level": "medium"
  },
  {
   "name": "Rock of Gibraltar",
@@ -624,7 +680,8 @@
    "I'm a pillar of Hercules, guarding the narrow gate between two seas.",
    "A British limestone rock at the tip of Spain."
   ],
-  "fact": "About 300 Barbary macaques live on the Rock of Gibraltar."
+  "fact": "About 300 Barbary macaques live on the Rock of Gibraltar.",
+  "level": "medium"
  },
  {
   "name": "Leaning Tower of Pisa, Italy",
@@ -635,7 +692,8 @@
    "People take photos pretending to hold me up, in a white marble square called the Field of Miracles.",
    "A tilted bell tower in Tuscany."
   ],
-  "fact": "The tower took about 200 years to build, partly because wars kept stopping the work."
+  "fact": "The tower took about 200 years to build, partly because wars kept stopping the work.",
+  "level": "easy"
  },
  {
   "name": "Darvaza Gas Crater, Turkmenistan",
@@ -646,7 +704,8 @@
    "Locals call me the door to hell, a fiery pit in the middle of a desert.",
    "A burning crater in the Karakum Desert."
   ],
-  "fact": "The crater is about 70 m wide and has been burning for decades."
+  "fact": "The crater is about 70 m wide and has been burning for decades.",
+  "level": "hard"
  },
  {
   "name": "Edinburgh Castle, Scotland",
@@ -657,7 +716,8 @@
    "Crown jewels and the Stone of Destiny rest inside my walls above a royal mile.",
    "The castle on the rock above Scotland's capital."
   ],
-  "fact": "The One O'Clock Gun has been fired since 1861 so ships could set their clocks."
+  "fact": "The One O'Clock Gun has been fired since 1861 so ships could set their clocks.",
+  "level": "medium"
  },
  {
   "name": "Christ the Redeemer, Rio de Janeiro",
@@ -668,7 +728,8 @@
    "I'm made of soapstone tiles, on top of a mountain shaped like a hunchback.",
    "The Christ the Redeemer statue in Rio de Janeiro, Brazil."
   ],
-  "fact": "Christ the Redeemer was finished in 1931 and is about 30 m tall, not counting its pedestal."
+  "fact": "Christ the Redeemer was finished in 1931 and is about 30 m tall, not counting its pedestal.",
+  "level": "easy"
  },
  {
   "name": "Sagrada Família, Barcelona, Spain",
@@ -679,7 +740,8 @@
    "My columns look like trees, and my towers are meant to reach the height of a hill but no higher.",
    "Gaudí's giant basilica in Barcelona."
   ],
-  "fact": "Antoni Gaudí worked on the Sagrada Família for more than 40 years, until his death in 1926."
+  "fact": "Antoni Gaudí worked on the Sagrada Família for more than 40 years, until his death in 1926.",
+  "level": "easy"
  },
  {
   "name": "Panmunjom, Korean DMZ",
@@ -690,7 +752,8 @@
    "Peace talks happen in my rooms, where the two halves of one peninsula meet.",
    "The truce village on the border between the two Koreas."
   ],
-  "fact": "The Demilitarized Zone is about 4 km wide and 250 km long."
+  "fact": "The Demilitarized Zone is about 4 km wide and 250 km long.",
+  "level": "hard"
  },
  {
   "name": "Mount Fuji, Japan",
@@ -701,7 +764,8 @@
    "Climbers walk me at night to see the first sunrise from my rim.",
    "A snow-capped volcano and the tallest peak in Japan."
   ],
-  "fact": "Mount Fuji is 3,776 m tall, and the official climbing season lasts only about two months each summer."
+  "fact": "Mount Fuji is 3,776 m tall, and the official climbing season lasts only about two months each summer.",
+  "level": "easy"
  },
  {
   "name": "Malé, Maldives",
@@ -712,7 +776,8 @@
    "From the air I look like a city floating on turquoise, among hundreds of coral atolls.",
    "The capital of an island nation in the Indian Ocean."
   ],
-  "fact": "The Maldives is the flattest country in the world."
+  "fact": "The Maldives is the flattest country in the world.",
+  "level": "medium"
  },
  {
   "name": "Brandenburg Gate, Berlin, Germany",
@@ -723,7 +788,8 @@
    "I was once a city gate, and now I'm a symbol of a country reunited.",
    "The famous gate in the heart of Berlin."
   ],
-  "fact": "The Berlin Wall ran right beside the Brandenburg Gate from 1961 to 1989."
+  "fact": "The Berlin Wall ran right beside the Brandenburg Gate from 1961 to 1989.",
+  "level": "easy"
  },
  {
   "name": "Wieliczka Salt Mine, Poland",
@@ -734,7 +800,8 @@
    "Miners dug me for seven hundred years, and now visitors walk my tunnels.",
    "An old salt mine near Kraków."
   ],
-  "fact": "Salt was mined at Wieliczka from the 13th century until 1996."
+  "fact": "Salt was mined at Wieliczka from the 13th century until 1996.",
+  "level": "hard"
  },
  {
   "name": "Angkor Wat, Cambodia",
@@ -745,7 +812,8 @@
    "My towers look like lotus buds, and they shine in the reflecting pond at sunrise.",
    "Angkor Wat temple in Cambodia."
   ],
-  "fact": "Angkor Wat faces west, which is unusual for a temple of its kind, and the sun rises right behind its towers at the equinox."
+  "fact": "Angkor Wat faces west, which is unusual for a temple of its kind, and the sun rises right behind its towers at the equinox.",
+  "level": "easy"
  },
  {
   "name": "Dead Sea",
@@ -756,7 +824,8 @@
    "Nothing swims in me, and I'm shrinking by about a metre a year.",
    "A lake so salty it is called 'dead'."
   ],
-  "fact": "The Dead Sea's shore is about 430 m below sea level and the water level drops about 1 m a year."
+  "fact": "The Dead Sea's shore is about 430 m below sea level and the water level drops about 1 m a year.",
+  "level": "easy"
  },
  {
   "name": "Hampi, India",
@@ -767,7 +836,8 @@
    "Temples and ruins of a great kingdom lie among my rocks and banana fields.",
    "The ruins of the Vijayanagara capital in Karnataka."
   ],
-  "fact": "Hampi's stone chariot at the Vittala Temple appears on India's 50-rupee note."
+  "fact": "Hampi's stone chariot at the Vittala Temple appears on India's 50-rupee note.",
+  "level": "hard"
  },
  {
   "name": "Kirkjufell, Iceland",
@@ -778,7 +848,8 @@
    "A famous fantasy series filmed me, and I'm the most photographed peak on my island.",
    "A cone-shaped mountain on Iceland's Snæfellsnes peninsula."
   ],
-  "fact": "Kirkjufell means 'church mountain'."
+  "fact": "Kirkjufell means 'church mountain'.",
+  "level": "medium"
  },
  {
   "name": "Badwater Basin, Death Valley, USA",
@@ -789,7 +860,8 @@
    "My salt floor cracks into hexagons, in a valley known for record heat.",
    "A salt flat in Death Valley, California."
   ],
-  "fact": "Mount Whitney, the highest point in the lower 48 states, is less than 140 km from Badwater."
+  "fact": "Mount Whitney, the highest point in the lower 48 states, is less than 140 km from Badwater.",
+  "level": "medium"
  },
  {
   "name": "Tiger's Nest Monastery, Bhutan",
@@ -800,7 +872,8 @@
    "Monks live in my white buildings on the side of a gorge.",
    "Paro Taktsang, a monastery in Bhutan."
   ],
-  "fact": "Bhutan measures its progress with Gross National Happiness."
+  "fact": "Bhutan measures its progress with Gross National Happiness.",
+  "level": "medium"
  },
  {
   "name": "Victoria Falls, Zambia and Zimbabwe",
@@ -811,7 +884,8 @@
    "I'm the largest sheet of falling water in the world, between two countries.",
    "Victoria Falls on the Zambezi River."
   ],
-  "fact": "At full flood, more than 500 million liters of water per minute pour over Victoria Falls."
+  "fact": "At full flood, more than 500 million liters of water per minute pour over Victoria Falls.",
+  "level": "easy"
  },
  {
   "name": "Lalibela, Ethiopia",
@@ -822,7 +896,8 @@
    "A king wanted to build a new Jerusalem, and eleven churches came out of the stone.",
    "Rock-hewn churches in the Ethiopian highlands."
   ],
-  "fact": "Lalibela's 11 churches were carved around the 12th and 13th centuries and are still used for worship."
+  "fact": "Lalibela's 11 churches were carved around the 12th and 13th centuries and are still used for worship.",
+  "level": "hard"
  },
  {
   "name": "Svalbard (Longyearbyen), Norway",
@@ -833,7 +908,8 @@
    "A seed vault built in my mountain keeps the world's crops safe.",
    "Longyearbyen, the main town of Svalbard."
   ],
-  "fact": "The Global Seed Vault holds more than a million seed samples from almost every country."
+  "fact": "The Global Seed Vault holds more than a million seed samples from almost every country.",
+  "level": "medium"
  },
  {
   "name": "Times Square, New York City",
@@ -844,7 +920,8 @@
    "I'm known as the crossroads of the world, in a city that never sleeps.",
    "Times Square, Manhattan."
   ],
-  "fact": "The New Year's Eve ball drop in Times Square started in 1907."
+  "fact": "The New Year's Eve ball drop in Times Square started in 1907.",
+  "level": "easy"
  },
  {
   "name": "Shibuya Crossing, Tokyo, Japan",
@@ -855,7 +932,8 @@
    "A loyal dog's statue waits for its owner at my station.",
    "The world's busiest pedestrian crossing, in Tokyo."
   ],
-  "fact": "The dog Hachikō waited at Shibuya Station for his owner every day for nearly ten years."
+  "fact": "The dog Hachikō waited at Shibuya Station for his owner every day for nearly ten years.",
+  "level": "easy"
  },
  {
   "name": "Preikestolen, Norway",
@@ -866,7 +944,8 @@
    "A two-hour hike leads to my edge, 600 metres above the water.",
    "A cliff above the Lysefjord in Norway."
   ],
-  "fact": "About 300,000 people hike to Preikestolen each year."
+  "fact": "About 300,000 people hike to Preikestolen each year.",
+  "level": "medium"
  },
  {
   "name": "Alhambra, Granada, Spain",
@@ -877,7 +956,8 @@
    "The last kingdom of its kind in my country surrendered here in 1492.",
    "A Moorish palace above Granada."
   ],
-  "fact": "The Alhambra was the last stronghold of Muslim rule in Spain, until 1492."
+  "fact": "The Alhambra was the last stronghold of Muslim rule in Spain, until 1492.",
+  "level": "medium"
  },
  {
   "name": "Torres del Paine, Chile",
@@ -888,7 +968,8 @@
    "I'm a national park at the end of the Andes, with blue lakes and guanacos.",
    "A national park in Chilean Patagonia."
   ],
-  "fact": "'Paine' is thought to mean 'blue' in the local Tehuelche language."
+  "fact": "'Paine' is thought to mean 'blue' in the local Tehuelche language.",
+  "level": "medium"
  },
  {
   "name": "Registan, Samarkand, Uzbekistan",
@@ -899,7 +980,8 @@
    "I stood at the heart of a city on the Silk Road, once Tamerlane's capital.",
    "The famous square of Samarkand."
   ],
-  "fact": "Registan means 'sandy place' in Persian."
+  "fact": "Registan means 'sandy place' in Persian.",
+  "level": "hard"
  },
  {
   "name": "Komodo Island, Indonesia",
@@ -910,7 +992,8 @@
    "I'm an island in a national park, with a beach that looks pink.",
    "An island in the Lesser Sunda chain, home of dragons."
   ],
-  "fact": "Komodo dragons can grow to 3 m long."
+  "fact": "Komodo dragons can grow to 3 m long.",
+  "level": "medium"
  },
  {
   "name": "Tikal, Guatemala",
@@ -921,7 +1004,8 @@
    "Howler monkeys shout from my trees, and I was once a great Maya city.",
    "A great Maya city in the jungle of northern Guatemala."
   ],
-  "fact": "Tikal appeared as the Rebel base on Yavin 4 in the first Star Wars film in 1977."
+  "fact": "Tikal appeared as the Rebel base on Yavin 4 in the first Star Wars film in 1977.",
+  "level": "medium"
  },
  {
   "name": "Ilulissat Icefjord, Greenland",
@@ -932,7 +1016,8 @@
    "My glacier is among the fastest in the world, near a town on a giant island.",
    "An icefjord on Greenland's west coast."
   ],
-  "fact": "Sermeq Kujalleq glacier produces about 10% of Greenland's icebergs."
+  "fact": "Sermeq Kujalleq glacier produces about 10% of Greenland's icebergs.",
+  "level": "hard"
  },
  {
   "name": "Colosseum, Rome, Italy",
@@ -943,7 +1028,8 @@
    "I'm half broken, but I'm still the biggest amphitheatre ever built.",
    "The great amphitheater of the Roman emperors."
   ],
-  "fact": "Much of the Colosseum's missing stone was taken to build other buildings in Rome, including St Peter's."
+  "fact": "Much of the Colosseum's missing stone was taken to build other buildings in Rome, including St Peter's.",
+  "level": "easy"
  },
  {
   "name": "Ushuaia, Argentina",
@@ -954,7 +1040,8 @@
    "I'm the southernmost city of my kind, on the Beagle Channel.",
    "The southernmost city on the island of Tierra del Fuego."
   ],
-  "fact": "Ushuaia was founded around a prison, which is now a museum."
+  "fact": "Ushuaia was founded around a prison, which is now a museum.",
+  "level": "medium"
  },
  {
   "name": "Borobudur, Indonesia",
@@ -965,7 +1052,8 @@
    "I was hidden under volcanic ash and jungle for centuries, on the island of Java.",
    "The largest Buddhist temple in the world, on the island of Java."
   ],
-  "fact": "Borobudur was built in the 9th century from about two million stone blocks."
+  "fact": "Borobudur was built in the 9th century from about two million stone blocks.",
+  "level": "medium"
  },
  {
   "name": "Havana, Cuba",
@@ -976,7 +1064,8 @@
    "My seafront wall is the living room of my city, where waves crash at sunset.",
    "The capital of Cuba."
   ],
-  "fact": "Old Havana and its fortifications became a UNESCO World Heritage Site in 1982."
+  "fact": "Old Havana and its fortifications became a UNESCO World Heritage Site in 1982.",
+  "level": "easy"
  },
  {
   "name": "Table Mountain, Cape Town, South Africa",
@@ -987,7 +1076,8 @@
    "A cable car turns as it climbs me, above a city at the tip of a continent.",
    "The flat-topped mountain above Cape Town."
   ],
-  "fact": "The constellation Mensa, 'the table', was named after Table Mountain in the 1750s."
+  "fact": "The constellation Mensa, 'the table', was named after Table Mountain in the 1750s.",
+  "level": "easy"
  },
  {
   "name": "Angel Falls, Venezuela",
@@ -998,7 +1088,8 @@
    "My water falls almost a kilometre from a flat-topped mountain in the jungle.",
    "The world's tallest waterfall, in Venezuela."
   ],
-  "fact": "Angel Falls drops 979 m, with an unbroken fall of 807 m."
+  "fact": "Angel Falls drops 979 m, with an unbroken fall of 807 m.",
+  "level": "medium"
  },
  {
   "name": "Dubrovnik, Croatia",
@@ -1009,7 +1100,8 @@
    "I'm called the Pearl of the Adriatic, a walled city on the sea.",
    "A walled old town on the Adriatic coast."
   ],
-  "fact": "Dubrovnik's walls are nearly 2 km around and up to 25 m high."
+  "fact": "Dubrovnik's walls are nearly 2 km around and up to 25 m high.",
+  "level": "medium"
  },
  {
   "name": "Thingvellir, Iceland",
@@ -1020,7 +1112,8 @@
    "You can dive between two continents in my clear water.",
    "Thingvellir (Þingvellir), Iceland."
   ],
-  "fact": "The rift valley at Thingvellir widens by about 2 cm every year."
+  "fact": "The rift valley at Thingvellir widens by about 2 cm every year.",
+  "level": "hard"
  },
  {
   "name": "Cartagena, Colombia",
@@ -1031,7 +1124,8 @@
    "I'm a colorful port on the Caribbean coast of South America.",
    "A walled Caribbean port city in Colombia."
   ],
-  "fact": "Cartagena's city walls stretch about 11 km."
+  "fact": "Cartagena's city walls stretch about 11 km.",
+  "level": "medium"
  },
  {
   "name": "Lake Titicaca, Peru and Bolivia",
@@ -1042,7 +1136,8 @@
    "Legend says the sun was born from my water, on the border of two countries.",
    "The highest navigable lake in the world, between Peru and Bolivia."
   ],
-  "fact": "Lake Titicaca sits about 3,812 m above sea level."
+  "fact": "Lake Titicaca sits about 3,812 m above sea level.",
+  "level": "medium"
  },
  {
   "name": "Chefchaouen, Morocco",
@@ -1053,7 +1148,8 @@
    "I'm hidden in the Rif mountains, and my cats nap on blue steps.",
    "The blue city of northern Morocco."
   ],
-  "fact": "Chefchaouen was founded in 1471 as a small fortress."
+  "fact": "Chefchaouen was founded in 1471 as a small fortress.",
+  "level": "medium"
  },
  {
   "name": "Great Barrier Reef, Australia",
@@ -1064,7 +1160,8 @@
    "Clownfish and turtles live in my coral, along the coast of a huge island.",
    "The giant coral reef off Queensland."
   ],
-  "fact": "The Great Barrier Reef is made of about 2,900 individual reefs."
+  "fact": "The Great Barrier Reef is made of about 2,900 individual reefs.",
+  "level": "easy"
  },
  {
   "name": "Pompeii, Italy",
@@ -1075,7 +1172,8 @@
    "Volcanic ash kept my streets, bread and graffiti for almost two thousand years.",
    "A Roman town at the foot of Mount Vesuvius."
   ],
-  "fact": "Pompeii was rediscovered in the 1700s, about 1,600 years after it was buried."
+  "fact": "Pompeii was rediscovered in the 1700s, about 1,600 years after it was buried.",
+  "level": "easy"
  },
  {
   "name": "Moraine Lake, Canada",
@@ -1086,7 +1184,8 @@
    "A glacier's fine dust gives me my color in the Rocky Mountains.",
    "A glacier lake below ten peaks in Banff National Park."
   ],
-  "fact": "Moraine Lake is usually frozen until June."
+  "fact": "Moraine Lake is usually frozen until June.",
+  "level": "medium"
  },
  {
   "name": "Las Vegas Strip, USA",
@@ -1097,7 +1196,8 @@
    "I'm a desert boulevard of casinos and copies of the world's famous sights.",
    "The neon street of casinos in Nevada."
   ],
-  "fact": "The beam of light from the top of the Luxor pyramid is among the strongest in the world."
+  "fact": "The beam of light from the top of the Luxor pyramid is among the strongest in the world.",
+  "level": "easy"
  },
  {
   "name": "St Basil's Cathedral, Moscow, Russia",
@@ -1108,7 +1208,8 @@
    "I stand at the edge of a red square that wasn't named for its color, beside a fortress with a ruby star.",
    "The colorful cathedral on Red Square."
   ],
-  "fact": "St Basil's was built in the 1550s to celebrate a military victory by Ivan the Terrible."
+  "fact": "St Basil's was built in the 1550s to celebrate a military victory by Ivan the Terrible.",
+  "level": "easy"
  },
  {
   "name": "Forbidden City, Beijing, China",
@@ -1119,7 +1220,8 @@
    "Emperors ruled from my yellow roofs, and my front gate wears a giant portrait over a vast square.",
    "The imperial palace in the heart of Beijing."
   ],
-  "fact": "The Forbidden City was home to 24 emperors of the Ming and Qing dynasties."
+  "fact": "The Forbidden City was home to 24 emperors of the Ming and Qing dynasties.",
+  "level": "easy"
  },
  {
   "name": "Arctic Circle, Rovaniemi, Finland",
@@ -1130,7 +1232,8 @@
    "Reindeer and letters from children all find their way to me, in Lapland.",
    "Santa Claus Village on the Arctic Circle in Finland."
   ],
-  "fact": "Santa's main post office in Rovaniemi gets letters from about 200 countries."
+  "fact": "Santa's main post office in Rovaniemi gets letters from about 200 countries.",
+  "level": "medium"
  },
  {
   "name": "Mount Everest",
@@ -1141,7 +1244,8 @@
    "Locals call me Mother of the World, and my summit sits on a border between two countries in the Himalaya.",
    "The highest point on Earth above sea level."
   ],
-  "fact": "The summit of Everest is made of marine limestone. It was once the floor of an ancient sea."
+  "fact": "The summit of Everest is made of marine limestone. It was once the floor of an ancient sea.",
+  "level": "easy"
  },
  {
   "name": "Burj Khalifa, Dubai, UAE",
@@ -1152,7 +1256,8 @@
    "A needle of glass taller than any other, I rise above a city of gold souks and artificial islands.",
    "The tallest building in the world, in Dubai."
   ],
-  "fact": "The Burj Khalifa is 828 m tall and opened in 2010."
+  "fact": "The Burj Khalifa is 828 m tall and opened in 2010.",
+  "level": "easy"
  },
  {
   "name": "Hiroshima Peace Memorial, Japan",
@@ -1163,7 +1268,8 @@
    "Paper cranes are folded for a girl who lived nearby, and the city around me rose again from ashes.",
    "The A-Bomb Dome in Hiroshima."
   ],
-  "fact": "The dome was one of the few buildings left standing near the hypocenter on 6 August 1945."
+  "fact": "The dome was one of the few buildings left standing near the hypocenter on 6 August 1945.",
+  "level": "easy"
  },
  {
   "name": "Amsterdam, Netherlands",
@@ -1174,7 +1280,8 @@
    "My canals ring the old town in half-circles, and a diary written in a hidden annex is read here by millions.",
    "The Dutch capital of canals."
   ],
-  "fact": "Amsterdam's 17th-century canal ring is a UNESCO World Heritage Site."
+  "fact": "Amsterdam's 17th-century canal ring is a UNESCO World Heritage Site.",
+  "level": "easy"
  },
  {
   "name": "Big Ben, London, England",
@@ -1185,7 +1292,8 @@
    "I chime beside a river and a Parliament, and I was renamed for a queen's jubilee.",
    "The clock tower at the Houses of Parliament in London."
   ],
-  "fact": "The tower was renamed Elizabeth Tower in 2012 for Queen Elizabeth II's Diamond Jubilee."
+  "fact": "The tower was renamed Elizabeth Tower in 2012 for Queen Elizabeth II's Diamond Jubilee.",
+  "level": "easy"
  },
  {
   "name": "Avenue of the Baobabs, Madagascar",
@@ -1196,7 +1304,8 @@
    "We may be eight hundred years old, on an island that split from Africa long ago, and lemurs live nowhere else but here.",
    "A road of giant baobab trees near Morondava."
   ],
-  "fact": "Six of the world's eight baobab species grow only in Madagascar."
+  "fact": "Six of the world's eight baobab species grow only in Madagascar.",
+  "level": "hard"
  },
  {
   "name": "Socotra, Yemen",
@@ -1207,7 +1316,8 @@
    "A third of my plants grow nowhere else on Earth, on an island far off the Horn of Africa.",
    "Socotra island, part of Yemen."
   ],
-  "fact": "The red resin of Socotra's dragon's blood tree has been traded since ancient times as dye and medicine."
+  "fact": "The red resin of Socotra's dragon's blood tree has been traded since ancient times as dye and medicine.",
+  "level": "hard"
  },
  {
   "name": "Alcatraz, San Francisco, USA",
@@ -1218,7 +1328,8 @@
    "Al Capone slept here, and three men may or may not have escaped me on a raft made of raincoats.",
    "The prison island in San Francisco Bay."
   ],
-  "fact": "Alcatraz was a federal prison from 1934 to 1963. Al Capone was one of its inmates."
+  "fact": "Alcatraz was a federal prison from 1934 to 1963. Al Capone was one of its inmates.",
+  "level": "easy"
  },
  {
   "name": "Niagara Falls, Canada and USA",
@@ -1229,7 +1340,8 @@
    "I sit between two great lakes and two countries, and honeymooners come in boats called Maid of the Mist.",
    "Three waterfalls on the border between Ontario and New York."
   ],
-  "fact": "Annie Edson Taylor was the first person to survive going over Niagara Falls in a barrel."
+  "fact": "Annie Edson Taylor was the first person to survive going over Niagara Falls in a barrel.",
+  "level": "easy"
  },
  {
   "name": "Grand Canyon, Arizona, USA",
@@ -1240,7 +1352,8 @@
    "I'm a mile deep in places, and some visitors walk out over me on a glass horseshoe.",
    "A mile-deep canyon cut by the Colorado River in Arizona."
   ],
-  "fact": "The Grand Canyon is about 446 km long and up to 29 km wide."
+  "fact": "The Grand Canyon is about 446 km long and up to 29 km wide.",
+  "level": "easy"
  },
  {
   "name": "Meeting of the Waters, Manaus, Brazil",
@@ -1251,7 +1364,8 @@
    "A black river and a sandy one meet near a city with an opera house built during the rubber boom.",
    "Where the Rio Negro meets the Amazon, in Brazil."
   ],
-  "fact": "The two rivers differ in temperature, speed and density, which keeps them apart."
+  "fact": "The two rivers differ in temperature, speed and density, which keeps them apart.",
+  "level": "hard"
  },
  {
   "name": "Teotihuacan, Mexico",
@@ -1262,7 +1376,8 @@
    "My Avenue of the Dead leads past a pyramid of the Sun to a pyramid of the Moon.",
    "The Pyramids of the Sun and Moon, near Mexico City."
   ],
-  "fact": "At its peak around 500 AD, Teotihuacan may have had more than 100,000 people."
+  "fact": "At its peak around 500 AD, Teotihuacan may have had more than 100,000 people.",
+  "level": "medium"
  },
  {
   "name": "Galapagos Islands, Ecuador",
@@ -1273,7 +1388,8 @@
    "I'm a volcanic archipelago on the equator, where iguanas swim and blue-footed boobies dance.",
    "The Galapagos Islands, part of Ecuador."
   ],
-  "fact": "Galapagos giant tortoises can live for more than 100 years."
+  "fact": "Galapagos giant tortoises can live for more than 100 years.",
+  "level": "easy"
  },
  {
   "name": "Neuschwanstein Castle, Germany",
@@ -1284,7 +1400,8 @@
    "My white towers rise on a crag above a gorge, near the border of Austria, in Bavaria.",
    "A fairy-tale castle in the Bavarian Alps."
   ],
-  "fact": "King Ludwig II of Bavaria died in 1886, before Neuschwanstein was finished."
+  "fact": "King Ludwig II of Bavaria died in 1886, before Neuschwanstein was finished.",
+  "level": "easy"
  },
  {
   "name": "Atomium, Brussels, Belgium",
@@ -1295,7 +1412,8 @@
    "Built for a World's Fair in 1958, my nine shiny balls sit in the capital of Europe's institutions.",
    "Nine giant silver balls in Brussels."
   ],
-  "fact": "The Atomium is 102 m tall, and you can ride an escalator between its spheres."
+  "fact": "The Atomium is 102 m tall, and you can ride an escalator between its spheres.",
+  "level": "medium"
  },
  {
   "name": "Salar de Uyuni, Bolivia",
@@ -1306,7 +1424,8 @@
    "I'm a white desert of salt high in the Andes, with a hotel built of salt blocks and a train graveyard nearby.",
    "The biggest salt flat in the world, high in the Andes of Bolivia."
   ],
-  "fact": "Salar de Uyuni covers more than 10,000 square kilometers and varies in height by less than a meter."
+  "fact": "Salar de Uyuni covers more than 10,000 square kilometers and varies in height by less than a meter.",
+  "level": "medium"
  },
  {
   "name": "McMurdo Station, Antarctica",
@@ -1317,7 +1436,8 @@
    "I sit on an island near a smoking volcano, beside a hut left by Captain Scott.",
    "The main US research base in Antarctica."
   ],
-  "fact": "McMurdo can house about 1,000 people in the summer."
+  "fact": "McMurdo can house about 1,000 people in the summer.",
+  "level": "hard"
  },
  {
   "name": "San Pedro de Atacama, Chile",
@@ -1328,7 +1448,8 @@
    "I'm an adobe oasis town near geysers, salt flats and a Valley of the Moon, in the driest desert on Earth.",
    "An oasis town in the driest non-polar desert on Earth."
   ],
-  "fact": "The Atacama is so dry and clear that it hosts some of the world's largest telescopes."
+  "fact": "The Atacama is so dry and clear that it hosts some of the world's largest telescopes.",
+  "level": "hard"
  },
  {
   "name": "Hallstatt, Austria",
@@ -1339,7 +1460,8 @@
    "Squeezed between a lake and the mountains, I have a bone house and one of the oldest salt mines on Earth.",
    "A lakeside village in the Austrian Alps."
   ],
-  "fact": "Hallstatt's bone house holds hundreds of painted skulls, because the tiny graveyard ran out of space."
+  "fact": "Hallstatt's bone house holds hundreds of painted skulls, because the tiny graveyard ran out of space.",
+  "level": "medium"
  },
  {
   "name": "Ha Long Bay, Vietnam",
@@ -1350,7 +1472,8 @@
    "Nearly two thousand limestone islands rise from my green water, where junk boats drift in the Gulf of Tonkin.",
    "A bay of green islands in northern Vietnam."
   ],
-  "fact": "Ha Long means 'descending dragon' in Vietnamese."
+  "fact": "Ha Long means 'descending dragon' in Vietnamese.",
+  "level": "medium"
  },
  {
   "name": "Belém Tower, Lisbon, Portugal",
@@ -1361,7 +1484,8 @@
    "I guard the river where explorers set off for India and Brazil, in the city of trams and custard tarts.",
    "A riverside fortress at the mouth of the Tagus in Lisbon."
   ],
-  "fact": "The rhino carving is thought to show the rhinoceros sent to Lisbon from India in 1515."
+  "fact": "The rhino carving is thought to show the rhinoceros sent to Lisbon from India in 1515.",
+  "level": "hard"
  },
  {
   "name": "Hagia Sophia, Istanbul, Türkiye",
@@ -1372,7 +1496,8 @@
    "For nearly a thousand years I was the biggest cathedral on Earth, on the strait between two continents.",
    "The great domed building of old Constantinople."
   ],
-  "fact": "Hagia Sophia's main dome rises about 55 m above the floor."
+  "fact": "Hagia Sophia's main dome rises about 55 m above the floor.",
+  "level": "easy"
  },
  {
   "name": "Persepolis, Iran",
@@ -1383,7 +1508,8 @@
    "Kings of kings received gifts from every land on my staircases, near the city of Shiraz.",
    "The ceremonial capital of the ancient Persian Empire."
   ],
-  "fact": "Persepolis was founded by Darius the Great around 518 BC."
+  "fact": "Persepolis was founded by Darius the Great around 518 BC.",
+  "level": "hard"
  },
  {
   "name": "Oia, Santorini, Greece",
@@ -1394,7 +1520,8 @@
    "Crowds clap here every evening for the sunset, on a crescent island in the Cyclades.",
    "White houses and blue domes on a Greek island in the Aegean."
   ],
-  "fact": "The Minoan eruption of Santorini was one of the largest volcanic eruptions in human history."
+  "fact": "The Minoan eruption of Santorini was one of the largest volcanic eruptions in human history.",
+  "level": "medium"
  },
  {
   "name": "Sydney Opera House, Australia",
@@ -1405,7 +1532,8 @@
    "A Danish architect designed me, and my curved shells were cut like segments of an orange, on a famous harbor.",
    "White sails on a harbour, near a famous bridge nicknamed the Coathanger."
   ],
-  "fact": "Danish architect Jørn Utzon resigned in 1966 and never returned to see the finished building."
+  "fact": "Danish architect Jørn Utzon resigned in 1966 and never returned to see the finished building.",
+  "level": "easy"
  },
  {
   "name": "Göreme, Cappadocia, Türkiye",
@@ -1416,7 +1544,8 @@
    "At dawn the sky fills with hot-air balloons above my valleys, and whole cities hide underground nearby.",
    "The land of fairy chimneys in central Türkiye."
   ],
-  "fact": "Derinkuyu, an underground city nearby, goes down about 85 m and could shelter thousands."
+  "fact": "Derinkuyu, an underground city nearby, goes down about 85 m and could shelter thousands.",
+  "level": "medium"
  },
  {
   "name": "Hobbiton, Matamata, New Zealand",
@@ -1427,7 +1556,8 @@
    "I'm a village of green hillside holes on a sheep farm, with a party tree and a pub called the Green Dragon.",
    "The hobbit village film set on New Zealand's North Island."
   ],
-  "fact": "Hobbiton was rebuilt in permanent materials for The Hobbit films and is now a tourist attraction."
+  "fact": "Hobbiton was rebuilt in permanent materials for The Hobbit films and is now a tourist attraction.",
+  "level": "easy"
  },
  {
   "name": "Pyramids of Meroë, Sudan",
@@ -1438,7 +1568,8 @@
    "I was the royal city of black pharaohs and warrior queens, along the Nile north of Khartoum.",
    "The royal pyramids of ancient Kush, in Sudan."
   ],
-  "fact": "In the 1830s an Italian treasure hunter blew the tops off dozens of Meroë's pyramids looking for gold."
+  "fact": "In the 1830s an Italian treasure hunter blew the tops off dozens of Meroë's pyramids looking for gold.",
+  "level": "hard"
  },
  {
   "name": "Petronas Towers, Kuala Lumpur, Malaysia",
@@ -1449,7 +1580,8 @@
    "Our steel shines like a temple's star pattern in a city whose name means muddy confluence.",
    "Malaysia's famous twin skyscrapers."
   ],
-  "fact": "The Petronas Towers were the tallest buildings in the world from 1998 to 2004."
+  "fact": "The Petronas Towers were the tallest buildings in the world from 1998 to 2004.",
+  "level": "easy"
  },
  {
   "name": "Timbuktu, Mali",
@@ -1460,7 +1592,8 @@
    "Camel caravans brought salt and gold here, and my mosques of mud keep scholars' manuscripts, near the Niger.",
    "A legendary desert city in Mali whose name starts with 'Tim'."
   ],
-  "fact": "Timbuktu's Djinguereber Mosque was built around 1327 and is still made of mud brick."
+  "fact": "Timbuktu's Djinguereber Mosque was built around 1327 and is still made of mud brick.",
+  "level": "medium"
  },
  {
   "name": "Monaco",
@@ -1471,7 +1604,8 @@
    "Once a year race cars scream through my streets and tunnel, on the Riviera.",
    "A tiny principality on the French Riviera."
   ],
-  "fact": "Monaco is the second-smallest country in the world after Vatican City."
+  "fact": "Monaco is the second-smallest country in the world after Vatican City.",
+  "level": "easy"
  },
  {
   "name": "Fushimi Inari Shrine, Kyoto, Japan",
@@ -1482,7 +1616,8 @@
    "My shrine honors the god of rice, in Japan's old imperial capital.",
    "Fushimi Inari shrine in Kyoto."
   ],
-  "fact": "The paths of torii gates at Fushimi Inari wind about 4 km up Mount Inari."
+  "fact": "The paths of torii gates at Fushimi Inari wind about 4 km up Mount Inari.",
+  "level": "medium"
  },
  {
   "name": "Jemaa el-Fnaa, Marrakech, Morocco",
@@ -1493,7 +1628,8 @@
    "My square lies below a tall minaret in a pink-walled city at the foot of the Atlas.",
    "The great square of Morocco's Red City."
   ],
-  "fact": "The square was one of the first places on UNESCO's list of Masterpieces of the Oral and Intangible Heritage of Humanity in 2001."
+  "fact": "The square was one of the first places on UNESCO's list of Masterpieces of the Oral and Intangible Heritage of Humanity in 2001.",
+  "level": "medium"
  },
  {
   "name": "Panama Canal, Panama",
@@ -1504,7 +1640,8 @@
    "I cut through a narrow country joining two continents, linking the Atlantic and Pacific.",
    "The canal across a narrow Central American country."
   ],
-  "fact": "Each ship passing through the Panama Canal uses about 200 million liters of fresh water from Gatun Lake."
+  "fact": "Each ship passing through the Panama Canal uses about 200 million liters of fresh water from Gatun Lake.",
+  "level": "easy"
  },
  {
   "name": "The South Pole",
@@ -1515,7 +1652,8 @@
    "Amundsen beat Scott here in 1911, on top of three kilometers of ice.",
    "The southern end of Earth's axis."
   ],
-  "fact": "The ice at the South Pole moves about 10 m a year, so the marker for the exact pole is moved every January."
+  "fact": "The ice at the South Pole moves about 10 m a year, so the marker for the exact pole is moved every January.",
+  "level": "easy"
  },
  {
   "name": "Half Dome, Yosemite, USA",
@@ -1526,7 +1664,8 @@
    "My sheer granite face looks down on a valley of giant sequoias and waterfalls in the Sierra Nevada.",
    "A granite dome in Yosemite National Park, California."
   ],
-  "fact": "Half Dome rises about 1,444 m above the floor of Yosemite Valley."
+  "fact": "Half Dome rises about 1,444 m above the floor of Yosemite Valley.",
+  "level": "medium"
  },
  {
   "name": "Lake Bled, Slovenia",
@@ -1537,7 +1676,8 @@
    "My emerald lake has a castle on a cliff and famous cream cake, in the Julian Alps.",
    "An alpine lake with a church on an island, in Slovenia."
   ],
-  "fact": "Bled's island is the only natural island in Slovenia."
+  "fact": "Bled's island is the only natural island in Slovenia.",
+  "level": "medium"
  },
  {
   "name": "Sigiriya, Sri Lanka",
@@ -1548,7 +1688,8 @@
    "My walls once held painted maidens, and my rock rises 200 meters out of the jungle on a tropical island.",
    "The Lion Rock fortress in Sri Lanka."
   ],
-  "fact": "Sigiriya was built by King Kashyapa in the 5th century."
+  "fact": "Sigiriya was built by King Kashyapa in the 5th century.",
+  "level": "hard"
  },
  {
   "name": "Marina Bay Sands, Singapore",
@@ -1559,7 +1700,8 @@
    "I look over a garden of supertrees in a tiny city-state at the tip of the Malay Peninsula.",
    "A famous hotel on the waterfront of a city-state."
   ],
-  "fact": "Singapore is one of only three surviving city-states."
+  "fact": "Singapore is one of only three surviving city-states.",
+  "level": "easy"
  },
  {
   "name": "Icehotel, Jukkasjärvi, Sweden",
@@ -1570,7 +1712,8 @@
    "I'm made from a river's ice, 200 km north of the Arctic Circle, where the northern lights dance.",
    "A hotel made of ice in Swedish Lapland."
   ],
-  "fact": "The first Icehotel was built in 1989-90 on the Torne River."
+  "fact": "The first Icehotel was built in 1989-90 on the Torne River.",
+  "level": "medium"
  },
  {
   "name": "Maya Bay, Thailand",
@@ -1581,7 +1724,8 @@
    "I'm a cove walled in by limestone cliffs, on an island in the Andaman Sea.",
    "A cove on Ko Phi Phi Le in the Andaman Sea."
   ],
-  "fact": "Maya Bay was closed from 2018 to 2022 to let its coral and sharks recover."
+  "fact": "Maya Bay was closed from 2018 to 2022 to let its coral and sharks recover.",
+  "level": "medium"
  },
  {
   "name": "Mount Rushmore, USA",
@@ -1592,7 +1736,8 @@
    "Four presidents are carved into my granite in the Black Hills.",
    "Four presidents carved into a mountain in South Dakota."
   ],
-  "fact": "Carving Mount Rushmore took 14 years, from 1927 to 1941, mostly with dynamite."
+  "fact": "Carving Mount Rushmore took 14 years, from 1927 to 1941, mostly with dynamite.",
+  "level": "easy"
  },
  {
   "name": "Point Nemo, South Pacific",
@@ -1603,7 +1748,8 @@
    "I'm the spot in the ocean farthest from any land, named after a fictional submarine captain.",
    "The 'oceanic pole of inaccessibility', named after Jules Verne's submarine captain."
   ],
-  "fact": "The nearest land to Point Nemo is about 2,700 km away."
+  "fact": "The nearest land to Point Nemo is about 2,700 km away.",
+  "level": "hard"
  },
  {
   "name": "The Bund, Shanghai, China",
@@ -1614,7 +1760,8 @@
    "I'm a waterfront promenade of colonial-era buildings, in China's biggest city.",
    "Shanghai's famous waterfront."
   ],
-  "fact": "The Shanghai Tower across the river is the tallest building in China."
+  "fact": "The Shanghai Tower across the river is the tallest building in China.",
+  "level": "medium"
  },
  {
   "name": "Potala Palace, Lhasa, Tibet",
@@ -1625,7 +1772,8 @@
    "I was the winter home of the Dalai Lamas, on the roof of the world.",
    "A red-and-white palace in Lhasa."
   ],
-  "fact": "The Potala Palace is 13 stories tall and was built in the 1600s on an older site."
+  "fact": "The Potala Palace is 13 stories tall and was built in the 1600s on an older site.",
+  "level": "medium"
  },
  {
   "name": "Abu Simbel, Egypt",
@@ -1636,7 +1784,8 @@
    "My four giant kings were cut apart and moved uphill to escape a rising lake on the Nile.",
    "Giant statues of Ramesses II near the Sudan border."
   ],
-  "fact": "Moving Abu Simbel took four years and a global campaign led by UNESCO."
+  "fact": "Moving Abu Simbel took four years and a global campaign led by UNESCO.",
+  "level": "medium"
  },
  {
   "name": "Eiffel Tower, Paris, France",
@@ -1647,6 +1796,7 @@
    "Built for a World's Fair in 1889, I'm the iron lady of the City of Light.",
    "The iron lady on the Champ de Mars."
   ],
-  "fact": "The Eiffel Tower grows about 15 cm taller in summer as the iron expands in the heat."
+  "fact": "The Eiffel Tower grows about 15 cm taller in summer as the iron expands in the heat.",
+  "level": "easy"
  }
 ]
