@@ -542,6 +542,7 @@ function recordHistory() {
 // Walks back from today. A single missed day is forgiven once per week (weeks run from day 1),
 // so one busy day doesn't wipe out a long streak.
 function streakInfo() {
+  if (DEV && params.has("streak")) return { count: Number(params.get("streak")) || 0, saved: [], saverReady: true }; // tester preview
   const h = store.get("sw:history", {});
   const week = (d) => Math.floor((d - 1) / 7);
   const usedWeeks = new Set(), saved = [];
@@ -599,6 +600,19 @@ function streakHTML() {
     </div>`;
 }
 
+// The day is done: say so clearly and invite players back for the next one.
+function doneHTML() {
+  const at = new Date(nextPuzzleAt()).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  const st = streakInfo().count;
+  return `<div class="done-box">
+      <img src="scout.svg" alt="" width="64" height="64">
+      <div>
+        <b>That's a wrap for today!</b>
+        <span>Scout's back with 5 new riddles in <strong id="countdown">--</strong> (${at} your time).${st >= 1 ? ` Come back to make it ${st + 1} days in a row.` : ""}</span>
+      </div>
+    </div>`;
+}
+
 function finalHTML() {
   const f = state.final;
   const rows = state.rounds.map((x, i) => `
@@ -622,6 +636,7 @@ function finalHTML() {
       <a class="ghost" href="/" id="daily-link">Play today's 5 places</a>
     </div>`;
   return `
+    ${doneHTML()}
     <div class="result-top">
       <div>
         <div class="eyebrow">Somewhere No. ${DAY} · ${THEME.name}</div>
@@ -630,7 +645,7 @@ function finalHTML() {
       ${f.beat != null ? `<div class="km"><b>${f.beat}%</b><span>of players beaten</span></div>` : `<div class="km"><b>${fmtKm(f.km)}</b><span>off in total</span></div>`}
     </div>
     <div class="scorebar"><div class="fill" id="r-bar" data-w="${(f.score / TOTAL * 100).toFixed(1)}"></div></div>
-    ${DEV ? "" : streakHTML()}
+    ${DEV && !params.has("streak") ? "" : streakHTML()}
     <ol class="rounds">${rows}</ol>
     ${spoilerBtn()}
     <div class="share-row">
@@ -646,8 +661,7 @@ function finalHTML() {
         <input id="name-input" maxlength="20" autocomplete="off" value="${esc(myName)}">
         <button class="ghost" id="name-save" data-umami-event="Rename">Save</button>
       </div>
-    </div>
-    <div class="next">5 new places in <b id="countdown">--:--:--</b></div>`;
+    </div>`;
 }
 
 function bindSheet() {
@@ -1063,7 +1077,7 @@ function tick() {
   const el = $("#countdown");
   if (el) {
     const h = Math.floor(ms / 3.6e6), m = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1000) % 60;
-    el.textContent = [h, m, s].map((v) => String(v).padStart(2, "0")).join(":");
+    el.textContent = h ? `${h}h ${String(m).padStart(2, "0")}m` : `${m}m ${String(s).padStart(2, "0")}s`;
   }
   // A new day started: load the new puzzle, but never in the middle of someone's game.
   const idle = state.final || (state.round === 0 && !cur().done && !cur().pin);
