@@ -152,67 +152,131 @@ $("#next-clue").addEventListener("click", () => {
   track("Reveal clue", { clue: r.clues, round: state.round + 1, day: DAY, custom: !!CUSTOM });
 });
 
-/* ---------- map ---------- */
-const map = { svg: null, root: null, projection: null, path: null, zoom: null, k: 1, land: null };
+/* ---------- map: MapLibre with the free OpenFreeMap street map ----------
+   Zooms from the whole world down to street level. If the street map can't load
+   (blocked network, outage), it switches to a simple built-in world map. */
+const STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
+const map = { gl: null, ready: false, land: null, fallback: false, tilesOk: false, tileErrors: 0, markers: { mine: [], answer: [] } };
+window.__swMap = map; // handy for debugging in the browser console
+const fc = (features) => ({ type: "FeatureCollection", features });
+const isPhone = () => matchMedia("(max-width: 640px)").matches;
+
+// Web maps can't draw the poles, and a few shapes (Russia, Fiji) cross the date line.
+// Shift those across so the simple map draws them in one piece, and leave out Antarctica.
+function mercatorSafe(geo) {
+  const fixRing = (r) => {
+    let jump = 0;
+    for (let i = 1; i < r.length; i++) jump = Math.max(jump, Math.abs(r[i][0] - r[i - 1][0]));
+    return jump > 180 ? r.map(([lon, lat]) => [lon < 0 ? lon + 360 : lon, lat]) : r;
+  };
+  const features = geo.features.filter((f) => f.geometry && f.properties?.name !== "Antarctica").map((f) => {
+    const g = f.geometry;
+    const coordinates = g.type === "Polygon" ? g.coordinates.map(fixRing) : g.coordinates.map((p) => p.map(fixRing));
+    return { ...f, geometry: { ...g, coordinates } };
+  });
+  return { type: "FeatureCollection", features };
+}
+function fallbackStyle() {
+  return {
+    version: 8,
+    sources: { land: { type: "geojson", data: mercatorSafe(map.land) } },
+    layers: [
+      { id: "bg", type: "background", paint: { "background-color": "#cfe6f3" } },
+      { id: "land", type: "fill", source: "land", paint: { "fill-color": "#f1efe4" } },
+      { id: "borders", type: "line", source: "land", paint: { "line-color": "#c9c3ad", "line-width": 0.8 } },
+    ],
+  };
+}
 
 async function initMap() {
   const topo = await fetch("vendor/countries-50m.json").then((r) => r.json());
-  map.land = topojson.feature(topo, topo.objects.countries);
-  buildMap();
-  let rt;
-  window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(buildMap, 200); });
-}
-
-function buildMap() {
-  const el = $("#map");
-  el.innerHTML = "";
-  const W = el.clientWidth, H = el.clientHeight;
-  map.projection = d3.geoNaturalEarth1().fitExtent([[6, 6], [W - 6, H - 6]], { type: "Sphere" });
-  map.path = d3.geoPath(map.projection);
-  map.svg = d3.select(el).append("svg").attr("viewBox", `0 0 ${W} ${H}`);
-  map.root = map.svg.append("g");
-  map.root.append("path").attr("class", "sphere").attr("d", map.path({ type: "Sphere" }));
-  map.root.append("path").attr("class", "graticule").attr("d", map.path(d3.geoGraticule10()));
-  map.root.append("g").selectAll("path").data(map.land.features).join("path").attr("class", "land").attr("d", map.path);
-  for (const id of ["players", "crowd", "line", "answer", "mine"]) map.root.append("g").attr("id", "layer-" + id);
-
-  map.k = 1;
-  map.zoom = d3.zoom().scaleExtent([1, 80]).translateExtent([[0, 0], [W, H]]).clickDistance(6)
-    .on("zoom", (e) => { map.root.attr("transform", e.transform); map.k = e.transform.k; rescaleMarkers(); });
-  map.svg.call(map.zoom).on("dblclick.zoom", null);
-  map.svg.on("click", onMapClick);
-  drawAll();
+  map.land = topojson.feature(topo, topo.objects.countries);   // also used for the share card
+  const gl = map.gl = new maplibregl.Map({
+    container: "map", style: STYLE_URL, center: [10, 22], zoom: 1, minZoom: 0, maxZoom: 17,
+    dragRotate: false, pitchWithRotate: false, attributionControl: { compact: true },
+  });
+  gl.touchZoomRotate.disableRotation();
+  gl.keyboard.disableRotation();
+  const useFallback = () => {
+    if (map.fallback) return;
+    map.fallback = true;
+    gl.setStyle(fallbackStyle());
+  };
+  const timer = setTimeout(() => { if (!map.tilesOk) useFallback(); }, 9000);
+  gl.on("error", (e) => {
+    // Style or tiles failed. A few tile errors before any tile has loaded = switch to the simple map.
+    if (!map.ready || (!map.tilesOk && ++map.tileErrors >= 3)) useFallback();
+  });
+  gl.on("data", (e) => { if (e.dataType === "source" && e.tile && !map.fallback) { map.tilesOk = true; clearTimeout(timer); } });
+  gl.on("style.load", () => { addOverlays(); if (map.ready) drawAll(); });
+  gl.on("click", (e) => onMapClick([Math.round(e.lngLat.lat * 1e4) / 1e4, Math.round(e.lngLat.wrap().lng * 1e4) / 1e4]));
+  await new Promise((res) => gl.once("style.load", res));
+  map.ready = true;
   if (view() !== "guess" && !making) fitToResult(false);
   else resetZoom(false);
 }
 
-// On tall/narrow screens the flat world is a thin strip; zoom in so it fills the box.
-function resetZoom(animate) {
-  const W = +map.svg.attr("viewBox").split(" ")[2], H = +map.svg.attr("viewBox").split(" ")[3];
-  const [[, y0], [, y1]] = map.path.bounds({ type: "Sphere" });
-  const k = Math.min(2.6, H / (y1 - y0));
-  let t = d3.zoomIdentity;
-  if (k > 1.15) {
-    const [cx, cy] = map.projection([10, 15]);
-    t = d3.zoomIdentity.translate(W / 2, H / 2).scale(k).translate(-cx, -cy);
+// Our own layers on top of whichever base map is showing.
+function addOverlays() {
+  const gl = map.gl;
+  if (!map.fallback) {
+    // Show place names in English where the map has them.
+    for (const l of gl.getStyle().layers) {
+      if (l.type === "symbol" && l.layout && l.layout["text-field"]) {
+        gl.setLayoutProperty(l.id, "text-field", ["coalesce", ["get", "name:en"], ["get", "name_en"], ["get", "name"]]);
+      }
+    }
   }
-  (animate ? map.svg.transition().duration(700) : map.svg).call(map.zoom.transform, t);
+  for (const id of ["players", "crowd", "lines"]) if (!gl.getSource(id)) gl.addSource(id, { type: "geojson", data: fc([]) });
+  if (!gl.getLayer("players")) gl.addLayer({ id: "players", type: "circle", source: "players", paint: {
+    "circle-radius": ["interpolate", ["linear"], ["get", "n"], 1, 3.5, 50, 9, 300, 14],
+    "circle-color": "#19a463", "circle-opacity": 0.55, "circle-stroke-color": "#fff", "circle-stroke-width": 1 } });
+  if (!gl.getLayer("crowd")) gl.addLayer({ id: "crowd", type: "circle", source: "crowd", paint: {
+    "circle-radius": ["interpolate", ["linear"], ["zoom"], 0, 2.6, 6, 4.5], "circle-color": "#2f7cf6", "circle-opacity": 0.65,
+    "circle-stroke-color": "#fff", "circle-stroke-width": 0.8 } });
+  if (!gl.getLayer("lines")) gl.addLayer({ id: "lines", type: "line", source: "lines",
+    layout: { "line-cap": "round" }, paint: { "line-color": "#17202e", "line-width": 2.5, "line-dasharray": [2, 1.6] } });
+}
+const setData = (id, data) => { const s = map.gl?.getSource(id); if (s) { s.setData(data); nudgeSoon(); } };
+// After new data or a big camera jump, MapLibre can skip drawing one copy of the world
+// until the camera moves again. A tiny invisible move once things settle fixes it.
+function nudgeSoon() {
+  clearTimeout(map.nudgeTimer);
+  map.nudgeTimer = setTimeout(() => {
+    if (!map.gl || map.gl.isMoving()) return nudgeSoon();
+    map.gl.panBy([1, 0], { duration: 0 });
+    map.gl.panBy([-1, 0], { duration: 0 });
+  }, 400);
 }
 
-function eventLatLon(e) {
-  const [x, y] = d3.pointer(e, map.root.node());
-  const ll = map.projection.invert([x, y]);
-  if (!ll || !isFinite(ll[0]) || !isFinite(ll[1])) return null;
-  const back = map.projection(ll);
-  if (!back || Math.hypot(back[0] - x, back[1] - y) > 1) return null; // clicked outside the globe
-  return [Math.round(ll[1] * 1e4) / 1e4, Math.round(ll[0] * 1e4) / 1e4];
+// Curved, shortest-path line between two points, with longitudes kept continuous so it
+// doesn't jump across the whole map when it crosses the date line.
+function arc(from, to) {
+  const interp = d3.geoInterpolate([from[1], from[0]], [to[1], to[0]]);
+  const pts = [];
+  let prev = null;
+  for (let i = 0; i <= 64; i++) {
+    let [lon, lat] = interp(i / 64);
+    if (prev != null) { while (lon - prev > 180) lon -= 360; while (lon - prev < -180) lon += 360; }
+    pts.push([lon, lat]); prev = lon;
+  }
+  return pts;
 }
 
-function onMapClick(e) {
-  if (making) return makerClick(e);
+// On narrow screens the whole world is a thin strip, so start zoomed on the middle of it.
+function resetZoom(animate) {
+  if (!map.ready) return;
+  const opts = { duration: animate ? 700 : 0 };
+  if (isPhone()) map.gl.easeTo({ center: [10, 22], zoom: 0.9, ...opts });
+  else {
+    const cam = map.gl.cameraForBounds([[-165, -56], [180, 74]], { padding: { top: 70, bottom: 90, left: 20, right: 20 } });
+    map.gl.easeTo({ center: cam.center, zoom: cam.zoom, padding: { top: 0, bottom: 0, left: 0, right: 0 }, ...opts });
+  }
+}
+
+function onMapClick(ll) {
+  if (making) return makerClick(ll);
   if (view() !== "guess") return;
-  const ll = eventLatLon(e);
-  if (!ll) return;
   const r = cur();
   if (!r.pin && state.round === 0) track("First pin", { clues: r.clues, day: DAY, custom: !!CUSTOM });
   r.pin = ll;
@@ -222,22 +286,19 @@ function onMapClick(e) {
   updateLock();
 }
 
-const pt = (lat, lon) => map.projection([lon, lat]);
-function rescaleMarkers() {
-  const s = 1 / map.k;
-  map.root.selectAll(".marker").attr("transform", function () {
-    return `translate(${this.dataset.x},${this.dataset.y}) scale(${s})`;
-  });
+// A few HTML markers (your pins, the answer stars) sit above the map layers.
+const PIN_SVG = `<svg viewBox="-10 -26 20 27" width="30" height="40"><path d="M0,0 C-2,-6 -8,-9 -8,-15 A8,8 0 1 1 8,-15 C8,-9 2,-6 0,0Z" fill="#e5484d" stroke="#fff" stroke-width="1.5"/><circle cy="-15" r="3" fill="#fff"/></svg>`;
+function pinEl() { const d = document.createElement("div"); d.className = "mk mk-pin"; d.innerHTML = PIN_SVG; return d; }
+function starEl(n) {
+  const d = document.createElement("div"); d.className = "mk mk-star";
+  d.innerHTML = `<svg viewBox="-14 -14 28 28" width="38" height="38"><circle r="13" fill="#f5b301" fill-opacity=".28"/><path d="${d3.symbol(d3.symbolStar, n ? 300 : 240)()}" fill="#f5b301" stroke="#5b4300" stroke-width="1.2"/>${n ? `<text text-anchor="middle" dy="0.36em" class="answer-num">${n}</text>` : ""}</svg>`;
+  return d;
 }
-function marker(layer, data, draw) {
-  const g = map.root.select("#layer-" + layer);
-  const sel = g.selectAll("g.marker").data(data).join("g").attr("class", "marker")
-    .each(function (d) { const [x, y] = pt(d[0], d[1]); this.dataset.x = x; this.dataset.y = y; });
-  sel.selectAll("*").remove();
-  draw(sel);
-  rescaleMarkers();
+function setMarkers(kind, list, make, anchor) {
+  if (!map.ready) return;
+  map.markers[kind].forEach((m) => m.remove());
+  map.markers[kind] = list.map((p) => new maplibregl.Marker({ element: make(p[2]), anchor }).setLngLat([p[1], p[0]]).addTo(map.gl));
 }
-const PIN_PATH = "M0,0 C-2,-6 -8,-9 -8,-15 A8,8 0 1 1 8,-15 C8,-9 2,-6 0,0Z";
 
 // Which rounds have their answer on the map right now.
 function revealed() {
@@ -249,40 +310,31 @@ function revealed() {
 
 function drawPlayers() {
   const where = view() === "guess" && !making ? (lastStats?.where || []) : [];
-  marker("players", where, (sel) => sel.append("circle").attr("class", "player-dot")
-    .attr("r", (d) => 2.2 + Math.min(9, Math.sqrt(d[2]) * 1.1)));
+  setData("players", fc(where.map(([lat, lon, n]) => ({ type: "Feature", properties: { n }, geometry: { type: "Point", coordinates: [lon, lat] } }))));
 }
 function drawCrowd() {
   const pins = view() === "final" && !hideAnswers() && !making ? crowdPins.flat() : [];
-  marker("crowd", pins, (sel) => sel.append("circle").attr("class", "crowd-dot").attr("r", 2.4));
+  setData("crowd", fc(pins.map(([lat, lon]) => ({ type: "Feature", properties: {}, geometry: { type: "Point", coordinates: [lon, lat] } }))));
 }
 function drawMine() {
   let pins = view() === "guess"
     ? (cur().pin ? [cur().pin] : [])
     : revealed().map((i) => [state.rounds[i].done.glat, state.rounds[i].done.glon]);
   if (making) pins = [];
-  marker("mine", pins, (sel) => {
-    sel.append("path").attr("class", "my-pin").attr("stroke-width", 1.5).attr("d", PIN_PATH);
-    sel.append("circle").attr("cy", -15).attr("r", 3).attr("fill", "#fff");
-  });
+  setMarkers("mine", pins, pinEl, "bottom");
 }
 function drawAnswer() {
   if (making) {
-    map.root.select("#layer-line").selectAll("path").remove();
-    marker("answer", makerPin ? [makerPin] : [], (sel) => sel.append("path").attr("class", "answer-pin").attr("stroke-width", 1.2).attr("d", d3.symbol(d3.symbolStar, 300)()));
+    setData("lines", fc([]));
+    setMarkers("answer", makerPin ? [[makerPin[0], makerPin[1], 0]] : [], starEl, "center");
     return;
   }
   const idx = hideAnswers() ? [] : revealed(), numbered = view() === "final" && N > 1;
-  map.root.select("#layer-line").selectAll("path").data(idx).join("path").attr("class", "guess-line")
-    .attr("d", (i) => map.path({ type: "LineString", coordinates: [[state.rounds[i].done.glon, state.rounds[i].done.glat], [PUZ[i].lon, PUZ[i].lat]] }));
-  marker("answer", idx.map((i) => [PUZ[i].lat, PUZ[i].lon, i + 1]), (sel) => {
-    sel.append("circle").attr("r", numbered ? 13 : 18).attr("fill", "var(--answer)").attr("fill-opacity", .25);
-    sel.append("path").attr("class", "answer-pin").attr("stroke-width", 1.2)
-      .attr("d", d3.symbol(d3.symbolStar, numbered ? 330 : 260)());
-    if (numbered) sel.append("text").attr("class", "answer-num").attr("text-anchor", "middle").attr("dy", "0.36em").text((d) => d[2]);
-  });
+  setData("lines", fc(idx.map((i) => ({ type: "Feature", properties: {}, geometry: { type: "LineString",
+    coordinates: arc([state.rounds[i].done.glat, state.rounds[i].done.glon], [PUZ[i].lat, PUZ[i].lon]) } }))));
+  setMarkers("answer", idx.map((i) => [PUZ[i].lat, PUZ[i].lon, numbered ? i + 1 : 0]), starEl, "center");
 }
-function drawAll() { drawPlayers(); drawCrowd(); drawAnswer(); drawMine(); renderLegend(); }
+function drawAll() { if (!map.ready || !map.gl.getSource("lines")) { renderLegend(); return; } drawPlayers(); drawCrowd(); drawAnswer(); drawMine(); renderLegend(); }
 
 function renderLegend() {
   const v = view();
@@ -294,25 +346,38 @@ function renderLegend() {
 
 function fitToResult(animate = true) {
   const idx = revealed();
-  if (!idx.length) return;
-  const W = +map.svg.attr("viewBox").split(" ")[2], H = +map.svg.attr("viewBox").split(" ")[3];
+  if (!idx.length || !map.ready) return;
   // In streamer mode with answers hidden, only frame your own pins so the view gives nothing away.
-  const shape = hideAnswers()
-    ? { type: "MultiPoint", coordinates: idx.map((i) => [state.rounds[i].done.glon, state.rounds[i].done.glat]) }
-    : { type: "MultiLineString", coordinates: idx.map((i) => [[state.rounds[i].done.glon, state.rounds[i].done.glat], [PUZ[i].lon, PUZ[i].lat]]) };
-  const [[x0, y0], [x1, y1]] = map.path.bounds(shape);
+  const coords = hideAnswers()
+    ? idx.map((i) => [state.rounds[i].done.glon, state.rounds[i].done.glat])
+    : idx.flatMap((i) => arc([state.rounds[i].done.glat, state.rounds[i].done.glon], [PUZ[i].lat, PUZ[i].lon]));
+  const b = smartBounds(coords);
   // Only the part of the screen above the result sheet (and below the top bar) is visible.
+  const el = $("#map"), W = el.clientWidth, H = el.clientHeight;
   const sheet = $("#result");
   const sheetH = sheet && !sheet.hidden ? sheet.offsetHeight + 20 : 0;
-  const top = 70, visH = Math.max(140, H - sheetH - top);
-  const pad = hideAnswers() ? 600 : 80;
-  const k = Math.max(1, Math.min(5, 0.9 / Math.max((x1 - x0 + pad) / W, (y1 - y0 + pad) / visH)));
-  const t = d3.zoomIdentity.translate(W / 2, top + visH / 2).scale(k).translate(-(x0 + x1) / 2, -(y0 + y1) / 2);
-  (animate ? map.svg.transition().duration(1200) : map.svg).call(map.zoom.transform, t);
+  const top = 76, bottom = Math.min(sheetH + 24, H - top - 120), side = Math.min(60, W / 6);
+  // Work out the camera with padding, then move there without padding: a padded camera can
+  // leave parts of the world undrawn when zoomed far out.
+  const cam = map.gl.cameraForBounds(b, { padding: { top, bottom, left: side, right: side }, maxZoom: hideAnswers() ? 3 : 9 });
+  if (!cam) return;
+  map.gl.easeTo({ center: cam.center, zoom: cam.zoom, padding: { top: 0, bottom: 0, left: 0, right: 0 }, duration: animate ? 1200 : 0 });
+  nudgeSoon();
 }
 
-$("#zoom-in").addEventListener("click", () => map.svg.transition().duration(250).call(map.zoom.scaleBy, 2));
-$("#zoom-out").addEventListener("click", () => map.svg.transition().duration(250).call(map.zoom.scaleBy, 0.5));
+// The tightest box around some points, going across the date line if that is shorter.
+function smartBounds(coords) {
+  const lons = [...new Set(coords.map((c) => ((c[0] + 540) % 360) - 180))].sort((a, b) => a - b);
+  let gap = lons[0] + 360 - lons[lons.length - 1], west = lons[0], east = lons[lons.length - 1];
+  for (let i = 1; i < lons.length; i++) {
+    if (lons[i] - lons[i - 1] > gap) { gap = lons[i] - lons[i - 1]; west = lons[i]; east = lons[i - 1] + 360; }
+  }
+  const lats = coords.map((c) => c[1]);
+  return new maplibregl.LngLatBounds([west, Math.max(-80, Math.min(...lats))], [east, Math.min(82, Math.max(...lats))]);
+}
+
+$("#zoom-in").addEventListener("click", () => map.gl?.zoomIn());
+$("#zoom-out").addEventListener("click", () => map.gl?.zoomOut());
 
 /* ---------- guess ---------- */
 function updateLock() {
@@ -523,19 +588,21 @@ function render(animate) {
   $("#map-hint").hidden = v !== "guess";
   if (v === "guess") { sheet.hidden = true; sheet.innerHTML = ""; }
   else {
-    sheet.innerHTML = v === "final" ? finalHTML() : roundHTML();
+    // The scrolling happens in an inner box: a scrolling box directly over the map can stop
+    // part of the map from drawing in some browsers.
+    sheet.innerHTML = `<div class="sheet-body">${v === "final" ? finalHTML() : roundHTML()}</div>`;
     sheet.classList.toggle("hide-answers", hideAnswers());
     sheet.hidden = false;
-    sheet.scrollTop = 0;
+    sheet.firstElementChild.scrollTop = 0;
     if (animate) { sheet.style.animation = "none"; void sheet.offsetWidth; sheet.style.animation = ""; }
     bindSheet();
     tick();
   }
-  if (map.svg) drawAll();
+  drawAll();
   if (v !== "guess" && matchMedia("(max-width: 640px)").matches) setClues(false);
   if (v === "guess") setClues(true);
   if (v !== "guess") requestAnimationFrame(() => {
-    if (map.svg) fitToResult(animate);
+    fitToResult(animate);
     const bar = $("#r-bar");
     if (bar) requestAnimationFrame(() => { bar.style.width = bar.dataset.w + "%"; });
   });
@@ -650,7 +717,7 @@ async function refreshStats(bust) {
   $("#preview-banner").hidden = !preview;
   lastStats = s;
   $("#live-count").textContent = fmt(s.players);
-  if (map.svg) drawPlayers();
+  drawPlayers();
   renderBoards();
 }
 
@@ -832,9 +899,7 @@ $("#mk-pick").addEventListener("click", () => {
   drawAll();
   resetZoom(true);
 });
-function makerClick(e) {
-  const ll = eventLatLon(e);
-  if (!ll) return;
+function makerClick(ll) {
   makerPin = ll;
   drawAnswer();
   $("#mk-done").disabled = false;

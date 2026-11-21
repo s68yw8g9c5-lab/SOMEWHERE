@@ -240,3 +240,20 @@ a.ghost { text-decoration: none; display: inline-flex; align-items: center; colo
   .day { max-width: 72px; }
   .share-row .ghost, .share-row .guess.small { padding: 9px 13px; font-size: 14px; }
 }
+
+/* Street map (MapLibre) */
+#map .maplibregl-canvas-container.maplibregl-interactive { cursor: crosshair; }
+#map .maplibregl-canvas-container.maplibregl-interactive:active { cursor: grabbing; }
+.mk { pointer-events: none; line-height: 0; }
+.mk svg { overflow: visible; filter: drop-shadow(0 2px 3px rgba(23,32,46,.3)); }
+.mk-star .answer-num { font-size: 11px; }
+.maplibregl-ctrl-bottom-right { bottom: calc(env(safe-area-inset-bottom, 0px) + 0px); }
+.maplibregl-ctrl-attrib { font-size: 10.5px; }
+@media (max-width: 640px) {
+  .maplibregl-ctrl-bottom-right { right: auto; left: 4px; bottom: calc(env(safe-area-inset-bottom, 0px) + 84px); }
+}
+
+/* Result sheet scrolls inside, not as a whole */
+.sheet { overflow: visible; max-height: none; }
+.sheet-body { max-height: calc(56vh - 36px); overflow: auto; overscroll-behavior: contain; }
+@media (max-width: 640px) { .sheet-body { max-height: calc(62vh - 32px); } }

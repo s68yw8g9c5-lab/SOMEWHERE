@@ -9,6 +9,8 @@ guessed, and how you rank against the world and your friends.
 
 - No sign-up. Players get a random name they can change.
 - Live global leaderboard, a "Country cup" and a live feed.
+- Detailed street map you can zoom down to street level (free OpenFreeMap tiles via MapLibre,
+  no account or API key). If those tiles can't load, it switches to a simple built-in world map.
 - Live map of where people are playing from (city level, from Netlify's geolocation; no GPS prompt).
 - Everyone's guesses appear only after you lock in, so no spoilers.
 - Spoiler-free sharing: emoji squares per round, plus a "Save image" story card (score and
@@ -30,7 +32,7 @@ public/              the website (plain HTML/CSS/JS, no build step)
   index.html, style.css, app.js
   game.js            rules shared by the site and the server (day number, scoring)
   puzzles.js         generated from tools/puzzles.json (lightly scrambled)
-  vendor/            d3, topojson and the world map, self-hosted
+  vendor/            MapLibre, d3, topojson and the world map, self-hosted
 netlify/functions/   the backend (Netlify Functions)
   play.mjs           POST /api/play: save a guess, return score and "beat X%"
   stats.mjs          GET /api/stats: live counts, leaderboard, countries, player map
