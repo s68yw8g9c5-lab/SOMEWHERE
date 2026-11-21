@@ -166,6 +166,12 @@ $("#next-clue").addEventListener("click", () => {
    (blocked network, outage), it switches to a simple built-in world map. */
 const STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
 const STREET_ZOOM = 5.5;   // street-map detail appears from this zoom level in
+// Within 25 km already scores full points, so there's no need for house-level zoom. The street
+// map's data stops at zoom 14; going past that makes the map re-cut the same data at every step.
+const MAX_ZOOM = 15;
+// Layers the game doesn't need. In big cities these are the heaviest part of the map
+// (millions of building shapes, shop icons, arrows), and they made zooming into cities lag.
+const SKIP_LAYERS = /^(building|poi_|road_one_way|highway-name-path|highway-name-minor|road_area_pattern)|hatching/;
 const map = { gl: null, ready: false, land: null, fallback: false, tilesOk: false, tileErrors: 0, markers: { mine: [], answer: [] } };
 window.__swMap = map; // handy for debugging in the browser console
 const fc = (features) => ({ type: "FeatureCollection", features });
@@ -202,7 +208,7 @@ async function initMap() {
   const topo = await fetch("vendor/countries-50m.json").then((r) => r.json());
   map.land = topojson.feature(topo, topo.objects.countries);   // also used for the share card
   const gl = map.gl = new maplibregl.Map({
-    container: "map", style: STYLE_URL, center: [10, 22], zoom: 1, minZoom: 0, maxZoom: 17,
+    container: "map", style: STYLE_URL, center: [10, 22], zoom: 1, minZoom: 0, maxZoom: MAX_ZOOM, maxTileCacheSize: 600,
     dragRotate: false, pitchWithRotate: false, maxPitch: 0, fadeDuration: 0, pixelRatio: Math.min(devicePixelRatio || 1, 2), attributionControl: { compact: true },
   });
   gl.touchZoomRotate.disableRotation();
@@ -234,7 +240,7 @@ function addOverlays() {
   if (!map.fallback && !gl.getLayer("lo-land")) {
     // 3D buildings look nice but are slow on phones, and the game never tilts the map.
     // The shaded-relief picture layer is also heavy, so both go.
-    for (const l of gl.getStyle().layers) if (l.type === "fill-extrusion" || l.type === "raster" || l.type === "hillshade") gl.removeLayer(l.id);
+    for (const l of gl.getStyle().layers) if (l.type === "fill-extrusion" || l.type === "raster" || l.type === "hillshade" || SKIP_LAYERS.test(l.id)) gl.removeLayer(l.id);
     // Zoomed out, the street map's tiles are huge (up to 1.5 MB each), which makes zooming laggy.
     // So below STREET_ZOOM we draw our own light world map, and street detail starts after that.
     for (const l of gl.getStyle().layers) {
