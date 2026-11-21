@@ -325,7 +325,7 @@ function revealed() {
 }
 
 function drawPlayers() {
-  const where = view() === "guess" && !making ? (lastStats?.where || []) : [];
+  const where = [];   // the live "where people play" dots are turned off
   setData("players", fc(where.map(([lat, lon, n]) => ({ type: "Feature", properties: { n }, geometry: { type: "Point", coordinates: [lon, lat] } }))));
 }
 function drawCrowd() {
@@ -354,8 +354,9 @@ function drawAll() { if (!map.ready || !map.gl.getSource("lines")) { renderLegen
 
 function renderLegend() {
   const v = view();
+  $("#legend").hidden = v === "guess" || making;
   $("#legend").innerHTML = v === "guess" || making
-    ? `<span><i style="background:var(--players)"></i>Where people are playing today</span>`
+    ? ""
     : `<span><i style="background:var(--pin)"></i>You</span><span><i style="background:var(--answer)"></i>Answer</span>`
       + (v === "final" && !CUSTOM ? `<span><i style="background:var(--crowd)"></i>Everyone's guesses</span>` : "");
 }
