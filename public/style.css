@@ -388,7 +388,7 @@ body { font-size: 15px; }
 .rounds .sq-0 { background: #4f7d5c; } .rounds .sq-1 { background: #b89a2e; } .rounds .sq-2 { background: #c26a2b; } .rounds .sq-3 { background: #d0402b; }
 
 /* First look: new players see the riddle, the map and the button. The rest appears after the first guess. */
-.first-look .clue-head, .first-look #next-clue, .first-look #boards-btn, .first-look .dateline .live,
+.first-look .clue-head, .first-look #boards-btn, .first-look .dateline .live,
 .first-look .map-tools, .first-look .legend, .first-look #clue-toggle { display: none !important; }
 .first-look .lock-bar .guess:disabled { color: var(--ink); border: 1px solid var(--ink); font-weight: 600; animation: nudge 2.4s ease-in-out 1.2s infinite; }
 @keyframes nudge { 0%, 100% { transform: none; } 50% { transform: translateY(-3px); } }
@@ -601,3 +601,16 @@ body { font-family: var(--font-body); color: var(--ink); background: var(--sea);
 /* Title hidden until the guess is locked in */
 .theme-line.secret .src { font-size: 17px; font-weight: 500; opacity: .75; }
 @media (max-width: 640px) { .theme-line.secret .src { font-size: 15.5px; } }
+
+/* Hint button: easy to spot, says what it is and what it costs */
+#next-clue { display: inline-flex; align-items: center; gap: 8px; background: #f8e7bf; border: 2px solid #d9a94a; box-shadow: 0 3px 0 #c9983e; color: var(--ink); font: 700 14.5px var(--font-body); padding: 9px 12px 9px 14px; }
+#next-clue[hidden] { display: none; }
+#next-clue:hover:not(:disabled) { background: #f4dda6; }
+#next-clue:active { transform: translateY(2px); box-shadow: 0 1px 0 #c9983e; }
+#next-clue::before { margin-right: 0; }
+#next-clue .hint-label b { font-weight: 800; }
+#next-clue .hint-cost { background: #fffdf8; color: #b4561f; border-radius: 999px; padding: 2px 9px; font: 800 12.5px var(--font-body); }
+#next-clue.nudge { animation: hintwiggle 2.6s ease-in-out infinite; }
+@keyframes hintwiggle { 0%, 70%, 100% { transform: none; } 76% { transform: rotate(-2deg); } 82% { transform: rotate(2deg); } 88% { transform: rotate(-1deg); } }
+@media (max-width: 640px) { #next-clue { font-size: 13.5px; padding: 8px 10px 8px 12px; gap: 6px; } #next-clue .hint-cost { font-size: 12px; padding: 2px 7px; } }
+@media (prefers-reduced-motion: reduce) { #next-clue.nudge { animation: none; } }

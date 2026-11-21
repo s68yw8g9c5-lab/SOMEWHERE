@@ -134,10 +134,10 @@ function renderClues(animateLast = false) {
     if (fp && fp.from) {
       const m = fp.from.match(/^(\S+)\s+(.*)$/), kind = m && m[1] === "📖" ? "Book" : "Film";
       th.dataset.level = fp.level || "";
-      // The title stays a secret until the guess is locked in, then it's part of the reveal.
-      const shown = !!cur().done;
+      // The title stays a secret until the first spyglass hint (or the guess) reveals it.
+      const rc = cur(), shown = !!rc.done || rc.clues >= 2;
       th.classList.toggle("secret", !shown);
-      th.innerHTML = `<span class="kind kind-${kind.toLowerCase()}">${kind}</span><span class="src">${shown ? esc(m ? m[2] : fp.from) : `Title revealed after your guess`}</span><span class="clock" id="clock"></span>`;
+      th.innerHTML = `<span class="kind kind-${kind.toLowerCase()}">${kind}</span><span class="src">${shown ? esc(m ? m[2] : fp.from) : `Title hidden. The spyglass reveals it.`}</span><span class="clock" id="clock"></span>`;
       drawClock();
     } else th.textContent = THEME.name;
     th.title = `Today's theme: ${THEME.about}`;
@@ -177,9 +177,19 @@ function renderClues(animateLast = false) {
   $("#clue-count").textContent = r.done ? `${n} of ${maxC} clues used` : `Clue ${n} of ${maxC}`;
   $("#mult").textContent = multTxt(n);
   $("#mult").title = `Clue multiplier: your points this round are ${multTxt(n)}`;
-  $("#next-clue").hidden = !!r.done || n >= maxC;
-  if (n < maxC) $("#next-cost").textContent = `· round worth ${fmt(Math.round(LEVELS[lv].max * CLUE_MULT[n]))} after`;
+  const hb = $("#next-clue");
+  hb.hidden = !!r.done || n >= maxC;
+  if (n < maxC) {
+    const cost = Math.round(LEVELS[lv].max * CLUE_MULT[n - 1]) - Math.round(LEVELS[lv].max * CLUE_MULT[n]);
+    $("#next-cost").textContent = `-${fmt(cost)} pts`;
+    hb.title = `Shows the next clue. This round is then worth up to ${fmt(Math.round(LEVELS[lv].max * CLUE_MULT[n]))} points.`;
+  }
+  // A gentle wiggle if a player has been stuck on the same clue for a while.
+  clearTimeout(hintNudge);
+  hb.classList.remove("nudge");
+  if (!hb.hidden) hintNudge = setTimeout(() => hb.classList.add("nudge"), 25000);
 }
+let hintNudge;
 
 $("#next-clue").addEventListener("click", () => {
   const r = cur();
