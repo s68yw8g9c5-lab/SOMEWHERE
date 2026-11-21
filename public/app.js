@@ -661,8 +661,11 @@ function revealSpoilers() {
   track("Reveal answers (streamer)");
 }
 
+// First look: a brand-new player sees only the riddle, the map and one button until their first guess.
+const isNewcomer = () => !CUSTOM && state.round === 0 && !cur().done && !Object.keys(store.get("sw:history", {})).length;
 function render(animate) {
   const v = view(), sheet = $("#result");
+  document.body.classList.toggle("first-look", isNewcomer());
   renderClues();
   updateLock();
   $("#map-hint").hidden = v !== "guess";
@@ -1095,7 +1098,8 @@ setInterval(tick, 1000);
 const help = $("#help");
 $("#help-btn").addEventListener("click", () => help.showModal());
 $("#help-close").addEventListener("click", () => help.close());
-if (!store.get("sw:seenHelp2", false) && !CUSTOM) { store.set("sw:seenHelp2", true); try { help.showModal(); } catch {} }
+// No how-to popup on the first visit: the first screen teaches itself (see "first look").
+store.set("sw:seenHelp2", true);
 if (CUSTOM && view() === "guess" && !state.rounds[0].pin) toast(`${CUSTOM.by} wrote you a riddle. Find the place!`);
 
 /* ---------- start ---------- */

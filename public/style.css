@@ -387,3 +387,9 @@ body { font-size: 15px; }
 /* Round result marks in the final list (the emoji squares stay in the copied share text only) */
 .rounds .sq { width: 10px; height: 10px; border-radius: 50%; flex: none; background: #c9c6bd; }
 .rounds .sq-0 { background: #4f7d5c; } .rounds .sq-1 { background: #b89a2e; } .rounds .sq-2 { background: #c26a2b; } .rounds .sq-3 { background: #d0402b; }
+
+/* First look: new players see the riddle, the map and the button. The rest appears after the first guess. */
+.first-look .clue-head, .first-look #next-clue, .first-look #boards-btn, .first-look .dateline .live,
+.first-look .map-tools, .first-look .legend, .first-look #clue-toggle { display: none !important; }
+.first-look .lock-bar .guess:disabled { color: var(--ink); border: 1px solid var(--ink); font-weight: 600; animation: nudge 2.4s ease-in-out 1.2s infinite; }
+@keyframes nudge { 0%, 100% { transform: none; } 50% { transform: translateY(-3px); } }
