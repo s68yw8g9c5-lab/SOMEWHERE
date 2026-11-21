@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Somewhere: 5 riddles about places from famous books and movies</title>
   <meta name="description" content="Every day, 5 riddles point to 5 spots on Earth. Read the clues, drop your pins, and see how you rank against the whole planet and your friends. Free, no sign-up.">
-  <meta name="theme-color" content="#f7f6f2">
+  <meta name="theme-color" content="#a9cbc0">
   <meta property="og:title" content="Somewhere: 5 riddles. 5 places. The whole world guessing.">
   <meta property="og:description" content="Read the riddles, drop your pins, beat your friends. New places every day at midnight UTC.">
   <meta property="og:image" content="https://somewheredaily.com/og.png">
@@ -17,7 +17,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,600&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vendor/maplibre-gl.css">
   <link rel="stylesheet" href="style.css">
   <!-- Umami analytics (no cookies), same setup as Driftline. Somewhere's own website on cloud.umami.is. -->
@@ -34,7 +34,7 @@
       <span class="dateline"><span class="day" id="day-label">No. 1</span><span class="live" title="People who played today"> · <span id="live-count">0</span> solvers today</span></span>
     </div>
     <div class="top-right">
-      <button class="chip btn" id="boards-btn" data-umami-event="Open leaderboard"><svg class="ico" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M2 14V9h3v5M6.5 14V4h3v10M11 14V7h3v7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="hide-sm">Leaderboard</span></button>
+      <button class="chip btn" id="boards-btn" data-umami-event="Open leaderboard"><svg class="ico" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M2 14V9h3v5M6.5 14V4h3v10M11 14V7h3v7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="hide-sm">Top scouts</span></button>
       <button class="chip btn round" id="help-btn" aria-label="How to play" data-umami-event="How to play">?</button>
     </div>
   </header>
@@ -52,7 +52,7 @@
       <button class="collapse" id="clue-toggle" aria-label="Hide clues" aria-expanded="true"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
     </div>
     <ol id="clue-list"></ol>
-    <button class="ghost" id="next-clue">Reveal another clue <span class="muted" id="next-cost"></span></button>
+    <button class="ghost" id="next-clue">Use the spyglass <span class="muted" id="next-cost"></span></button>
   </section>
 
   <div class="map-tools">
@@ -60,10 +60,10 @@
     <button class="tool" id="zoom-out" aria-label="Zoom out">−</button>
   </div>
   <div class="legend" id="legend"></div>
-  <div class="map-hint" id="map-hint">Tap the map to drop your pin</div>
+  <div class="map-hint" id="map-hint">Tap the map to mark the spot</div>
 
   <div class="lock-bar" id="lock-bar">
-    <button class="guess" id="lock-btn" disabled>Tap the map to drop your pin</button>
+    <button class="guess" id="lock-btn" disabled>Tap the map to mark the spot</button>
   </div>
 
   <section class="result sheet" id="result" hidden aria-live="polite"></section>
@@ -91,8 +91,8 @@
     <h3>How to play</h3>
     <ol>
       <li>Every day, the whole world gets the <b>same 5 riddles</b>. Each one points to a real place from a <b>famous book or movie</b>.</li>
-      <li>Read the clue. Stuck? Reveal up to 3 clues, but each one lowers your points for that round.</li>
-      <li>Tap the map to drop your pin, then hit <b>Lock in my answer</b>. One shot per place.</li>
+      <li>Read the clue. Stuck? Use the spyglass for up to 3 clues, but each one lowers your points for that round.</li>
+      <li>Tap the map to mark the spot, then hit <b>Mark the spot</b>. One shot per place.</li>
       <li>Each day climbs from <b>easy</b> to <b>hard</b>: 1 easy riddle (up to 600 points), 2 medium (900 each) and 2 hard (1,300 each). 5,000 a day in all.</li>
       <li>The closer you are, the more points. Be quick too: answer within 20 seconds for the full speed bonus.</li>
     </ol>

@@ -4,8 +4,8 @@
   "description": "5 riddles, 5 places, the whole world guessing.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f7f6f2",
-  "theme_color": "#121212",
+  "background_color": "#f6eed9",
+  "theme_color": "#2f4a35",
   "icons": [
     { "src": "icon-180.png", "sizes": "180x180", "type": "image/png" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
