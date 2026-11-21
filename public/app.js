@@ -134,7 +134,10 @@ function renderClues(animateLast = false) {
     if (fp && fp.from) {
       const m = fp.from.match(/^(\S+)\s+(.*)$/), kind = m && m[1] === "📖" ? "Book" : "Film";
       th.dataset.level = fp.level || "";
-      th.innerHTML = `<span class="kind kind-${kind.toLowerCase()}">${kind}</span><span class="src">${esc(m ? m[2] : fp.from)}</span><span class="clock" id="clock"></span>`;
+      // The title stays a secret until the guess is locked in, then it's part of the reveal.
+      const shown = !!cur().done;
+      th.classList.toggle("secret", !shown);
+      th.innerHTML = `<span class="kind kind-${kind.toLowerCase()}">${kind}</span><span class="src">${shown ? esc(m ? m[2] : fp.from) : `Title revealed after your guess`}</span><span class="clock" id="clock"></span>`;
       drawClock();
     } else th.textContent = THEME.name;
     th.title = `Today's theme: ${THEME.about}`;

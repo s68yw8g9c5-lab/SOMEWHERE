@@ -597,3 +597,7 @@ body { font-family: var(--font-body); color: var(--ink); background: var(--sea);
 .theme-line .clock { top: 16px; }
 @media (max-width: 640px) { .theme-line { padding-top: 13px; } .theme-line .clock { top: 13px; } }
 
+
+/* Title hidden until the guess is locked in */
+.theme-line.secret .src { font-size: 17px; font-weight: 500; opacity: .75; }
+@media (max-width: 640px) { .theme-line.secret .src { font-size: 15.5px; } }
