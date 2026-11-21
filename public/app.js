@@ -193,9 +193,10 @@ async function initMap() {
   map.land = topojson.feature(topo, topo.objects.countries);   // also used for the share card
   const gl = map.gl = new maplibregl.Map({
     container: "map", style: STYLE_URL, center: [10, 22], zoom: 1, minZoom: 0, maxZoom: 17,
-    dragRotate: false, pitchWithRotate: false, attributionControl: { compact: true },
+    dragRotate: false, pitchWithRotate: false, maxPitch: 0, fadeDuration: 0, attributionControl: { compact: true },
   });
   gl.touchZoomRotate.disableRotation();
+  gl.touchPitch.disable();
   gl.keyboard.disableRotation();
   const useFallback = () => {
     if (map.fallback) return;
@@ -220,6 +221,8 @@ async function initMap() {
 function addOverlays() {
   const gl = map.gl;
   if (!map.fallback) {
+    // 3D buildings look nice but are slow on phones, and the game never tilts the map.
+    for (const l of gl.getStyle().layers) if (l.type === "fill-extrusion") gl.removeLayer(l.id);
     // Show place names in English where the map has them.
     for (const l of gl.getStyle().layers) {
       if (l.type === "symbol" && l.layout && l.layout["text-field"]) {
