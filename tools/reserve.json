@@ -89,5 +89,18 @@
    "A big city in Pennsylvania, between New York and Washington, D.C."
   ],
   "fact": "There's a bronze Rocky statue at the bottom of the steps."
+ },
+ {
+  "level": "easy",
+  "from": "🎬 Ratatouille",
+  "name": "Paris, France",
+  "lat": 48.853,
+  "lon": 2.35,
+  "clues": [
+   "Anyone can cook! A rat hid under a chef's hat and became the best cook in my city. Where am I?",
+   "Remy works in a fancy restaurant in this French capital, the city of the Eiffel Tower.",
+   "The capital of France."
+  ],
+  "fact": "The dish ratatouille comes from Provence, in the south of France."
  }
 ]
