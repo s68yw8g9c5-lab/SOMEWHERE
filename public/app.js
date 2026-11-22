@@ -330,6 +330,41 @@ function addOverlays() {
   if (!gl.getLayer("lines")) gl.addLayer({ id: "lines", type: "line", source: "lines",
     layout: { "line-cap": "round" }, paint: { "line-color": "#2f4a35", "line-width": 3, "line-dasharray": [0.1, 2] } });
 }
+// Motion: kept short, and skipped for people who ask their device for less motion.
+const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let dropNext = false, revealAnim = false;
+function growLines(feats) {
+  const src = map.gl?.getSource("lines");
+  if (!src || calm) return setData("lines", fc(feats));
+  const t0 = performance.now(), D = 850, delay = 300;
+  const step = (t) => {
+    const k = Math.min(1, Math.max(0, (t - t0 - delay) / D)), e = 1 - Math.pow(1 - k, 3);
+    src.setData(fc(feats.map((f) => ({ ...f, geometry: { type: "LineString", coordinates: f.geometry.coordinates.slice(0, Math.max(2, Math.ceil(e * f.geometry.coordinates.length))) } }))));
+    if (k < 1) requestAnimationFrame(step); else nudgeSoon();
+  };
+  src.setData(fc([]));
+  requestAnimationFrame(step);
+}
+function countUp(el) {
+  const n = Number(el.dataset.count) || 0, t0 = performance.now(), D = 900, delay = 350;
+  el.textContent = "0";
+  const step = (t) => {
+    const k = Math.min(1, Math.max(0, (t - t0 - delay) / D)), e = 1 - Math.pow(1 - k, 3);
+    el.textContent = fmt(n * e);
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+// A quick slate between scenes: the clapper arm snaps shut, then it's gone.
+function showSlate(n) {
+  if (calm) return;
+  const d = document.createElement("div");
+  d.className = "slate";
+  d.setAttribute("aria-hidden", "true");
+  d.innerHTML = `<div class="slate-card"><i class="slate-arm"></i><div class="slate-body"><small>Scene</small><b>${n}</b><span>of ${N}</span></div></div>`;
+  document.body.appendChild(d);
+  setTimeout(() => d.remove(), 1000);
+}
 const setData = (id, data) => { const s = map.gl?.getSource(id); if (s) { s.setData(data); nudgeSoon(); } };
 // After new data or a big camera jump, MapLibre can skip drawing one copy of the world
 // until the camera moves again. A tiny invisible move once things settle fixes it.
@@ -374,16 +409,18 @@ function onMapClick(ll) {
   if (!r.pin && state.round === 0) track("First pin", { clues: r.clues, day: DAY, custom: !!CUSTOM });
   r.pin = ll;
   save();
+  dropNext = true;
   drawMine();
+  dropNext = false;
   $("#map-hint").style.opacity = 0;
   updateLock();
 }
 
 // A few HTML markers (your pins, the answer stars) sit above the map layers.
 const PIN_SVG = `<svg viewBox="-10 -26 20 27" width="30" height="40"><path d="M0,0 C-2,-6 -8,-9 -8,-15 A8,8 0 1 1 8,-15 C8,-9 2,-6 0,0Z" fill="#ee7a3b" stroke="#fff" stroke-width="1.6"/><circle cy="-15" r="3" fill="#fff"/></svg>`;
-function pinEl() { const d = document.createElement("div"); d.className = "mk mk-pin"; d.innerHTML = PIN_SVG; return d; }
+function pinEl() { const d = document.createElement("div"); d.className = "mk mk-pin" + (dropNext && !calm ? " drop" : ""); d.innerHTML = PIN_SVG; return d; }
 function starEl(n) {
-  const d = document.createElement("div"); d.className = "mk mk-star";
+  const d = document.createElement("div"); d.className = "mk mk-star" + (revealAnim && !calm ? " pop" : "");
   // Numbered (final screen): the number replaces the centre dot so the two don't overlap.
   d.innerHTML = `<svg viewBox="-14 -14 28 28" width="38" height="38"><circle r="11" fill="#2f4a35" stroke="#fff" stroke-width="2.5"/>${n ? `<text text-anchor="middle" dy="0.36em" class="answer-num">${n}</text>` : `<circle r="4" fill="#fff"/>`}</svg>`;
   return d;
@@ -416,8 +453,9 @@ function drawAnswer() {
     return;
   }
   const idx = hideAnswers() ? [] : revealed(), numbered = view() === "final" && N > 1;
-  setData("lines", fc(idx.map((i) => ({ type: "Feature", properties: {}, geometry: { type: "LineString",
-    coordinates: arc([state.rounds[i].done.glat, state.rounds[i].done.glon], [PUZ[i].lat, PUZ[i].lon]) } }))));
+  const feats = idx.map((i) => ({ type: "Feature", properties: {}, geometry: { type: "LineString",
+    coordinates: arc([state.rounds[i].done.glat, state.rounds[i].done.glon], [PUZ[i].lat, PUZ[i].lon]) } }));
+  if (revealAnim) growLines(feats); else setData("lines", fc(feats));
   setMarkers("answer", idx.map((i) => [PUZ[i].lat, PUZ[i].lon, numbered ? i + 1 : 0]), starEl, "center");
 }
 function drawAll() { if (!map.ready || !map.gl.getSource("lines")) { renderLegend(); return; } drawAnswer(); drawMine(); renderLegend(); }
@@ -483,12 +521,15 @@ $("#lock-btn").addEventListener("click", () => {
   spoilerOpen = false;
   save();
   track("Guess", { round: state.round + 1, clues: r.clues, distance: kmBucket(km), day: DAY, custom: !!CUSTOM });
+  revealAnim = true;
   render(true);
+  revealAnim = false;
 });
 
 function nextRound() {
   if (state.round < N - 1) {
     state.round++; startClock(); save();
+    showSlate(state.round + 1);
     render(false);
     resetZoom(true);
     $("#map-hint").style.opacity = 1;
@@ -701,7 +742,7 @@ function roundHTML() {
     </div>
     <div class="scorebar"><div class="fill" id="r-bar" data-w="${(r.score / maxFor(p) * 100).toFixed(1)}"></div></div>
     <div class="score-line">
-      <span><b>${fmt(r.score)}</b> of ${fmt(maxFor(p))} points</span>
+      <span><b data-count="${r.score}">${fmt(r.score)}</b> of ${fmt(maxFor(p))} points</span>
       ${CUSTOM ? "" : `<span class="muted">Total <b>${fmt(runningTotal())}</b></span>`}
     </div>
     ${r.secs != null ? `<p class="speed-line">Answered in ${fmtSecs(r.secs)}. ${speedNote(r.secs)}</p>` : ""}
@@ -758,7 +799,7 @@ function finalHTML() {
     <div class="result-top">
       <div>
         <div class="eyebrow">${esc(CUSTOM.by)}'s riddle · your score</div>
-        <h2>${fmt(f.score)} <span class="of">/ ${fmt(TOTAL)}</span></h2>
+        <h2><span data-count="${f.score}">${fmt(f.score)}</span> <span class="of">/ ${fmt(TOTAL)}</span></h2>
       </div>
       <div class="km"><b>${fmtKm(f.km)}</b><span>from the answer</span></div>
     </div>
@@ -776,7 +817,7 @@ function finalHTML() {
     <div class="result-top">
       <div>
         <div class="eyebrow">Somewhere No. ${DAY} · ${THEME.name}</div>
-        <h2>${fmt(f.score)} <span class="of">/ ${fmt(TOTAL)}</span></h2>
+        <h2><span data-count="${f.score}">${fmt(f.score)}</span> <span class="of">/ ${fmt(TOTAL)}</span></h2>
       </div>
       ${f.beat != null ? `<div class="km"><b>${f.beat}%</b><span>of players beaten</span></div>` : `<div class="km"><b>${fmtKm(f.km)}</b><span>off in total</span></div>`}
     </div>
@@ -841,6 +882,8 @@ function render(animate) {
     sheet.hidden = false;
     sheet.firstElementChild.scrollTop = 0;
     if (animate) { sheet.style.animation = "none"; void sheet.offsetWidth; sheet.style.animation = ""; }
+    sheet.classList.toggle("play", !!animate && !calm);
+    if (animate && !calm) sheet.querySelectorAll("[data-count]").forEach(countUp);
     bindSheet();
     tick();
   }
