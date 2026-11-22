@@ -757,3 +757,19 @@ dialog.passport { max-width: 600px; width: calc(100% - 24px); max-height: 88vh; 
    Keep it pinned to the bottom of the card so every player can see the spyglass. */
 #next-clue { position: sticky; bottom: 0; z-index: 1; box-shadow: 0 3px 0 #c9983e, 0 -14px 14px -2px #fffaf2; }
 @media (max-width: 640px) { .clues { max-height: 54%; } }
+
+/* Nov 22: first-look start card (how to play + Start). The riddle card waits behind it. */
+.intro { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 16px; background: rgba(47, 74, 53, .38); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+.intro-card { width: min(420px, 100%); padding: 26px 24px 20px; text-align: center; animation: rise .35s ease-out; }
+.intro-scout { display: block; margin: -4px auto 6px; }
+.intro-no { margin: 0 0 4px; font: 800 12px var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.intro-card h1 { margin: 0 0 14px; font: var(--head-w) 26px/1.15 var(--font-head); color: var(--ink); }
+.intro-steps { list-style: none; counter-reset: s; margin: 0 0 14px; padding: 0; text-align: left; display: grid; gap: 10px; }
+.intro-steps li { counter-increment: s; display: grid; grid-template-columns: 28px 1fr; gap: 10px; font: 600 15.5px/1.4 var(--font-body); color: var(--muted); }
+.intro-steps li b { color: var(--ink); }
+.intro-steps li::before { content: counter(s); width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--soft); color: var(--primary); font: 800 14px var(--font-body); }
+.intro-mix { margin: 0 0 16px; padding: 9px 12px; border-radius: 14px; background: var(--soft); font: 700 14px var(--font-body); color: var(--ink); }
+.intro .guess { background: var(--primary); color: var(--on-primary); box-shadow: 0 5px 0 var(--primary-deep); font: 700 19px var(--font-head); }
+.intro-small { margin: 12px 0 0; font: 600 12.5px var(--font-body); color: var(--muted); }
+body.has-intro .theme-line .clock { visibility: hidden; }
+@media (max-width: 640px) { .intro-card { padding: 22px 18px 18px; } .intro-card h1 { font-size: 23px; } .intro-scout { width: 70px; height: 70px; } }
