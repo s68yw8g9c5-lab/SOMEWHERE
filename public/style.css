@@ -748,3 +748,8 @@ dialog.passport { max-width: 600px; width: calc(100% - 24px); max-height: 88vh; 
   .mk-pin.drop svg, .mk-pin.drop::after, .mk-star.pop svg, .mk-star.pop::after, .sheet.play .grade::before, .sheet.play .grade b, .sheet.play .grade .stars svg, .sheet.play .done-scout, .sheet.play .done-title { animation: none; }
   .slate { display: none; }
 }
+
+/* Nov 22: on short screens the riddle card scrolls, which hid the hint button below the fold.
+   Keep it pinned to the bottom of the card so every player can see the spyglass. */
+#next-clue { position: sticky; bottom: 0; z-index: 1; box-shadow: 0 3px 0 #c9983e, 0 -14px 14px -2px #fffaf2; }
+@media (max-width: 640px) { .clues { max-height: 54%; } }

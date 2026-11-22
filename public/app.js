@@ -550,13 +550,17 @@ async function finishGame() {
   const ms = Date.now() - state.started;
   let res = null;
   if (!preview && !DEV) {
-    try {
-      const r = await fetch("/api/play", {
-        method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ day: DAY, player, name: myName, ms, rounds: state.rounds.map((x) => ({ lat: x.done.glat, lon: x.done.glon, clues: x.done.clues, secs: x.done.secs })) }),
-      });
-      if (r.ok) res = await r.json();
-    } catch {}
+    // Try a few times: phones drop requests when the screen locks or the network switches.
+    const body = JSON.stringify({ day: DAY, player, name: myName, ms, rounds: state.rounds.map((x) => ({ lat: x.done.glat, lon: x.done.glon, clues: x.done.clues, secs: x.done.secs })) });
+    for (let tries = 0; tries < 3 && !res; tries++) {
+      if (tries) await new Promise((ok) => setTimeout(ok, 1500 * tries));
+      try {
+        const r = await fetch("/api/play", { method: "POST", headers: { "content-type": "application/json" }, body });
+        if (r.ok) res = await r.json();
+        else if (r.status >= 400 && r.status < 500) break; // the server said no; retrying won't help
+      } catch {}
+    }
+    if (!res) track("Save failed", { day: DAY });
   }
   if (res && Array.isArray(res.rounds)) {
     // Trust the server's numbers (and its copy, if this device already played today).
@@ -998,9 +1002,11 @@ async function refreshStats(bust) {
     try {
       const r = await fetch(`/api/stats?day=${DAY}${bust ? "&t=" + Date.now() : ""}`);
       if (r.ok) s = await r.json(); else if (r.status === 404) preview = true;
-    } catch { preview = true; }
+    } catch {}
   }
-  if (!s) { preview = true; s = emptyStats(); }
+  // A dropped request (phone locked, flaky wifi) keeps the last numbers. It must NOT switch
+  // the game into preview mode, or the player's finished game would never be saved.
+  if (!s) s = (!preview && lastStats) || emptyStats();
   $("#preview-banner").hidden = !preview;
   lastStats = s;
   $("#live-count").textContent = fmt(s.players);
