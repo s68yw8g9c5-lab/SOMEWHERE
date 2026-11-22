@@ -1376,7 +1376,40 @@ if (CUSTOM && view() === "guess" && !state.rounds[0].pin) toast(`${CUSTOM.by} wr
 renderClues();
 updateLock();
 await initMap();
-startClock();
+// First look: a short "how to play" card with a Start button. The speed clock only starts on Start,
+// so nobody loses their bonus while they're still figuring out what the page is.
+const needsIntro = !CUSTOM && !state.final && state.round === 0 && !cur().shown && !cur().pin;
+if (needsIntro) showIntro(); else startClock();
+function showIntro() {
+  const lv = { easy: 0, medium: 0, hard: 0 };
+  PUZ.forEach((p) => { lv[levelOf(p)]++; });
+  const mix = ["easy", "medium", "hard"].filter((k) => lv[k]).map((k) => `${lv[k]} ${k}`).join(", ");
+  const el = document.createElement("div");
+  el.className = "intro";
+  el.innerHTML = `<div class="intro-card card" role="dialog" aria-labelledby="intro-title">
+    <img src="scout.svg" alt="" width="84" height="84" class="intro-scout">
+    <p class="intro-no">No. ${DAY} · ${dateLabel(DAY)}</p>
+    <h1 id="intro-title">5 riddles. 5 places on the map.</h1>
+    <ol class="intro-steps">
+      <li><span><b>Read the riddle.</b> Each one is a real place from a famous book or movie.</span></li>
+      <li><span><b>Tap the map</b> where you think it is, then lock it in.</span></li>
+      <li><span><b>Stuck?</b> The spyglass gives a hint for fewer points.</span></li>
+    </ol>
+    <p class="intro-mix">Today: ${mix}. Faster answers earn a bonus.</p>
+    <button class="guess" id="intro-start">Start</button>
+    <p class="intro-small">The clock starts when you tap Start.</p>
+  </div>`;
+  document.body.appendChild(el);
+  document.body.classList.add("has-intro");
+  track("See intro", { day: DAY });
+  $("#intro-start").addEventListener("click", () => {
+    el.remove();
+    document.body.classList.remove("has-intro");
+    startClock();
+    drawClock();
+    track("Start game", { day: DAY });
+  }, { once: true });
+}
 await refreshStats();
 render(false);
 if (view() === "guess" && cur().pin) $("#map-hint").style.opacity = 0;
