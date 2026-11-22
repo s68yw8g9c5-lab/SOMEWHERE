@@ -749,6 +749,10 @@ dialog.passport { max-width: 600px; width: calc(100% - 24px); max-height: 88vh; 
   .slate { display: none; }
 }
 
+/* Shown if the day's riddles can't be loaded from the server. */
+#clue-list .load-error { list-style: none; font-size: 15px; line-height: 1.5; }
+#clue-list .load-error a { color: inherit; font-weight: 700; text-decoration: underline; }
+
 /* Nov 22: on short screens the riddle card scrolls, which hid the hint button below the fold.
    Keep it pinned to the bottom of the card so every player can see the spyglass. */
 #next-clue { position: sticky; bottom: 0; z-index: 1; box-shadow: 0 3px 0 #c9983e, 0 -14px 14px -2px #fffaf2; }

@@ -30,16 +30,19 @@ guessed, and how you rank against the world and your friends.
 public/              the website (plain HTML/CSS/JS, no build step)
   index.html, style.css, app.js
   game.js            rules shared by the site and the server (day number, scoring)
-  puzzles.js         generated from tools/puzzles.json (lightly scrambled)
   vendor/            MapLibre, d3, topojson and the world map, self-hosted
 netlify/functions/   the backend (Netlify Functions)
-  play.mjs           POST /api/play: save a guess, return score and "beat X%"
+  riddle.mjs         /api/riddle: sends clues one at a time and scores each guess; a riddle's
+                     answer is only sent after its guess is in (anti-cheat)
+  play.mjs           POST /api/play: save the day's result from those guesses, return "beat X%"
   stats.mjs          GET /api/stats: live counts, leaderboard, countries, player map
   pins.mjs           GET /api/pins: everyone's guesses (only after you've played)
   name.mjs           POST /api/name: change your name on today's board
   friends.mjs        /api/friends: create, join, leave and read friends boards
   feedback.mjs       POST /api/feedback: the feedback box
 lib/db.mjs           database connection; creates the tables by itself on first use
+lib/puzzles.mjs      server-only riddle lookup (the browser never gets the answers)
+lib/puzzle-data.mjs  generated from tools/puzzles.json by `npm run encode`
 tools/puzzles.json   150 riddles (30 days of 5). Add more here.
 netlify.toml         tells Netlify where the site and functions are
 ```
@@ -130,8 +133,12 @@ npm install
 npm run dev        # netlify dev, then open http://localhost:8888
 ```
 
-If you open `public/index.html` without the backend, the game still works in **preview mode**
-with sample players, so you can show it to people before deploying.
+The riddles come from the server (so nobody can read the answers in the page), so the game
+needs the backend running: use `npm run dev`, not a plain `public/index.html`.
+
+**Tester mode:** add `?dev` to the address to replay today or any past day (not counted).
+Future days need the tester key: set `TESTER_KEY` in Netlify (Site configuration, Environment
+variables) and open `/?dev=YOUR-KEY&day=5`. The key is remembered on that device.
 
 ## Add more riddles
 

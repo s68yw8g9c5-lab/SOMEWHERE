@@ -1,11 +1,11 @@
-// POST /api/play  { day, player, name, rounds: [{ lat, lon, clues, secs } x5], ms }
-// Sent once, after the 5th round. The server recomputes every distance and score
-// itself, so nobody can fake points.
-import { dayNumber, puzzlesFor, distanceKm, scoreFor, maxFor, LAUNCH_UTC, MAX_CLUES, ROUNDS } from "../../public/game.js";
+// POST /api/play  { day, player, name, ms }
+// Sent once, after the 5th round. The score comes from the guesses the server already
+// recorded one riddle at a time (/api/riddle), so pins can't be moved after seeing an answer.
+import { dayNumber, scoreFor, maxFor, ROUNDS } from "../../public/game.js";
+import { puzzlesFor, isOpen } from "../../lib/puzzles.mjs";
 import { db } from "../../lib/db.mjs";
 import { json, cleanName, validPlayer, readJson, fail } from "../../lib/http.mjs";
 
-const GRACE_MS = 15 * 60 * 1000; // finish yesterday's game up to 15 min after midnight UTC
 const BUCKET = 100;
 
 export default async (req, context) => {
@@ -13,27 +13,25 @@ export default async (req, context) => {
   if (!b) return json({ error: "bad json" }, { status: 400 });
 
   const now = Date.now();
-  const today = dayNumber(now);
   const day = Number(b.day);
-  const inGrace = day === today - 1 && now - (LAUNCH_UTC + (today - 1) * 86400000) < GRACE_MS;
-  if (day !== today && !inGrace) return json({ error: "that game is closed" }, { status: 400 });
+  if (!Number.isInteger(day) || day > dayNumber(now) || !isOpen(day, now)) return json({ error: "that game is closed" }, { status: 400 });
   if (!validPlayer(b.player)) return json({ error: "bad player" }, { status: 400 });
-  if (!Array.isArray(b.rounds) || b.rounds.length !== ROUNDS) return json({ error: "need 5 rounds" }, { status: 400 });
 
   const places = puzzlesFor(day);
-  const rounds = [];
-  for (let i = 0; i < ROUNDS; i++) {
-    const r = b.rounds[i] || {};
-    const lat = Number(r.lat), lon = Number(r.lon), clues = Math.round(Number(r.clues));
-    if (!(lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180)) return json({ error: "bad pin" }, { status: 400 });
-    if (!(clues >= 1 && clues <= MAX_CLUES)) return json({ error: "bad clues" }, { status: 400 });
-    // Seconds spent on this riddle (the speed bonus). Missing or odd values earn no bonus.
-    const secs = Number.isFinite(Number(r.secs)) ? Math.max(0, Math.min(86400, Math.round(Number(r.secs)))) : 86400;
-    const km = Math.round(distanceKm(lat, lon, places[i].lat, places[i].lon) * 10) / 10;
-    rounds.push([Math.round(lat * 1e4) / 1e4, Math.round(lon * 1e4) / 1e4, clues, km, scoreFor(km, clues, maxFor(places[i]), secs), secs]);
-  }
-  const km = Math.round(rounds.reduce((s, r) => s + r[3], 0) * 10) / 10;
   const ms = Math.max(0, Math.min(86400000, Math.round(Number(b.ms) || 0)));
+  let sql, rounds = null;
+  try {
+    sql = await db();
+    const [had] = await sql`SELECT 1 FROM games WHERE day = ${day} AND player = ${b.player}`;
+    if (!had) {
+      const turns = await sql`SELECT round, clues, glat, glon, km, secs FROM turns
+                              WHERE day = ${day} AND player = ${b.player} AND glat IS NOT NULL ORDER BY round`;
+      if (turns.length !== ROUNDS) return json({ error: "finish all 5 riddles first" }, { status: 400 });
+      rounds = turns.map((t, i) => [t.glat, t.glon, t.clues, Number(t.km), scoreFor(Number(t.km), t.clues, maxFor(places[i]), t.secs), t.secs]);
+    }
+  } catch (e) { return fail(e); }
+  rounds = rounds || [];
+  const km = Math.round(rounds.reduce((s, r) => s + r[3], 0) * 10) / 10;
   // The riddle times can't add up to more than the whole game took.
   if (rounds.reduce((s, r) => s + r[5], 0) > ms / 1000 + 5) {
     rounds.forEach((r, i) => { r[5] = 86400; r[4] = scoreFor(r[3], r[2], maxFor(places[i]), 86400); });
@@ -48,8 +46,7 @@ export default async (req, context) => {
   const name = cleanName(b.name);
 
   try {
-    const sql = await db();
-    const inserted = await sql`
+    const inserted = !rounds.length ? [] : await sql`
       INSERT INTO games (day, player, name, country, plat, plon, rounds, km, score, ms, created)
       VALUES (${day}, ${b.player}, ${name}, ${country}, ${plat}, ${plon}, ${sql.json(rounds)}, ${km}, ${score}, ${ms}, ${now})
       ON CONFLICT (day, player) DO NOTHING

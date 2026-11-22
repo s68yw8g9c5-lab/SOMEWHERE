@@ -1,7 +1,7 @@
 // Somewhere: the browser side of the game. 5 places a day, 3 clues each.
 // Also plays single riddles that friends write for each other (links with #r=...).
 import {
-  dayNumber, nextPuzzleAt, puzzlesFor, dateFor, hasDate, distanceKm, scoreFor, roundSquare,
+  dayNumber, nextPuzzleAt, dateFor, distanceKm, scoreFor, roundSquare,
   CLUE_MULT, SPEED, speedFactor, MAX_CLUES, MAX_POINTS, MAX_TOTAL, LEVELS, HARD_ROUND, maxFor,
   dateLabel,
 } from "./game.js";
@@ -48,11 +48,62 @@ function parseCustom() {
 window.addEventListener("hashchange", () => location.reload());
 
 // Tester mode (?dev): replay any day, nothing is sent to the leaderboard, saves are kept apart.
+// Future days need the tester key (?dev=KEY, remembered on this device).
 const DEV = params.has("dev");
-const DEV_DAYS = Array.from({ length: 60 }, (_, i) => i + 1).filter((d) => hasDate(d));
-const DAY = DEV && DEV_DAYS.includes(Number(params.get("day"))) ? Number(params.get("day")) : dayNumber();
+if (DEV && params.get("dev")) store.set("sw:devkey", params.get("dev"));
+const DEV_KEY = DEV ? store.get("sw:devkey", "") : "";
+const devQuery = (day) => `?dev${DEV_KEY ? "=" + encodeURIComponent(DEV_KEY) : ""}${day ? "&day=" + day : ""}`;
+const askedDay = Math.round(Number(params.get("day")));
+const DAY = DEV && askedDay >= 1 ? askedDay : dayNumber();
 const CUSTOM = parseCustom();
-const PUZ = CUSTOM ? [CUSTOM] : puzzlesFor(DAY);
+
+let player = store.get("sw:player", null);
+if (!player) {
+  player = (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36));
+  store.set("sw:player", player);
+}
+
+/* ---------- the day's riddles come from the server, one clue and one answer at a time ----------
+   The page never holds an answer before you mark the spot: /api/riddle sends each riddle's
+   place, map spot and fun fact only after your guess for it is in (and scores it there). */
+const riddleApi = async (body) => {
+  const r = await fetch("/api/riddle", {
+    method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ day: DAY, player, ...(DEV ? { dev: DEV_KEY } : {}), ...body }),
+  });
+  if (!r.ok) throw new Error("riddle " + r.status);
+  return r.json();
+};
+// One riddle as the page knows it: answer fields (name, lat, lon, fact) appear once the server sends them.
+const toPuz = (v, old = {}) => ({
+  ...old, level: v.level, kind: v.kind, nclues: v.nclues, clues: v.clues,
+  from: v.from || old.from, ...(v.answer || {}),
+});
+async function loadDay() {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const r = await fetch(`/api/riddle?day=${DAY}&player=${encodeURIComponent(player)}${DEV ? "&dev=" + encodeURIComponent(DEV_KEY) : ""}`, { cache: "no-store" });
+      if (r.status === 403 && DEV) return { locked: true };
+      if (r.ok) return await r.json();
+    } catch {}
+    await new Promise((res) => setTimeout(res, 800 * (attempt + 1)));
+  }
+  return null;
+}
+function loadFailed(msg, link) {
+  const li = document.createElement("li"), a = document.createElement("a");
+  li.className = "load-error"; li.textContent = msg + " ";
+  a.href = link[0]; a.textContent = link[1]; li.appendChild(a);
+  $("#clue-list").replaceChildren(li);
+  $("#next-clue").hidden = true;
+  $("#lock-bar").hidden = true;
+  throw new Error(msg);
+}
+const dayData = CUSTOM ? null : await loadDay();
+if (!CUSTOM && !dayData) loadFailed("Couldn't load today's riddles. Check your connection and reload the page.", ["/" + location.search, "Reload"]);
+if (dayData?.locked) loadFailed("That day hasn't come out yet. Future days need your tester key in the link (?dev=YOUR-KEY).", [devQuery(), "Play today instead"]);
+const DEV_DAYS = dayData?.days || [];
+const PUZ = CUSTOM ? [{ ...CUSTOM, nclues: CUSTOM.clues.length }] : dayData.rounds.map((v) => toPuz(v));
 const N = PUZ.length;
 const TOTAL = CUSTOM ? MAX_POINTS : PUZ.reduce((t, p) => t + maxFor(p), 0); // 5,000 once a day has the 1-2-2 mix
 const THEME = { emoji: "🍿", name: "Books & movies", about: "each riddle points to a real place from a famous book or movie" };
@@ -67,6 +118,26 @@ const fresh = () => ({
 let state = store.get(STATE_KEY, null);
 if (!state || !Array.isArray(state.rounds) || state.rounds.length !== N) state = fresh();
 const save = () => store.set(STATE_KEY, state);
+// Line up this device's saved game with what the server remembers. The server wins: a riddle
+// it has already scored keeps that first guess, and clues it has sent stay counted. A pin this
+// device scored before (an older version of the site, or tester mode) is sent in now.
+async function syncDay() {
+  for (let i = 0; i < N; i++) {
+    const v = dayData.rounds[i], r = state.rounds[i];
+    try {
+      let got = v;
+      if (!v.guess && r.done && !dayData.finished) got = await riddleApi({ action: "guess", round: i, lat: r.done.glat, lon: r.done.glon, clues: r.done.clues, secs: r.done.secs });
+      else if (!v.guess && !v.answer && r.clues > v.clues.length) got = await riddleApi({ action: "clue", round: i, want: r.clues });
+      PUZ[i] = toPuz(got, PUZ[i]);
+      if (got.guess) { r.done = { ...got.guess }; r.clues = got.guess.clues; r.pin = r.pin || [got.guess.glat, got.guess.glon]; }
+      else if (!r.done && !got.answer) r.clues = Math.max(1, Math.min(got.nclues, Math.max(r.clues, got.clues.length)));
+    } catch {}
+  }
+  // Rounds the server scored that this device didn't know about: move on to the first open one.
+  if (!state.final) { const open = state.rounds.findIndex((x) => !x.done); state.round = open < 0 ? N - 1 : Math.min(state.round, open); }
+  save();
+}
+if (!CUSTOM) await syncDay();
 // The speed clock for each riddle starts when it first appears on a ready map (reloading
 // doesn't reset it). The first one starts after the map has loaded, so slow phones aren't punished.
 const startClock = () => { const r = state.rounds[state.round]; if (r && !r.done && !state.final && !r.shown) { r.shown = Date.now(); save(); } };
@@ -80,11 +151,6 @@ const doneRounds = () => state.rounds.filter((r) => r.done);
 const runningTotal = () => doneRounds().reduce((s, r) => s + r.done.score, 0);
 const totalClues = () => doneRounds().reduce((s, r) => s + r.done.clues, 0);
 
-let player = store.get("sw:player", null);
-if (!player) {
-  player = (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36));
-  store.set("sw:player", player);
-}
 let myName = store.get("sw:name", null);
 if (!myName) { myName = randomName(); store.set("sw:name", myName); }
 
@@ -134,11 +200,11 @@ function renderClues(animateLast = false) {
   th.hidden = !!CUSTOM;
   if (!CUSTOM) {
     const fp = view() !== "final" && curPuz();
-    if (fp && fp.from) {
-      const m = fp.from.match(/^(\S+)\s+(.*)$/), kind = m && m[1] === "📖" ? "Book" : "Film";
+    if (fp && (fp.from || fp.kind)) {
+      const m = (fp.from || "").match(/^(\S+)\s+(.*)$/), kind = (m ? m[1] === "📖" : fp.kind === "book") ? "Book" : "Film";
       th.dataset.level = fp.level || "";
       // The title stays a secret until the first spyglass hint (or the guess) reveals it.
-      const rc = cur(), shown = !!rc.done || rc.clues >= 2;
+      const rc = cur(), shown = (!!rc.done || rc.clues >= 2) && !!fp.from;
       th.classList.toggle("secret", !shown);
       th.innerHTML = `<span class="kind kind-${kind.toLowerCase()}">${kind}</span><span class="src">${shown ? esc(m ? m[2] : fp.from) : `Title hidden. The spyglass reveals it.`}</span><span class="clock" id="clock"></span>`;
       drawClock();
@@ -148,13 +214,13 @@ function renderClues(animateLast = false) {
   const v = view();
   $("#clues").hidden = v === "final";
   if (v === "final") return;
-  const r = cur(), p = curPuz(), maxC = p.clues.length;
+  const r = cur(), p = curPuz(), maxC = p.nclues || p.clues.length;
   const n = r.done ? r.done.clues : r.clues;
   // After the guess, show the clues you skipped too (unless streamer mode is hiding answers).
   const shown = r.done && !hideAnswers() ? maxC : n;
   const list = $("#clue-list");
   list.innerHTML = "";
-  for (let i = 0; i < shown; i++) {
+  for (let i = 0; i < Math.min(shown, p.clues.length); i++) {
     const li = document.createElement("li");
     li.dataset.n = i + 1;
     li.innerHTML = `<span class="verse">${p.clues[i].split(" / ").map((l) => `<span class="ln">${esc(l)}</span>`).join("")}</span>`; // rhymes: one line per verse
@@ -194,10 +260,19 @@ function renderClues(animateLast = false) {
 }
 let hintNudge;
 
-$("#next-clue").addEventListener("click", () => {
-  const r = cur();
-  if (r.done || r.clues >= curPuz().clues.length) return;
-  r.clues++; save(); renderClues(true);
+$("#next-clue").addEventListener("click", async () => {
+  const r = cur(), i = state.round, btn = $("#next-clue");
+  if (r.done || r.clues >= (curPuz().nclues || curPuz().clues.length) || btn.disabled) return;
+  if (!CUSTOM) {
+    btn.disabled = true;
+    try {
+      const v = await riddleApi({ action: "clue", round: i, want: r.clues + 1 });
+      PUZ[i] = toPuz(v, PUZ[i]);
+      r.clues = Math.min(v.nclues, r.clues + 1);
+    } catch { toast("Couldn't reach the server. Try the spyglass again."); return; }
+    finally { btn.disabled = false; }
+  } else r.clues++;
+  save(); renderClues(true);
   track("Reveal clue", { clue: r.clues, round: state.round + 1, day: DAY, custom: !!CUSTOM });
 });
 
@@ -511,13 +586,30 @@ function updateLock() {
   btn.textContent = cur().pin ? "Mark the spot" : "Tap the map to mark the spot";
 }
 
-$("#lock-btn").addEventListener("click", () => {
-  const r = cur(), p = curPuz();
-  if (!r.pin || r.done) return;
+$("#lock-btn").addEventListener("click", async () => {
+  const r = cur(), p = curPuz(), i = state.round, btn = $("#lock-btn");
+  if (!r.pin || r.done || btn.dataset.busy) return;
   const [glat, glon] = r.pin;
-  const km = Math.round(distanceKm(glat, glon, p.lat, p.lon) * 10) / 10;
-  const secs = CUSTOM ? 0 : secsOn(r);   // friend riddles have no clock
-  r.done = { glat, glon, km, clues: r.clues, secs, score: scoreFor(km, r.clues, maxFor(curPuz()), secs) };
+  if (CUSTOM) {
+    // Friend riddles carry their own answer in the link, so they're scored right here (no clock).
+    const km = Math.round(distanceKm(glat, glon, p.lat, p.lon) * 10) / 10;
+    r.done = { glat, glon, km, clues: r.clues, secs: 0, score: scoreFor(km, r.clues, maxFor(p), 0) };
+  } else {
+    // The server scores the guess and only then tells us where the place is.
+    btn.dataset.busy = "1"; btn.disabled = true; btn.textContent = "Checking the spot…";
+    try {
+      const v = await riddleApi({ action: "guess", round: i, lat: glat, lon: glon, clues: r.clues, secs: secsOn(r) });
+      if (!v.guess) throw new Error("no guess");
+      PUZ[i] = toPuz(v, PUZ[i]);
+      r.done = { ...v.guess }; r.clues = v.guess.clues;
+    } catch {
+      delete btn.dataset.busy; updateLock();
+      toast("Couldn't reach the server. Tap Mark the spot again.");
+      return;
+    }
+    delete btn.dataset.busy;
+  }
+  const km = r.done.km;
   spoilerOpen = false;
   save();
   track("Guess", { round: state.round + 1, clues: r.clues, distance: kmBucket(km), day: DAY, custom: !!CUSTOM });
@@ -551,7 +643,7 @@ async function finishGame() {
   let res = null;
   if (!preview && !DEV) {
     // Try a few times: phones drop requests when the screen locks or the network switches.
-    const body = JSON.stringify({ day: DAY, player, name: myName, ms, rounds: state.rounds.map((x) => ({ lat: x.done.glat, lon: x.done.glon, clues: x.done.clues, secs: x.done.secs })) });
+    const body = JSON.stringify({ day: DAY, player, name: myName, ms });
     for (let tries = 0; tries < 3 && !res; tries++) {
       if (tries) await new Promise((ok) => setTimeout(ok, 1500 * tries));
       try {
@@ -621,7 +713,7 @@ function backdateStamps() {
 // Right after a game ends: check this game's result for new stamps.
 function awardStamps() {
   if (CUSTOM) return;
-  const c = { ...stampContext(), hour: new Date().getHours(), rounds: state.rounds.map((x, i) => ({ km: Number(x.done.km), score: x.done.score, secs: x.done.secs, level: levelOf(PUZ[i]), lat: PUZ[i].lat, lon: PUZ[i].lon, kind: /^📖/.test(PUZ[i].from || "") ? "book" : "film" })) };
+  const c = { ...stampContext(), hour: new Date().getHours(), rounds: state.rounds.map((x, i) => ({ km: Number(x.done.km), score: x.done.score, secs: x.done.secs, level: levelOf(PUZ[i]), lat: PUZ[i].lat, lon: PUZ[i].lon, kind: /^📖/.test(PUZ[i].from || "") || PUZ[i].kind === "book" ? "book" : "film" })) };
   freshStamps = earnedNow(c, stampBook.got);
   freshStamps.forEach((st) => { stampBook.got[st.id] = { day: DAY, at: Date.now(), seen: true }; track("Earn stamp", { stamp: st.id, day: DAY }); });
   if (freshStamps.length) saveStamps();
@@ -1302,6 +1394,6 @@ if (DEV) {
     <select id="dev-day" aria-label="Pick a day">${DEV_DAYS.map(opt).join("")}</select>
     <button id="dev-reset">Play again</button><a href="/">Exit</a>`;
   document.body.appendChild(bar);
-  $("#dev-day").addEventListener("change", (e) => { location.search = `?dev&day=${e.target.value}`; });
+  $("#dev-day").addEventListener("change", (e) => { location.search = devQuery(e.target.value); });
   $("#dev-reset").addEventListener("click", () => { try { localStorage.removeItem(STATE_KEY); localStorage.removeItem("sw:dev:stamps"); } catch {} location.reload(); });
 }

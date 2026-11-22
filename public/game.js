@@ -1,6 +1,6 @@
 // Shared game rules. Used by the browser AND by the server (Netlify Functions),
-// so both always agree on today's places and the score.
-import { PUZZLES } from "./puzzles.js";
+// so both always agree on the day number and the score. The riddles and their answers
+// are NOT here: they live on the server only (lib/puzzles.mjs).
 
 // Day #1 starts at midnight UTC on this date. Everyone on Earth switches together.
 // Tip: set this to your launch day so your first public game is #1.
@@ -29,43 +29,10 @@ export function nextPuzzleAt(now = Date.now()) {
   return LAUNCH_UTC + dayNumber(now) * 86400000;
 }
 
-const KEY = "somewhere";
-function decode(b64) {
-  const bin = atob(b64);
-  const bytes = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i) ^ KEY.charCodeAt(i % KEY.length);
-  return JSON.parse(new TextDecoder().decode(bytes));
-}
-
-// The 5 places for a given day: 1 easy, 2 medium, 2 hard. Every riddle is tied to a calendar
-// date (MM-DD in tools/puzzles.json); days with no riddles of their own reuse earlier dates.
+// Calendar dates for each day number.
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 export const dateFor = (day) => new Date(LAUNCH_UTC + (day - 1) * 86400000);
 export const dateLabel = (day) => { const d = dateFor(day); return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}`; };
-const mmdd = (d) => String(d.getUTCMonth() + 1).padStart(2, "0") + "-" + String(d.getUTCDate()).padStart(2, "0");
-
-let byDate = null;
-function getDates() {
-  if (!byDate) {
-    byDate = {};
-    for (const enc of PUZZLES) { const p = decode(enc); (byDate[p.date] = byDate[p.date] || []).push(p); }
-    const rank = { easy: 0, medium: 1, hard: 2 };
-    for (const k in byDate) byDate[k].sort((a, b) => rank[a.level] - rank[b.level]);
-  }
-  return byDate;
-}
-// True when this day has its own riddles (otherwise earlier dates are reused).
-export const hasDate = (day) => !!getDates()[mmdd(dateFor(day))];
-
-export function puzzlesFor(day) {
-  const all = getDates();
-  const keys = Object.keys(all).sort();
-  const list = all[mmdd(dateFor(day))] || all[keys[(day - 1) % keys.length]];
-  // Follow the day plan when the date has the right mix; otherwise keep the date's own order.
-  const pool = list.slice(), picked = [];
-  for (const lv of DAY_PLAN) { const i = pool.findIndex((p) => p.level === lv); if (i < 0) return list.slice(0, ROUNDS); picked.push(pool.splice(i, 1)[0]); }
-  return picked;
-}
 
 export function distanceKm(lat1, lon1, lat2, lon2) {
   const R = 6371, rad = Math.PI / 180;
