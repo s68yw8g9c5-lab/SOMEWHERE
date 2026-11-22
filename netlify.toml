@@ -9,3 +9,9 @@
   for = "/vendor/*"
   [headers.values]
     cache-control = "public, max-age=604800"
+
+# Icons: browsers re-check them daily, so a new logo shows up without waiting weeks.
+[[headers]]
+  for = "/favicon.*"
+  [headers.values]
+    cache-control = "public, max-age=86400, must-revalidate"
