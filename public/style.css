@@ -748,3 +748,7 @@ dialog.passport { max-width: 600px; width: calc(100% - 24px); max-height: 88vh; 
   .mk-pin.drop svg, .mk-pin.drop::after, .mk-star.pop svg, .mk-star.pop::after, .sheet.play .grade::before, .sheet.play .grade b, .sheet.play .grade .stars svg, .sheet.play .done-scout, .sheet.play .done-title { animation: none; }
   .slate { display: none; }
 }
+
+/* Shown if the day's riddles can't be loaded from the server. */
+#clue-list .load-error { list-style: none; font-size: 15px; line-height: 1.5; }
+#clue-list .load-error a { color: inherit; font-weight: 700; text-decoration: underline; }
