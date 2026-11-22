@@ -773,3 +773,31 @@ dialog.passport { max-width: 600px; width: calc(100% - 24px); max-height: 88vh; 
 .intro-small { margin: 12px 0 0; font: 600 12.5px var(--font-body); color: var(--muted); }
 body.has-intro .theme-line .clock { visibility: hidden; }
 @media (max-width: 640px) { .intro-card { padding: 22px 18px 18px; } .intro-card h1 { font-size: 23px; } .intro-scout { width: 70px; height: 70px; } }
+
+/* Nov 22: phones. A Reddit player said the panels cover the map. The riddle card is more compact,
+   folds into a slim strip once you drag, pinch or tap the map, and Scout steps aside while you play. */
+.clue-peek { display: none; }
+.theme-line .src .show-sm { display: none; }
+@media (max-width: 640px) {
+  .clues { max-height: calc(100% - 190px); }
+  #next-clue { white-space: normal !important; max-width: 100%; text-align: left; }
+  .theme-line .clock small { display: none !important; }
+  .theme-line .clock { padding: 3px 10px !important; top: 8px !important; }
+  .theme-line .src .hide-sm { display: none; }
+  .theme-line .src .show-sm { display: inline; }
+  .theme-line { padding: 10px 14px 9px !important; margin-bottom: 10px !important; }
+  .theme-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 84px !important; }
+  .theme-line .kind { display: inline-block; font-size: 10px; padding: 2px 8px; margin: 0 6px 0 0; vertical-align: 1px; }
+  .theme-line .src { display: inline; font-size: 14.5px !important; padding-right: 0 !important; }
+  .theme-line .clock { top: 9px !important; right: 10px !important; padding: 4px 9px 3px !important; border-radius: 12px; }
+  .theme-line .clock b { font-size: 15px !important; }
+  #clue-list li:last-child { font-size: 14.5px !important; line-height: 1.38 !important; }
+  #clue-list li { font-size: 13.5px; }
+  #next-clue { margin-top: 10px; padding: 7px 12px !important; font-size: 13px !important; }
+  .clues { padding-bottom: 12px !important; }
+  .lock-bar::before { display: none; }
+  .clues.mini { padding-bottom: 0 !important; overflow: hidden; }
+  .clues.mini #clue-list, .clues.mini #next-clue, .clues.mini .clue-head { display: none !important; }
+  .clues.mini .theme-line { margin-bottom: 0 !important; }
+  .clues.mini .clue-peek { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; border: 0; background: var(--surface); padding: 9px 14px 10px; font: 800 13.5px var(--font-body); color: var(--primary); }
+}
