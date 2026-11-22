@@ -206,7 +206,7 @@ function renderClues(animateLast = false) {
       // The title stays a secret until the first spyglass hint (or the guess) reveals it.
       const rc = cur(), shown = (!!rc.done || rc.clues >= 2) && !!fp.from;
       th.classList.toggle("secret", !shown);
-      th.innerHTML = `<span class="kind kind-${kind.toLowerCase()}">${kind}</span><span class="src">${shown ? esc(m ? m[2] : fp.from) : `Title hidden. The spyglass reveals it.`}</span><span class="clock" id="clock"></span>`;
+      th.innerHTML = `<span class="kind kind-${kind.toLowerCase()}">${kind}</span><span class="src">${shown ? esc(m ? m[2] : fp.from) : `<span class="hide-sm">Title hidden. The spyglass reveals it.</span><span class="show-sm">Title hidden</span>`}</span><span class="clock" id="clock"></span>`;
       drawClock();
     } else th.textContent = THEME.name;
     th.title = `Today's theme: ${THEME.about}`;
@@ -365,6 +365,11 @@ async function initMap() {
   gl.on("data", (e) => { if (e.dataType === "source" && e.tile && e.sourceId === "openmaptiles") map.tilesOk = true; });
   gl.once("style.load", () => clearTimeout(timer));
   gl.on("style.load", () => { addOverlays(); if (map.ready) drawAll(); });
+  // Phones: as soon as the player works the map (drag, pinch or tap), fold the riddle card
+  // into a slim strip so the whole map is free. Tapping the strip opens the riddle again.
+  const foldOnPhone = (e) => { if (e.originalEvent && isPhone() && view() === "guess") setMini(true); };
+  gl.on("dragstart", foldOnPhone); gl.on("zoomstart", foldOnPhone);
+  gl.on("click", (e) => { foldOnPhone({ originalEvent: true }); });
   gl.on("click", (e) => onMapClick([Math.round(e.lngLat.lat * 1e4) / 1e4, Math.round(e.lngLat.wrap().lng * 1e4) / 1e4]));
   await new Promise((res) => gl.once("style.load", res));
   map.ready = true;
@@ -621,6 +626,7 @@ $("#lock-btn").addEventListener("click", async () => {
 function nextRound() {
   if (state.round < N - 1) {
     state.round++; startClock(); save();
+    setMini(false);
     showSlate(state.round + 1);
     render(false);
     resetZoom(true);
@@ -1198,6 +1204,14 @@ function setClues(open) {
   $("#clue-toggle").setAttribute("aria-label", open ? "Hide clues" : "Show clues");
 }
 $("#clue-toggle").addEventListener("click", () => setClues($("#clues").classList.contains("collapsed")));
+function setMini(on) {
+  const c = $("#clues");
+  if (c.classList.contains("mini") === on) return;
+  c.classList.toggle("mini", on);
+  $("#clue-peek").setAttribute("aria-expanded", String(!on));
+  if (on) track("Fold riddle");
+}
+$("#clue-peek").addEventListener("click", () => setMini(false));
 
 let tab = "players";
 function setTab(t) {
