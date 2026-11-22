@@ -37,5 +37,96 @@
    "The northern part of the United Kingdom."
   ],
   "fact": "Merida is voiced by Scottish actress Kelly Macdonald."
+ },
+ {
+  "level": "medium",
+  "from": "📖 Robin Hood",
+  "name": "Nottingham, England",
+  "lat": 52.954,
+  "lon": -1.158,
+  "clues": [
+   "An archer in green stole the gold of the rich, / then he gave it away to the poor without a hitch. / He hid in my forest from a sheriff's mean crew, / under oak trees so old they've seen centuries through.",
+   "Sherwood Forest is my backyard green, / in the English Midlands, where outlaws were seen.",
+   "A city in the English Midlands, whose sheriff, they say, / chased Robin Hood around day after day."
+  ],
+  "fact": "The Major Oak in Sherwood Forest is said to have been Robin Hood's hideout."
+ },
+ {
+  "level": "medium",
+  "from": "🎬 Skyfall",
+  "name": "Shanghai, China",
+  "lat": 31.2304,
+  "lon": 121.4737,
+  "clues": [
+   "A spy fought a hitman high up in a tower, / with glowing jellyfish screens and neon power. / My skyline's a forest of futuristic spires, / across from my Bund, all old banks and bright fires.",
+   "The Pearl Tower's pink balls light up my sky, / on China's east coast, where the Huangpu flows by.",
+   "China's biggest city, near the Yangtze's mouth, see? / The Bund and Pudong. That's me."
+  ],
+  "fact": "Skyfall's skyscraper fight is set in Shanghai's Pudong district, though much of it was filmed on a set near London."
+ },
+ {
+  "level": "hard",
+  "from": "🎬 Crocodile Dundee",
+  "name": "Kakadu National Park, Australia",
+  "lat": -12.84,
+  "lon": 132.47,
+  "clues": [
+   "A bushman with a big knife wrestled crocs in my streams, / then went to New York and made it big, it seems. / My rock art was painted thousands of years ago, / and my wetlands are wild, where the crocodiles go.",
+   "I'm a huge national park in the Top End's wild heat, / in northern Australia, where the floodplains meet.",
+   "A national park in Australia's Northern Territory, east of Darwin, see? / Crocodile country. That's me."
+  ],
+  "fact": "Crocodile Dundee (1986) was filmed in and around Kakadu National Park, which has rock art made over thousands of years."
+ },
+ {
+  "level": "medium",
+  "from": "📖 Eat Pray Love",
+  "name": "Bali, Indonesia",
+  "lat": -8.507,
+  "lon": 115.263,
+  "clues": [
+   "She ate in Italy, prayed far away, / then she found love on my island one day. / My rice fields climb hills in stairs of bright green, / and my temples by the sea make the sunsets serene.",
+   "Surfers and yogis love my beaches and Ubud, / in Indonesia, where the incense smells good.",
+   "An Indonesian island just east of Java, see? / The Island of the Gods. That's me."
+  ],
+  "fact": "Elizabeth Gilbert's memoir Eat Pray Love has sold more than 10 million copies."
+ },
+ {
+  "level": "medium",
+  "from": "🎬 The Devil Wears Prada 2",
+  "name": "Milan, Italy",
+  "lat": 45.464,
+  "lon": 9.19,
+  "clues": [
+   "A fashion boss and her assistant fly in / for the runway shows, where the models all spin. / My cathedral has spires like a lacy white cake, / and a famous Last Supper is mine, for art's sake.",
+   "Fashion Week struts through my streets every year, / in northern Italy, with the Alps quite near.",
+   "Italy's fashion capital, on the Lombardy plain, see? / Home of the Duomo. That's me."
+  ],
+  "fact": "The sequel filmed at a real Dolce & Gabbana show during Milan Fashion Week in 2025."
+ },
+ {
+  "level": "hard",
+  "from": "📖 The Jungle Book",
+  "name": "Pench, India",
+  "lat": 21.7,
+  "lon": 79.3,
+  "clues": [
+   "A boy raised by wolves had a bear for a friend, / and a tiger who hunted him right to the end. / The writer imagined my forests and streams, / with real tigers prowling through teak trees and dreams.",
+   "My tiger reserve sits in the heart of my land, / in central India, where the teak forests stand.",
+   "A tiger reserve in central India, near Nagpur, see? / Mowgli's real jungle. That's me."
+  ],
+  "fact": "Pench National Park is home to real Bengal tigers like Shere Khan."
+ },
+ {
+  "level": "medium",
+  "from": "🎬 Zorba the Greek",
+  "name": "Crete, Greece",
+  "lat": 35.2401,
+  "lon": 24.8093,
+  "clues": [
+   "A wild man danced on my beach, arms out wide, / teaching a shy writer to live life with pride. / A king kept a monster in a maze on my land, / half bull and half man, as the old stories planned.",
+   "Knossos is mine, an old palace of kings, / the biggest Greek island, with olives and springs.",
+   "Greece's biggest island, south in the Med, see? / Heraklion and Chania. That's me."
+  ],
+  "fact": "Zorba the Greek (1964) was filmed on Crete, and Zorba's beach dance, the sirtaki, became famous around the world."
  }
 ]
