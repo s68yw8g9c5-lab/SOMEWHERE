@@ -708,3 +708,43 @@ dialog.passport { max-width: 600px; width: calc(100% - 24px); max-height: 88vh; 
 @media (max-width: 640px) { .pp-grid { grid-template-columns: repeat(2, 1fr); } }
 .pp-close:focus:not(:focus-visible) { outline: none; box-shadow: none; }
 .streak-box .near-miss { margin-top: 2px; }
+
+/* ---------- Motion ---------- */
+/* The pin thuds down with a little bounce and a dust ring. */
+.mk-pin.drop svg { transform-origin: 50% 100%; animation: pindrop .5s cubic-bezier(.3,1.5,.5,1) both; }
+.mk-pin.drop::after { content: ""; position: absolute; left: 50%; bottom: -4px; width: 30px; height: 10px; margin-left: -15px; border-radius: 50%; border: 2px solid rgba(238,122,59,.7); animation: dust .55s ease-out .22s both; pointer-events: none; }
+@keyframes pindrop { 0% { opacity: 0; transform: translateY(-46px) scale(.9, 1.12); } 55% { opacity: 1; transform: translateY(0) scale(1.14, .82); } 78% { transform: translateY(-5px) scale(.96, 1.05); } 100% { transform: none; } }
+@keyframes dust { from { opacity: 1; transform: scale(.3); } to { opacity: 0; transform: scale(1.6); } }
+/* The answer pops in once the line reaches it. */
+.mk-star.pop svg { animation: starin .5s cubic-bezier(.3,1.6,.5,1) 1.05s both; }
+.mk-star.pop::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; border: 3px solid #2f4a35; animation: ring .7s ease-out 1.15s both; pointer-events: none; }
+@keyframes starin { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: none; } }
+@keyframes ring { from { opacity: .8; transform: scale(.6); } to { opacity: 0; transform: scale(2.2); } }
+/* Scout pops up, the speech bubble follows, then the stars land one by one. */
+.sheet.play .grade::before { animation: scoutpop .5s cubic-bezier(.3,1.6,.5,1) .2s both; transform-origin: 50% 100%; }
+.sheet.play .grade b { animation: bubble .4s cubic-bezier(.3,1.6,.5,1) .45s both; transform-origin: 0 50%; }
+.sheet.play .grade .stars svg { animation: starpop .38s cubic-bezier(.3,1.8,.5,1) both; }
+.sheet.play .grade .stars svg:nth-child(1) { animation-delay: .7s; }
+.sheet.play .grade .stars svg:nth-child(2) { animation-delay: .85s; }
+.sheet.play .grade .stars svg:nth-child(3) { animation-delay: 1s; }
+@keyframes scoutpop { 0% { opacity: 0; transform: translateY(18px) scale(.7); } 70% { opacity: 1; transform: translateY(-3px) scale(1.05) rotate(-3deg); } 100% { transform: none; } }
+@keyframes bubble { from { opacity: 0; transform: scale(.5); } to { opacity: 1; transform: none; } }
+@keyframes starpop { 0% { opacity: 0; transform: scale(0) rotate(-40deg); } 100% { opacity: 1; transform: none; } }
+.sheet.play .done-scout { animation: scoutpop .6s cubic-bezier(.3,1.6,.5,1) .2s both; transform-origin: 50% 100%; }
+.sheet.play .done-title { animation: bubble .45s cubic-bezier(.3,1.6,.5,1) .35s both; transform-origin: 0 50%; }
+/* The slate between scenes: the arm snaps shut, then the card lifts away. */
+.slate { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; pointer-events: none; animation: slatefade .95s ease both; }
+.slate-card { position: relative; width: 170px; animation: slatein .95s cubic-bezier(.2,.9,.3,1) both; }
+.slate-body { background: #2f4a35; color: #fffdf8; border-radius: 10px 10px 16px 16px; padding: 14px 16px 12px; text-align: center; box-shadow: 0 4px 0 #1e3124, 0 18px 40px rgba(30,40,30,.35); }
+.slate-body small { display: block; font: 800 11px var(--font-body); letter-spacing: .18em; text-transform: uppercase; color: #e5bb66; }
+.slate-body b { display: block; font: 600 52px/1 var(--font-head, var(--display)); }
+.slate-body span { font: 700 12px var(--font-body); color: #d9e6d8; }
+.slate-arm { position: absolute; left: 0; right: 0; top: -18px; height: 16px; border-radius: 4px; background: #e5bb66; box-shadow: inset 0 -3px 0 #c9983e; transform-origin: 8px 100%; animation: arm .95s cubic-bezier(.5,0,.3,1.4) both; }
+.slate-arm::before { content: ""; position: absolute; left: 3px; bottom: 3px; width: 9px; height: 9px; border-radius: 50%; background: #2f4a35; }
+@keyframes arm { 0%, 15% { transform: rotate(-28deg); } 32%, 100% { transform: rotate(0); } }
+@keyframes slatein { 0% { transform: translateY(16px) scale(.92); } 15% { transform: none; } 36% { transform: translateY(2px); } 42%, 72% { transform: none; } 100% { transform: translateY(-24px) scale(.96); } }
+@keyframes slatefade { 0% { opacity: 0; } 12%, 72% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .mk-pin.drop svg, .mk-pin.drop::after, .mk-star.pop svg, .mk-star.pop::after, .sheet.play .grade::before, .sheet.play .grade b, .sheet.play .grade .stars svg, .sheet.play .done-scout, .sheet.play .done-title { animation: none; }
+  .slate { display: none; }
+}
